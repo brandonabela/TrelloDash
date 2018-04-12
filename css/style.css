@@ -1,0 +1,133 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
+
+/*
+----------------------------------------
+	1. General Styling
+	2. Navigation Styling
+----------------------------------------
+*/
+
+
+/* -------------------- General Styling -------------------- */
+
+*
+{
+	margin: 0;
+	padding: 0px;
+}
+
+body
+{
+	background: #ffffff;
+	margin: 0;
+	height: 100%;
+	color: #384452;
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+}
+
+p
+{
+	padding: 0;
+	margin-bottom: 12px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 24px;
+	color: #384452;
+	margin-top: 10px;
+}
+
+a
+{
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+	-webkit-transition: background-color .4s linear, color .4s linear;
+	-moz-transition: background-color .4s linear, color .4s linear;
+	-o-transition: background-color .4s linear, color .4s linear;
+	-ms-transition: background-color .4s linear, color .4s linear;
+	transition: background-color .4s linear, color .4s linear;
+}
+
+a:hover, a:focus
+{
+  text-decoration: none;
+  color:#01b2fe;
+}
+
+/* -------------------- Navigation Styling -------------------- */
+
+.navigationSection .navbar
+{
+	min-height: 70px;
+	padding-top: 10px;
+	margin-bottom: 0px;
+}
+
+.navigationSection .navbar-default
+{
+	background-color: #384452;
+	border-color: transparent;
+}
+
+.navigationSection .navbar .navbar-brand
+{
+	font-family: 'Raleway', sans-serif;
+	font-weight: 900;
+}
+
+.navigationSection .navbar-header .navbar-brand,
+	.navigationSection .navbar-header .navbar-brand:focus,
+	.navigationSection .navbar-header .navbar-brand:hover
+{
+	color: white;
+}
+
+.navigationSection .navbar-default .navbar-nav > li > a:focus,
+	.navigationSection .navbar-default .navbar-nav > li > a:hover
+{
+	color: #00b3fe;
+}
+
+.navigationSection .navbar-default .navbar-nav > .active > a,
+	.navigationSection .navbar-default .navbar-nav > .active > a:hover,
+	.navigationSection .navbar-default .navbar-nav > .active > a:focus,
+	.navigationSection .navbar-default .navbar-nav > .open > a,
+	.navigationSection .navbar-default .navbar-nav > .open > a:hover,
+	.navigationSection .navbar-default .navbar-nav > .open > a:focus
+{
+	color: #00b3fe;
+	background-color: transparent;
+}
+
+.navigationSection .dropdown-menu
+{
+	background: #384452;
+}
+
+.navigationSection .navbar-default li.dropdown:hover > .dropdown-menu
+{
+    display: block;
+}
+
+.navigationSection .navbar-default .navbar-nav > li > a
+{
+	color: white;
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.navigationSection .navbar-default .dropdown-menu > li > a
+{
+	color: white;
+	font-weight: 700;
+	font-size: 14px;
+}
