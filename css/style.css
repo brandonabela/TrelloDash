@@ -3,11 +3,20 @@
 
 /*
 ----------------------------------------
-	1. General Styling
-	2. Navigation Styling
+	1. Debugging Style
+	2. General Styling
+	3. Navigation Styling
+	4. Mini Banner Styling
+	5. Full Banner
 ----------------------------------------
 */
 
+/* -------------------- Debugging Style -------------------- */
+
+.sectionTestingSpacing
+{
+	padding-bottom: 70px;
+}
 
 /* -------------------- General Styling -------------------- */
 
@@ -92,7 +101,9 @@ a:hover, a:focus
 }
 
 .navigationSection .navbar-default .navbar-nav > li > a:focus,
-	.navigationSection .navbar-default .navbar-nav > li > a:hover
+	.navigationSection .navbar-default .navbar-nav > li > a:hover,
+	.navigationSection .navbar-default .dropdown-menu > li > a:hover,
+	.navigationSection .navbar-default .dropdown-menu > li > a:focus
 {
 	color: #00b3fe;
 }
@@ -118,16 +129,70 @@ a:hover, a:focus
     display: block;
 }
 
-.navigationSection .navbar-default .navbar-nav > li > a
+.navigationSection .navbar-default .navbar-nav > li > a,
+	.navigationSection .navbar-default .dropdown-menu > li > a
 {
 	color: white;
 	font-weight: 700;
 	font-size: 14px;
 }
 
-.navigationSection .navbar-default .dropdown-menu > li > a
+/* -------------------- Mini Banner Styling -------------------- */
+
+.miniBanner
+{
+	margin-top: 70px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+    background: #184e8e;
+}
+
+.miniBanner h3
 {
 	color: white;
-	font-weight: 700;
-	font-size: 14px;
+	margin-left: 15px;
+}
+
+/* -------------------- Full Banner Styling -------------------- */
+
+.fullBanner
+{
+	padding: 100px;
+	margin-top: 70px;
+	text-align: center;
+	height: calc(100vh - 70px); /* Responsible for making an offset from top */
+    background: #184e8e linear-gradient(135deg, #172a74, #21a9af);
+}
+
+.fullBanner .row
+{
+	margin-top: 8vh;
+}
+
+.fullBanner .bannerTextColumn
+{
+	margin-top: 3vh;
+	padding-right: 50px;
+}
+
+.fullBanner h1 /* Text Title in the Full Banner Section */
+{
+    color: #fff;
+    font-size: 40px;
+	margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.fullBanner h5 /* Text Description in the Full Banner Section */
+{
+    color: #FFFFFF;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.fullBanner .bannerImage
+{
+	height: 50vh;
+	border-radius: 5px;
+	box-shadow: 7px 7px 10px;
 }
