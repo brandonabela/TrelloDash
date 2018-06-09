@@ -11,9 +11,15 @@
         <link href="bootstrap/css/bootstrap.css" rel="stylesheet">  <!-- Bootstrap core CSS -->
         <link href="css/font-awesome.min.css" rel="stylesheet">     <!-- Icons Style -->
         <link href="css/style.css" rel="stylesheet">                <!-- Website Style Sheet -->
+
+        <!-- Important Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+        <!-- Controllers for the portfolio website -->
+        <script src="javascript/controller/tableGameProgress.js"></script>
     </head>
 
-    <body>
+    <body ng-app="myGameApplication">
         <!-- ******************** SECTION - NAVIGATION BAR ******************** -->
 
         <div class="navigationSection">
@@ -84,9 +90,90 @@
 
         <div class="sectionTestingSpacing"> </div>
 
+        <!-- ******************** TRELLO GAME PROGRESS ******************** -->
+
+        <div class="container" ng-controller="myTableGameProgressController">
+        	<div class="row">
+        		<div role="tabpanel">
+                    <div class="col-sm-3">
+                        <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+                            <li role="presentation" class="brand-nav active"> <a href="#overall" aria-controls="overall" role="tab" data-toggle="tab"> Overall </a> </li>
+
+                            <li role="presentation" class="brand-nav" ng-repeat="aTrelloBoardList in trelloBoardLists">
+                                <a href="#{{removeSpace(aTrelloBoardList.boardName)}}" aria-controls="{{removeSpace(aTrelloBoardList.boardName)}}" role="tab" data-toggle="tab"> {{aTrelloBoardList.boardName}} </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-9">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="overview">
+                                <h1> Overview Status </h1>
+                            </div>
+
+                            <div role="tabpanel" ng-repeat="aTrelloBoardList in trelloBoardLists" class="tab-pane" id="{{removeSpace(aTrelloBoardList.boardName)}}">
+
+                                <h1> {{aTrelloBoardList.boardName}} </h1>
+
+                                <form>
+                                    <div class="form-group input-group">
+                                        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                                        <input type="text" class="form-control input-lg" placeholder="Search for a Task Attribute" ng-model="searchTaskAttribute">
+                                    </div>
+                                </form>
+
+                                <div ng-show="(trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute).length">
+                                    <table class="gameProgress headerTable">
+                                        <thead>
+                                            <tr>
+                                                <th class="taskNameColumn">    Task Name   </th>
+                                                <th class="taskRoleColumn">    Role        </th>
+                                                <th class="taskTimeColumn">    Time        </th>
+                                                <th class="taskProgressColumn">    Progress    </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+
+                                    <div class="gameProgressScrolling">
+                                        <table class="gameProgress">
+                                            <tr ng-repeat="aTrelloCard in trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute">
+                                                <td class="taskNameColumn">    {{aTrelloCard.cardName}}                    </td>
+                                                <td class="taskRoleColumn">    {{aTrelloCard.cardJob}}                     </td>
+                                                <td class="taskTimeColumn">    {{aTrelloCard.cardEstimation === "Estimation Unknown" ? "Estimation Unknown" : aTrelloCard.cardEstimation + " days"}}   </td>
+                                                <td class="taskProgressColumn">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar"
+                                                                style="width: {{(aTrelloCard.cardListActual === undefined) ? '0%' : calculatePercentage(aTrelloCard.cardListActual) + '%'}};"
+                                                                aria-valuenow="{{aTrelloCard.cardListActual === undefined ? '0' : calculatePercentage(aTrelloCard.cardListActual)}}"
+                                                                aria-valuemin="0" aria-valuemax="100">
+
+                                                            <span> {{aTrelloCard.cardListActual === undefined ? "0.00 %" : calculatePercentage(aTrelloCard.cardListActual) + " %"}} </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <table class="gameProgress headerTableRound" ng-show="!(trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute).length">
+                                    <thead>
+                                        <tr>    <th class="text-center">    The search that your are trying to perform does not match anything   </th>  </tr>
+                                    </thead>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        	</div>
+        </div>
+
+        <div class="sectionTestingSpacing"> </div>
+
         <!-- ******************** LOADING HEAVY SCRIPTS ******************** -->
 
-        <script src="javascript/jquery.js"></script>            <!-- Jquery Java Script -->
+        <script src="javascript/standardLibraries/jquery.js"></script>            <!-- Jquery Java Script -->
         <script src="bootstrap/js/bootstrap.min.js"></script>   <!-- Bootstrap Java Script -->
     </body>
 </html>
