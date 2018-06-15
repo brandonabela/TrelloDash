@@ -19,16 +19,30 @@ tableGameProgressApplication.controller("myTableGameProgressController", functio
 
                 const cardsJSON         = entireJSONFile.cards;                                         // Stores all the cards across all the boards
 
-                const trelloBoardLists = findBoardList(entireJSONFile.lists);                          // Store the broad list
+                $scope.trelloBoardLists = findBoardList(entireJSONFile.lists);                          // Store the broad list
                 const trelloCheckLists  = findChecklist(entireJSONFile.checklists);                     // Store the check lists
-                const trelloJobLists    = findJobList(entireJSONFile.customFields[0].options);          // Store the job lists (for some reason custom field index is switched)
+                $scope.trelloJobLists   = findJobList(entireJSONFile.customFields[0].options);          // Store the job lists (for some reason custom field index is switched)
                 const trelloCategory    = findCategories(entireJSONFile.customFields[2].options);       // Stores the category (for some reason custom field index is switched)
 
-                const trelloCards       = findGameCards(cardsJSON, trelloBoardLists, trelloCheckLists, trelloJobLists, trelloCategory); // Populating the game cards
+                $scope.trelloCards      = findGameCards(cardsJSON, $scope.trelloBoardLists, trelloCheckLists, $scope.trelloJobLists, trelloCategory); // Populating the game cards
 
                 $scope.searchTaskAttribute = ""; // Responsible for storing the value that is going to be searched
-                $scope.trelloBoardLists = trelloBoardLists;
-                $scope.trelloCards = trelloCards;
+                createChartFunction($scope.trelloCards, $scope.trelloJobLists, $scope.trelloBoardLists); // Calling the function to create the chart and calculating the data
+
+                $scope.boardCardCount = [];
+                for (let i = 0; i < $scope.trelloBoardLists.length; i ++)    {   $scope.boardCardCount.push({boardName : $scope.trelloBoardLists[i].boardName, boardCardCount : 0}); }
+
+                for (let i = 0; i < $scope.trelloCards.length; i ++)
+                {
+                    for (let j = 0; j < $scope.trelloBoardLists.length; j ++)
+                    {
+                        if ($scope.trelloCards[i].cardBoardName === $scope.trelloBoardLists[j].boardName)
+                        {
+                            $scope.boardCardCount[j].boardCardCount += 1;
+                            break;
+                        }
+                    }
+                }
             }
         });
     };
@@ -40,16 +54,9 @@ tableGameProgressApplication.controller("myTableGameProgressController", functio
         return wordToRemoveSpaces.replace(/ /g, "");
     };
 
-    $scope.calculatePercentage = function(checkListToCalculate)
+    $scope.calculatePercentage = function(checkListToCalculate) // Given a card checklist calculate the percentage
     {
-        let percentageCompleted = 0;
-
-        for (i = 0; i < checkListToCalculate.length; i++)
-        {
-            if (checkListToCalculate[i].isTaskCompleted === true)   {   percentageCompleted ++; }
-        }
-
-        return ((percentageCompleted / checkListToCalculate.length) * 100).toFixed(2);
+        calculatePercentage(checkListToCalculate, true);
     };
 });
 
@@ -248,4 +255,49 @@ function printFormattedData(trelloCards)
             `<br><br>${trelloCards[i].cardLabelName} | ${trelloCards[i].cardLabelColor} | ${trelloCards[i].cardEstimation} | ${trelloCards[i].cardJob} | ${trelloCards[i].cardCategory}
              <br><br> ---------------------------------------------------------------------- <br><br>`;
     }
+}
+
+function calculatePercentage(trelloCardChecklist, twoDecimalPlaces) // Given a card checklist calculate the percentage
+{
+    let percentageCompleted = 0;
+
+    for (let i = 0; i < trelloCardChecklist.length; i++)
+    {
+        if (trelloCardChecklist[i].isTaskCompleted === true)   {   percentageCompleted ++; }
+    }
+
+    return twoDecimalPlaces ? ((percentageCompleted / trelloCardChecklist.length) * 100).toFixed(2) : ((percentageCompleted / trelloCardChecklist.length) * 100);
+}
+
+function createChartFunction(trelloCards, trelloJobLists, trelloBoardLists)
+{
+    let jobNames = [];
+    let jobPercentage = [];
+    let totalTypeTasks = [];
+
+    for (let i = 0; i < trelloJobLists.length; i ++)    {   jobPercentage.push(0);  totalTypeTasks.push(0); }
+
+    for (let i = 0; i < trelloCards.length; i ++)
+    {
+        for (let positionToAdd = 0; positionToAdd < trelloJobLists.length; positionToAdd ++)
+        {
+            if (trelloJobLists[positionToAdd].jobName === trelloCards[i].cardJob)
+            {
+                totalTypeTasks[positionToAdd] += 1;
+                jobPercentage[positionToAdd] += (trelloCards[i].cardListActual === undefined) ?
+                                                    ((trelloCards[i].cardBoardName === trelloBoardLists[5].boardName || trelloCards[i].cardBoardName === trelloBoardLists[6].boardName) ? 100 : 0) :
+                                                    calculatePercentage(trelloCards[i].cardListActual, false);
+
+                break;
+            }
+        }
+    }
+
+    for (let i = 0; i < trelloJobLists.length; i ++)
+    {
+        jobNames.push(trelloJobLists[i].jobName);
+        jobPercentage[i] = (jobPercentage[i] / totalTypeTasks[i]).toFixed(2);
+    }
+
+    createChartGameProgress(jobNames, jobPercentage);
 }

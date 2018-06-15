@@ -269,6 +269,18 @@ form label
 
 /* -------------------- Trello Game Tasks Styling -------------------- */
 
+#overallProgress .canvasSize
+{
+	width: 100%;
+	height: 500px;
+}
+
+#overallProgress #overallProgressChart
+{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 .gameProgress
 {
 	overflow: hidden;

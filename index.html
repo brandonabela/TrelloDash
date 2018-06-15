@@ -15,7 +15,9 @@
         <!-- Important Scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
-        <!-- Controllers for the portfolio website -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>      <!-- Chart Script -->
+
+        <!-- Controllers for the city of the zombies website -->
         <script src="javascript/controller/tableGameProgress.js"></script>
     </head>
 
@@ -96,22 +98,32 @@
         	<div class="row">
         		<div role="tabpanel">
                     <div class="col-sm-3">
-                        <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
-                            <li role="presentation" class="brand-nav active"> <a href="#overall" aria-controls="overall" role="tab" data-toggle="tab"> Overall </a> </li>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active"> <a href="#overallProgress" data-toggle="tab"> Overall Progress </a> </li>
 
-                            <li role="presentation" class="brand-nav" ng-repeat="aTrelloBoardList in trelloBoardLists">
-                                <a href="#{{removeSpace(aTrelloBoardList.boardName)}}" aria-controls="{{removeSpace(aTrelloBoardList.boardName)}}" role="tab" data-toggle="tab"> {{aTrelloBoardList.boardName}} </a>
+                            <li ng-repeat="aTrelloBoardList in trelloBoardLists">
+                                <a href="#{{removeSpace(aTrelloBoardList.boardName)}}" data-toggle="tab"> {{aTrelloBoardList.boardName}} </a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="col-sm-9">
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="overview">
-                                <h1> Overview Status </h1>
+                            <div class="tab-pane active" id="overallProgress">
+                                <h1> Overview Progress </h1>
+
+                                <div class="row">
+                                    <div class="col-sm-4" ng-repeat="aBoardCardCount in boardCardCount">
+                                        <p> {{aBoardCardCount.boardName}} : <strong> {{aBoardCardCount.boardCardCount}} </strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="canvasSize">
+                                    <canvas id="overallProgressChart"> </canvas> <!-- Creating the overall statistics in table game progress -->
+                                </div>
                             </div>
 
-                            <div role="tabpanel" ng-repeat="aTrelloBoardList in trelloBoardLists" class="tab-pane" id="{{removeSpace(aTrelloBoardList.boardName)}}">
+                            <div ng-repeat="aTrelloBoardList in trelloBoardLists" id="{{removeSpace(aTrelloBoardList.boardName)}}" class="tab-pane">
 
                                 <h1> {{aTrelloBoardList.boardName}} </h1>
 
@@ -173,7 +185,10 @@
 
         <!-- ******************** LOADING HEAVY SCRIPTS ******************** -->
 
-        <script src="javascript/standardLibraries/jquery.js"></script>            <!-- Jquery Java Script -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>   <!-- Bootstrap Java Script -->
+        <script src="javascript/standardLibraries/jquery.js"></script>              <!-- Jquery Java Script -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>                       <!-- Bootstrap Java Script -->
+        
+        <!-- Controllers for the portfolio website -->
+        <script src="javascript/controller/chartGameProgress.js"></script>
     </body>
 </html>
