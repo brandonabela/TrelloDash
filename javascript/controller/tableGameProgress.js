@@ -153,6 +153,8 @@ function findGameCards(cardsJSON, trelloBoardLists, trelloCheckLists, trelloJobL
     const trelloCards = [];
 
     for (i = 0; i < cardsJSON.length; i++) {
+        let foundCardList = getCardListActual(cardsJSON[i].id, trelloCheckLists);
+
         let cardEstimationAvailable = cardsJSON[i].customFieldItems[1] !== undefined && cardsJSON[i].customFieldItems[1].idCustomField === "5a98670ad6afbd6de1c8a9cc";
         let cardJobAvailable = cardsJSON[i].customFieldItems[2] !== undefined && cardsJSON[i].customFieldItems[2].idCustomField === "5a98670ad6afbd6de1c8a9c3";
         let cardCategoryAvailable = cardsJSON[i].customFieldItems[0] !== undefined && cardsJSON[i].customFieldItems[0].idCustomField === "5a98670ad6afbd6de1c8a9ce";
@@ -162,7 +164,8 @@ function findGameCards(cardsJSON, trelloBoardLists, trelloCheckLists, trelloJobL
             cardName: cardsJSON[i].name,
             cardDescription: cardsJSON[i].desc.length > 0 ? cardsJSON[i].desc : "Description Unassigned",
             cardListName: getCardListName(cardsJSON[i].id, trelloCheckLists),
-            cardListActual: getCardListActual(cardsJSON[i].id, trelloCheckLists),
+            cardListActual: foundCardList,
+            cardListPercentage: (foundCardList === undefined) ? 0 : calculatePercentage(foundCardList, true),
             cardLabelName: cardsJSON[i].labels.length > 0 ? cardsJSON[i].labels[0].name : "Label Name Unassigned",
             cardLabelColor: cardsJSON[i].labels.length > 0 ? cardsJSON[i].labels[0].color : "Label Colour Unassigned",
             cardEstimation: cardEstimationAvailable ? cardsJSON[i].customFieldItems[1].value.number : "Estimation Unknown",

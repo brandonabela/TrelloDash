@@ -155,11 +155,11 @@
                                                 <td class="taskProgressColumn">
                                                     <div class="progress">
                                                         <div class="progress-bar" role="progressbar"
-                                                                style="width: {{(aTrelloCard.cardListActual === undefined) ? '0%' : calculatePercentage(aTrelloCard.cardListActual) + '%'}};"
-                                                                aria-valuenow="{{aTrelloCard.cardListActual === undefined ? '0' : calculatePercentage(aTrelloCard.cardListActual)}}"
+                                                                style="width: {{aTrelloCard.cardListPercentage + '%'}};"
+                                                                aria-valuenow="{{aTrelloCard.cardListPercentage}}"
                                                                 aria-valuemin="0" aria-valuemax="100">
 
-                                                            <span> {{aTrelloCard.cardListActual === undefined ? "0.00 %" : calculatePercentage(aTrelloCard.cardListActual) + " %"}} </span>
+                                                            <span> {{aTrelloCard.cardListPercentage === 0 ? "0.00 %" : aTrelloCard.cardListPercentage + " %"}} </span>
                                                         </div>
                                                     </div>
                                                 </td>
