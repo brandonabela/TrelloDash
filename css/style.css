@@ -15,10 +15,15 @@
 /**
 ----------------------------------------
 Convention for CSS ordering and each section should be separated by a enter:
-	- Display	- width, height, margin, padding, display, position, border, overflow, box-shadow
+	- Display	- top, left, width, height, margin, padding, display, float, position, border,
+					overflow, box-shadow
+
 	- Color		- color, background
-	- Text		- font-size, font-weight, line-height, text-align, font-family
-	- Other		- text-decoration, transition
+
+	- Text		- font-size, font-weight, line-height, letter-spacing, text-transform, text-align,
+					font-family
+
+	- Other		- text-decoration, text-shadow, transition, transform
 ----------------------------------------
 */
 
@@ -135,54 +140,73 @@ form label
 
 .navigationSection .navbar
 {
-	min-height: 70px;
-	margin-bottom: 0;
-	padding-top: 10px;
+	padding: 40px 0;
+	position: fixed;
+	border: none;
+
+	background: transparent;
+
+	transition: 0.32s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
-.navigationSection .navbar-default
+.navigationSection .navbar .container
 {
-	border-color: transparent;
-
-	background-color: #384452;
+	margin-top: 12px;
+	margin-bottom: 12px;
 }
 
 .navigationSection .navbar .navbar-brand
 {
+	float: left;
+
+	font-size: 20px;
 	font-weight: 900;
-	font-family: 'Raleway', sans-serif;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+
+	color: #FFFFFF;
+
+	transition: .3s all ease;
 }
 
-.navigationSection .navbar-header .navbar-brand,
-	.navigationSection .navbar-header .navbar-brand:focus,
-	.navigationSection .navbar-header .navbar-brand:hover
+.navigationSection .navbar-default .navbar-nav ul
 {
-	color: white;
+	transition: .3s all ease;
 }
 
-.navigationSection .navbar-default .navbar-nav > li > a:focus,
-	.navigationSection .navbar-default .navbar-nav > li > a:hover,
-	.navigationSection .navbar-default .dropdown-menu > li > a:hover,
-	.navigationSection .navbar-default .dropdown-menu > li > a:focus
+.navigationSection .navbar-default .navbar-nav > li
 {
-	color: #00b3fe;
+	padding: 0 10px;
 }
 
-.navigationSection .navbar-default .navbar-nav > .active > a,
-	.navigationSection .navbar-default .navbar-nav > .active > a:hover,
-	.navigationSection .navbar-default .navbar-nav > .active > a:focus,
-	.navigationSection .navbar-default .navbar-nav > .open > a,
-	.navigationSection .navbar-default .navbar-nav > .open > a:hover,
-	.navigationSection .navbar-default .navbar-nav > .open > a:focus
+.navigationSection .navbar-default .navbar-nav > li > a
 {
-	color: #00b3fe;
+	color: #abb3b3;
 
-	background-color: transparent;
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 1px;
+
+	text-transform: uppercase;
 }
 
-.navigationSection .dropdown-menu
+.navigationSection .navbar-default .navbar-nav > li > a:hover,
+	.navigationSection .navbar-default .navbar-nav > li > a:focus
 {
-	background: #384452;
+	color: #FFFFFF;
+	background: transparent;
+
+	font-weight: 900;
+}
+
+.navigationSection .navbar-default .navbar-nav > .active > a
+{
+	border-bottom: 2px solid #FFFFFF;
+
+	color: #FFFFFF;
+	background: transparent;
+
+	font-weight: 900;
 }
 
 .navigationSection .navbar-default li.dropdown:hover > .dropdown-menu
@@ -190,20 +214,65 @@ form label
 	display: block;
 }
 
-.navigationSection .navbar-default .navbar-nav > li > a,
-	.navigationSection .navbar-default .dropdown-menu > li > a
+.navigationSection .navbar-default .dropdown-menu
 {
-	color: white;
+	padding: 7px 0 3px;
+	border-radius: 5px;
 
-	font-size: 14px;
-	font-weight: 700;
+	background: #000000;
+}
+
+.navigationSection .navbar-default .dropdown-menu > li
+{
+	padding: 0 15px;
+
+	background: transparent;
+}
+
+.navigationSection .navbar-default .dropdown-menu > li > a
+{
+	padding: 10px 15px;
+
+	color: #FFFFFF !important;
+
+	font-size: 13px;
+	font-weight: 600;
+
+	text-transform: uppercase;
+}
+
+.navigationSection .navbar-default .dropdown-menu > li > a:hover,
+	.navigationSection .navbar-default .dropdown-menu > li > a:focus
+{
+	color: #28bbf8 !important;
+	background: transparent;
+
+	font-weight: 900;
+}
+
+.navbarScrolled
+{
+	padding: 0 0 !important;
+
+	background: white !important;
+}
+
+.navbarScrolled .navbar-brand
+{
+	color: black !important;
+}
+
+.navbarScrolled .navbar-nav > .active > a,
+	.navigationSection .navbar-default .navbar-nav > li > a:hover,
+	.navigationSection .navbar-default .navbar-nav > li > a:focus
+{
+	color: #28bbf8 !important;
 }
 
 /* -------------------- Mini Banner Styling -------------------- */
 
 .miniBanner
 {
-	margin-top: 70px;
 	padding-top: 25px;
 	padding-bottom: 25px;
 
@@ -221,50 +290,66 @@ form label
 
 .fullBanner
 {
-	height: calc(100vh - 70px); /* Responsible for making an offset from top */
+	height: 100vh;
 	padding: 100px;
-	margin-top: 70px;
 
 	background: #184e8e linear-gradient(135deg, #172a74, #21a9af);
 
 	text-align: center;
 }
 
-.fullBanner .row
+.fullBanner .row .col-lg-12
 {
-	margin-top: 8vh;
+	top: 50%;
+	left: 0;
+	position: absolute;
+
+	transform: translate(0%, -50%);
 }
 
-.fullBanner .bannerTextColumn
+.fullBanner h2 /* Text Title in the Full Banner Section */
 {
-	margin-top: 3vh;
-	padding-right: 50px;
-}
+	margin-bottom: 50px;
 
-.fullBanner h1 /* Text Title in the Full Banner Section */
-{
-	margin-top: 80px;
-	margin-bottom: 40px;
-
-	color: #fff;
+	color: #FFFFFF;
 
 	font-size: 40px;
 }
 
 .fullBanner h5 /* Text Description in the Full Banner Section */
 {
-	margin-bottom: 30px;
+	margin-bottom: 40px;
 
 	color: #FFFFFF;
 
 	font-size: 18px;
 }
 
-.fullBanner .bannerImage
+.fullBanner .buttonHolder .btn
 {
-	height: 50vh;
-	border-radius: 5px;
-	box-shadow: 7px 7px 10px;
+	padding: 20px 40px;
+	margin: 20px;
+	border-radius: 0;
+	border: 2px solid #FFFFFF;
+
+	color: #FFFFFF;
+	background: transparent;
+
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+
+}
+
+.fullBanner .buttonHolder .btn:focus,
+	.fullBanner .buttonHolder .btn:hover
+{
+	color: #000000;
+	background-color: #FFFFFF;
+
+	text-shadow: none;
+	transition: background linear 300ms, color linear 300ms;
 }
 
 /* -------------------- Trello Game Tasks Styling -------------------- */

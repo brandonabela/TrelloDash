@@ -25,7 +25,7 @@
         <!-- ******************** SECTION - NAVIGATION BAR ******************** -->
 
         <div class="navigationSection">
-            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navbar navbar-default navbar-fixed-top">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -44,18 +44,17 @@
                             <li> <a href="#">    News    </a> </li>
 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Game Informormation <span class="caret"> </span> </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Game Information <span class="caret"> </span> </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">     Getting Started     </a> </li>
-                                    <li><a href="#">     Customisation       </a> </li>
-                                    <li><a href="#">     Game Progress       </a> </li>
+                                    <li> <a href="#">     Getting Started     </a> </li>
+                                    <li> <a href="#">     Customisation       </a> </li>
+                                    <li> <a href="#">     Game Progress       </a> </li>
                                 </ul>
                             </li>
 
                             <li> <a href="#">    Media       </a> </li>
                             <li> <a href="#">    Team        </a> </li>
-                            <li> <a href="#">    FAQ         </a> </li>
                             <li> <a href="#">    Contact Us  </a> </li>
                         </ul>
                     </div>
@@ -63,29 +62,32 @@
             </div>
         </div>
 
+        <!-- ******************** SECTION - FULL BANNER ******************** -->
+
+        <div class="fullBanner">
+            <div class="container">
+                <div class="row">
+                    <div class= "col-lg-12">
+                        <h2> Banner Title </h2>
+                        <h5> Description Description Description Description Description Description Description </h5>
+
+                        <div class="buttonHolder">
+                            <button type="button" class="btn btn-success"> Button 1 </button>
+                            <button type="button" class="btn btn-success"> Button 2 </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sectionTestingSpacing"> </div>
+
         <!-- ******************** SECTION - MINI BANNER ******************** -->
 
         <div class="miniBanner">
     	    <div class="container">
     			<div class="row">
     				<h3> Title </h3>
-    			</div>
-    	    </div>
-    	</div>
-
-        <!-- ******************** SECTION - FULL BANNER ******************** -->
-
-        <div class="fullBanner">
-    	    <div class="container">
-    			<div class="row">
-                    <div class= "col-lg-6 bannerTextColumn">
-    					<h1> Banner Title </h1>
-    					<h5> Description Description Description Description Description Description Description </h5>
-    				</div>
-
-    				<div class="col-lg-6">
-    					<img class= "bannerImage" src="images/banner01.jpg">
-    				</div>
     			</div>
     	    </div>
     	</div>
@@ -190,5 +192,8 @@
         
         <!-- Controllers for the portfolio website -->
         <script src="javascript/controller/chartGameProgress.js"></script>
+
+        <!-- Importing the website manager -->
+        <script src="javascript/websiteManager.js"></script>
     </body>
 </html>
