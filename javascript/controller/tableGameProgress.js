@@ -3,7 +3,6 @@ const tableGameProgressApplication = angular.module("myGameApplication", []);
 tableGameProgressApplication.controller("myTableGameProgressController", function ($scope)
 {
     // Reading and filtering the data from the trello cards
-
     let xhr = new XMLHttpRequest(); // Creating an XML Http Request
 
     // Creating an XML HTTP Request
@@ -22,9 +21,9 @@ tableGameProgressApplication.controller("myTableGameProgressController", functio
                 $scope.trelloBoardLists = findBoardList(entireJSONFile.lists);                          // Store the broad list
                 const trelloCheckLists  = findChecklist(entireJSONFile.checklists);                     // Store the check lists
                 $scope.trelloJobLists   = findJobList(entireJSONFile.customFields[0].options);          // Store the job lists (for some reason custom field index is switched)
-                const trelloCategory    = findCategories(entireJSONFile.customFields[2].options);       // Stores the category (for some reason custom field index is switched)
+                $scope.trelloCategory   = findCategories(entireJSONFile.customFields[2].options);      // Store the category (for some reason custom field index is switched)
 
-                $scope.trelloCards      = findGameCards(cardsJSON, $scope.trelloBoardLists, trelloCheckLists, $scope.trelloJobLists, trelloCategory); // Populating the game cards
+                $scope.trelloCards      = findGameCards(cardsJSON, $scope.trelloBoardLists, trelloCheckLists, $scope.trelloJobLists, $scope.trelloCategory); // Populating the game cards
 
                 $scope.searchTaskAttribute = ""; // Responsible for storing the value that is going to be searched
                 createChartFunction($scope.trelloCards, $scope.trelloJobLists, $scope.trelloBoardLists); // Calling the function to create the chart and calculating the data
@@ -34,7 +33,7 @@ tableGameProgressApplication.controller("myTableGameProgressController", functio
 
                 for (let i = 0; i < $scope.trelloCards.length; i ++)
                 {
-                    for (let j = 0; j < $scope.trelloBoardLists.length; j ++)
+                    for (let j = 0; j < $scope.trelloBoardLists.length ; j ++)
                     {
                         if ($scope.trelloCards[i].cardBoardName === $scope.trelloBoardLists[j].boardName)
                         {
@@ -58,6 +57,11 @@ tableGameProgressApplication.controller("myTableGameProgressController", functio
     {
         calculatePercentage(checkListToCalculate, true);
     };
+
+    $scope.generateDocumentAngularJS = function(trelloCards, trelloCategory)
+    {
+        generateDocument(trelloCards, trelloCategory);
+    }
 });
 
 tableGameProgressApplication.filter("trelloCardsFilter", function ()
@@ -66,7 +70,7 @@ tableGameProgressApplication.filter("trelloCardsFilter", function ()
     {
         const filteredTasksArray = [];
 
-        for (i = 0; i < trelloCards.length; i++)
+        for (let i = 0; i < trelloCards.length; i++)
         {
             if (trelloCards[i].cardBoardName === currentBoard &&
                 (trelloCards[i].cardName.toLowerCase().indexOf(searchTaskAttribute) !== -1 ||
@@ -86,7 +90,7 @@ function findBoardList(boardListJSON)
 {
     const trelloBoardLists = [];
 
-    for (i = 0; i < boardListJSON.length; i++) {
+    for (let i = 0; i < boardListJSON.length; i++) {
         trelloBoardLists.push({
             boardId: boardListJSON[i].id,
             boardName: boardListJSON[i].name
@@ -138,7 +142,7 @@ function findCategories(categoryJSON)
 {
     const trelloCategory = [];
 
-    for (i = 0; i < categoryJSON.length; i++) {
+    for (let i = 0; i < categoryJSON.length; i++) {
         trelloCategory.push({
             categoryId: categoryJSON[i].id,
             categoryName: categoryJSON[i].value.text
@@ -152,8 +156,9 @@ function findGameCards(cardsJSON, trelloBoardLists, trelloCheckLists, trelloJobL
 {
     const trelloCards = [];
 
-    for (i = 0; i < cardsJSON.length; i++) {
+    for (let i = 0; i < cardsJSON.length; i++) {
         let foundCardList = getCardListActual(cardsJSON[i].id, trelloCheckLists);
+        let imageAttachments = getImageAttachments(cardsJSON[i]);
 
         let cardEstimationAvailable = cardsJSON[i].customFieldItems[1] !== undefined && cardsJSON[i].customFieldItems[1].idCustomField === "5a98670ad6afbd6de1c8a9cc";
         let cardJobAvailable = cardsJSON[i].customFieldItems[2] !== undefined && cardsJSON[i].customFieldItems[2].idCustomField === "5a98670ad6afbd6de1c8a9c3";
@@ -170,7 +175,8 @@ function findGameCards(cardsJSON, trelloBoardLists, trelloCheckLists, trelloJobL
             cardLabelColor: cardsJSON[i].labels.length > 0 ? cardsJSON[i].labels[0].color : "Label Colour Unassigned",
             cardEstimation: cardEstimationAvailable ? cardsJSON[i].customFieldItems[1].value.number : "Estimation Unknown",
             cardJob: cardJobAvailable ? getJobTitle(cardsJSON[i].customFieldItems[2].idValue, trelloJobLists) : "Job Unassigned",
-            cardCategory: cardCategoryAvailable ? getCategoryTitle(cardsJSON[i].customFieldItems[0].idValue, trelloCategory) : "Category Unassigned"
+            cardCategory: cardCategoryAvailable ? getCategoryTitle(cardsJSON[i].customFieldItems[0].idValue, trelloCategory) : "Category Unassigned",
+            cardAttachments: imageAttachments
         });
     }
 
@@ -237,14 +243,29 @@ function getCategoryTitle(categoryId, trelloCategory)
     return "Category Unassigned";
 }
 
+function getImageAttachments(cardsJSON)
+{
+    let cardImageAttachments = [];
+
+    for (let j = 0; j < cardsJSON.attachments.length; j ++)
+    {
+        cardImageAttachments.push({
+            cardImageName: cardsJSON.attachments[j].url.substring(cardsJSON.attachments[j].url.lastIndexOf('/')+1, cardsJSON.attachments[j].url.length),
+            cardImageURL: cardsJSON.attachments[j].url
+        });
+    }
+
+    return (cardImageAttachments === []) ? undefined : cardImageAttachments;
+}
+
 function printFormattedData(trelloCards)
 {
-    for (i = 0; i < trelloCards.length; i++) { // For every trello card
+    for (let i = 0; i < trelloCards.length; i++) { // For every trello card
         document.body.innerHTML += `${trelloCards[i].cardBoardName} | ${trelloCards[i].cardName} | ${trelloCards[i].cardDescription} | ${trelloCards[i].cardListName} | <br><br>`;
 
         if (trelloCards[i].cardListActual !== undefined)
         {
-            for (j = 0; j < trelloCards[i].cardListActual.length; j++)
+            for (let j = 0; j < trelloCards[i].cardListActual.length; j++)
             {
                 document.body.innerHTML += `${trelloCards[i].cardListActual[j].taskName} ${trelloCards[i].cardListActual[j].isTaskCompleted} | `;
             }

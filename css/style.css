@@ -9,20 +9,17 @@
 	4. Mini Banner Styling
 	5. Full Banner
 	6. Trello Game Tasks Styling
+    7. 	Trello Documentation Download
+
 ----------------------------------------
 */
 
 /**
 ----------------------------------------
 Convention for CSS ordering and each section should be separated by a enter:
-	- Display	- top, left, width, height, margin, padding, display, float, position, border,
-					overflow, box-shadow
-
+    - Display	- top, left, width, height, margin, padding, display, float, position, border, overflow, box-shadow
 	- Color		- color, background
-
-	- Text		- font-size, font-weight, line-height, letter-spacing, text-transform, text-align,
-					font-family
-
+    - Text		- font-size, font-weight, line-height, letter-spacing, text-transform, text-align, font-family
 	- Other		- text-decoration, text-shadow, transition, transform
 ----------------------------------------
 */
@@ -469,4 +466,12 @@ form label
 	position: absolute;
 
 	color: black;
+}
+
+/* -------------------- Trello Documentation Download -------------------- */
+
+.documentationImages img
+{
+	width: 100%;
+	padding-bottom: 30px;
 }

@@ -13,11 +13,11 @@
         <link href="css/style.css" rel="stylesheet">                <!-- Website Style Sheet -->
 
         <!-- Important Scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>    <!-- Angular JS Script -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>      <!-- Chart Script -->
 
         <!-- Controllers for the city of the zombies website -->
+        <script src="javascript/controller/latexDocumentation.js"></script>
         <script src="javascript/controller/tableGameProgress.js"></script>
     </head>
 
@@ -94,100 +94,128 @@
 
         <div class="sectionTestingSpacing"> </div>
 
-        <!-- ******************** TRELLO GAME PROGRESS ******************** -->
+        <!-- ******************** SHARING COMMON CONTROLLERS ******************** -->
 
-        <div class="container" ng-controller="myTableGameProgressController">
-        	<div class="row">
-        		<div role="tabpanel">
-                    <div class="col-sm-3">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="active"> <a href="#overallProgress" data-toggle="tab"> Overall Progress </a> </li>
+        <div ng-controller="myTableGameProgressController">
+            <!-- ******************** TRELLO GAME PROGRESS ******************** -->
 
-                            <li ng-repeat="aTrelloBoardList in trelloBoardLists">
-                                <a href="#{{removeSpace(aTrelloBoardList.boardName)}}" data-toggle="tab"> {{aTrelloBoardList.boardName}} </a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="container">
+                <div class="row">
+                    <div role="tabpanel">
+                        <div class="col-sm-3">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="active"> <a href="#overallProgress" data-toggle="tab"> Overall Progress </a> </li>
 
-                    <div class="col-sm-9">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="overallProgress">
-                                <h1> Overview Progress </h1>
+                                <li ng-repeat="aTrelloBoardList in trelloBoardLists">
+                                    <a href="#{{removeSpace(aTrelloBoardList.boardName)}}" data-toggle="tab"> {{aTrelloBoardList.boardName}} </a>
+                                </li>
+                            </ul>
+                        </div>
 
-                                <div class="row">
-                                    <div class="col-sm-4" ng-repeat="aBoardCardCount in boardCardCount">
-                                        <p> {{aBoardCardCount.boardName}} : <strong> {{aBoardCardCount.boardCardCount}} </strong></p>
+                        <div class="col-sm-9">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="overallProgress">
+                                    <h1> Overview Progress </h1>
+
+                                    <div class="row">
+                                        <div class="col-sm-4" ng-repeat="aBoardCardCount in boardCardCount">
+                                            <p> {{aBoardCardCount.boardName}} : <strong> {{aBoardCardCount.boardCardCount}} </strong></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="canvasSize">
+                                        <canvas id="overallProgressChart"> </canvas> <!-- Creating the overall statistics in table game progress -->
                                     </div>
                                 </div>
 
-                                <div class="canvasSize">
-                                    <canvas id="overallProgressChart"> </canvas> <!-- Creating the overall statistics in table game progress -->
-                                </div>
-                            </div>
+                                <div ng-repeat="aTrelloBoardList in trelloBoardLists" id="{{removeSpace(aTrelloBoardList.boardName)}}" class="tab-pane">
 
-                            <div ng-repeat="aTrelloBoardList in trelloBoardLists" id="{{removeSpace(aTrelloBoardList.boardName)}}" class="tab-pane">
+                                    <h1> {{aTrelloBoardList.boardName}} </h1>
 
-                                <h1> {{aTrelloBoardList.boardName}} </h1>
+                                    <form>
+                                        <div class="form-group input-group">
+                                            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                                            <input type="text" class="form-control input-lg" placeholder="Search for a Task Attribute" ng-model="searchTaskAttribute">
+                                        </div>
+                                    </form>
 
-                                <form>
-                                    <div class="form-group input-group">
-                                        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
-                                        <input type="text" class="form-control input-lg" placeholder="Search for a Task Attribute" ng-model="searchTaskAttribute">
-                                    </div>
-                                </form>
-
-                                <div ng-show="(trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute).length">
-                                    <table class="gameProgress headerTable">
-                                        <thead>
+                                    <div ng-show="(trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute).length">
+                                        <table class="gameProgress headerTable">
+                                            <thead>
                                             <tr>
                                                 <th class="taskNameColumn">    Task Name   </th>
                                                 <th class="taskRoleColumn">    Role        </th>
                                                 <th class="taskTimeColumn">    Time        </th>
                                                 <th class="taskProgressColumn">    Progress    </th>
                                             </tr>
+                                            </thead>
+                                        </table>
+
+                                        <div class="gameProgressScrolling">
+                                            <table class="gameProgress">
+                                                <tr ng-repeat="aTrelloCard in trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute">
+                                                    <td class="taskNameColumn">    {{aTrelloCard.cardName}}                    </td>
+                                                    <td class="taskRoleColumn">    {{aTrelloCard.cardJob}}                     </td>
+                                                    <td class="taskTimeColumn">    {{aTrelloCard.cardEstimation === "Estimation Unknown" ? "Estimation Unknown" : aTrelloCard.cardEstimation + " days"}}   </td>
+                                                    <td class="taskProgressColumn">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar"
+                                                                 style="width: {{aTrelloCard.cardListPercentage + '%'}};"
+                                                                 aria-valuenow="{{aTrelloCard.cardListPercentage}}"
+                                                                 aria-valuemin="0" aria-valuemax="100">
+
+                                                                <span> {{aTrelloCard.cardListPercentage === 0 ? "0.00 %" : aTrelloCard.cardListPercentage + " %"}} </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <table class="gameProgress headerTableRound" ng-show="!(trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute).length">
+                                        <thead>
+                                        <tr>    <th class="text-center">    The search that your are trying to perform does not match anything   </th>  </tr>
                                         </thead>
                                     </table>
 
-                                    <div class="gameProgressScrolling">
-                                        <table class="gameProgress">
-                                            <tr ng-repeat="aTrelloCard in trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute">
-                                                <td class="taskNameColumn">    {{aTrelloCard.cardName}}                    </td>
-                                                <td class="taskRoleColumn">    {{aTrelloCard.cardJob}}                     </td>
-                                                <td class="taskTimeColumn">    {{aTrelloCard.cardEstimation === "Estimation Unknown" ? "Estimation Unknown" : aTrelloCard.cardEstimation + " days"}}   </td>
-                                                <td class="taskProgressColumn">
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar"
-                                                                style="width: {{aTrelloCard.cardListPercentage + '%'}};"
-                                                                aria-valuenow="{{aTrelloCard.cardListPercentage}}"
-                                                                aria-valuemin="0" aria-valuemax="100">
-
-                                                            <span> {{aTrelloCard.cardListPercentage === 0 ? "0.00 %" : aTrelloCard.cardListPercentage + " %"}} </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
                                 </div>
-
-                                <table class="gameProgress headerTableRound" ng-show="!(trelloCards | trelloCardsFilter: aTrelloBoardList.boardName: searchTaskAttribute).length">
-                                    <thead>
-                                        <tr>    <th class="text-center">    The search that your are trying to perform does not match anything   </th>  </tr>
-                                    </thead>
-                                </table>
-
                             </div>
                         </div>
                     </div>
                 </div>
-        	</div>
-        </div>
+            </div>
 
-        <div class="sectionTestingSpacing"> </div>
+            <div class="sectionTestingSpacing"> </div>
+
+            <!-- ******************** DOWNLOADING LATEX DOCUMENTATION ******************** -->
+
+            <div class="container">
+                <h3> Downloading Trello Documentation </h3>
+
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary col-md-12" ng-click="generateDocumentAngularJS(trelloCards, trelloCategory)">
+                        Download LaTeX Documentation of Game Tasks
+                    </button>
+                </div>
+
+                <div class="sectionTestingSpacing"> </div>
+
+                <div class="documentationImages">
+                    <div class="row">
+                        <h4 class="imageCount text-center"> </h4>
+                    </div>
+
+                </div>
+
+                <div class="sectionTestingSpacing"> </div>
+            </div>
+        </div>
 
         <!-- ******************** LOADING HEAVY SCRIPTS ******************** -->
 
         <script src="javascript/standardLibraries/jquery.js"></script>              <!-- Jquery Java Script -->
+        <script src="javascript/standardLibraries/FileSaver.js"></script>           <!-- File Saving Java Script -->
         <script src="bootstrap/js/bootstrap.min.js"></script>                       <!-- Bootstrap Java Script -->
         
         <!-- Controllers for the portfolio website -->
