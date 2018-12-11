@@ -4,10 +4,11 @@
 	2. General Styling
 	3. Top Navigation Styling
 	4. Sidebar Navigation Styling
-	5. Mini Banner Styling
-	6. Full Banner
-	7. Trello Game Tasks Styling
-    8. Trello Documentation Download
+	5. Website Card Styling
+	6. Title Banner Styling
+	7. Description Banner
+	8. Trello Game Tasks Styling
+    9. Trello Documentation Download
 
 ----------------------------------------
 */
@@ -39,7 +40,7 @@ body
 	height: 100%;
 
 	color: #384452;
-	background: #ffffff;
+	background: #f1f2f7;
 
 	font-weight: 400;
 	font-family: 'Lato', sans-serif;
@@ -553,9 +554,41 @@ form label
     box-shadow: 1px 0 20px rgba(0, 0, 0, .08);
 }
 
-/* -------------------- Mini Banner Styling -------------------- */
+/* -------------------- Website Card Styling -------------------- */
 
-.miniBanner
+.content
+{
+    clear: both;
+
+    height: 100%;
+    margin-left: 280px;
+    padding: 1.875em;
+}
+
+.expandSideNavigation .content
+{
+    margin-left: 83px;
+}
+
+.card
+{
+    margin-bottom: 1.875em;
+    padding: 0;
+
+    border: 0 solid transparent;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .08);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .08);
+}
+
+.cardBlueGradient
+{
+    background: #184e8e linear-gradient(135deg, #172a74, #21a9af);
+}
+
+/* -------------------- Title Banner Styling -------------------- */
+
+.titleBanner
 {
 	padding-top: 25px;
 	padding-bottom: 25px;
@@ -563,77 +596,65 @@ form label
 	background: #184e8e;
 }
 
-.miniBanner h3
+.titleBanner h3
 {
 	margin-left: 15px;
 
 	color: white;
 }
 
-/* -------------------- Full Banner Styling -------------------- */
+/* -------------------- Description Banner Styling -------------------- */
 
-.fullBanner
+.descriptionBanner
 {
-	height: 100vh;
-	padding: 100px;
+    padding: 100px 50px;
 
-	background: #184e8e linear-gradient(135deg, #172a74, #21a9af);
-
-	text-align: center;
+    text-align: center;
 }
 
-.fullBanner .row .col-lg-12
+.descriptionBanner h2 /* Text Title in the Full Banner Section */
 {
-	top: 50%;
-	left: 0;
-	position: absolute;
+    font-size: 40px;
 
-	transform: translate(0%, -50%);
+    margin-bottom: 50px;
+
+    color: #fff;
 }
 
-.fullBanner h2 /* Text Title in the Full Banner Section */
+.descriptionBanner h5 /* Text Description in the Full Banner Section */
 {
-	margin-bottom: 50px;
+    font-size: 18px;
 
-	color: #FFFFFF;
+    margin-bottom: 40px;
 
-	font-size: 40px;
+    color: #fff;
 }
 
-.fullBanner h5 /* Text Description in the Full Banner Section */
+.descriptionBanner .buttonHolder .btn
 {
-	margin-bottom: 40px;
+    font-size: 14px;
+    font-weight: 600;
 
-	color: #FFFFFF;
+    margin: 20px;
+    padding: 20px 40px;
 
-	font-size: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 0;
+    background: transparent;
 }
 
-.fullBanner .buttonHolder .btn
+.descriptionBanner .buttonHolder .btn:focus,
+    .descriptionBanner .buttonHolder .btn:hover
 {
-	padding: 20px 40px;
-	margin: 20px;
-	border-radius: 0;
-	border: 2px solid #FFFFFF;
+    transition: background linear 300ms, color linear 300ms;
 
-	color: #FFFFFF;
-	background: transparent;
-
-	font-size: 14px;
-	font-weight: 600;
-	letter-spacing: 3px;
-	text-transform: uppercase;
-
-}
-
-.fullBanner .buttonHolder .btn:focus,
-	.fullBanner .buttonHolder .btn:hover
-{
-	color: #000000;
-	background-color: #FFFFFF;
-
-	text-shadow: none;
-	transition: background linear 300ms, color linear 300ms;
+    color: #000;
+    background-color: #fff;
+    text-shadow: none;
 }
 
 /* -------------------- Trello Game Tasks Styling -------------------- */
