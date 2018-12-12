@@ -246,7 +246,7 @@ form label
 
 .sideNavigation .navbar .main-menu .menu-title
 {
-    font-family: 'Open Sans', serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-weight: 700;
     line-height: 50px;
@@ -581,6 +581,11 @@ form label
     box-shadow: 0 0 20px rgba(0, 0, 0, .08);
 }
 
+.cardBlue
+{
+    background: #184e8e;
+}
+
 .cardBlueGradient
 {
     background: #184e8e linear-gradient(135deg, #172a74, #21a9af);
@@ -590,17 +595,13 @@ form label
 
 .titleBanner
 {
-	padding-top: 25px;
-	padding-bottom: 25px;
-
-	background: #184e8e;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 .titleBanner h3
 {
-	margin-left: 15px;
-
-	color: white;
+    color: white;
 }
 
 /* -------------------- Description Banner Styling -------------------- */
@@ -608,8 +609,6 @@ form label
 .descriptionBanner
 {
     padding: 100px 50px;
-
-    text-align: center;
 }
 
 .descriptionBanner h2 /* Text Title in the Full Banner Section */
