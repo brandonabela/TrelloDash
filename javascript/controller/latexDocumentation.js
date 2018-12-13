@@ -5,6 +5,8 @@ function generateDocument(trelloCards, trelloCategory)
         "%\t\t\tCHAPTER\n" +
         "%----------------------------------------------------------------------------------------\n" +
         "\n" +
+        "\\begin{document}" +
+        "\n" +
         "\\chapterimage{images/titleBackground} % Chapter heading image\n" +
         "\\chapter{Game Tasks}\n\n";
 
@@ -42,7 +44,7 @@ function generateDocument(trelloCards, trelloCategory)
 
             for (let j = 0; j < trelloCards[i].cardAttachments.length; j ++)
             {
-                documentationString += "\n\\begin{figure}[h!]\n";
+                documentationString += "\n\\begin{figure}[ht!]\n";
                 documentationString += "\t\\centering \n";
                 documentationString += "\t\\includegraphics[width=\\linewidth / 4 * 3]{images/GameTasks/" + trelloCards[i].cardAttachments[j].cardImageName + "} \n";
                 documentationString += "\\end{figure} \n";
@@ -61,7 +63,7 @@ function generateDocument(trelloCards, trelloCategory)
         }
 
         if (i < (trelloCards.length - 1))   {   documentationString += "\n\n\\clearpage\n\n";     }
-        else                                {   documentationString += "\n";                    }
+        else                                {   documentationString += "\n\\end{document}\n";     }
     }
 
     let div = document.createElement('div');
