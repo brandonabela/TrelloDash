@@ -66,26 +66,6 @@ p
 	font-family: 'Lato', sans-serif;
 }
 
-a
-{
-	margin: 0;
-	padding: 0;
-
-    text-decoration: none;
-	-webkit-transition: background-color .4s linear, color .4s linear;
-	-moz-transition: background-color .4s linear, color .4s linear;
-	-o-transition: background-color .4s linear, color .4s linear;
-	-ms-transition: background-color .4s linear, color .4s linear;
-	transition: background-color .4s linear, color .4s linear;
-}
-
-a:hover, a:focus
-{
-	color:#01b2fe;
-
-	text-decoration: none;
-}
-
 table
 {
 	width: 100%;
@@ -579,6 +559,11 @@ form label
     border-radius: 5px;
     -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .08);
     box-shadow: 0 0 20px rgba(0, 0, 0, .08);
+}
+
+.cardSpacing
+{
+    padding: 30px;
 }
 
 .cardBlue
