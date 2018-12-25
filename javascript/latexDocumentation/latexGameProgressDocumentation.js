@@ -1,4 +1,4 @@
-function generateDocument(trelloCards, trelloCategory)
+function generateGameProgressDocument(trelloCards, trelloCategory)
 {
     let documentationString =
         "%----------------------------------------------------------------------------------------\n" +

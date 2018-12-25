@@ -1,3 +1,5 @@
+angular.module("myGameApplication", ['tableGameProgress', 'titleBannerDirective']);
+
 jQuery(document).ready(function ($) {
     // Responsible for collapsing and expanding the side navigation
 

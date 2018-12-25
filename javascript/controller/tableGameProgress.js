@@ -1,6 +1,6 @@
-const tableGameProgressApplication = angular.module("myGameApplication", []);
+const tableGameProgress = angular.module("tableGameProgress", []);
 
-tableGameProgressApplication.controller("myTableGameProgressController", function ($scope)
+tableGameProgress.controller("myTableGameProgressController", function ($scope)
 {
     // Reading and filtering the data from the trello cards
     let xhr = new XMLHttpRequest(); // Creating an XML Http Request
@@ -60,11 +60,11 @@ tableGameProgressApplication.controller("myTableGameProgressController", functio
 
     $scope.generateDocumentAngularJS = function(trelloCards, trelloCategory)
     {
-        generateDocument(trelloCards, trelloCategory);
+        generateGameProgressDocument(trelloCards, trelloCategory);
     }
 });
 
-tableGameProgressApplication.filter("trelloCardsFilter", function ()
+tableGameProgress.filter("trelloCardsFilter", function ()
 {
     return function(trelloCards, currentBoard, searchTaskAttribute)
     {

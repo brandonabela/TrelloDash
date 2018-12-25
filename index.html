@@ -16,11 +16,11 @@
         <link href="css/style.css" rel="stylesheet">
 
         <!-- Important Scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>    <!-- Angular JS Script -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>    <!-- Angular JS Script -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>      <!-- Chart Script -->
 
         <!-- Controllers for the city of the zombies website -->
-        <script src="javascript/controller/latexDocumentation.js"></script>
+        <script src="javascript/latexDocumentation/latexGameProgressDocumentation.js"></script>
         <script src="javascript/controller/tableGameProgress.js"></script>
     </head>
 
@@ -99,11 +99,7 @@
 
                 <div class="col-md-12">
                     <div class="card cardBlue">
-                        <!-- ******************** SECTION - TITLE BANNER ******************** -->
-
-                        <div class="titleBanner text-center">
-                            <h3> Title </h3>
-                        </div>
+                        <title-banner title="title"> </title-banner>
                     </div>
                 </div>
 
@@ -230,10 +226,16 @@
 
         <script src="javascript/standardLibraries/FileSaver.js"></script>           <!-- File Saving Java Script -->
 
+        <!-- ******************** Loading Directives ******************** -->
+
+        <script src="directive/TitleBanner/titleBannerDirective.js"></script>
+
         <!-- Controllers for the Chart Game Progress -->
-        <script src="javascript/controller/chartGameProgress.js"></script>
+
+        <script src="javascript/charts/chartGameProgress.js"></script>
 
         <!-- Importing the website manager -->
+
         <script src="javascript/websiteManager.js"></script>
     </body>
 </html>
