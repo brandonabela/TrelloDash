@@ -1,0 +1,40 @@
+.table-striped {
+  th {
+    border: 0px;
+    font-weight: 500;
+    vertical-align: bottom;
+    padding: 12px;
+  }
+
+  td {
+    border-color: #f3f1f1;
+    padding: 12px;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+
+  tbody tr:nth-of-type(odd) {
+    background: #f2f4f8;
+  }
+
+  tbody {
+    .label {
+      padding: 3px 10px;
+      line-height: 13px;
+      color: #ffffff;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .progressColumn {
+      align-items: center;
+      padding-left: 15px;
+      padding-right: 15px;
+
+      .col-md-5,
+      .col-md-7 {
+        padding: 0;
+      }
+    }
+  }
+}

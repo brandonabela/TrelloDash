@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-md-12">
+    <page-header></page-header>
+  </div>
+
+  <div class="col-md-12">
+    <ng-container *ngIf="trelloViewer.storageLoaded; else projectsLoading">
+      <card>
+        <card-header>
+          <card-tools>
+            <button class="btn" data-toggle="modal" data-target="#manageProjectModal">
+              <i class="fas fa-plus"></i>
+              Manage Projects
+            </button>
+          </card-tools>
+
+          <card-title>
+            Trello Projects Overview
+          </card-title>
+        </card-header>
+
+        <card-body>
+          <div class="row">
+            <ng-container *ngFor="let aBoard of trelloViewer.uniqueBoards; let i = index">
+              <div [class]="boardStatisticsClass(i + 1, trelloViewer.uniqueBoards.length)">
+                <card-countdown cardPrimary [count]="aBoard.frequency" [description]="aBoard.name"></card-countdown>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th> Board Name </th>
+                    <th> Card Name </th>
+                    <th> Labels </th>
+                    <th> Percentage </th>
+                  </tr>
+                </thead>
+
+                <tbody *ngFor="let aTrelloProject of trelloViewer.trelloProjects">
+                  <tr *ngFor="let aTrelloCard of aTrelloProject.trelloCards">
+                    <td> {{aTrelloCard.cardBoardName}} </td>
+                    <td> {{aTrelloCard.cardName}} </td>
+                    <td>
+                      <span class="label" *ngFor="let aCard of aTrelloCard.cardLabels"
+                        [style.background-color]="aCard.labelColour"> {{aCard.labelName}} </span>
+                    </td>
+                    <td>
+                      <div class="row progressColumn">
+                        <div class="col-md-7">
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                              [style.width]="aTrelloCard.cardPercentage + '%'"
+                              [attr.aria-valuenow]="aTrelloCard.cardPercentage"></div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-5 text-center">
+                          {{aTrelloCard.cardPercentage}}%
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </card-body>
+      </card>
+    </ng-container>
+
+    <ng-template #projectsLoading>
+      <card>
+        <card-header>
+          <card-title>
+            Loading Trello Projects
+          </card-title>
+        </card-header>
+
+        <card-body>
+          <div class="col-md-12">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                [style.width]="trelloViewer.storagePercentage + '%'"
+                [attr.aria-valuenow]="trelloViewer.storagePercentage">
+              </div>
+            </div>
+          </div>
+        </card-body>
+      </card>
+    </ng-template>
+  </div>
+</div>
+
+<trello-manage-project [trelloViewer]="trelloViewer"></trello-manage-project>

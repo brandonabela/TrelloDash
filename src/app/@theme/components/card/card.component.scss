@@ -1,0 +1,72 @@
+.card {
+  margin-bottom: 25px;
+
+  border-color: #d7dfe3;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  padding: 10px 20px;
+
+  border-bottom: 1px solid #ebedf2;
+  background-color: transparent;
+
+  ::ng-deep img {
+    width: 100%;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.8;
+
+  margin-bottom: 0;
+
+  color: #434349;
+}
+
+.card-subtitle {
+  font-size: 14px;
+
+  margin-top: 4px;
+
+  color: #74788d;
+}
+
+.card-tools ::ng-deep .btn {
+  font-size: 13px;
+  font-weight: 500;
+
+  margin-left: 18px;
+  padding: 6px 16px;
+
+  color: #fff;
+  border-color: #5d78ff;
+  background-color: #5d78ff;
+  box-shadow: 0 4px 16px 0 rgba(93, 120, 255, 0.15);
+
+  &:hover {
+    color: #fff;
+    border-color: #2a4eff;
+    background-color: #3758ff;
+    box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25);
+  }
+
+  &:active {
+    color: #fff;
+    border-color: #2a4eff;
+    background-color: #3758ff;
+    box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25);
+  }
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+.card-body {
+  padding: 12px 20px;
+}

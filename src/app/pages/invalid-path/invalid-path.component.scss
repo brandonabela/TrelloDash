@@ -1,0 +1,53 @@
+.row .col-md-8 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+  h1 {
+    font-family: "montserrat-black", sans-serif;
+    font-size: 220px;
+    line-height: initial;
+
+    letter-spacing: 10px;
+    text-transform: uppercase;
+
+    background: url("~src/app/@theme/assets/img/SolarBackground.jpg") no-repeat center center;
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+  }
+
+  h2 {
+    font-family: "montserrat-black", sans-serif;
+    font-size: 24px;
+
+    margin-top: 0;
+    margin-bottom: 30px;
+
+    text-transform: uppercase;
+
+    color: #000;
+  }
+
+  .btn {
+    font-size: 14px;
+    font-weight: 700;
+
+    display: inline-block;
+
+    padding: 15px 30px;
+
+    text-decoration: none;
+    text-transform: uppercase;
+
+    color: #fff;
+    border-color: #1572e8 !important;
+    border-radius: 40px;
+    background: #1572e8 !important;
+    box-shadow: #0046d5 0 4px 15px -5px;
+  }
+}

@@ -1,0 +1,28 @@
+.export {
+  .col-md-12 {
+    margin: 12px 0;
+  }
+
+  .form-control,
+  .input-group-text {
+    height: auto;
+    padding: 11px 17px;
+    border: none;
+  }
+
+  .form-control {
+    border-radius: 3px;
+    background: #e0e8f5;
+    color: #444444;
+  }
+
+  .input-group-text {
+    cursor: pointer;
+    color: white;
+    background: #5d78ff;
+
+    &::before {
+      vertical-align: middle;
+    }
+  }
+}

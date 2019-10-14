@@ -1,0 +1,43 @@
+<modal modalId="manageProjectModal" modalClass="modal-lg">
+  <modal-title>
+    Manage Trello Project
+  </modal-title>
+
+  <modal-body>
+    <form [formGroup]="trelloForm" (keyup.enter)="addTrelloURL()">
+      <div class="col-md-12">
+        <div class="input-group">
+          <input class="form-control" placeholder="Trello URL" formControlName="url">
+
+          <div class="input-group-append">
+            <button type="button" class="btn btn-primary" (click)="addTrelloURL()" [disabled]="!trelloForm.valid">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
+      <div class="todo-list col-md-12" *ngFor="let aTrelloProject of trelloViewer.trelloProjects; index as i">
+        <div class="input-group">
+          <p class="form-control"> {{aTrelloProject.projectName}} </p>
+
+          <div class="input-group-append">
+            <i class="input-group-text fas fa-trash" (click)="removeTrelloURL(i)"></i>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noProjects>
+      <div class="todo-list col-md-12 text-center">
+        <div class="input-group">
+          <p class="form-control"> No projects has been added </p>
+        </div>
+      </div>
+    </ng-template>
+  </modal-body>
+
+  <modal-footer></modal-footer>
+</modal>

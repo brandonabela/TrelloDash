@@ -1,0 +1,19 @@
+<ul class="breadcrumb">
+  <ng-container *ngFor="let breadcrumb of breadcrumbs; let isLast = last">
+    <li class="breadcrumb-item">
+      <ng-container *ngIf="!isLast">
+        <a [routerLink]="[breadcrumb.url]">
+          {{breadcrumb.title}}
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="isLast">
+        {{breadcrumb.title}}
+      </ng-container>
+    </li>
+
+    <li class="separator" *ngIf="!isLast">
+      <i class="fas fa-chevron-right"></i>
+    </li>
+  </ng-container>
+</ul>

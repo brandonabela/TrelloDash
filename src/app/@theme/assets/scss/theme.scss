@@ -1,0 +1,67 @@
+@import "~simplebar/dist/simplebar.css"; // Scroll Styling
+
+@import "~@fortawesome/fontawesome-free/css/all.css"; // Font awesome font
+
+@import "~wfk-poppins/poppins.css"; // Primary Font Style
+@import "~wfk-montserrat/montserrat.css"; // 404 Error Font Style
+
+/*
+----------------------------------------
+Convention for CSS ordering is done using https://csscomb.herokuapp.com/online
+----------------------------------------
+*/
+
+@import "./theme-alert.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'poppins-regular', sans-serif;
+  font-size: 15px;
+
+  color: #67757c;
+  background: #eef5f9;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #455a64;
+  font-family: 'poppins-regular', sans-serif;
+}
+
+h1 {
+  line-height: 40px;
+  font-size: 36px;
+}
+
+h2 {
+  line-height: 36px;
+  font-size: 24px;
+}
+
+h3 {
+  line-height: 30px;
+  font-size: 21px;
+}
+
+h4 {
+  line-height: 22px;
+  font-size: 18px;
+}
+
+h5 {
+  line-height: 18px;
+  font-size: 16px;
+}
+
+h6 {
+  line-height: 16px;
+  font-size: 14px;
+}

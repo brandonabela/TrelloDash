@@ -1,0 +1,40 @@
+::ng-deep .modal-body {
+  .col-md-12 {
+    margin: 12px 0;
+  }
+
+  form {
+    margin: 0 0 30px 0;
+
+    .form-control,
+    .btn {
+      height: auto;
+      padding: 9px 15px;
+    }
+  }
+
+  .todo-list {
+    .form-control,
+    .input-group-text {
+      height: auto;
+      padding: 11px 17px;
+      border: none;
+    }
+
+    .form-control {
+      border-radius: 3px;
+      background: #e0e8f5;
+      color: #444444;
+    }
+
+    .input-group-text {
+      cursor: pointer;
+      color: white;
+      background: #f56468;
+
+      &::before {
+        vertical-align: middle;
+      }
+    }
+  }
+}

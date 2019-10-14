@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-md-12">
+    <page-header></page-header>
+  </div>
+
+  <div class="col-md-12">
+    <ng-container *ngIf="trelloViewer.storageLoaded; else projectsLoading">
+      <card>
+        <card-header>
+          <card-tools>
+            <button class="btn" data-toggle="modal" data-target="#manageProjectModal">
+              <i class="fas fa-plus"></i>
+              Manage Projects
+            </button>
+          </card-tools>
+
+          <card-title>
+            Export Trello Project for Documentation
+          </card-title>
+        </card-header>
+
+        <card-body>
+          <div class="export">
+            <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
+              <div class="col-md-12" *ngFor="let aTrelloProject of trelloViewer.trelloProjects; index as i">
+                <div class="input-group">
+                  <p class="form-control"> {{aTrelloProject.projectName}} </p>
+
+                  <div class="input-group-append">
+                    <i class="input-group-text fas fa-file-alt" (click)="exportTrelloProject(i)"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                    [style.width]="exportPercentage + '%'" [attr.aria-valuenow]="exportPercentage"></div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-template #noProjects>
+              <div class="col-md-12 text-center">
+                <div class="input-group">
+                  <p class="form-control"> No projects has been added </p>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </card-body>
+      </card>
+    </ng-container>
+
+    <ng-template #projectsLoading>
+      <card>
+        <card-header>
+          <card-title>
+            Loading Trello Projects
+          </card-title>
+        </card-header>
+
+        <card-body>
+          <div class="col-md-12">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                [style.width]="trelloViewer.storagePercentage + '%'"
+                [attr.aria-valuenow]="trelloViewer.storagePercentage">
+              </div>
+            </div>
+          </div>
+        </card-body>
+      </card>
+    </ng-template>
+  </div>
+</div>
+
+<trello-manage-project [trelloViewer]="trelloViewer"></trello-manage-project>
