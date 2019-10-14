@@ -1,28 +1,15 @@
-image: ruby:2.3
-
-variables:
-  JEKYLL_ENV: production
-  LC_ALL: C.UTF-8
-
-before_script:
-  - bundle install
-
-test:
-  stage: test
-  script:
-  - bundle exec jekyll build -d test
-  artifacts:
-    paths:
-    - test
-  except:
-  - master
-
+image: node:10.16.0
 pages:
-  stage: deploy
+  cache:
+    paths:
+      - node_modules/
   script:
-  - bundle exec jekyll build -d public
+    - npm install -g @angular/cli@8.3.6
+    - npm install
+    - npm run buildProd
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
+    - master
+    - pages

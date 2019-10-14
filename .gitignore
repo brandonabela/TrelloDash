@@ -1,21 +1,45 @@
-# User-specific stuff
-.idea/*
+# compiled output
+/dist
+/tmp
+/out-tsc
 
-# CMake
-cmake-build-debug/
-cmake-build-release/
+# dependencies
+/node_modules
 
-# Mongo Explorer plugin
-.idea/**/mongoSettings.xml
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
 
-# File-based project format
-*.iws
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# IntelliJ
-out/
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
-# mpeltonen/sbt-idea plugin
-.idea_modules/
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
 
-# JIRA plugin
-atlassian-ide-plugin.xml
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
