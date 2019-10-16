@@ -17,9 +17,15 @@ export class TrelloViewer {
     private storageService: StorageService,
     private requestService: RequestService
   ) {
-    this.storageService.getTrelloLinks().map(aTrelloUrl => {
+    const trelloLinks = this.storageService.getTrelloLinks();
+
+    trelloLinks.map(aTrelloUrl => {
       this.addTrelloProject(aTrelloUrl, true);
     });
+
+    if (trelloLinks.length === 0) {
+      this.storageLoaded = true;
+    }
   }
 
   public addURL(trelloUrl: string): void {

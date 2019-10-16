@@ -6,7 +6,7 @@ pages:
   script:
     - npm install -g @angular/cli@8.3.9
     - npm install
-    - npm run buildProd
+    - ng build --prod --base-href=/
   artifacts:
     paths:
       - public
