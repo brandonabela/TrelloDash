@@ -7,6 +7,11 @@ pages:
     - npm install -g @angular/cli@8.3.9
     - npm install
     - ng build --prod --base-href=/
+    - cp public/index.html public/theme/alert.html
+    - cp public/index.html public/theme/cards.html
+    - cp public/index.html public/theme/modals.html
+    - cp public/index.html public/trello/overview.html
+    - cp public/index.html public/trello/document.html
     - cp public/index.html public/404.html
   artifacts:
     paths:
