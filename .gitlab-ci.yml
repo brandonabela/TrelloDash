@@ -4,7 +4,7 @@ pages:
     paths:
       - node_modules/
   script:
-    - npm install -g @angular/cli@8.3.13
+    - npm install -g @angular/cli@8.3.14
     - npm install
     - ng build --prod --base-href=/
     - cp public/index.html public/404.html
