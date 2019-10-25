@@ -13,6 +13,9 @@ export class Menu {
       new MenuChild('Cards', '/theme/cards'),
       new MenuChild('Modals', '/theme/modals')
     ]),
+    new MenuParent('Error Pages', 'fas fa-ban', [
+      new MenuChild('404', '/theme/404')
+    ]),
     new MenuSection('Trello'),
     new MenuSingle('Overview', '/trello/overview', 'fas fa-folder'),
     new MenuSingle('Document', '/trello/document', 'fas fa-file-alt')

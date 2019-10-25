@@ -58,6 +58,10 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'theme/404',
+    component: InvalidPathComponent
+  },
   { // Keep last in the array
     path: '**',
     component: InvalidPathComponent

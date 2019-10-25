@@ -9,7 +9,7 @@ pages:
     - ng build --prod --base-href=/
     - ng run DashboardSystem:server
     - npx angular-prerender
-    - cp public/index.html public/404.html
+    - cp public/theme/404/index.html public/404.html
   artifacts:
     paths:
       - public
