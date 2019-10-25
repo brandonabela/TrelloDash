@@ -36,7 +36,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "public",
+            "outputPath": "dist/DashboardSystem",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -53,8 +53,10 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/file-saver/dist/FileSaver.min.js",
+              "node_modules/jszip/dist/jszip.min.js",
               "node_modules/bootstrap-notify/bootstrap-notify.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {

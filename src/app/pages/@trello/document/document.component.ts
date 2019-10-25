@@ -1,6 +1,3 @@
-import * as saveAs from 'file-saver';
-import * as JSZip from 'jszip';
-
 import { Component } from '@angular/core';
 import { AlertService } from 'src/app/@theme/service/alert.service';
 import { messages } from 'src/app/constants/messages';
@@ -10,6 +7,9 @@ import { TrelloProject } from 'src/app/models/trello/trello-project';
 import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
 import { RequestService } from 'src/app/service/request.service';
 import { StorageService } from 'src/app/service/storage.service';
+
+declare var JSZip: any;
+declare var saveAs: any;
 
 @Component({
   selector: 'page-document',

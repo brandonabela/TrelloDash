@@ -7,6 +7,9 @@ pages:
     - npm install -g @angular/cli@8.3.14
     - npm install
     - ng build --prod --base-href=/
+    - ng run DashboardSystem:server
+    - npx angular-prerender
+    - cp dist/DashboardSystem public
     - cp public/index.html public/404.html
   artifacts:
     paths:

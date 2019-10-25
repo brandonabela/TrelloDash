@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import * as saveAs from 'file-saver';
 import { AlertService } from '../@theme/service/alert.service';
 import { messages } from '../constants/messages';
 import { JsonStorage } from '../models/local-storage/json-storage';
+
+declare var saveAs: any;
 
 @Injectable({
   providedIn: 'root'

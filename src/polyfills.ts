@@ -55,8 +55,7 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js/dist/zone';  // Included with Angular CLI.
-import 'bootstrap-notify';   // Included for Bootstrap Notify
+import 'zone.js/dist/zone';  // Included with Angular CLI
 import 'simplebar';          // Included for Simple Bar Scrolling
 
 /***************************************************************************************************
