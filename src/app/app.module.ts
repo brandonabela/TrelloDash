@@ -25,7 +25,7 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
     ManageProjectComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,

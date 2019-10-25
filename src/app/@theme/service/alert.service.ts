@@ -1,5 +1,4 @@
-import 'bootstrap-notify';
-import * as $ from 'jquery';
+declare var $: any;
 
 import { Injectable } from '@angular/core';
 import { AlertConfig } from '../models/alerts/alert-config';
