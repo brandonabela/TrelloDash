@@ -18,11 +18,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
-    // Skip recording GA events to our account if in development.
-    if (document.location.hostname != 'localhost') {
-        gtag('config', 'UA-149941240-1');
-    }
   </script>
 </head>
 
