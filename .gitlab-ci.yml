@@ -5,6 +5,7 @@ pages:
       - node_modules/
   script:
     - npm install -g @angular/cli@8.3.24
+    - npm install -g gzipper
     - npm install
     - ng build --prod --base-href=/
     - ng run DashboardSystem:server
