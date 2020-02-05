@@ -4,15 +4,16 @@ pages:
     paths:
       - node_modules/
   script:
-    - npm install -g @angular/cli@8.3.14
+    - npm install -g @angular/cli@8.3.24
     - npm install
     - ng build --prod --base-href=/
     - ng run DashboardSystem:server
     - npx angular-prerender
     - cp public/theme/404/index.html public/404.html
+    - gzipper --verbose ./public ./compressed
   artifacts:
     paths:
-      - public
+      - compressed
   only:
     - master
     - pages
