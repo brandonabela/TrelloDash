@@ -12,11 +12,11 @@ export class ConfirmationModalComponent {
   @Output()
   public modalChoice = new EventEmitter();
 
-  private confirmAction(): void {
+  public confirmAction(): void {
     this.modalChoice.emit(true);
   }
 
-  private declineAction(): void {
+  public declineAction(): void {
     this.modalChoice.emit(false);
   }
 }
