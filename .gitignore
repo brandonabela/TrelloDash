@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /public
+/gzipped
 /tmp
 /out-tsc
 

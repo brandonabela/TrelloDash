@@ -11,10 +11,10 @@ pages:
     - ng run DashboardSystem:server
     - npx angular-prerender
     - cp public/theme/404/index.html public/404.html
-    - gzipper --verbose ./public ./compressed
+    - gzipper --verbose ./public ./gzipped
   artifacts:
     paths:
-      - compressed
+      - gzipped
   only:
     - master
     - pages
