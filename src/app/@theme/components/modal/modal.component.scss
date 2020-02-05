@@ -21,24 +21,6 @@
   padding: 13px;
   border-top: 1px solid #dee2e6;
 
-  ::ng-deep .btn-primary {
-    color: #ffffff;
-    background: #7460ee;
-    border: 1px solid #7460ee;
-
-    &:hover {
-      background: #7460ee;
-      box-shadow: 0 9px 16px 0 rgba(116, 96, 238, 0.42);
-      border: 1px solid #7460ee;
-    }
-
-    &:focus,
-    &:active {
-      background-color: #6352ce;
-      border: 1px solid #6352ce;
-    }
-  }
-
   & > :not(:last-child) {
     margin-right: 10px;
   }

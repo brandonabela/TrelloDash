@@ -5,7 +5,8 @@ import { ThemeComponentsModule } from './@theme/components/theme-components.modu
 import { DashboardLayoutComponent } from './@theme/layouts/dashboard-layout/dashboard-layout.component';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ManageProjectComponent } from './pages/@trello/shared/manage-project/manage-project.component';
+import { TrelloProjectNameFilter } from './filters/TrelloProjectNameFilter';
+import { ManageProjectComponent } from './pages/@trello/manage-projects/manage-project/manage-project.component';
 import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
 import { ContentFooterComponent } from './shared/components/content-footer/content-footer.component';
 import { LeftNavigationComponent } from './shared/components/left-navigation/left-navigation.component';
@@ -13,8 +14,12 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
 
 @NgModule({
   declarations: [
+    // Angular Components
+
     AppComponent,
     RoutingComponents,
+
+    // Dashboard Components
 
     LeftNavigationComponent,
     TopNavigationComponent,
@@ -22,7 +27,13 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
     DashboardLayoutComponent,
     InvalidPathComponent,
 
-    ManageProjectComponent
+    // Dashboard Modals
+
+    ManageProjectComponent,
+
+    // Filters
+
+    TrelloProjectNameFilter
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

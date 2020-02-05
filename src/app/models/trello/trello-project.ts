@@ -12,15 +12,21 @@ export class TrelloProject {
   public projectJson: string;
   public trelloCards: TrelloCard[] = [];
 
+  public validInDays: number;
+  public expiryDate: Date;
+
   public trelloBoards: Map<string, string> = new Map<string, string>();
   public trelloLabelList: Map<string, TrelloLabel> = new Map<string, TrelloLabel>();
   public trelloCheckList: Map<string, TrelloCheckList> = new Map<string, TrelloCheckList>();
   public trelloCustomDropdown: Map<string, TrelloCustomDropdown> = new Map<string, TrelloCustomDropdown>();
 
-  constructor(projectJson: JsonTrello) {
+  constructor(projectJson: JsonTrello, days: number) {
     this.projectName = projectJson.name;
     this.projectLink = projectJson.shortUrl;
     this.projectJson = projectJson.shortUrl + '.json';
+
+    this.validInDays = days;
+    this.expiryDate = TrelloProject.getExpiryDate(days);
 
     this.trelloBoards = TrelloProject.addTrelloBoards(projectJson);
     this.trelloCheckList = TrelloProject.addTrelloChecklists(projectJson);
@@ -32,6 +38,13 @@ export class TrelloProject {
     for (let i = 0; i < projectJson.cards.length; i++) {
       this.trelloCards.push(new TrelloCard(projectJson, i, this.trelloBoards, this.trelloCheckList, this.trelloLabelList, this.trelloCustomDropdown));
     }
+  }
+
+  public static getExpiryDate(days: number): Date {
+    const todayDate = new Date();
+    todayDate.setDate(todayDate.getDate() + days);
+
+    return todayDate;
   }
 
   private static addTrelloBoards(projectJson: JsonTrello): Map<string, string> {

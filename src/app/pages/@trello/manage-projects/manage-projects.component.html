@@ -1,0 +1,109 @@
+<div class="row">
+  <div class="col-md-12">
+    <page-header></page-header>
+  </div>
+
+  <div class="col-md-12">
+    <ng-container *ngIf="trelloViewer.areProjectsLoaded(); else projectsLoading">
+      <card>
+        <card-header>
+          <card-tools>
+            <button class="btn" type="button" (click)="addTrelloProject()" data-toggle="modal" data-target="#manageProjectModal">
+              <i class="fas fa-plus"></i>
+              Add Project
+            </button>
+          </card-tools>
+
+          <card-title>
+            Projects
+          </card-title>
+        </card-header>
+
+        <card-body>
+          <div class="row">
+            <div class="col-md-12">
+
+              <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
+
+                <div class="searchArea">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="Project Name" [(ngModel)]="projectNameSearch">
+
+                    <div class="input-group-append">
+                      <button class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th> Project Name </th>
+                          <th> Expiry Date </th>
+                          <th> Action </th>
+                        </tr>
+                      </thead>
+
+                      <tbody *ngFor="let aTrelloProject of trelloViewer.trelloProjects | trelloProjectNameFilter: projectNameSearch; index as i">
+                        <td> {{aTrelloProject.projectName}} </td>
+                        <td> {{aTrelloProject.expiryDate | date: 'dd MMMM yyyy'}} </td>
+                        <td>
+                          <button class="btn btn-success" type="button" (click)="editTrelloProject(i)" data-toggle="modal" data-target="#manageProjectModal">
+                            <i class="fas fa-edit"></i>
+                          </button>
+
+                          <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmationModal">
+                            <i class="fas fa-trash"></i>
+                          </button>
+
+                          <confirmation-modal modalId="confirmationModal" (modalChoice)="removeTrelloProject($event, i)"></confirmation-modal>
+                        </td>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </ng-container>
+
+              <ng-template #noProjects>
+                <div class="no-project col-md-12 text-center">
+                  <div class="input-group">
+                    <p class="form-control"> No projects has been added </p>
+                  </div>
+                </div>
+              </ng-template>
+
+            </div>
+          </div>
+        </card-body>
+      </card>
+    </ng-container>
+
+    <ng-template #projectsLoading>
+      <card>
+        <card-header>
+          <card-title>
+            Loading Trello Projects
+          </card-title>
+        </card-header>
+
+        <card-body>
+          <div class="col-md-12">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                [style.width]="trelloViewer.getStoragePercentage() + '%'"
+                [attr.aria-valuenow]="trelloViewer.getStoragePercentage()">
+              </div>
+            </div>
+          </div>
+        </card-body>
+      </card>
+    </ng-template>
+  </div>
+</div>
+
+<trello-manage-project [projectIndex]="projectIndex" [trelloForm]="trelloForm" [trelloViewer]="trelloViewer"></trello-manage-project>

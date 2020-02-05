@@ -1,1 +1,19 @@
-@import "~src/app/@theme/assets/scss/theme.scss"
+@import "~simplebar/dist/simplebar.css"; // Scroll Styling
+
+@import "~@fortawesome/fontawesome-free/css/all.css"; // Font awesome font
+
+@import "~wfk-poppins/poppins.css"; // Primary Font Style
+@import "~wfk-montserrat/montserrat.css"; // 404 Error Font Style
+
+@import "~src/app/@theme/assets/scss/theme.scss"; // Theme Style
+
+.no-project {
+  .form-control {
+    height: auto;
+    padding: 11px 17px;
+    border: none;
+    border-radius: 3px;
+    background: #e0e8f5;
+    color: #444444;
+  }
+}

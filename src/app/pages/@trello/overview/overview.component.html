@@ -4,13 +4,13 @@
   </div>
 
   <div class="col-md-12">
-    <ng-container *ngIf="trelloViewer.storageLoaded; else projectsLoading">
+    <ng-container *ngIf="trelloViewer.areProjectsLoaded(); else projectsLoading">
       <card>
         <card-header>
           <card-tools>
-            <button class="btn" data-toggle="modal" data-target="#manageProjectModal">
-              <i class="fas fa-plus"></i>
-              Manage Projects
+            <button class="btn" (click)="trelloViewer.syncTrelloProject()">
+              <i class="fas fa-sync"></i>
+              Sync Projects
             </button>
           </card-tools>
 
@@ -84,8 +84,8 @@
           <div class="col-md-12">
             <div class="progress">
               <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                [style.width]="trelloViewer.storagePercentage + '%'"
-                [attr.aria-valuenow]="trelloViewer.storagePercentage">
+                [style.width]="trelloViewer.getStoragePercentage() + '%'"
+                [attr.aria-valuenow]="trelloViewer.getStoragePercentage()">
               </div>
             </div>
           </div>
@@ -94,5 +94,3 @@
     </ng-template>
   </div>
 </div>
-
-<trello-manage-project [trelloViewer]="trelloViewer"></trello-manage-project>

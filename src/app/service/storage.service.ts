@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AlertService } from '../@theme/service/alert.service';
 import { messages } from '../constants/messages';
 import { JsonStorage } from '../models/local-storage/json-storage';
+import { TrelloProject } from '../models/trello/trello-project';
 
 declare var saveAs: any;
 
@@ -9,7 +10,7 @@ declare var saveAs: any;
   providedIn: 'root'
 })
 export class StorageService {
-  private keyTrelloLink = 'trelloLinks';
+  private keyTrelloProject = 'trelloProjects';
 
   constructor(private alertService: AlertService) { }
 
@@ -27,7 +28,7 @@ export class StorageService {
     window.localStorage.setItem(key, JSON.stringify(value));
   }
 
-  private addToArray(key: string, value: string): void {
+  private addToArray(key: string, value: any): void {
     let storageValue = this.getStorageValue(key);
 
     if (storageValue === null) {
@@ -48,18 +49,18 @@ export class StorageService {
 
   // ---------- Specific Functionality ----------
 
-  public getTrelloLinks(): string[] {
-    const trelloLinks = this.getStorageValue(this.keyTrelloLink);
+  public getTrelloProjects(): TrelloProject[] {
+    const trelloProjects = this.getStorageValue(this.keyTrelloProject);
 
-    return trelloLinks != null ? trelloLinks : [];
+    return trelloProjects != null ? trelloProjects : [];
   }
 
-  public addTrelloUrl(trelloUrl: string): void {
-    this.addToArray(this.keyTrelloLink, trelloUrl);
+  public addTrelloProject(trelloProjct: TrelloProject): void {
+    this.addToArray(this.keyTrelloProject, trelloProjct);
   }
 
-  public removeTrelloUrl(index: number): void {
-    this.removeFromArray(this.keyTrelloLink, index);
+  public removeTrelloProject(index: number): void {
+    this.removeFromArray(this.keyTrelloProject, index);
   }
 
   // ---------- Import and Export Handling ----------

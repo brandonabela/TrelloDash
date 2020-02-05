@@ -1,0 +1,11 @@
+.searchArea {
+  padding-bottom: 15px;
+}
+
+td {
+  vertical-align: middle;
+
+  button:not(:last-child) {
+    margin-right: 10px;
+  }
+}

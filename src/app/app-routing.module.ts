@@ -5,6 +5,7 @@ import { AlertsComponent } from './pages/@theme/alerts/alerts.component';
 import { CardsComponent } from './pages/@theme/cards/cards.component';
 import { ModalsComponent } from './pages/@theme/modals/modals.component';
 import { DocumentComponent } from './pages/@trello/document/document.component';
+import { ManageProjectsComponent } from './pages/@trello/manage-projects/manage-projects.component';
 import { OverviewComponent } from './pages/@trello/overview/overview.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
@@ -40,6 +41,13 @@ const routes: Routes = [
         component: ModalsComponent,
         data: {
           breadcrumb: 'Modals'
+        }
+      },
+      {
+        path: 'trello/manage',
+        component: ManageProjectsComponent,
+        data: {
+          breadcrumb: 'Manage Projects'
         }
       },
       {
@@ -81,6 +89,7 @@ export const RoutingComponents = [
   CardsComponent,
   ModalsComponent,
 
+  ManageProjectsComponent,
   OverviewComponent,
   DocumentComponent
 ];

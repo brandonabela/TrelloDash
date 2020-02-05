@@ -17,6 +17,7 @@ export class Menu {
       new MenuChild('404', '/theme/404')
     ]),
     new MenuSection('Trello'),
+    new MenuSingle('Manage Projects', '/trello/manage', 'fas fa-project-diagram'),
     new MenuSingle('Overview', '/trello/overview', 'fas fa-folder'),
     new MenuSingle('Document', '/trello/document', 'fas fa-file-alt')
   ];

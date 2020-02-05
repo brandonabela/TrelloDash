@@ -1,0 +1,52 @@
+<modal modalId="manageProjectModal" modalClass="modal-md">
+  <modal-title>
+    <div *ngIf="isNewMode() else editMode"> Add Trello Project </div>
+    <ng-template #editMode> Edit Trello Project </ng-template>
+  </modal-title>
+
+  <modal-body>
+    <form [formGroup]="trelloForm">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label> Trello Project </label>
+          <input class="form-control" type="text" placeholder="Trello URL" formControlName="url">
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label> Sync Project Every </label>
+
+          <div class="row">
+            <div class="col-md-6">
+              <input class="form-control" type="number" formControlName="expiryQuantity">
+              <small> 0 sync project every page load </small>
+            </div>
+
+            <div class="col-md-6">
+              <select class="form-control" formControlName="expiryType">
+                <option value=1> Days </option>
+                <option value=31> Months </option>
+                <option value=365> Years </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </modal-body>
+
+  <modal-footer>
+    <ng-container *ngIf="isNewMode()">
+      <button type="button" class="btn btn-primary" (click)="addTrelloProjectModal()" data-dismiss="modal">
+        Add Project
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="!isNewMode()">
+      <button type="button" class="btn btn-primary" (click)="updateTrelloProjectModal()" data-dismiss="modal">
+        Update Project
+      </button>
+    </ng-container>
+  </modal-footer>
+</modal>
