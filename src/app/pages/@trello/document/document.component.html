@@ -4,73 +4,23 @@
   </div>
 
   <div class="col-md-12">
-    <ng-container *ngIf="trelloViewer.areProjectsLoaded(); else projectsLoading">
-      <card>
-        <card-header>
-          <card-tools>
-            <button class="btn" (click)="trelloViewer.syncTrelloProject()">
-              <i class="fas fa-sync"></i>
-              Sync Projects
-            </button>
-          </card-tools>
+    <trello-page-logic cardTitle="Export Trello Project for Documentation" [trelloViewer]="trelloViewer">
+      <div class="col-md-12 export-field" *ngFor="let aTrelloProject of trelloViewer.trelloProjects; index as i">
+        <div class="input-group">
+          <p class="form-control"> {{aTrelloProject.projectName}} </p>
 
-          <card-title>
-            Export Trello Project for Documentation
-          </card-title>
-        </card-header>
-
-        <card-body>
-          <div class="export">
-            <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
-              <div class="col-md-12" *ngFor="let aTrelloProject of trelloViewer.trelloProjects; index as i">
-                <div class="input-group">
-                  <p class="form-control"> {{aTrelloProject.projectName}} </p>
-
-                  <div class="input-group-append">
-                    <i class="input-group-text fas fa-file-alt" (click)="exportTrelloProject(i)"></i>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-12">
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                    [style.width]="exportPercentage + '%'" [attr.aria-valuenow]="exportPercentage"></div>
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-template #noProjects>
-              <div class="col-md-12 text-center">
-                <div class="input-group">
-                  <p class="form-control"> No projects has been added </p>
-                </div>
-              </div>
-            </ng-template>
+          <div class="input-group-append">
+            <i class="input-group-text fas fa-file-alt" (click)="exportTrelloProject(i)"></i>
           </div>
-        </card-body>
-      </card>
-    </ng-container>
+        </div>
+      </div>
 
-    <ng-template #projectsLoading>
-      <card>
-        <card-header>
-          <card-title>
-            Loading Trello Projects
-          </card-title>
-        </card-header>
-
-        <card-body>
-          <div class="col-md-12">
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                [style.width]="trelloViewer.getStoragePercentage() + '%'"
-                [attr.aria-valuenow]="trelloViewer.getStoragePercentage()">
-              </div>
-            </div>
-          </div>
-        </card-body>
-      </card>
-    </ng-template>
+      <div class="col-md-12">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+            [style.width]="exportPercentage + '%'" [attr.aria-valuenow]="exportPercentage"></div>
+        </div>
+      </div>
+    </trello-page-logic>
   </div>
 </div>

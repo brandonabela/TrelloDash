@@ -1,0 +1,30 @@
+<ng-container *ngIf="trelloViewer.areProjectsLoaded(); else projectsLoading">
+  <card>
+    <card-header>
+      <card-tools>
+        <button class="btn" (click)="trelloViewer.syncTrelloProjects()">
+          <i class="fas fa-sync"></i>
+          Sync Projects
+        </button>
+      </card-tools>
+
+      <card-title>
+        {{cardTitle}}
+      </card-title>
+    </card-header>
+
+    <card-body>
+      <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
+        <ng-content></ng-content>
+      </ng-container>
+
+      <ng-template #noProjects>
+        <trello-no-project></trello-no-project>
+      </ng-template>
+    </card-body>
+  </card>
+</ng-container>
+
+<ng-template #projectsLoading>
+  <trello-loading-projects [trelloViewer]="trelloViewer"></trello-loading-projects>
+</ng-template>

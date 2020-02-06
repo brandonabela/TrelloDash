@@ -70,11 +70,7 @@
               </ng-container>
 
               <ng-template #noProjects>
-                <div class="no-project col-md-12 text-center">
-                  <div class="input-group">
-                    <p class="form-control"> No projects has been added </p>
-                  </div>
-                </div>
+                <trello-no-project></trello-no-project>
               </ng-template>
 
             </div>
@@ -84,24 +80,7 @@
     </ng-container>
 
     <ng-template #projectsLoading>
-      <card>
-        <card-header>
-          <card-title>
-            Loading Trello Projects
-          </card-title>
-        </card-header>
-
-        <card-body>
-          <div class="col-md-12">
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                [style.width]="trelloViewer.getStoragePercentage() + '%'"
-                [attr.aria-valuenow]="trelloViewer.getStoragePercentage()">
-              </div>
-            </div>
-          </div>
-        </card-body>
-      </card>
+      <trello-loading-projects [trelloViewer]="trelloViewer"></trello-loading-projects>
     </ng-template>
   </div>
 </div>

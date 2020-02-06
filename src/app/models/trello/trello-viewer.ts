@@ -111,17 +111,12 @@ export class TrelloViewer {
   public syncTrelloProject(index: number) {
     const storageTrello = this.storageService.getTrelloProjects();
 
-    const projectLink = storageTrello[index].projectLink;
-    const projectDays = storageTrello[index].validInDays;
-
-    this.removeProject(index);
-
-    this.addURL(projectLink, projectDays);
+    this.updateProject(index, storageTrello[index].validInDays);
   }
 
   public syncTrelloProjects(): void {
-    this.trelloProjects.map((_, index) => {
-      this.syncTrelloProject(index);
-    });
+    for (let i = this.trelloProjects.length - 1; i >= 0; i --) {
+      this.syncTrelloProject(i);
+    }
   }
 }
