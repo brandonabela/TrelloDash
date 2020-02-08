@@ -24,24 +24,24 @@ export class OverviewComponent {
   public boardStatisticsClass(currentIndex: number, total: number): string {
     switch (total) {
       case 1:
-        return 'col-md-12';
+        return 'col-xl-12';
       case 2:
-        return 'col-md-6';
+        return 'col-xl-6';
       case 3:
-        return 'col-md-4';
+        return 'col-xl-4';
       case 4:
-        return 'col-md-3';
+        return 'col-xl-3';
       case 5:
         if (currentIndex <= 3) {
-          return 'col-md-4';
+          return 'col-xl-4';
         } else {
-          return 'col-md-6';
+          return 'col-xl-6';
         }
       case 6:
-        return 'col-md-4';
+        return 'col-xl-4';
       default:
         if (currentIndex <= 4) {
-          return 'col-md-3';
+          return 'col-xl-3';
         } else {
           return this.boardStatisticsClass(currentIndex - 4, total - 4);
         }

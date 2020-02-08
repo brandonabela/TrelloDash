@@ -101,7 +101,7 @@ export class TrelloViewer {
   }
 
   public updateProject(index: number, days: number) {
-    const projectLink = this.trelloProjects[index].projectLink;
+    const projectLink = this.storageService.getTrelloProjects()[index].projectLink;
 
     this.removeProject(index);
 

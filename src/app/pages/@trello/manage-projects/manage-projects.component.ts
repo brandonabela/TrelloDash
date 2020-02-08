@@ -79,9 +79,13 @@ export class ManageProjectsComponent implements OnInit {
     this.trelloForm.controls.url.disable();
   }
 
-  public removeTrelloProject($event: Event, index: number): void {
+  public removeTrelloProject(index: number): void {
+    this.projectIndex = index;
+  }
+
+  public confirmRemoveTrelloProject($event: Event): void {
     if ($event) {
-      this.trelloViewer.removeProject(index);
+      this.trelloViewer.removeProject(this.projectIndex);
     }
   }
 }

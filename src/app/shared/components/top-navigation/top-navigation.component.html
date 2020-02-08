@@ -2,7 +2,7 @@
   <nav class="navbar navbar-header fixed-top navbar-expand-lg">
     <div class="logo-banner">
       <h4 class="fullLogoBanner"> Dashboard System </h4>
-      <h4 class="miniLogoBanner d-none"> DS </h4>
+      <h4 class="miniLogoBanner"> DS </h4>
     </div>
 
     <div class="navbar-collapse">
@@ -37,7 +37,7 @@
             </div>
 
             <div class="row">
-              <a class="col-md-6" (click)="downloadData()">
+              <a class="col-xl-6" (click)="downloadData()">
                 <div class="dropdown-links">
                   <i class="fas fa-download"></i>
                   <span> Download </span>
@@ -45,7 +45,7 @@
               </a>
 
               <input type="file" accept=".json" hidden #importData (change)="uploadData($event)">
-              <a class="col-md-6" (click)="importData.click()">
+              <a class="col-xl-6" (click)="importData.click()">
                 <div class="dropdown-links">
                   <i class="fas fa-upload"></i>
                   <span> Upload </span>

@@ -1,4 +1,4 @@
-.row .col-md-8 {
+.row .col-xl-8 {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -49,5 +49,23 @@
     border-radius: 40px;
     background: #1572e8 !important;
     box-shadow: #0046d5 0 4px 15px -5px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .row .col-xl-8 h1 {
+    font-size: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .row .col-xl-8 h1 {
+    font-size: 100px;
+  }
+}
+
+@media (max-width: 425px) {
+  .row .col-xl-8 h1 {
+    font-size: 75px;
   }
 }

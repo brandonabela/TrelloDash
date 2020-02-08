@@ -24,3 +24,9 @@
     font-size: 13px;
   }
 }
+
+@media (max-width: 425px) {
+  .breadcrumb {
+    float: left;
+  }
+}

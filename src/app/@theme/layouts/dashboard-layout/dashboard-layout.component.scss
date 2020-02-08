@@ -16,3 +16,9 @@
 .fullContent {
   width: calc(100% - 60px);
 }
+
+@media (max-width: 1440px) {
+  .content {
+    width: 100%;
+  }
+}

@@ -8,7 +8,7 @@
 
     .logo-banner {
       width: 240px;
-      height: 60px;
+      height: 64px;
       padding: 0 20px;
       background: rgba(0, 0, 0, 0.05);
 
@@ -17,6 +17,14 @@
         font-size: 20px;
         line-height: 60px;
         color: #fff;
+      }
+
+      .fullLogoBanner {
+        display: inline;
+      }
+
+      .miniLogoBanner {
+        display: none;
       }
     }
 
@@ -151,5 +159,28 @@
 
   .minimise-sidebar .logo-banner {
     width: 70px !important;
+
+    .fullLogoBanner {
+      display: none;
+    }
+
+    .miniLogoBanner {
+      display: inline;
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .topNavigation {
+    .navbar {
+      .navbar-collapse {
+        flex-basis: auto;
+        display: flex;
+
+        .navigationSearch {
+          display: none;
+        }
+      }
+    }
   }
 }

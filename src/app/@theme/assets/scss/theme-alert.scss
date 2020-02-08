@@ -76,3 +76,9 @@
   border: 1px solid #282a3c;
   color: #ffffff;
 }
+
+@media (max-width: 1440px) {
+  .alert {
+    width: calc(100% - 40px);
+  }
+}

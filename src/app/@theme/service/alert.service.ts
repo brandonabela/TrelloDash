@@ -40,7 +40,7 @@ export class AlertService {
 
   public getAlertComponent(): string {
     return `
-      <div data-notify="container" class="col-md-3 alert alert-{0}">
+      <div data-notify="container" class="col-xl-3 alert alert-{0}">
         <button type="button" class="close" data-notify="dismiss" aria-hidden="true"> &times; </button>
 
         <i data-notify="icon"></i>
