@@ -7,7 +7,7 @@ import { StorageService } from 'src/app/service/storage.service';
   styleUrls: ['./top-navigation.component.scss']
 })
 export class TopNavigationComponent implements OnInit {
-  @ViewChild('importData', { static: false })
+  @ViewChild('importData')
   public importDataElement: ElementRef;
 
   constructor(private storageService: StorageService) { }
