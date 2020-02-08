@@ -61,6 +61,16 @@
         }
       }
 
+      .center-logo {
+        display: none;
+
+        h4 {
+          margin: 0;
+          font-size: 20px;
+          color: #fff;
+        }
+      }
+
       .navbar-nav {
         position: relative;
 
@@ -90,6 +100,7 @@
           left: auto;
           width: 250px;
           z-index: 1001;
+          position: absolute;
 
           .header {
             align-items: center;
@@ -172,6 +183,10 @@
 
 @media (max-width: 1440px) {
   .topNavigation {
+    .logo-banner {
+      display: none;
+    }
+
     .navbar {
       .navbar-collapse {
         flex-basis: auto;
@@ -179,6 +194,20 @@
 
         .navigationSearch {
           display: none;
+        }
+
+        .center-logo {
+          display: inline;
+        }
+
+        .navbar-nav {
+          .dropdown-menu {
+            width: calc(100vw - 20px);
+
+            .col-xl-6 {
+              width: 50%;
+            }
+          }
         }
       }
     }

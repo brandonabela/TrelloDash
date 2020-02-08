@@ -79,6 +79,8 @@ export class StorageService {
         }
       });
 
+      location.reload();
+
       this.alertService.add(messages.storageUploadSuccess);
     };
   }

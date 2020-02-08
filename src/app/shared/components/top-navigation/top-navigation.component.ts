@@ -92,7 +92,7 @@ export class TopNavigationComponent implements OnInit {
     this.storageService.exportStorage();
   }
 
-  public uploadData(event: Event): void {
+  public importData(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.storageService.importStorage(target.files[0]);
   }

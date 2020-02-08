@@ -1,7 +1,7 @@
 export class JsonStorage {
-  public trelloLinks: string[];
+  public trelloProjects: string[];
 
   constructor() {
-    this.trelloLinks = [];
+    this.trelloProjects = [];
   }
 }

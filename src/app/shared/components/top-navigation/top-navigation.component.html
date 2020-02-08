@@ -23,6 +23,10 @@
               (focus)="onSearchBoxFocus()" (blur)="onSearchBoxBlur()">
           </div>
         </form>
+
+        <div class="center-logo">
+          <h4> Dashboard System </h4>
+        </div>
       </div>
 
       <ul class="navbar-nav">
@@ -44,11 +48,11 @@
                 </div>
               </a>
 
-              <input type="file" accept=".json" hidden #importData (change)="uploadData($event)">
+              <input type="file" accept=".json" hidden #importData (change)="importData($event)">
               <a class="col-xl-6" (click)="importData.click()">
                 <div class="dropdown-links">
                   <i class="fas fa-upload"></i>
-                  <span> Upload </span>
+                  <span> Import </span>
                 </div>
               </a>
             </div>

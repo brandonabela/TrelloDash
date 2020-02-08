@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
 import { AlertService } from 'src/app/@theme/service/alert.service';
 import { messages } from 'src/app/constants/messages';
+import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
 
 @Component({
   selector: 'trello-manage-project',
