@@ -7,14 +7,13 @@ pages:
     - npm install -g @angular/cli@9.0.1
     - npm install -g gzipper
     - npm install
-    - ng build --prod --base-href=/
-    - ng run DashboardSystem:server
-    - npx angular-prerender
-    - cp public/theme/404/index.html public/404.html
-    - gzipper --verbose ./public
+    - npm run build:ssr
+    - npm run prerender
+    - cp dist/DashboardSystem/theme/404/index.html dist/DashboardSystem/404.html
+    - gzipper --verbose ./dist/DashboardSystem
   artifacts:
     paths:
-      - public
+      - dist/DashboardSystem
   only:
     - master
     - pages

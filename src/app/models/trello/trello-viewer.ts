@@ -17,7 +17,7 @@ export class TrelloViewer {
     const todayDate = new Date();
     const storageTrello = this.storageService.getTrelloProjects();
 
-    for (let i = storageTrello.length - 1; i >= 0; i --) {
+    for (let i = storageTrello.length - 1; i >= 0; i--) {
       const projectDate = new Date(storageTrello[i].expiryDate);
 
       if (todayDate < projectDate) {
@@ -115,7 +115,7 @@ export class TrelloViewer {
   }
 
   public syncTrelloProjects(): void {
-    for (let i = this.trelloProjects.length - 1; i >= 0; i --) {
+    for (let i = this.trelloProjects.length - 1; i >= 0; i--) {
       this.syncTrelloProject(i);
     }
   }
