@@ -4,6 +4,7 @@ import { DashboardLayoutComponent } from './@theme/layouts/dashboard-layout/dash
 import { AlertsComponent } from './pages/@theme/alerts/alerts.component';
 import { CardsComponent } from './pages/@theme/cards/cards.component';
 import { ModalsComponent } from './pages/@theme/modals/modals.component';
+import { TablesComponent } from './pages/@theme/tables/tables.component';
 import { DocumentComponent } from './pages/@trello/document/document.component';
 import { ManageProjectsComponent } from './pages/@trello/manage-projects/manage-projects.component';
 import { OverviewComponent } from './pages/@trello/overview/overview.component';
@@ -44,6 +45,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'theme/tables',
+        component: TablesComponent,
+        data: {
+          breadcrumb: 'Tables'
+        }
+      },
+      {
         path: 'trello/manage',
         component: ManageProjectsComponent,
         data: {
@@ -79,7 +87,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabled'
-})],
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
@@ -90,6 +98,7 @@ export const RoutingComponents = [
   AlertsComponent,
   CardsComponent,
   ModalsComponent,
+  TablesComponent,
 
   ManageProjectsComponent,
   OverviewComponent,

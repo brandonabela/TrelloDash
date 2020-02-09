@@ -11,7 +11,8 @@ export class Menu {
     new MenuParent('Components', 'fas fa-cogs', [
       new MenuChild('Alerts', '/theme/alerts'),
       new MenuChild('Cards', '/theme/cards'),
-      new MenuChild('Modals', '/theme/modals')
+      new MenuChild('Modals', '/theme/modals'),
+      new MenuChild('Tables', '/theme/tables')
     ]),
     new MenuParent('Error Pages', 'fas fa-ban', [
       new MenuChild('404', '/theme/404')
