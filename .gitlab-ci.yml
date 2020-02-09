@@ -9,11 +9,11 @@ pages:
     - npm install
     - npm run build:ssr
     - npm run prerender
-    - cp dist/theme/404/index.html dist/404.html
-    - gzipper --verbose ./dist
+    - cp public/theme/404/index.html public/404.html
+    - gzipper --verbose ./public
   artifacts:
     paths:
-      - dist
+      - public
   only:
     - master
     - pages
