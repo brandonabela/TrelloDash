@@ -9,11 +9,11 @@ pages:
     - npm install
     - npm run build:ssr
     - npm run prerender
-    - cp dist/DashboardSystem/theme/404/index.html dist/DashboardSystem/404.html
-    - gzipper --verbose ./dist/DashboardSystem
+    - cp dist/theme/404/index.html dist/404.html
+    - gzipper --verbose ./dist
   artifacts:
     paths:
-      - dist/DashboardSystem
+      - dist
   only:
     - master
     - pages
