@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-xl-12">
-    <trello-card cardTitle="Trello Board Counts">
+    <trello-card cardTitle="Trello Board Counts" [trelloViewer]="trelloViewer">
       <div class="header"></div>
 
       <div class="body">
@@ -20,7 +20,7 @@
   </div>
 
   <div class="col-xl-12">
-    <trello-card cardTitle="Trello Projects Overview">
+    <trello-card cardTitle="Trello Projects Overview" [trelloViewer]="trelloViewer">
       <div class="header">
         <dropdown-checkbox [dropdownForm]="tableColumnForm" dropdownArray="tableColumnsArray" [checkboxArray]="trelloCardFields">
           <i class="fas fa-cog"></i>
