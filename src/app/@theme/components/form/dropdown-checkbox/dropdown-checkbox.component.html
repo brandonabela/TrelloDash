@@ -1,0 +1,14 @@
+<form [formGroup]="dropdownForm">
+  <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    <ng-content></ng-content>
+  </button>
+
+  <ul class="dropdown-menu dropdown-checkbox">
+    <li [formArrayName]="dropdownArray" *ngFor="let checkbox of checkboxArray; let i = index">
+      <label>
+        <input type="checkbox" [formControlName]="i">
+        <span> {{checkbox}} </span>
+      </label>
+    </li>
+  </ul>
+</form>

@@ -26,11 +26,7 @@ export class DocumentComponent {
     private storageService: StorageService,
     private requestService: RequestService
   ) {
-    this.trelloViewer = new TrelloViewer(
-      this.alertService,
-      this.storageService,
-      this.requestService
-    );
+    this.trelloViewer = new TrelloViewer(this.alertService, this.storageService, this.requestService);
   }
 
   public exportTrelloProject(index: number) {

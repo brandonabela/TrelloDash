@@ -24,7 +24,6 @@
             <div class="col-xl-12">
 
               <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
-
                 <div class="searchArea">
                   <div class="input-group">
                     <input class="form-control" placeholder="Project Name" [(ngModel)]="projectNameSearch">
@@ -49,26 +48,25 @@
                           </tr>
                         </thead>
 
-                        <tbody *ngFor="let aTrelloProject of trelloViewer.trelloProjects | trelloProjectNameFilter: projectNameSearch; index as i">
-                          <td> {{aTrelloProject.projectName}} </td>
-                          <td> {{aTrelloProject.expiryDate | date: 'dd MMMM yyyy'}} </td>
-                          <td>
-                            <button class="btn btn-success" type="button" (click)="editTrelloProject(i)" data-toggle="modal" data-target="#manageProjectModal">
-                              <i class="fas fa-edit"></i>
-                            </button>
+                        <tbody>
+                          <tr *ngFor="let aTrelloProject of trelloViewer.trelloProjects | trelloProjectNameFilter: projectNameSearch; index as i">
+                            <td> {{aTrelloProject.projectName}} </td>
+                            <td> {{aTrelloProject.expiryDate | date: 'dd MMMM yyyy'}} </td>
+                            <td>
+                              <button class="btn btn-success" type="button" (click)="editTrelloProject(i)" data-toggle="modal" data-target="#manageProjectModal">
+                                <i class="fas fa-edit"></i>
+                              </button>
 
-                            <button class="btn btn-danger" type="button" (click)="removeTrelloProject(i)" data-toggle="modal" data-target="#confirmationModal">
-                              <i class="fas fa-trash"></i>
-                            </button>
-
-                            <confirmation-modal modalId="confirmationModal" (modalChoice)="confirmRemoveTrelloProject($event)"></confirmation-modal>
-                          </td>
+                              <button class="btn btn-danger" type="button" (click)="removeTrelloProject(i)" data-toggle="modal" data-target="#confirmationModal">
+                                <i class="fas fa-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
                   </div>
                 </div>
-
               </ng-container>
 
               <ng-template #noProjects>
@@ -88,3 +86,5 @@
 </div>
 
 <trello-manage-project [projectIndex]="projectIndex" [trelloForm]="trelloForm" [trelloViewer]="trelloViewer"></trello-manage-project>
+
+<confirmation-modal modalId="confirmationModal" (modalChoice)="confirmRemoveTrelloProject($event)"></confirmation-modal>

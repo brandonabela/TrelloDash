@@ -4,55 +4,103 @@
   </div>
 
   <div class="col-xl-12">
-    <trello-page-logic cardTitle="Trello Projects Overview" [trelloViewer]="trelloViewer">
-      <div class="row">
-        <ng-container *ngFor="let aBoard of trelloViewer.uniqueBoards; let i = index">
-          <div [class]="boardStatisticsClass(i + 1, trelloViewer.uniqueBoards.length)">
-            <card-countdown cardPrimary [count]="aBoard.frequency" [description]="aBoard.name"></card-countdown>
-          </div>
-        </ng-container>
-      </div>
+    <trello-card cardTitle="Trello Board Counts">
+      <div class="header"></div>
 
-      <div class="row">
-        <div class="col-xl-12">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th> Board Name </th>
-                <th> Card Name </th>
-                <th> Labels </th>
-                <th> Percentage </th>
-              </tr>
-            </thead>
-
-            <tbody *ngFor="let aTrelloProject of trelloViewer.trelloProjects">
-              <tr *ngFor="let aTrelloCard of aTrelloProject.trelloCards">
-                <td> {{aTrelloCard.cardBoardName}} </td>
-                <td> {{aTrelloCard.cardName}} </td>
-                <td>
-                  <span class="label" *ngFor="let aCard of aTrelloCard.cardLabels"
-                    [style.background-color]="aCard.labelColour"> {{aCard.labelName}} </span>
-                </td>
-                <td>
-                  <div class="row progressColumn">
-                    <div class="col-xl-7">
-                      <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                          [style.width]="aTrelloCard.cardPercentage + '%'"
-                          [attr.aria-valuenow]="aTrelloCard.cardPercentage"></div>
-                      </div>
-                    </div>
-
-                    <div class="col-xl-5 text-center">
-                      {{aTrelloCard.cardPercentage}}%
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="body">
+        <div class="row">
+          <ng-container *ngFor="let aBoard of trelloViewer.uniqueBoards; let i = index">
+            <div [class]="boardStatisticsClass(i + 1, trelloViewer.uniqueBoards.length)">
+              <card-countdown cardPrimary [count]="aBoard.frequency" [description]="aBoard.name"></card-countdown>
+            </div>
+          </ng-container>
         </div>
       </div>
-    </trello-page-logic>
+    </trello-card>
+  </div>
+
+  <div class="col-xl-12">
+    <trello-card cardTitle="Trello Projects Overview">
+      <div class="header">
+        <dropdown-checkbox [dropdownForm]="tableColumnForm" dropdownArray="tableColumnsArray" [checkboxArray]="trelloCardFields">
+          <i class="fas fa-cog"></i>
+        </dropdown-checkbox>
+      </div>
+
+      <div class="body">
+        <div class="searchArea">
+          <div class="input-group">
+            <input class="form-control" placeholder="Project Name" [(ngModel)]="projectNameSearch">
+
+            <div class="input-group-append">
+              <button class="btn btn-primary">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-12">
+            <ng-container *ngIf="noColumnsPresent(); else noColumns">
+              <div class="table-responsive-xl" data-simplebar data-simplebar-auto-hide="false">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <ng-container *ngFor="let aCardField of trelloCardFields; let i = index">
+                        <th *ngIf="displayColumns[i]"> {{aCardField}} </th>
+                      </ng-container>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <ng-container *ngFor="let aTrelloProject of trelloViewer.trelloProjects">
+                      <tr *ngFor="let aTrelloCard of aTrelloProject.trelloCards">
+
+                        <ng-container *ngFor="let aCardField of trelloCardFields; let i = index">
+                          <ng-container *ngIf="displayColumns[i]">
+
+                            <td *ngIf="i == 0"> {{aTrelloProject.projectName}} </td>
+                            <td *ngIf="i == 1"> {{aTrelloCard.cardBoardName}} </td>
+                            <td *ngIf="i == 2"> {{aTrelloCard.cardName}} </td>
+                            <td *ngIf="i == 3"> {{aTrelloCard.cardDescription}} </td>
+
+                            <td *ngIf="i == 4">
+                              <span class="label" *ngFor="let aCard of aTrelloCard.cardLabels" [style.background-color]="aCard.labelColour"> {{aCard.labelName}} </span>
+                            </td>
+
+                            <td *ngIf="i == 5">
+                              <div class="row progressColumn">
+                                <div class="col-xl-7">
+                                  <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" [style.width]="aTrelloCard.cardPercentage + '%'" [attr.aria-valuenow]="aTrelloCard.cardPercentage"></div>
+                                  </div>
+                                </div>
+
+                                <div class="col-xl-5 text-center">
+                                  {{aTrelloCard.cardPercentage}}%
+                                </div>
+                              </div>
+                            </td>
+
+                            <td *ngIf="i > 5"> {{aTrelloCard.cardCustomFields[i - 6].fieldValue}} </td>
+
+                          </ng-container>
+                        </ng-container>
+
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </ng-container>
+
+            <ng-template #noColumns>
+              <trello-no-columns></trello-no-columns>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </trello-card>
   </div>
 </div>

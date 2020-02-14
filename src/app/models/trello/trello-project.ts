@@ -6,7 +6,6 @@ import { TrelloCustomDropdown } from './trello-custom-dropdown';
 import { TrelloLabel } from './trello-label';
 
 export class TrelloProject {
-
   public projectName: string;
   public projectLink: string;
   public projectJson: string;
@@ -19,6 +18,8 @@ export class TrelloProject {
   public trelloLabelList: Map<string, TrelloLabel> = new Map<string, TrelloLabel>();
   public trelloCheckList: Map<string, TrelloCheckList> = new Map<string, TrelloCheckList>();
   public trelloCustomDropdown: Map<string, TrelloCustomDropdown> = new Map<string, TrelloCustomDropdown>();
+
+  public trelloFieldNames: string[] = [];
 
   constructor(projectJson: JsonTrello, days: number) {
     this.projectName = projectJson.name;
@@ -33,11 +34,15 @@ export class TrelloProject {
     this.trelloLabelList = TrelloProject.addTrelloLabels(projectJson);
     this.trelloCustomDropdown = TrelloProject.addCustomDropdown(projectJson);
 
-    // Add Cards
+    // Add Trello Cards
 
     for (let i = 0; i < projectJson.cards.length; i++) {
       this.trelloCards.push(new TrelloCard(projectJson, i, this.trelloBoards, this.trelloCheckList, this.trelloLabelList, this.trelloCustomDropdown));
     }
+
+    // After initialising Trello Cards
+
+    this.trelloFieldNames = TrelloProject.getFieldNames(this.trelloCards);
   }
 
   public static getExpiryDate(days: number): Date {
@@ -97,5 +102,15 @@ export class TrelloProject {
       ));
 
     return trelloFieldList;
+  }
+
+  private static getFieldNames(trelloCards: TrelloCard[]): string[] {
+    const fieldsNames = ['Project Name', 'Board Name', 'Card Name', 'Card Description', 'Card Labels', 'Card Percentage'];
+
+    if (trelloCards.length > 0) {
+      return [...fieldsNames, ...trelloCards[0].cardCustomFields.map(customField => customField.fieldName)];
+    }
+
+    return fieldsNames;
   }
 }

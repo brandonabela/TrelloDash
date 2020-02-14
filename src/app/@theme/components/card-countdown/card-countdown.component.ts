@@ -8,7 +8,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class CardCountdownComponent implements OnInit {
   @Input()
-  public count: string;
+  public count: number;
 
   @Input()
   public description: string;

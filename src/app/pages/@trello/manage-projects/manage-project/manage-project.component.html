@@ -1,6 +1,6 @@
 <modal modalId="manageProjectModal" modalClass="modal-md">
   <modal-title>
-    <div *ngIf="isNewMode() else editMode"> Add Trello Project </div>
+    <div *ngIf="isNewMode(); else editMode"> Add Trello Project </div>
     <ng-template #editMode> Edit Trello Project </ng-template>
   </modal-title>
 

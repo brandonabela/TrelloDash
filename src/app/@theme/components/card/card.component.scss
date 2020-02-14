@@ -36,34 +36,38 @@
   color: #74788d;
 }
 
-.card-tools ::ng-deep .btn {
-  font-size: 13px;
-  font-weight: 500;
+.card-tools .row {
+  margin: 0;
 
-  margin-left: 18px;
-  padding: 6px 16px;
+  ::ng-deep .btn {
+    font-size: 13px;
+    font-weight: 500;
 
-  color: #fff;
-  border-color: #5d78ff;
-  background-color: #5d78ff;
-  box-shadow: 0 4px 16px 0 rgba(93, 120, 255, 0.15);
+    margin-left: 18px;
+    padding: 6px 16px;
 
-  &:hover {
     color: #fff;
-    border-color: #2a4eff;
-    background-color: #3758ff;
-    box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25);
-  }
+    border-color: #5d78ff;
+    background-color: #5d78ff;
+    box-shadow: 0 4px 16px 0 rgba(93, 120, 255, 0.15);
 
-  &:active {
-    color: #fff;
-    border-color: #2a4eff;
-    background-color: #3758ff;
-    box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25);
-  }
+    &:hover {
+      color: #fff;
+      border-color: #2a4eff;
+      background-color: #3758ff;
+      box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25);
+    }
 
-  i {
-    margin-right: 5px;
+    &:active {
+      color: #fff;
+      border-color: #2a4eff;
+      background-color: #3758ff;
+      box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25);
+    }
+
+    i {
+      margin-right: 5px;
+    }
   }
 }
 

@@ -7,9 +7,7 @@ import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrelloProjectNameFilter } from './filters/TrelloProjectNameFilter';
 import { ManageProjectComponent } from './pages/@trello/manage-projects/manage-project/manage-project.component';
-import { LoadingProjectsComponent } from './pages/@trello/shared/loading-projects/loading-projects.component';
-import { NoProjectComponent } from './pages/@trello/shared/no-project/no-project.component';
-import { PageLogicComponent } from './pages/@trello/shared/page-logic/page-logic.component';
+import { TrelloSharedModule } from './pages/@trello/shared/trello-shared.module';
 import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
 import { ContentFooterComponent } from './shared/components/content-footer/content-footer.component';
 import { LeftNavigationComponent } from './shared/components/left-navigation/left-navigation.component';
@@ -33,9 +31,6 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
     // Trello Components
 
     ManageProjectComponent,
-    LoadingProjectsComponent,
-    NoProjectComponent,
-    PageLogicComponent,
 
     // Filters
 
@@ -46,6 +41,8 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+
+    TrelloSharedModule,
     ThemeComponentsModule
   ],
   bootstrap: [AppComponent]

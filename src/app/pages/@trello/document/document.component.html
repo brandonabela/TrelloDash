@@ -4,23 +4,26 @@
   </div>
 
   <div class="col-xl-12">
-    <trello-page-logic cardTitle="Export Trello Project for Documentation" [trelloViewer]="trelloViewer">
-      <div class="col-xl-12 export-field" *ngFor="let aTrelloProject of trelloViewer.trelloProjects; index as i">
-        <div class="input-group">
-          <p class="form-control"> {{aTrelloProject.projectName}} </p>
+    <trello-card cardTitle="Export Trello Project for Documentation" [trelloViewer]="trelloViewer">
+      <div class="header"></div>
 
-          <div class="input-group-append">
-            <i class="input-group-text fas fa-file-alt" (click)="exportTrelloProject(i)"></i>
+      <div class="body">
+        <div class="col-xl-12 export-field" *ngFor="let aTrelloProject of trelloViewer.trelloProjects; index as i">
+          <div class="input-group">
+            <p class="form-control"> {{aTrelloProject.projectName}} </p>
+
+            <div class="input-group-append">
+              <i class="input-group-text fas fa-file-alt" (click)="exportTrelloProject(i)"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-12">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" [style.width]="exportPercentage + '%'" [attr.aria-valuenow]="exportPercentage"></div>
           </div>
         </div>
       </div>
-
-      <div class="col-xl-12">
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-            [style.width]="exportPercentage + '%'" [attr.aria-valuenow]="exportPercentage"></div>
-        </div>
-      </div>
-    </trello-page-logic>
+    </trello-card>
   </div>
 </div>

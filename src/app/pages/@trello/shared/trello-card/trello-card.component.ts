@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
 
 @Component({
-  selector: 'trello-page-logic',
-  templateUrl: './page-logic.component.html',
-  styleUrls: ['./page-logic.component.scss']
+  selector: 'trello-card',
+  templateUrl: './trello-card.component.html',
+  styleUrls: ['./trello-card.component.scss']
 })
-export class PageLogicComponent {
+export class TrelloCardComponent {
   @Input()
   public cardTitle: string;
 
