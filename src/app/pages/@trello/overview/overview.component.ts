@@ -14,7 +14,7 @@ export class OverviewComponent implements OnInit {
   public trelloViewer: TrelloViewer;
   public trelloCardFields: string[];
 
-  public projectNameSearch: string;
+  public cardNameSearch: string;
 
   public displayColumns: boolean[];
   public defaultDisplayColumns = [0, 1, 2, 5];

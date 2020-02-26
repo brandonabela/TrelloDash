@@ -26,7 +26,7 @@
               <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
                 <div class="searchArea">
                   <div class="input-group">
-                    <input class="form-control" placeholder="Project Name" [(ngModel)]="projectNameSearch">
+                    <input class="form-control" placeholder="Project Name" [(ngModel)]="projectNameSearch" ng-model-options="{debounce: 500}">
 
                     <div class="input-group-append">
                       <button class="btn btn-primary">
@@ -49,7 +49,7 @@
                         </thead>
 
                         <tbody>
-                          <tr *ngFor="let aTrelloProject of trelloViewer.trelloProjects | trelloProjectNameFilter: projectNameSearch; index as i">
+                          <tr *ngFor="let aTrelloProject of trelloViewer.trelloProjects | trelloProjectFilter: projectNameSearch; index as i">
                             <td> {{aTrelloProject.projectName}} </td>
                             <td> {{aTrelloProject.expiryDate | date: 'dd MMMM yyyy'}} </td>
                             <td>
