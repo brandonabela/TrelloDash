@@ -26,7 +26,7 @@
               <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
                 <div class="searchArea">
                   <div class="input-group">
-                    <input class="form-control" placeholder="Project Name" [(ngModel)]="projectNameSearch" ng-model-options="{debounce: 500}">
+                    <input class="form-control" placeholder="Project Name" [(ngModel)]="projectNameSearch" ng-model-options="{debounce: 100}">
 
                     <div class="input-group-append">
                       <button class="btn btn-primary">
