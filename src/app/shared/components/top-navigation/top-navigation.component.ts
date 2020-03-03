@@ -76,16 +76,6 @@ export class TopNavigationComponent implements OnInit {
     document.getElementsByClassName('topNavigation')[0].firstElementChild.classList.toggle('minimise-sidebar');
   }
 
-  // Responsible for handling the colour change of the search bar
-
-  public onSearchBoxFocus() {
-    document.getElementsByClassName('navigationSearch')[0].firstElementChild.classList.add('focused');
-  }
-
-  public onSearchBoxBlur() {
-    document.getElementsByClassName('navigationSearch')[0].firstElementChild.classList.remove('focused');
-  }
-
   // Responsible for handling website data
 
   public downloadData(): void {

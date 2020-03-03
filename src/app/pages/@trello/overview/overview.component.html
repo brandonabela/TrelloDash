@@ -30,7 +30,7 @@
       <div class="body">
         <div class="searchArea">
           <div class="input-group">
-            <input class="form-control" placeholder="Card Name" [(ngModel)]="cardNameSearch" ng-model-options="{debounce: 100}">
+            <input class="form-control" placeholder="Card Search" [(ngModel)]="cardSearch" ng-model-options="{debounce: 100}">
 
             <div class="input-group-append">
               <button class="btn btn-primary">
@@ -55,7 +55,7 @@
 
                   <tbody>
                     <ng-container *ngFor="let aTrelloProject of trelloViewer.trelloProjects">
-                      <tr *ngFor="let aTrelloCard of aTrelloProject.trelloCards | trelloCardFilter: { 'filter': cardNameSearch, 'columns': displayColumns }">
+                      <tr *ngFor="let aTrelloCard of aTrelloProject.trelloCards | trelloCardFilter: { 'filter': cardSearch, 'columns': displayColumns }">
 
                         <ng-container *ngFor="let aCardField of trelloCardFields; let i = index">
                           <ng-container *ngIf="displayColumns[i]">

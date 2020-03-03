@@ -29,37 +29,8 @@
     }
 
     .navbar-collapse {
-      padding: 11px;
+      padding: 11px 15px;
       color: #fff;
-
-      .navigationSearch {
-        width: 400px;
-
-        input {
-          color: #fff;
-          border: 0;
-          border-radius: 0 5px 5px 0;
-          background: rgba(0, 0, 0, 0.1) !important;
-          box-shadow: none;
-
-          &::placeholder {
-            color: #fff;
-          }
-        }
-
-        button {
-          color: #fff;
-          border: 0;
-          border-radius: 5px 0 0 5px;
-          background: rgba(0, 0, 0, 0.1) !important;
-        }
-
-        .focused input,
-        .focused button {
-          color: #a0a0a0 !important;
-          background: #fff !important;
-        }
-      }
 
       .center-logo {
         display: none;
@@ -191,10 +162,6 @@
       .navbar-collapse {
         flex-basis: auto;
         display: flex;
-
-        .navigationSearch {
-          display: none;
-        }
 
         .center-logo {
           display: inline;
