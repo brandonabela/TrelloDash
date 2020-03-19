@@ -7,7 +7,7 @@
 
   <card-body>
     <div class="col-xl-12">
-      <div class="progress">
+      <div class="progress" *ngIf="trelloViewer">
         <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
           [style.width]="trelloViewer.getStoragePercentage() + '%'"
           [attr.aria-valuenow]="trelloViewer.getStoragePercentage()">

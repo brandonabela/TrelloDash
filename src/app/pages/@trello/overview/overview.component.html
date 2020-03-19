@@ -54,7 +54,7 @@
                   </thead>
 
                   <tbody>
-                    <ng-container *ngFor="let aTrelloProject of trelloViewer.trelloProjects">
+                    <ng-container *ngFor="let aTrelloProject of trelloViewer.getTrelloProjects()">
                       <tr *ngFor="let aTrelloCard of aTrelloProject.trelloCards | trelloCardFilter: { 'filter': cardSearch, 'columns': displayColumns }">
 
                         <ng-container *ngFor="let aCardField of trelloCardFields; let i = index">

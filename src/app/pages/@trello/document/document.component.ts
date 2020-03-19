@@ -30,7 +30,7 @@ export class DocumentComponent {
   }
 
   public exportTrelloProject(index: number) {
-    const selectedProject = this.trelloViewer.trelloProjects[index];
+    const selectedProject = this.trelloViewer.getTrelloProject(index);
 
     const fileString = this.generateDocumentString(selectedProject);
 

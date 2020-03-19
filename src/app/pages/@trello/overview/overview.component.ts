@@ -52,7 +52,9 @@ export class OverviewComponent implements OnInit {
   }
 
   public getCommonFields(): string[] {
-    const projectFields = [].concat(...this.trelloViewer.trelloProjects.map(aProject => aProject.trelloFieldNames));
+    const trelloProjects = this.trelloViewer.getTrelloProjects();
+
+    const projectFields = [].concat(...trelloProjects.map(aProject => aProject.trelloFieldNames));
     const uniqueProjectFields = [...new Set(projectFields)];
 
     const projectFieldCounts = new Map(uniqueProjectFields
@@ -60,7 +62,7 @@ export class OverviewComponent implements OnInit {
     );
 
     return Array.from(projectFieldCounts)
-      .filter(field => field[1] >= this.trelloViewer.trelloProjects.length)
+      .filter(field => field[1] >= trelloProjects.length)
       .map(field => field[0]);
   }
 

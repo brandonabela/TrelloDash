@@ -6,29 +6,62 @@ import { BoardFrequency } from '../dashboard-trello/board-frequency';
 import { TrelloProject } from './trello-project';
 
 export class TrelloViewer {
+  private loadedProjects = 0;
+
   public uniqueBoards: BoardFrequency[];
-  public trelloProjects: TrelloProject[] = [];
 
   constructor(
     private alertService: AlertService,
     private storageService: StorageService,
     private requestService: RequestService
   ) {
+    this.syncExpiredProjects();
+  }
+
+  public syncExpiredProjects(): void {
     const todayDate = new Date();
+
     const storageTrello = this.storageService.getTrelloProjects();
 
     for (let i = storageTrello.length - 1; i >= 0; i--) {
       const projectDate = new Date(storageTrello[i].expiryDate);
 
-      if (todayDate < projectDate) {
-        this.addTrelloProjectFromStorage(storageTrello[i]);
-      } else {
+      if (todayDate > projectDate) {
         this.syncTrelloProject(i);
+      } else {
+        this.loadedProjects++;
+
+        this.updateBoards();
       }
     }
   }
 
-  public addURL(trelloUrl: string, days: number): void {
+  public syncAllProjects(): void {
+    const storageTrello = this.storageService.getTrelloProjects();
+
+    this.loadedProjects = 0;
+
+    for (let i = storageTrello.length - 1; i >= 0; i--) {
+      this.syncTrelloProject(i);
+    }
+  }
+
+  public syncTrelloProject(index: number): void {
+    const storageTrello = this.storageService.getTrelloProjects();
+
+    this.updateProject(index, storageTrello[index].validInDays);
+  }
+
+  public updateProject(index: number, days: number) {
+    const storageTrello = this.storageService.getTrelloProjects();
+    const projectJson = storageTrello[index].projectJson;
+
+    this.updateProjectRemote(index, projectJson, days);
+  }
+
+  public addProject(trelloUrl: string, days: number): void {
+    const storageTrello = this.storageService.getTrelloProjects();
+
     // If invalid urls
 
     if (!trelloUrl.includes('trello.com/b/')) {
@@ -43,28 +76,21 @@ export class TrelloViewer {
 
     // Checking if the given url path was already added to the project
 
-    if (this.trelloProjects.filter(aProject => aProject.projectJson === trelloUrl).length === 0) {
-      this.addTrelloProjectFromRemote(trelloUrl, days);
+    if (storageTrello.filter(aProject => aProject.projectJson === trelloUrl).length === 0) {
+      this.addProjectFromRemote(trelloUrl, days);
     } else {
       this.alertService.add(messages.trelloAlreadyAdded);
     }
   }
 
-  private addTrelloProjectFromStorage(trelloProject: TrelloProject): void {
-    this.trelloProjects.push(trelloProject);
-    this.updateBoards();
-  }
-
-  private addTrelloProjectFromRemote(trelloUrl: string, days: number): void {
+  private addProjectFromRemote(trelloUrl: string, days: number): void {
     this.alertService.add(messages.trelloInitiateAdd);
 
     this.requestService.getXhrResponse(trelloUrl).then((xhr: XMLHttpRequest) => {
       if (xhr.status === 200 && xhr.responseText !== '') {
         const trelloProject = new TrelloProject(JSON.parse(xhr.responseText), days);
 
-        this.trelloProjects.push(trelloProject);
         this.storageService.addTrelloProject(trelloProject);
-
         this.updateBoards();
 
         this.alertService.add(messages.trelloSuccessAdd);
@@ -74,16 +100,40 @@ export class TrelloViewer {
     });
   }
 
-  public areProjectsLoaded(): boolean {
-    return this.trelloProjects.length === this.storageService.getTrelloProjects().length;
+  private updateProjectRemote(index: number, trelloUrl: string, days: number): void {
+    const storageTrello = this.storageService.getTrelloProjects();
+
+    this.requestService.getXhrResponse(trelloUrl).then((xhr: XMLHttpRequest) => {
+      if (xhr.status === 200 && xhr.responseText !== '') {
+        const updatedProject = new TrelloProject(JSON.parse(xhr.responseText), days);
+
+        this.storageService.updateTrelloProject(index, updatedProject);
+        this.updateBoards();
+
+        // If user initiated update do not increment loaded projects
+
+        if (this.loadedProjects !== storageTrello.length) {
+          this.loadedProjects++;
+        }
+
+        this.alertService.add(messages.trelloUpdated);
+      }
+    });
   }
 
-  public getStoragePercentage(): number {
-    return ((this.trelloProjects.length / this.storageService.getTrelloProjects().length) * 100);
+  public removeProject(index: number) {
+    this.loadedProjects--;
+
+    this.storageService.removeTrelloProject(index);
+    this.updateBoards();
+
+    this.alertService.add(messages.trelloSuccessRemove);
   }
 
   public updateBoards(): void {
-    const cardBoardNames = [].concat(...this.trelloProjects.map(aProject => aProject.trelloCards.map(aCard => aCard.cardBoardName)));
+    const storageTrello = this.storageService.getTrelloProjects();
+
+    const cardBoardNames = [].concat(...storageTrello.map(aProject => aProject.trelloCards.map(aCard => aCard.cardBoardName)));
     const uniqueBoardNames = Array.from(new Set(cardBoardNames));
 
     this.uniqueBoards = uniqueBoardNames.map(aBoardName =>
@@ -91,32 +141,22 @@ export class TrelloViewer {
     );
   }
 
-  public removeProject(index: number) {
-    this.trelloProjects.splice(index, 1);
-    this.storageService.removeTrelloProject(index);
-
-    this.updateBoards();
-
-    this.alertService.add(messages.trelloSuccessRemove);
+  public areProjectsLoaded(): boolean {
+    return this.loadedProjects === this.storageService.getTrelloProjects().length;
   }
 
-  public updateProject(index: number, days: number) {
-    const projectLink = this.storageService.getTrelloProjects()[index].projectLink;
+  public getStoragePercentage(): number {
+    const totalProjects = this.storageService.getTrelloProjects().length - 1;
 
-    this.removeProject(index);
-
-    this.addURL(projectLink, days);
+    return (this.loadedProjects / totalProjects) * 100;
   }
 
-  public syncTrelloProject(index: number) {
+  public getTrelloProjects(): TrelloProject[] {
+    return this.storageService.getTrelloProjects();
+  }
+
+  public getTrelloProject(index: number): TrelloProject {
     const storageTrello = this.storageService.getTrelloProjects();
-
-    this.updateProject(index, storageTrello[index].validInDays);
-  }
-
-  public syncTrelloProjects(): void {
-    for (let i = this.trelloProjects.length - 1; i >= 0; i--) {
-      this.syncTrelloProject(i);
-    }
+    return storageTrello[index];
   }
 }

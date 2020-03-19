@@ -45,8 +45,11 @@ export class ManageProjectsComponent implements OnInit {
   }
 
   public populateForm(index: number): void {
-    const formUrl = this.trelloViewer.trelloProjects[index].projectLink;
-    let formExpiryQuantity = this.trelloViewer.trelloProjects[index].validInDays;
+    const trelloProject = this.trelloViewer.getTrelloProject(index);
+
+    const formUrl = trelloProject.projectLink;
+    let formExpiryQuantity = trelloProject.validInDays;
+
     const formExpiryType = this.getExpiryType(formExpiryQuantity);
 
     formExpiryQuantity = formExpiryQuantity / formExpiryType;
@@ -61,6 +64,10 @@ export class ManageProjectsComponent implements OnInit {
   public getExpiryType(expiryQuantity: number): number {
     const isYear = expiryQuantity % 365 === 0;
     const isMonth = expiryQuantity % 31 === 0;
+
+    if (expiryQuantity === 0) {
+      return 1;
+    }
 
     return isYear ? 365 : (isMonth ? 31 : 1);
   }

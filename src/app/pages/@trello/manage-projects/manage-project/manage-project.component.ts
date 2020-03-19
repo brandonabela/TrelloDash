@@ -35,7 +35,7 @@ export class ManageProjectComponent {
     const days = expiryQuantity * expiryType;
 
     if (0 <= days) {
-      this.trelloViewer.addURL(url, days);
+      this.trelloViewer.addProject(url, days);
     } else {
       this.alertService.add(messages.trelloNegativeExpiry);
     }

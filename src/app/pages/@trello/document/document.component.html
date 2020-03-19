@@ -8,7 +8,7 @@
       <div class="header"></div>
 
       <div class="body">
-        <div class="col-xl-12 export-field" *ngFor="let aTrelloProject of trelloViewer.trelloProjects; index as i">
+        <div class="col-xl-12 export-field" *ngFor="let aTrelloProject of trelloViewer.getTrelloProjects(); index as i">
           <div class="input-group">
             <p class="form-control"> {{aTrelloProject.projectName}} </p>
 

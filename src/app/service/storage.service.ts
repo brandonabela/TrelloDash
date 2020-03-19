@@ -40,6 +40,13 @@ export class StorageService {
     this.setStorageValue(key, storageValue);
   }
 
+  private updateArrayValue(key: string, index: number, value: any): void {
+    const storageValue = this.getStorageValue(key);
+    storageValue[index] = value;
+
+    this.setStorageValue(key, storageValue);
+  }
+
   private removeFromArray(key: string, index: number): void {
     const storageValue = this.getStorageValue(key);
     storageValue.splice(index, 1);
@@ -55,8 +62,12 @@ export class StorageService {
     return trelloProjects != null ? trelloProjects : [];
   }
 
-  public addTrelloProject(trelloProjct: TrelloProject): void {
-    this.addToArray(this.keyTrelloProject, trelloProjct);
+  public addTrelloProject(trelloProject: TrelloProject): void {
+    this.addToArray(this.keyTrelloProject, trelloProject);
+  }
+
+  public updateTrelloProject(index: number, trelloProject: TrelloProject): void {
+    this.updateArrayValue(this.keyTrelloProject, index, trelloProject);
   }
 
   public removeTrelloProject(index: number): void {

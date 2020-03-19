@@ -6,7 +6,7 @@
 
         <button class="btn" (click)="trelloViewer.syncTrelloProjects()">
           <i class="fas fa-sync"></i>
-          Sync Projects
+          Sync
         </button>
       </card-tools>
 
@@ -16,7 +16,7 @@
     </card-header>
 
     <card-body>
-      <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
+      <ng-container *ngIf="trelloViewer.getTrelloProjects().length !== 0; else noProjects">
         <ng-content select=".body"></ng-content>
       </ng-container>
 
@@ -28,5 +28,5 @@
 </ng-container>
 
 <ng-template #projectsLoading>
-  <trello-loading-projects></trello-loading-projects>
+  <trello-loading-projects [trelloViewer]="trelloViewer"></trello-loading-projects>
 </ng-template>
