@@ -1,22 +1,13 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .form-control,
 .input-group-text {
   height: auto;
   padding: 11px 17px;
-  border: none;
+  color: color(theme, text-white) !important;
+  background: color(theme, primary-dark) !important;
 }
 
-.form-control {
-  border-radius: 3px;
-  background: #e0e8f5;
-  color: #444444;
-}
-
-.input-group-text {
-  cursor: pointer;
-  color: white;
-  background: #5d78ff;
-
-  &::before {
-    vertical-align: middle;
-  }
+.input-group-text::before {
+  vertical-align: middle;
 }

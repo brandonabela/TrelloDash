@@ -1,0 +1,46 @@
+$palette: (
+  theme: (
+    text-heading: #111111,
+    text-paragraph: #575962,
+    text-white: #FFFFFF,
+
+    backdrop: #f2f3f8,
+    backdrop-outline: #d7dfe3,
+
+    primary-light: #4886ff,
+
+    info-dark: #11cdef,
+    primary-dark: #3f76e4,
+    success-dark: #2dce89,
+    danger-dark: #f5365c,
+    warning-dark: #ffb822,
+    light-dark: #ebedf2,
+    dark-dark: #172b4d
+  )
+);
+
+@function color($color-name, $color-variant: null) {
+  $map-color-exist: map-has-key($palette, $color-name);
+
+  @if ($map-color-exist and $color-variant == null) {
+    @return map-get($palette, $color-name);
+  }
+  @else if ($map-color-exist and $color-variant != null) {
+    $map-variant-exist: map-has-key(map-get($palette, $color-name), $color-variant);
+
+    @if ($map-variant-exist) {
+      @return map-get(map-get($palette, $color-name), $color-variant);
+    }
+  }
+
+  $error-message: "The following route is not valid: $palette > ";
+  $level-one-path: "'#{$color-name}'.";
+  $level-two-path: "'#{$color-name}' > '#{$color-variant}'.";
+
+  @if ($color-variant == null) {
+    @error $error-message + $level-one-path;
+  }
+  @else {
+    @error $error-message + $level-two-path;
+  }
+}

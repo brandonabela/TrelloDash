@@ -1,14 +1,16 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .footer {
   padding: 15px 20px;
 
-  border-top: 1px solid #78828c21;
-  background: #fff;
+  border-top: 1px solid color(theme, backdrop-outline);
+  background: color(theme, text-white);
 
   p {
     font-size: 13px;
 
     margin-bottom: 0;
 
-    color: #67757c;
+    color: color(theme, text-paragraph);
   }
 }

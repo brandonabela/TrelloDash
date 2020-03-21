@@ -16,6 +16,6 @@ export const messages = {
   trelloInvalidLink: new AlertTitle('The provided URL is not a trello project', AlertType.Error),
   trelloNegativeExpiry: new AlertTitle('The expiry date should be a positive number', AlertType.Error),
 
-  trelloUpdated: new AlertTitle('The trello project has been updated successfully', AlertType.Success),
+  trelloSuccessUpdated: new AlertTitle('The trello project has been updated successfully', AlertType.Success),
   trelloSuccessRemove: new AlertTitle('The trello project has been removed successfully', AlertType.Success)
 };

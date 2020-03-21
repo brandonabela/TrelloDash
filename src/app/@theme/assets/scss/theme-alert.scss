@@ -1,4 +1,5 @@
 .alert {
+  color: color(theme, text-white);
   padding: 12px 20px 12px 60px;
   box-shadow: 1px 1px 14px 0px rgba(18, 38, 63, 0.26);
 
@@ -7,15 +8,12 @@
 
     & > [data-notify="title"] {
       display: block;
-      margin-top: 1px;
       font-weight: 700;
       font-size: 15px;
     }
 
     & > [data-notify="message"] {
       font-size: 14px;
-      margin-top: 5px;
-      color: #ffffff;
     }
   }
 
@@ -27,7 +25,7 @@
     transform: translateY(-50%);
     width: 30px;
     text-align: center;
-    color: #fff;
+    color: color(theme, text-white);
   }
 
   .progress {
@@ -40,7 +38,6 @@
   }
 
   .close {
-    color: #ffffff;
     font-weight: 700;
     position: initial !important;
     text-shadow: none !important;
@@ -48,33 +45,33 @@
 }
 
 .alert-success {
-  background: #0abb87;
-  border: 1px solid #0abb87;
-  color: #ffffff;
+  background: color(theme, success-dark);
+  border: 1px solid color(theme, success-dark);
+  color: color(theme, text-white);
 }
 
 .alert-error {
-  background: #fd397a;
-  border: 1px solid #fd397a;
-  color: #ffffff;
+  background: color(theme, danger-dark);
+  border: 1px solid color(theme, danger-dark);
+  color: color(theme, text-white);
 }
 
 .alert-warning {
-  background: #ffb822;
-  border: 1px solid #ffb822;
-  color: #111111;
+  background: color(theme, warning-dark);
+  border: 1px solid color(theme, warning-dark);
+  color: color(theme, text-heading);
 }
 
 .alert-info {
-  background: #5578eb;
-  border: 1px solid #5578eb;
-  color: #ffffff;
+  background: color(theme, primary-dark);
+  border: 1px solid color(theme, primary-dark);
+  color: color(theme, text-white);
 }
 
 .alert-dark {
-  background: #282a3c;
-  border: 1px solid #282a3c;
-  color: #ffffff;
+  background: color(theme, dark-dark);
+  border: 1px solid color(theme, dark-dark);
+  color: color(theme, text-white);
 }
 
 @media (max-width: 1440px) {

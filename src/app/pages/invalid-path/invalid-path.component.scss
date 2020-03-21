@@ -1,3 +1,5 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .row .col-xl-8 {
   position: absolute;
   top: 50%;
@@ -30,25 +32,21 @@
 
     text-transform: uppercase;
 
-    color: #000;
+    color: color(theme, text-heading);
   }
 
   .btn {
     font-size: 14px;
     font-weight: 700;
 
-    display: inline-block;
-
     padding: 15px 30px;
 
-    text-decoration: none;
-    text-transform: uppercase;
+    color: color(theme, text-white);
 
-    color: #fff;
-    border-color: #1572e8 !important;
     border-radius: 40px;
-    background: #1572e8 !important;
-    box-shadow: #0046d5 0 4px 15px -5px;
+    background: color(theme, primary-dark);
+    border-color: color(theme, primary-dark);
+    box-shadow: color(theme, primary-dark) 0 4px 15px -5px;
   }
 }
 

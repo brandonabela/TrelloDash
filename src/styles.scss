@@ -1,12 +1,9 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss"; // Theme Colour
 @import "~src/app/@theme/assets/scss/theme.scss"; // Theme Style
 
 .no-project {
   .form-control {
-    height: auto;
     padding: 11px 17px;
-    border: none;
-    border-radius: 3px;
-    background: #e0e8f5;
-    color: #444444;
+    border-radius: 5px;
   }
 }

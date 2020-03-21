@@ -1,6 +1,8 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .project {
   a {
-    color: #455a64;
+    color: color(theme, text-heading);
     text-decoration: none;
 
     &:hover,
@@ -17,8 +19,8 @@
         font-size: 35px;
         text-align: center;
 
-        color: #fff;
-        background-color: #1d88e6;
+        color: color(theme, text-white);
+        background-color: color(theme, primary-dark);
       }
     }
 

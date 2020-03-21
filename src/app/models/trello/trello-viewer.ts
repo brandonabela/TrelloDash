@@ -93,6 +93,8 @@ export class TrelloViewer {
         this.storageService.addTrelloProject(trelloProject);
         this.updateBoards();
 
+        this.loadedProjects++;
+
         this.alertService.add(messages.trelloSuccessAdd);
       } else {
         this.alertService.add(messages.trelloNoAccess);
@@ -116,16 +118,16 @@ export class TrelloViewer {
           this.loadedProjects++;
         }
 
-        this.alertService.add(messages.trelloUpdated);
+        this.alertService.add(messages.trelloSuccessUpdated);
       }
     });
   }
 
   public removeProject(index: number) {
-    this.loadedProjects--;
-
     this.storageService.removeTrelloProject(index);
     this.updateBoards();
+
+    this.loadedProjects--;
 
     this.alertService.add(messages.trelloSuccessRemove);
   }

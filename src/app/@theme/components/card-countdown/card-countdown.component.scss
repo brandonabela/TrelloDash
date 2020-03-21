@@ -1,6 +1,11 @@
-.card-info .card {
-  background: #8f98a0 !important;
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
+.card-countdown {
   text-align: center;
+
+  .card {
+    margin: 8px 0;
+  }
 
   h1 {
     font-size: 36px;
@@ -8,7 +13,7 @@
 
     padding-top: 10px;
 
-    color: #fff;
+    color: color(theme, text-white);
   }
 
   h6 {
@@ -17,75 +22,22 @@
 
     padding-bottom: 10px;
 
-    color: #fff;
+    color: color(theme, text-white);
   }
+}
+
+.card-info .card {
+  background: color(theme, info-dark) !important;
 }
 
 .card-primary .card {
-  background: #7460ee !important;
-  text-align: center;
-
-  h1 {
-    font-size: 36px;
-    line-height: 40px;
-
-    padding-top: 10px;
-
-    color: #fff;
-  }
-
-  h6 {
-    font-size: 14px;
-    line-height: 16px;
-
-    padding-bottom: 10px;
-
-    color: #fff;
-  }
+  background: color(theme, primary-dark) !important;
 }
 
 .card-success .card {
-  background: #26c6da !important;
-  text-align: center;
-
-  h1 {
-    font-size: 36px;
-    line-height: 40px;
-
-    padding-top: 10px;
-
-    color: #fff;
-  }
-
-  h6 {
-    font-size: 14px;
-    line-height: 16px;
-
-    padding-bottom: 10px;
-
-    color: #fff;
-  }
+  background: color(theme, success-dark) !important;
 }
 
 .card-dark .card {
-  background: #2f3d4a !important;
-  text-align: center;
-
-  h1 {
-    font-size: 36px;
-    line-height: 40px;
-
-    padding-top: 10px;
-
-    color: #fff;
-  }
-
-  h6 {
-    font-size: 14px;
-    line-height: 16px;
-
-    padding-bottom: 10px;
-
-    color: #fff;
-  }
+  background: color(theme, dark-dark) !important;
 }

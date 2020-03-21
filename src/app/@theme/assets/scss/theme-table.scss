@@ -1,5 +1,5 @@
 .table {
-  color: #212529;
+  color: color(theme, text-heading);
 
   th {
     font-weight: 600 !important;
@@ -11,64 +11,67 @@
 
   th,
   td {
-    border-top: 1px solid #ebedf2;
+    border-top: 1px solid color(theme, backdrop-outline);
     vertical-align: middle;
   }
 
   .table-active,
   .table-active > td,
   .table-active > th {
-    color: #fff;
-    background-color: #5867dd;
+    color: color(theme, text-white);
+    background-color: color(theme, info-dark);
   }
 
   .table-primary,
   .table-primary > td,
   .table-primary > th {
-    background-color: #d0d4f5;
+    color: color(theme, text-white);
+    background-color: color(theme, primary-dark);
   }
 
   .table-success,
   .table-success > td,
   .table-success > th {
-    background-color: #baecdd;
+    color: color(theme, text-white);
+    background-color: color(theme, success-dark);
   }
 
   .table-danger,
   .table-danger > td,
   .table-danger > th {
-    background-color: #fec8da;
+    background-color: color(theme, danger-dark);
   }
 
   .table-warning,
   .table-warning > td,
   .table-warning > th {
-    background-color: #ffebc1;
+    background-color: color(theme, warning-dark);
   }
 
   .table-light,
   .table-light > td,
   .table-light > th {
-    background-color: #ebedf2;
+    background-color: color(theme, light-dark);
   }
 
   .table-dark,
   .table-dark > td,
   .table-dark > th {
-    color: #fff;
-    background-color: #343a40;
+    color: color(theme, text-white);
+    background-color: color(theme, dark-dark);
   }
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background: #ebedf2;
+  background: color(theme, light-dark);
 }
 
+.table-bordered,
 .table-bordered td,
 .table-bordered th {
-  border: 1px solid #ebedf2;
+  border: 1px solid color(theme, backdrop-outline);
 }
 
 .table-hover tbody tr:hover {
-  background-color: #ebedf2;
+  background-color: color(theme, light-dark);
 }

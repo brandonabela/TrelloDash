@@ -1,3 +1,5 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .dropdown-menu {
   li {
     display: block;
@@ -11,7 +13,6 @@
       input[type="checkbox"] {
         position: absolute;
         opacity: 0;
-        z-index: -1;
       }
 
       input[type="checkbox"] + span:before,
@@ -28,7 +29,7 @@
         width: 20px;
         background-color: transparent;
         border-radius: 2px;
-        border: 2px solid #5a5a5a;
+        border: 2px solid color(theme, backdrop-outline);
       }
 
       input[type="checkbox"]:checked + span:before {
@@ -38,11 +39,11 @@
 
         border-top: 3px solid transparent;
         border-left: 3px solid transparent;
-        border-right: 3px solid #fff;
-        border-bottom: 3px solid #fff;
+        border-right: 3px solid color(theme, text-white);
+        border-bottom: 3px solid color(theme, text-white);
 
-        -webkit-transform: rotateZ(37deg);
         transform: rotateZ(37deg);
+        -webkit-transform: rotateZ(37deg);
       }
 
       input[type="checkbox"]:checked + span:after {
@@ -50,8 +51,8 @@
         height: 20px;
         z-index: 0;
 
-        border: 3px solid #02bec9;
-        background-color: #02bec9;
+        border: 3px solid color(theme, primary-dark);
+        background-color: color(theme, primary-dark);
       }
     }
   }

@@ -1,3 +1,5 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .export-field {
   margin: 12px 0;
 }
@@ -10,15 +12,14 @@
 }
 
 .form-control {
-  border-radius: 3px;
-  background: #e0e8f5;
-  color: #444444;
+  border-radius: 5px;
+  background: color(theme, light-dark);
 }
 
 .input-group-text {
   cursor: pointer;
-  color: white;
-  background: #5d78ff;
+  color: color(theme, text-white);
+  background: color(theme, primary-dark);
 
   &::before {
     vertical-align: middle;

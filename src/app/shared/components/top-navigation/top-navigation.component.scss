@@ -1,10 +1,12 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .topNavigation {
   z-index: 50;
 
   .navbar {
     padding: 0;
-    background: #1e88e5;
-    box-shadow: 0 0 5px rgba(18, 23, 39, 0.5);
+    background: color(theme, primary-light);
+    box-shadow: 0 0 5px color(theme, text-white);
 
     .logo-banner {
       width: 240px;
@@ -15,8 +17,8 @@
       h4 {
         margin: 0;
         font-size: 20px;
-        line-height: 60px;
-        color: #fff;
+        line-height: 64px;
+        color: color(theme, text-white);
       }
 
       .fullLogoBanner {
@@ -30,15 +32,14 @@
 
     .navbar-collapse {
       padding: 11px 15px;
-      color: #fff;
+      color: color(theme, text-white);
 
       .center-logo {
         display: none;
 
         h4 {
           margin: 0;
-          font-size: 20px;
-          color: #fff;
+          color: color(theme, text-white);
         }
       }
 
@@ -76,30 +77,30 @@
           .header {
             align-items: center;
             flex-direction: column;
-            background: #48abf7;
+            background: color(theme, primary-dark);
             font-size: 16px;
 
             display: flex;
-            color: #fff;
+            color: color(theme, text-white);
             padding: 15px;
             border-radius: 3px 3px 0 0;
 
             &:after {
-              border-bottom: 9px solid #fff;
+              border-bottom: 9px solid color(theme, text-white);
               border-left: 9px solid transparent;
               border-right: 9px solid transparent;
               content: "";
               right: 17px;
               top: -9px;
               position: absolute;
-              border-bottom-color: #48abf7;
+              border-bottom-color: color(theme, primary-light);
             }
           }
 
           .row {
             margin: 0;
             padding: 7.5px 0;
-            background-color: #fff;
+            background-color: color(theme, text-white);
 
             .dropdown-links {
               display: flex;
@@ -112,12 +113,12 @@
                 display: inline-flex;
                 width: 48px;
                 height: 48px;
-                color: #fff;
+                color: color(theme, text-white);
                 align-items: center;
                 justify-content: center;
-                box-shadow: 2px 2px 8px 0px rgba(31, 30, 30, 0.13);
+                box-shadow: 2px 2px 8px 0px color(theme, backdrop-outline);
                 border-radius: 50%;
-                background-color: #f25961 !important;
+                background-color: color(theme, danger-dark) !important;
                 font-size: 18px;
 
                 &:hover,
@@ -130,7 +131,7 @@
                 text-align: center;
                 font-size: 14px;
                 margin-top: 12px;
-                color: #48abf7;
+                color: color(theme, primary-dark);
               }
             }
           }
@@ -169,7 +170,7 @@
 
         .navbar-nav {
           .dropdown-menu {
-            width: calc(100vw - 20px);
+            width: 40vw;
 
             .col-xl-6 {
               width: 50%;

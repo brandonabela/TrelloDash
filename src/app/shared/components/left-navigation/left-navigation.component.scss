@@ -1,3 +1,5 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .leftNavigation {
   position: fixed;
   z-index: 500;
@@ -7,8 +9,8 @@
 
   transition: all 0.3s;
 
-  color: #fff;
-  background: #fff;
+  color: color(theme, text-white);
+  background: color(theme, text-white);
   box-shadow: 4px 4px 10px rgba(69, 65, 78, 0.06);
 
   nav {
@@ -32,7 +34,7 @@
         letter-spacing: 1px;
         text-transform: uppercase;
 
-        color: #727275;
+        color: color(theme, text-paragraph);
       }
 
       li {
@@ -59,7 +61,7 @@
           width: 100%;
           padding: 8px 10px;
 
-          color: #575962;
+          color: color(theme, text-paragraph);
           border: none;
           border-radius: 5px;
           background: none;
@@ -93,7 +95,7 @@
 
             padding: 10px 25px 10px 45px;
 
-            color: #575962;
+            color: color(theme, text-paragraph);
             border-radius: 5px;
             box-shadow: none !important;
           }
@@ -108,7 +110,7 @@
             content: "";
 
             border-radius: 100%;
-            background: rgba(131, 132, 138, 0.89);
+            background: color(theme, light-dark) !important;
           }
         }
       }
@@ -118,15 +120,15 @@
         & > button {
           font-weight: 700;
 
-          color: #fff;
-          background: #1572e8 !important;
+          color: color(theme, text-white);
+          background: color(theme, primary-dark) !important;
           box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1), 4px 4px 15px -5px rgba(21, 114, 232, 0.4);
         }
 
         ul .active a {
           font-weight: 700;
 
-          background: rgba(199, 199, 199, 0.2) !important;
+          background: color(theme, light-dark) !important;
         }
       }
     }

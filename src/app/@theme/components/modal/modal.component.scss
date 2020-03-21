@@ -1,6 +1,8 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .modal-header {
   padding: 13px;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid color(theme, backdrop-outline);
 
   .modal-title {
     margin-bottom: 0;
@@ -19,9 +21,9 @@
 
 .modal-footer {
   padding: 13px;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid color(theme, backdrop-outline);
 
-  & > :not(:last-child) {
+  ::ng-deep button:not(:last-child) {
     margin-right: 10px;
   }
 }

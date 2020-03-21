@@ -1,14 +1,16 @@
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
+
 .card {
   margin-bottom: 25px;
 
-  border-color: #d7dfe3;
+  border-color: color(theme, backdrop-outline);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 .card-header {
-  padding: 10px 20px;
+  padding: 13px 23px;
 
-  border-bottom: 1px solid #ebedf2;
+  border-bottom: 1px solid color(theme, backdrop-outline);
   background-color: transparent;
 
   ::ng-deep img {
@@ -25,7 +27,7 @@
 
   margin-bottom: 0;
 
-  color: #434349;
+  color: color(theme, text-heading);
 }
 
 .card-subtitle {
@@ -33,36 +35,27 @@
 
   margin-top: 4px;
 
-  color: #74788d;
+  color: color(theme, text-paragraph);
 }
 
 .card-tools .row {
-  margin: 0;
+  margin: -2px 0 0 0;
 
   ::ng-deep .btn {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
 
     margin-left: 18px;
     padding: 6px 16px;
 
-    color: #fff;
-    border-color: #5d78ff;
-    background-color: #5d78ff;
-    box-shadow: 0 4px 16px 0 rgba(93, 120, 255, 0.15);
+    color: color(theme, text-white);
+    border-color: color(theme, primary-dark);
+    background-color: color(theme, primary-dark);
 
-    &:hover {
-      color: #fff;
-      border-color: #2a4eff;
-      background-color: #3758ff;
-      box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25);
-    }
-
+    &:hover,
     &:active {
-      color: #fff;
-      border-color: #2a4eff;
-      background-color: #3758ff;
-      box-shadow: 0 9px 16px 0 rgba(93, 120, 255, 0.25);
+      border-color: color(theme, primary-light);
+      background-color: color(theme, primary-light);
     }
 
     i {
@@ -72,5 +65,5 @@
 }
 
 .card-body {
-  padding: 12px 20px;
+  padding: 14px 23px;
 }
