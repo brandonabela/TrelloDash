@@ -115,7 +115,7 @@ export class TrelloViewer {
         // If user initiated update do not increment loaded projects
 
         if (this.loadedProjects !== storageTrello.length) {
-          this.loadedProjects++;
+          this.loadedProjects ++;
         }
 
         this.alertService.add(messages.trelloSuccessUpdated);
@@ -148,9 +148,7 @@ export class TrelloViewer {
   }
 
   public getStoragePercentage(): number {
-    const totalProjects = this.storageService.getTrelloProjects().length - 1;
-
-    return (this.loadedProjects / totalProjects) * 100;
+    return (this.loadedProjects / this.storageService.getTrelloProjects().length) * 100;
   }
 
   public getTrelloProjects(): TrelloProject[] {
