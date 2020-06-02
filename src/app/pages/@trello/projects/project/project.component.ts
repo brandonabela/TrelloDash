@@ -5,11 +5,11 @@ import { messages } from 'src/app/constants/messages';
 import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
 
 @Component({
-  selector: 'trello-manage-project',
-  templateUrl: './manage-project.component.html',
-  styleUrls: ['./manage-project.component.scss']
+  selector: 'trello-project',
+  templateUrl: './project.component.html',
+  styleUrls: ['./project.component.scss']
 })
-export class ManageProjectComponent {
+export class ProjectComponent {
   @Input()
   public projectIndex: number;
 

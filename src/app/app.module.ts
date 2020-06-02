@@ -7,7 +7,7 @@ import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrelloCardFilter } from './filters/TrelloCardFilter';
 import { TrelloProjectFilter } from './filters/TrelloProjectFilter';
-import { ManageProjectComponent } from './pages/@trello/manage-projects/manage-project/manage-project.component';
+import { ProjectComponent } from './pages/@trello/projects/project/project.component';
 import { TrelloSharedModule } from './pages/@trello/shared/trello-shared.module';
 import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
 import { ContentFooterComponent } from './shared/components/content-footer/content-footer.component';
@@ -31,7 +31,7 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
 
     // Trello Components
 
-    ManageProjectComponent,
+    ProjectComponent,
 
     // Filters
 

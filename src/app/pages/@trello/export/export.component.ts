@@ -12,11 +12,11 @@ declare var JSZip: any;
 declare var saveAs: any;
 
 @Component({
-  selector: 'page-document',
-  templateUrl: './document.component.html',
-  styleUrls: ['./document.component.scss']
+  selector: 'page-export',
+  templateUrl: './export.component.html',
+  styleUrls: ['./export.component.scss']
 })
-export class DocumentComponent {
+export class ExportComponent {
   public exportPercentage = 0;
 
   public trelloViewer: TrelloViewer;

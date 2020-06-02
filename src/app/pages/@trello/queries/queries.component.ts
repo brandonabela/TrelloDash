@@ -6,11 +6,11 @@ import { RequestService } from 'src/app/service/request.service';
 import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
-  selector: 'page-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss']
+  selector: 'page-queries',
+  templateUrl: './queries.component.html',
+  styleUrls: ['./queries.component.scss']
 })
-export class OverviewComponent implements OnInit {
+export class QueriesComponent implements OnInit {
   public trelloViewer: TrelloViewer;
   public trelloCardFields: string[];
 

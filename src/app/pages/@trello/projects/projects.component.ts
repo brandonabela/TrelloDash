@@ -6,11 +6,11 @@ import { StorageService } from 'src/app/service/storage.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'page-manage-projects',
-  templateUrl: './manage-projects.component.html',
-  styleUrls: ['./manage-projects.component.scss']
+  selector: 'page-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss']
 })
-export class ManageProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit {
   @Input()
   public trelloViewer: TrelloViewer;
 

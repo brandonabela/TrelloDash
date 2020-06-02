@@ -5,9 +5,9 @@ import { AlertsComponent } from './pages/@theme/alerts/alerts.component';
 import { CardsComponent } from './pages/@theme/cards/cards.component';
 import { ModalsComponent } from './pages/@theme/modals/modals.component';
 import { TablesComponent } from './pages/@theme/tables/tables.component';
-import { DocumentComponent } from './pages/@trello/document/document.component';
-import { ManageProjectsComponent } from './pages/@trello/manage-projects/manage-projects.component';
-import { OverviewComponent } from './pages/@trello/overview/overview.component';
+import { ExportComponent as ExportComponent } from './pages/@trello/export/export.component';
+import { ProjectsComponent } from './pages/@trello/projects/projects.component';
+import { QueriesComponent } from './pages/@trello/queries/queries.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
 
@@ -52,24 +52,24 @@ const routes: Routes = [
         }
       },
       {
-        path: 'trello/manage',
-        component: ManageProjectsComponent,
+        path: 'trello/projects',
+        component: ProjectsComponent,
         data: {
-          breadcrumb: 'Manage Projects'
+          breadcrumb: 'Projects'
         }
       },
       {
-        path: 'trello/overview',
-        component: OverviewComponent,
+        path: 'trello/queries',
+        component: QueriesComponent,
         data: {
-          breadcrumb: 'Overview'
+          breadcrumb: 'Queries'
         }
       },
       {
-        path: 'trello/document',
-        component: DocumentComponent,
+        path: 'trello/export',
+        component: ExportComponent,
         data: {
-          breadcrumb: 'Document'
+          breadcrumb: 'Export'
         }
       }
     ]
@@ -100,7 +100,7 @@ export const RoutingComponents = [
   ModalsComponent,
   TablesComponent,
 
-  ManageProjectsComponent,
-  OverviewComponent,
-  DocumentComponent
+  ProjectsComponent,
+  QueriesComponent,
+  ExportComponent
 ];
