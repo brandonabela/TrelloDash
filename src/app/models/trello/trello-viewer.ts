@@ -3,6 +3,7 @@ import { messages } from 'src/app/constants/messages';
 import { StorageService } from 'src/app/service/storage.service';
 import { RequestService } from '../../service/request.service';
 import { BoardFrequency } from '../dashboard-trello/board-frequency';
+import { TrelloCard } from './trello-card';
 import { TrelloProject } from './trello-project';
 
 export class TrelloViewer {
@@ -115,7 +116,7 @@ export class TrelloViewer {
         // If user initiated update do not increment loaded projects
 
         if (this.loadedProjects !== storageTrello.length) {
-          this.loadedProjects ++;
+          this.loadedProjects++;
         }
 
         this.alertService.add(messages.trelloSuccessUpdated);
@@ -153,6 +154,16 @@ export class TrelloViewer {
 
   public getTrelloProjects(): TrelloProject[] {
     return this.storageService.getTrelloProjects();
+  }
+
+  public getTrelloCards(): TrelloCard[] {
+    const projects = this.storageService.getTrelloProjects();
+
+    return [].concat(...projects.map(project =>
+      project.trelloCards.map(trelloCard => {
+        return Object.assign({ projectName: project.projectName }, trelloCard);
+      })
+    ));
   }
 
   public getTrelloProject(index: number): TrelloProject {

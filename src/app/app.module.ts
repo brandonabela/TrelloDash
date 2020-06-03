@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ThemeComponentsModule } from './@theme/components/theme-components.module';
 import { DashboardLayoutComponent } from './@theme/layouts/dashboard-layout/dashboard-layout.component';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
@@ -44,7 +43,6 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    InfiniteScrollModule,
 
     TrelloSharedModule,
     ThemeComponentsModule
