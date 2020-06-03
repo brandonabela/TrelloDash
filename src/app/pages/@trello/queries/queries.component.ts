@@ -15,6 +15,7 @@ export class QueriesComponent implements OnInit {
   public trelloCardFields: string[];
 
   public cardSearch: string;
+  public viewProjectsLength: number;
 
   public displayColumns: boolean[];
   public defaultDisplayColumns = [0, 1, 2, 5];
@@ -28,6 +29,10 @@ export class QueriesComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.trelloViewer = new TrelloViewer(this.alertService, this.storageService, this.requestService);
+
+    if (this.trelloViewer.getTrelloProjects().length !== 0) {
+      this.viewProjectsLength = 1;
+    }
 
     this.trelloCardFields = this.getCommonFields();
     this.displayColumns = this.trelloCardFields.map(_ => false);
@@ -87,5 +92,11 @@ export class QueriesComponent implements OnInit {
 
   public noColumnsPresent(): boolean {
     return this.displayColumns.some(item => item);
+  }
+
+  public onScroll(): void {
+    if (this.trelloViewer.getTrelloProjects().length > this.viewProjectsLength) {
+      this.viewProjectsLength ++;
+    }
   }
 }

@@ -39,6 +39,7 @@
     "jquery": "^3.5.1",
     "jsdom": "^16.2.2",
     "jszip": "^3.4.0",
+    "ngx-infinite-scroll": "^9.0.0",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
     "rxjs": "^6.5.5",
