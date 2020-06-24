@@ -14,18 +14,43 @@ export class StorageService {
 
   constructor(private alertService: AlertService) { }
 
+  // ---------- JSON Map Handling ----------
+
+  private compress(key: string, value: any) {
+    const originalObject = this[key];
+
+    if (originalObject instanceof Map) {
+      return {
+        dataType: 'Map',
+        value: [...originalObject]
+      };
+    } else {
+      return value;
+    }
+  }
+
+  private decompress(key: string, value: any) {
+    if (typeof value === 'object' && value !== null) {
+      if (value.dataType === 'Map') {
+        return new Map(value.value);
+      }
+    }
+
+    return value;
+  }
+
   // ---------- Reading Memory Handling ----------
 
   private getStorageValue(key: string): any {
     const storageValue = window.localStorage.getItem(key);
 
-    return storageValue != null ? JSON.parse(storageValue) : null;
+    return storageValue != null ? JSON.parse(storageValue, this.decompress) : null;
   }
 
   // ---------- Writing Memory Handling ----------
 
   private setStorageValue(key: string, value: any): void {
-    window.localStorage.setItem(key, JSON.stringify(value));
+    window.localStorage.setItem(key, JSON.stringify(value, this.compress));
   }
 
   private addToArray(key: string, value: any): void {
@@ -81,7 +106,7 @@ export class StorageService {
     reader.readAsText(file);
 
     reader.onload = () => {
-      const importJson = JSON.parse(reader.result.toString());
+      const importJson = JSON.parse(reader.result.toString(), this.decompress);
       const jsonStorageKeys = Object.keys(new JsonStorage());
 
       jsonStorageKeys.map(aStorageKey => {
@@ -98,7 +123,7 @@ export class StorageService {
 
   public exportStorage(): void {
     if (window.localStorage.length > 0) {
-      const content = JSON.stringify(window.localStorage);
+      const content = JSON.stringify(window.localStorage, this.compress);
 
       const blob = new Blob([content], {
         type: 'text/plain;charset=utf-8'
