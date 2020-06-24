@@ -52,6 +52,7 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/wfk-poppins/poppins.css",
               "node_modules/wfk-montserrat/montserrat.css",
+              "node_modules/jsmind/style/jsmind.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -59,6 +60,7 @@
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/file-saver/dist/FileSaver.min.js",
               "node_modules/jszip/dist/jszip.min.js",
+              "node_modules/jsmind/js/jsmind.js",
               "node_modules/bootstrap-notify/bootstrap-notify.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]

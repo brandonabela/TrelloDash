@@ -6,6 +6,7 @@ import { CardsComponent } from './pages/@theme/cards/cards.component';
 import { ModalsComponent } from './pages/@theme/modals/modals.component';
 import { TablesComponent } from './pages/@theme/tables/tables.component';
 import { ExportComponent as ExportComponent } from './pages/@trello/export/export.component';
+import { MindMapComponent } from './pages/@trello/mind-map/mind-map.component';
 import { ProjectsComponent } from './pages/@trello/projects/projects.component';
 import { QueriesComponent } from './pages/@trello/queries/queries.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -66,6 +67,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'trello/mindmap',
+        component: MindMapComponent,
+        data: {
+          breadcrumb: 'Mind Map'
+        }
+      },
+      {
         path: 'trello/export',
         component: ExportComponent,
         data: {
@@ -102,5 +110,6 @@ export const RoutingComponents = [
 
   ProjectsComponent,
   QueriesComponent,
+  MindMapComponent,
   ExportComponent
 ];

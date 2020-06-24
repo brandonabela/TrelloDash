@@ -4,7 +4,7 @@ pages:
     paths:
       - node_modules/
   script:
-    - npm install -g @angular/cli@9.1.7
+    - npm install -g @angular/cli@9.1.9
     - npm install -g gzipper
     - npm install
     - npm run build:ssr

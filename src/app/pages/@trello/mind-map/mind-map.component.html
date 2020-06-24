@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-xl-12">
+    <page-header></page-header>
+  </div>
+
+  <div class="col-xl-12">
+    <trello-card cardTitle="Mind Map Builder" [trelloViewer]="trelloViewer">
+      <div class="header"></div>
+
+      <div class="body">
+        <div class="col-xl-12">
+
+          <ng-container *ngIf="trelloViewer.getTrelloProjects().length !== 0; else noProjects">
+            <form [formGroup]="trelloForm">
+              <div class="row">
+                <div class="col-xl-4">
+                  <div class="form-group">
+                    <label> Trello Project </label>
+
+                    <select class="form-control" formControlName="projectIndex">
+                      <option *ngFor="let aTrelloProject of trelloViewer.getTrelloProjects(); let i = index" [value]="i"> {{aTrelloProject.projectName}} </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-xl-4">
+                  <div class="form-group">
+                    <label> First Parent </label>
+
+                    <select class="form-control" formControlName="firstParentIndex">
+                      <option *ngFor="let field of getFirstParentFields(); let i = index" [value]="i"> {{field}} </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-xl-4">
+                  <div class="form-group">
+                    <label> Second Parent </label>
+
+                    <select class="form-control" formControlName="secondParentIndex">
+                      <option *ngFor="let field of getSecondParentFields(); let i = index" [value]="i"> {{field}} </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </ng-container>
+
+          <ng-template #noProjects>
+            <trello-no-project></trello-no-project>
+          </ng-template>
+
+        </div>
+      </div>
+    </trello-card>
+  </div>
+
+  <div class="col-xl-12">
+    <card>
+      <card-header>
+        <card-tools>
+          <button class="btn" (click)="fullscreen()">
+            <i class="fas fa-expand-arrows-alt"></i>
+            Fullscreen
+          </button>
+        </card-tools>
+
+        <card-title>
+          Mind Map
+        </card-title>
+      </card-header>
+
+      <card-body>
+        <div class="row">
+          <div class="col-xl-12">
+
+            <div id="jsmind_container"></div>
+
+          </div>
+        </div>
+      </card-body>
+    </card>
+  </div>
+</div>
