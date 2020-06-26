@@ -88,21 +88,14 @@ export class MindMapComponent implements OnInit {
       theme: 'primary'
     };
 
-    let jsInner: Element;
+    return new jsMind(options);
+  }
+
+  public mindMapEvents(): void {
     let enableCall = true;
+    let jsInner: Element;
 
     const jsContainer = document.getElementById('jsmind_container');
-
-    jsContainer.addEventListener('wheel', event => {
-      if (event.deltaY < 0) {
-        this.mindMap.view.zoomIn();
-      } else if (event.deltaY > 0) {
-        this.mindMap.view.zoomOut();
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-    });
 
     jsContainer.addEventListener('mousedown', event => {
       this.mouseClick = true;
@@ -114,13 +107,36 @@ export class MindMapComponent implements OnInit {
       }
     });
 
+    jsContainer.addEventListener('touchstart', event => {
+      this.mouseClick = true;
+      this.mouseDownX = event.targetTouches[0].pageX;
+      this.mouseDownY = event.targetTouches[0].pageY;
+
+      if (jsInner === undefined) {
+        jsInner = document.getElementsByClassName('jsmind-inner')[0];
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
     jsContainer.addEventListener('mousemove', event => {
       if (enableCall && this.mouseClick) {
         jsInner.scrollTop += (this.mouseDownY - event.pageY);
         jsInner.scrollLeft += (this.mouseDownX - event.pageX);
 
         enableCall = false;
-        setTimeout(() => enableCall = true, 100);
+        setTimeout(() => enableCall = true, 50);
+      }
+    });
+
+    jsContainer.addEventListener('touchmove', event => {
+      if (enableCall && this.mouseClick) {
+        jsInner.scrollTop += (this.mouseDownY - event.targetTouches[0].pageY);
+        jsInner.scrollLeft += (this.mouseDownX - event.targetTouches[0].pageX);
+
+        enableCall = false;
+        setTimeout(() => enableCall = true, 50);
       }
     });
 
@@ -128,12 +144,15 @@ export class MindMapComponent implements OnInit {
       this.mouseClick = false;
     });
 
-    return new jsMind(options);
+    jsContainer.addEventListener('touchend', () => {
+      this.mouseClick = false;
+    });
   }
 
   public populateMindMap(): void {
     if (this.mindMap === undefined) {
       this.mindMap = this.createMindMap();
+      this.mindMapEvents();
     }
 
     const mindMapObject = this.getMindMapObject();
