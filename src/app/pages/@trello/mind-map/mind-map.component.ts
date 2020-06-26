@@ -92,7 +92,6 @@ export class MindMapComponent implements OnInit {
   }
 
   public mindMapEvents(): void {
-    let enableCall = true;
     let jsInner: Element;
 
     const jsContainer = document.getElementById('jsmind_container');
@@ -121,22 +120,16 @@ export class MindMapComponent implements OnInit {
     });
 
     jsContainer.addEventListener('mousemove', event => {
-      if (enableCall && this.mouseClick) {
+      if (this.mouseClick) {
         jsInner.scrollTop += (this.mouseDownY - event.pageY);
         jsInner.scrollLeft += (this.mouseDownX - event.pageX);
-
-        enableCall = false;
-        setTimeout(() => enableCall = true, 50);
       }
     });
 
     jsContainer.addEventListener('touchmove', event => {
-      if (enableCall && this.mouseClick) {
+      if (this.mouseClick) {
         jsInner.scrollTop += (this.mouseDownY - event.targetTouches[0].pageY);
         jsInner.scrollLeft += (this.mouseDownX - event.targetTouches[0].pageX);
-
-        enableCall = false;
-        setTimeout(() => enableCall = true, 50);
       }
     });
 
