@@ -91,61 +91,9 @@ export class MindMapComponent implements OnInit {
     return new jsMind(options);
   }
 
-  public mindMapEvents(): void {
-    let jsInner: Element;
-
-    const jsContainer = document.getElementById('jsmind_container');
-
-    jsContainer.addEventListener('mousedown', event => {
-      this.mouseClick = true;
-      this.mouseDownX = event.pageX;
-      this.mouseDownY = event.pageY;
-
-      if (jsInner === undefined) {
-        jsInner = document.getElementsByClassName('jsmind-inner')[0];
-      }
-    });
-
-    jsContainer.addEventListener('touchstart', event => {
-      this.mouseClick = true;
-      this.mouseDownX = event.targetTouches[0].pageX;
-      this.mouseDownY = event.targetTouches[0].pageY;
-
-      if (jsInner === undefined) {
-        jsInner = document.getElementsByClassName('jsmind-inner')[0];
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-    });
-
-    jsContainer.addEventListener('mousemove', event => {
-      if (this.mouseClick) {
-        jsInner.scrollTop += (this.mouseDownY - event.pageY);
-        jsInner.scrollLeft += (this.mouseDownX - event.pageX);
-      }
-    });
-
-    jsContainer.addEventListener('touchmove', event => {
-      if (this.mouseClick) {
-        jsInner.scrollTop += (this.mouseDownY - event.targetTouches[0].pageY);
-        jsInner.scrollLeft += (this.mouseDownX - event.targetTouches[0].pageX);
-      }
-    });
-
-    jsContainer.addEventListener('mouseup', () => {
-      this.mouseClick = false;
-    });
-
-    jsContainer.addEventListener('touchend', () => {
-      this.mouseClick = false;
-    });
-  }
-
   public populateMindMap(): void {
     if (this.mindMap === undefined) {
       this.mindMap = this.createMindMap();
-      this.mindMapEvents();
     }
 
     const mindMapObject = this.getMindMapObject();
