@@ -48,7 +48,6 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/simplebar/dist/simplebar.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/wfk-poppins/poppins.css",
               "node_modules/wfk-montserrat/montserrat.css",
