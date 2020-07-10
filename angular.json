@@ -47,12 +47,13 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/simplebar/dist/simplebar.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "node_modules/wfk-poppins/poppins.css",
-              "node_modules/wfk-montserrat/montserrat.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/jsmind/style/jsmind.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/simplebar/dist/simplebar.css",
+              "node_modules/wfk-montserrat/montserrat.css",
+              "node_modules/wfk-poppins/poppins.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -61,7 +62,6 @@
               "node_modules/file-saver/dist/FileSaver.min.js",
               "node_modules/jszip/dist/jszip.min.js",
               "node_modules/jsmind/js/jsmind.js",
-              "node_modules/bootstrap-notify/bootstrap-notify.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },

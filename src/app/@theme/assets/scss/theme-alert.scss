@@ -1,81 +1,23 @@
-.alert {
-  color: color(theme, text-white);
-  padding: 12px 20px 12px 60px;
-  box-shadow: 1px 1px 14px 0px rgba(18, 38, 63, 0.26);
-
-  .alert-content {
-    margin: 0 25px 10px 0;
-
-    & > [data-notify="title"] {
-      display: block;
-      font-weight: 700;
-      font-size: 15px;
-    }
-
-    & > [data-notify="message"] {
-      font-size: 14px;
-    }
-  }
-
-  & > [data-notify="icon"] {
-    font-size: 22px;
-    left: 15px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    text-align: center;
-    color: color(theme, text-white);
-  }
-
-  .progress {
-    position: absolute;
-    bottom: 4px;
-    right: 4px;
-    left: 4px;
-    border-radius: 3px;
-    height: 6px;
-  }
-
-  .close {
-    font-weight: 700;
-    position: initial !important;
-    text-shadow: none !important;
-  }
+.toast-bottom-right .ngx-toastr {
+  width: 600px !important;
 }
 
-.alert-success {
-  background: color(theme, success-dark);
-  border: 1px solid color(theme, success-dark);
+.toast-success {
+  background-color: color(theme, success-dark);
   color: color(theme, text-white);
 }
 
-.alert-error {
-  background: color(theme, danger-dark);
-  border: 1px solid color(theme, danger-dark);
+.toast-error {
+  background-color: color(theme, danger-dark);
   color: color(theme, text-white);
 }
 
-.alert-warning {
-  background: color(theme, warning-dark);
-  border: 1px solid color(theme, warning-dark);
+.toast-warning {
+  background-color: color(theme, warning-dark);
   color: color(theme, text-heading);
 }
 
-.alert-info {
-  background: color(theme, primary-dark);
-  border: 1px solid color(theme, primary-dark);
+.toast-info {
+  background-color: color(theme, primary-dark);
   color: color(theme, text-white);
-}
-
-.alert-dark {
-  background: color(theme, dark-dark);
-  border: 1px solid color(theme, dark-dark);
-  color: color(theme, text-white);
-}
-
-@media (max-width: 1440px) {
-  .alert {
-    width: calc(100% - 40px);
-  }
 }

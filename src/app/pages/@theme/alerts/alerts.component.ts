@@ -31,10 +31,6 @@ export class AlertsComponent {
     this.alertService.add(new AlertTitle(this.title, AlertType.Info));
   }
 
-  public openAlertTitleDark() {
-    this.alertService.add(new AlertTitle(this.title, AlertType.Dark));
-  }
-
   public openAlertDescriptionSuccess() {
     this.alertService.add(new AlertDescription(this.title, this.description, AlertType.Success));
   }
@@ -49,9 +45,5 @@ export class AlertsComponent {
 
   public openAlertDescriptionInfo() {
     this.alertService.add(new AlertDescription(this.title, this.description, AlertType.Info));
-  }
-
-  public openAlertDescriptionDark() {
-    this.alertService.add(new AlertDescription(this.title, this.description, AlertType.Dark));
   }
 }
