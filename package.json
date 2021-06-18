@@ -46,6 +46,7 @@
     "stream": "0.0.2",
     "tslib": "^2.0.0",
     "utf-8-validate": "^5.0.2",
+    "webpack": "^4.46.0",
     "webpack-subresource-integrity": "^1.4.1",
     "wfk-montserrat": "^1.0.0",
     "wfk-poppins": "^1.0.0",
