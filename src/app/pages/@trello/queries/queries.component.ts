@@ -52,7 +52,7 @@ export class QueriesComponent implements OnInit {
   }
 
   public getCommonFields(): string[] {
-    const trelloProjects = this.trelloViewer.getTrelloProjects();
+    const trelloProjects = this.trelloViewer.trelloProjects;
 
     const projectFields = [].concat(...trelloProjects.map(aProject => aProject.trelloFieldNames));
     const uniqueProjectFields = [...new Set(projectFields)];

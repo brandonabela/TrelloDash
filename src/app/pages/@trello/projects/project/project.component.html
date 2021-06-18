@@ -24,7 +24,7 @@
             </div>
 
             <div class="col-xl-6">
-              <select class="form-control" formControlName="expiryType">
+              <select class="form-select" formControlName="expiryType">
                 <option value=1> Days </option>
                 <option value=31> Months </option>
                 <option value=365> Years </option>
@@ -38,13 +38,13 @@
 
   <modal-footer>
     <ng-container *ngIf="isNewMode()">
-      <button type="button" class="btn btn-primary" (click)="addTrelloProjectModal()" data-dismiss="modal">
+      <button type="button" class="btn btn-primary" (click)="addTrelloProjectModal()" data-bs-dismiss="modal">
         Add Project
       </button>
     </ng-container>
 
     <ng-container *ngIf="!isNewMode()">
-      <button type="button" class="btn btn-primary" (click)="updateTrelloProjectModal()" data-dismiss="modal">
+      <button type="button" class="btn btn-primary" (click)="updateTrelloProjectModal()" data-bs-dismiss="modal">
         Update Project
       </button>
     </ng-container>

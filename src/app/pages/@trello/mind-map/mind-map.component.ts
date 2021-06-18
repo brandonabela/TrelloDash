@@ -1,6 +1,6 @@
 declare var jsMind: any;
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/@theme/service/alert.service';
 import { TrelloCard } from 'src/app/models/trello/trello-card';
@@ -17,12 +17,9 @@ import SimpleBar from 'simplebar';
   styleUrls: ['./mind-map.component.scss']
 })
 export class MindMapComponent implements OnInit {
-  @Input()
-  public trelloViewer: TrelloViewer;
-
-  public trelloForm: FormGroup;
-
   public mindMap: any;
+  public trelloForm: FormGroup;
+  public trelloViewer: TrelloViewer;
 
   public mouseClick = false;
   public mouseDownX: number;
@@ -57,7 +54,7 @@ export class MindMapComponent implements OnInit {
   public getFirstParentFields(): string[] {
     const projectIndex = this.trelloForm.get('projectIndex').value;
 
-    const projectFields = this.trelloViewer.getTrelloProject(projectIndex).trelloFieldNames;
+    const projectFields = this.trelloViewer.trelloProjects[projectIndex].trelloFieldNames;
     const relevantFields = [projectFields[1], projectFields[4]].concat(projectFields.slice(6));
 
     return relevantFields;
@@ -74,7 +71,7 @@ export class MindMapComponent implements OnInit {
   }
 
   public getProjectFields(): string[] {
-    const trelloProjects = this.trelloViewer.getTrelloProjects();
+    const trelloProjects = this.trelloViewer.trelloProjects;
     const projectFields = [].concat(...trelloProjects.map(aProject => aProject.trelloFieldNames));
 
     const uniqueFields = [...new Set(projectFields)];
@@ -196,8 +193,7 @@ export class MindMapComponent implements OnInit {
       secondParentIndex--;
     }
 
-    const project = this.trelloViewer.getTrelloProject(projectIndex);
-
+    const project = this.trelloViewer.trelloProjects[projectIndex];
     const mindMapData = this.getMindMapData(project, firstParentIndex, secondParentIndex);
 
     const mindMap = {

@@ -7,9 +7,6 @@ import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
   styleUrls: ['./trello-card.component.scss']
 })
 export class TrelloCardComponent {
-  @Input()
-  public cardTitle: string;
-
-  @Input()
-  public trelloViewer: TrelloViewer;
+  @Input() public cardTitle: string;
+  @Input() public trelloViewer: TrelloViewer;
 }

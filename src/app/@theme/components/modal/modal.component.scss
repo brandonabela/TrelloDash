@@ -9,14 +9,21 @@
     line-height: 1.5;
   }
 
-  .close {
-    padding: 16px;
-    margin: -16px;
+  .btn-close {
+    padding: 14px;
   }
 }
 
 .modal-body {
   padding: 16px;
+
+  ::ng-deep .form-group {
+    padding-bottom: 12px;
+
+    label {
+      padding-bottom: 5px;
+    }
+  }
 }
 
 .modal-footer {

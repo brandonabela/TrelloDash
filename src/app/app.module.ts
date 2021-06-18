@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { TrelloCardFilter } from './filters/TrelloCardFilter';
 import { TrelloProjectFilter } from './filters/TrelloProjectFilter';
 import { ProjectComponent } from './pages/@trello/projects/project/project.component';
+import { ExportCsvComponent } from './pages/@trello/projects/export-csv/export-csv.component';
+import { ExportLatexComponent } from './pages/@trello/projects/export-latex/export-latex.component';
 import { TrelloSharedModule } from './pages/@trello/shared/trello-shared.module';
 import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
 import { ContentFooterComponent } from './shared/components/content-footer/content-footer.component';
@@ -35,6 +37,8 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
     // Trello Components
 
     ProjectComponent,
+    ExportCsvComponent,
+    ExportLatexComponent,
 
     // Filters
 

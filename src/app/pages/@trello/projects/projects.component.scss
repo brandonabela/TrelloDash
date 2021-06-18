@@ -1,9 +1,58 @@
-.searchArea {
-  padding-bottom: 15px;
-}
+@import "~src/app/@theme/assets/scss/theme-colour.scss";
 
-td {
-  button:not(:last-child) {
-    margin-right: 10px;
+table {
+  width: 100%;
+
+  thead th {
+    padding: 15px;
+
+    border-radius: 2px;
+    background: color(theme, backdrop);
+
+    &:first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+  }
+
+  tbody tr {
+    &:first-child td {
+      border-top: none !important;
+    }
+
+    .dropdown-menu i {
+      padding-right: 10px;
+    }
+
+    .profilePicture,
+    .additionalMembers {
+      width: 40px;
+      height: 40px;
+
+      border: 2px solid color(theme, text-white);
+      border-radius: 100%;
+    }
+
+    .additionalMembers {
+      background-color: color(theme, backdrop);
+
+      p {
+        line-height: 36px; // 40px - 2px - 2px
+
+        margin: 0;
+
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  tbody .memberCells {
+    display: flex;
   }
 }

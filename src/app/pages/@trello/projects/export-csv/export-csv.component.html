@@ -1,0 +1,63 @@
+<modal modalId="exportCSVProjectModal" modalClass="modal-md">
+  <modal-title>
+    Export Project as CSV
+  </modal-title>
+
+  <modal-body>
+    <form [formGroup]="trelloForm">
+      <div class="col-xl-12">
+        <div class="form-group row">
+          <label class="col-xl-3 col-form-label"> Delimiters: </label>
+
+          <div class="col-xl-9">
+            <select class="form-select" formControlName="csvDelimiter">
+              <option> Tab </option>
+              <option> Semicolon </option>
+              <option> Comma </option>
+              <option> Space </option>
+            </select>
+          </div>
+        </div>
+
+        <label class="mb-3"> Tick the fields that should be exported, which can then be renamed. </label>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkBoardName"> </span>
+          <input class="form-control" type="text" placeholder="Board Name Column" formControlName="txtBoardName">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardName"> </span>
+          <input class="form-control" type="text" placeholder="Card Name Column" formControlName="txtCardName">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardDescription"> </span>
+          <input class="form-control" type="text" placeholder="Card Description Column" formControlName="txtCardDescription">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardLabels"> </span>
+          <input class="form-control" type="text" placeholder="Card Labels Column" formControlName="txtCardLabels">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardPercentage"> </span>
+          <input class="form-control" type="text" placeholder="Card Percentage Column" formControlName="txtCardPercentage">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCustomField"> </span>
+          <input class="form-control" type="text" placeholder="Card Custom Field Column" formControlName="txtCustomField">
+        </div>
+
+      </div>
+    </form>
+  </modal-body>
+
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="exportCSVProject()" data-bs-dismiss="modal">
+      Export Project as CSV
+    </button>
+  </modal-footer>
+</modal>

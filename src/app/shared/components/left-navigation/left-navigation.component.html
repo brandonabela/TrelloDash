@@ -1,51 +1,53 @@
 <div class="leftNavigation">
   <nav data-simplebar data-simplebar-auto-hide="false">
-    <ul class="nav nav-primary">
-      <ng-container *ngFor="let menuItem of menu.items; let i = index">
-        <ng-container *ngIf="getMenuSingle(menuItem); let menuSingle">
-          <ng-container *ngIf="i === 0">
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-              <a [routerLink]="menuSingle.link">
-                <i [class]="menuSingle.icon"></i>
-                <p>{{menuSingle.name}}</p>
-              </a>
+    <div class="container-fluid">
+      <ul class="nav nav-primary">
+        <ng-container *ngFor="let menuItem of menu.items; let i = index">
+          <ng-container *ngIf="getMenuSingle(menuItem); let menuSingle">
+            <ng-container *ngIf="i === 0">
+              <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a [routerLink]="menuSingle.link">
+                  <i [class]="menuSingle.icon"></i>
+                  <p>{{menuSingle.name}}</p>
+                </a>
+              </li>
+            </ng-container>
+
+            <ng-container *ngIf="i !== 0">
+              <li class="nav-item" routerLinkActive="active">
+                <a [routerLink]="menuSingle.link">
+                  <i [class]="menuSingle.icon"></i>
+                  <p>{{menuSingle.name}}</p>
+                </a>
+              </li>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="getMenuSection(menuItem); let menuSection">
+            <li class="nav-section">
+              {{menuSection.name}}
             </li>
           </ng-container>
 
-          <ng-container *ngIf="i !== 0">
+          <ng-container *ngIf="getMenuParent(menuItem); let menuParent">
             <li class="nav-item" routerLinkActive="active">
-              <a [routerLink]="menuSingle.link">
-                <i [class]="menuSingle.icon"></i>
-                <p>{{menuSingle.name}}</p>
-              </a>
+              <button [attr.data-bs-target]="'#' + menuParent.dropdownId" data-bs-toggle="collapse">
+                <i [class]="menuParent.icon"></i>
+                <p>{{menuParent.name}}</p>
+                <i class="fas fa-angle-right dropdownArrow"></i>
+              </button>
+
+              <div class="collapse" [id]="menuParent.dropdownId">
+                <ul>
+                  <li *ngFor="let menuChild of menuParent.children" routerLinkActive="active">
+                    <a [routerLink]="menuChild.link"> {{menuChild.name}} </a>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ng-container>
         </ng-container>
-
-        <ng-container *ngIf="getMenuSection(menuItem); let menuSection">
-          <li class="nav-section">
-            {{menuSection.name}}
-          </li>
-        </ng-container>
-
-        <ng-container *ngIf="getMenuParent(menuItem); let menuParent">
-          <li class="nav-item" routerLinkActive="active">
-            <button [attr.data-target]="'#' + menuParent.dropdownId" data-toggle="collapse">
-              <i [class]="menuParent.icon"></i>
-              <p>{{menuParent.name}}</p>
-              <i class="fas fa-angle-right dropdownArrow"></i>
-            </button>
-
-            <div class="collapse" [id]="menuParent.dropdownId">
-              <ul>
-                <li *ngFor="let menuChild of menuParent.children" routerLinkActive="active">
-                  <a [routerLink]="menuChild.link"> {{menuChild.name}} </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </ng-container>
-      </ng-container>
-    </ul>
+      </ul>
+    </div>
   </nav>
 </div>

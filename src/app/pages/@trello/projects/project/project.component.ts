@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AlertService } from 'src/app/@theme/service/alert.service';
 import { messages } from 'src/app/constants/messages';
@@ -10,14 +10,9 @@ import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
   styleUrls: ['./project.component.scss']
 })
 export class ProjectComponent {
-  @Input()
-  public projectIndex: number;
-
-  @Input()
-  public trelloForm: FormGroup;
-
-  @Input()
-  public trelloViewer: TrelloViewer;
+  @Input() public projectIndex: number;
+  @Input() public trelloForm: FormGroup;
+  @Input() @Output() public trelloViewer: TrelloViewer;
 
   constructor(
     private alertService: AlertService

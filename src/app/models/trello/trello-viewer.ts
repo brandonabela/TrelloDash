@@ -10,22 +10,22 @@ export class TrelloViewer {
   private loadedProjects = 0;
 
   public uniqueBoards: BoardFrequency[];
+  public trelloProjects: TrelloProject[];
 
   constructor(
     private alertService: AlertService,
     private storageService: StorageService,
     private requestService: RequestService
   ) {
+    this.trelloProjects = this.storageService.getTrelloProjects();
     this.syncExpiredProjects();
   }
 
   public syncExpiredProjects(): void {
     const todayDate = new Date();
 
-    const storageTrello = this.storageService.getTrelloProjects();
-
-    for (let i = storageTrello.length - 1; i >= 0; i--) {
-      const projectDate = new Date(storageTrello[i].expiryDate);
+    for (let i = this.trelloProjects.length - 1; i >= 0; i--) {
+      const projectDate = new Date(this.trelloProjects[i].expiryDate);
 
       if (todayDate > projectDate) {
         this.syncTrelloProject(i);
@@ -38,31 +38,24 @@ export class TrelloViewer {
   }
 
   public syncAllProjects(): void {
-    const storageTrello = this.storageService.getTrelloProjects();
-
     this.loadedProjects = 0;
 
-    for (let i = storageTrello.length - 1; i >= 0; i--) {
+    for (let i = this.trelloProjects.length - 1; i >= 0; i--) {
       this.syncTrelloProject(i);
     }
   }
 
-  public syncTrelloProject(index: number): void {
-    const storageTrello = this.storageService.getTrelloProjects();
-
-    this.updateProject(index, storageTrello[index].validInDays);
+  private syncTrelloProject(index: number): void {
+    this.updateProject(index, this.trelloProjects[index].validInDays);
   }
 
-  public updateProject(index: number, days: number) {
-    const storageTrello = this.storageService.getTrelloProjects();
-    const projectJson = storageTrello[index].projectJson;
+  public updateProject(index: number, days: number): void {
+    const projectJson = this.trelloProjects[index].projectJson;
 
     this.updateProjectRemote(index, projectJson, days);
   }
 
   public addProject(trelloUrl: string, days: number): void {
-    const storageTrello = this.storageService.getTrelloProjects();
-
     // If invalid urls
 
     if (!trelloUrl.includes('trello.com/b/')) {
@@ -77,7 +70,7 @@ export class TrelloViewer {
 
     // Checking if the given url path was already added to the project
 
-    if (storageTrello.filter(aProject => aProject.projectJson === trelloUrl).length === 0) {
+    if (this.trelloProjects.filter(aProject => aProject.projectJson === trelloUrl).length === 0) {
       this.addProjectFromRemote(trelloUrl, days);
     } else {
       this.alertService.add(messages.trelloAlreadyAdded);
@@ -85,13 +78,13 @@ export class TrelloViewer {
   }
 
   private addProjectFromRemote(trelloUrl: string, days: number): void {
-    this.alertService.add(messages.trelloInitiateAdd);
+    this.alertService.add(messages.trelloInitAdd);
 
     this.requestService.getXhrResponse(trelloUrl).then((xhr: XMLHttpRequest) => {
       if (xhr.status === 200 && xhr.responseText !== '') {
         const trelloProject = new TrelloProject(JSON.parse(xhr.responseText), days);
 
-        this.storageService.addTrelloProject(trelloProject);
+        this.trelloProjects = this.storageService.addTrelloProject(trelloProject);
         this.updateBoards();
 
         this.loadedProjects++;
@@ -104,18 +97,16 @@ export class TrelloViewer {
   }
 
   private updateProjectRemote(index: number, trelloUrl: string, days: number): void {
-    const storageTrello = this.storageService.getTrelloProjects();
-
     this.requestService.getXhrResponse(trelloUrl).then((xhr: XMLHttpRequest) => {
       if (xhr.status === 200 && xhr.responseText !== '') {
         const updatedProject = new TrelloProject(JSON.parse(xhr.responseText), days);
 
-        this.storageService.updateTrelloProject(index, updatedProject);
+        this.trelloProjects = this.storageService.updateTrelloProject(index, updatedProject);
         this.updateBoards();
 
         // If user initiated update do not increment loaded projects
 
-        if (this.loadedProjects !== storageTrello.length) {
+        if (this.loadedProjects !== this.trelloProjects.length) {
           this.loadedProjects++;
         }
 
@@ -125,7 +116,7 @@ export class TrelloViewer {
   }
 
   public removeProject(index: number) {
-    this.storageService.removeTrelloProject(index);
+    this.trelloProjects = this.storageService.removeTrelloProject(index);
     this.updateBoards();
 
     this.loadedProjects--;
@@ -134,9 +125,7 @@ export class TrelloViewer {
   }
 
   public updateBoards(): void {
-    const storageTrello = this.storageService.getTrelloProjects();
-
-    const cardBoardNames = [].concat(...storageTrello.map(aProject => aProject.trelloCards.map(aCard => aCard.cardBoardName)));
+    const cardBoardNames = [].concat(...this.trelloProjects.map(aProject => aProject.trelloCards.map(aCard => aCard.cardBoardName)));
     const uniqueBoardNames = Array.from(new Set(cardBoardNames));
 
     this.uniqueBoards = uniqueBoardNames.map(aBoardName =>
@@ -145,29 +134,18 @@ export class TrelloViewer {
   }
 
   public areProjectsLoaded(): boolean {
-    return this.loadedProjects === this.storageService.getTrelloProjects().length;
+    return this.loadedProjects === this.trelloProjects.length;
   }
 
   public getStoragePercentage(): number {
-    return (this.loadedProjects / this.storageService.getTrelloProjects().length) * 100;
-  }
-
-  public getTrelloProjects(): TrelloProject[] {
-    return this.storageService.getTrelloProjects();
+    return (this.loadedProjects / this.trelloProjects.length) * 100;
   }
 
   public getTrelloCards(): TrelloCard[] {
-    const projects = this.storageService.getTrelloProjects();
-
-    return [].concat(...projects.map(project =>
+    return [].concat(...this.trelloProjects.map(project =>
       project.trelloCards.map(trelloCard => {
         return Object.assign({ projectName: project.projectName }, trelloCard);
       })
     ));
-  }
-
-  public getTrelloProject(index: number): TrelloProject {
-    const storageTrello = this.storageService.getTrelloProjects();
-    return storageTrello[index];
   }
 }

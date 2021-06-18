@@ -1,12 +1,9 @@
 .table {
   color: color(theme, text-heading);
 
-  th {
-    font-weight: 600 !important;
-  }
-
   thead th {
     border: 0;
+    font-weight: 600 !important;
   }
 
   th,

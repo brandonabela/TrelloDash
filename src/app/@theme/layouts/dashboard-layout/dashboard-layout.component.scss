@@ -7,9 +7,8 @@
   transition: all 0.3s;
 
   .content-body {
-    padding: 25px;
-    margin-top: 60px;
-    min-height: calc(100% - 60px - 50px); /* Top Navigation and Footer Height */
+    margin-top: 64px;
+    min-height: calc(100% - 64px - 50px); /* Top Navigation and Footer Height */
   }
 }
 

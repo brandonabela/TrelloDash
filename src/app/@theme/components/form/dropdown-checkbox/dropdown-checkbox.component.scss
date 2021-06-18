@@ -3,57 +3,59 @@
 .dropdown-menu {
   li {
     display: block;
-    padding: 8px;
-    padding-left: 40px;
 
-    label {
-      cursor: pointer;
-      margin-bottom: 0;
+    padding: 6px 6px 6px 40px;
 
-      input[type="checkbox"] {
-        position: absolute;
-        opacity: 0;
-      }
+    cursor: pointer;
 
-      input[type="checkbox"] + span:before,
-      input[type="checkbox"] + span:after {
-        content: "";
-        left: 10px;
-        position: absolute;
-        z-index: 1;
-        margin-top: 2px;
-      }
+    input[type="checkbox"] {
+      position: absolute;
 
-      input[type="checkbox"] + span:before {
-        height: 20px;
-        width: 20px;
-        background-color: transparent;
-        border-radius: 2px;
-        border: 2px solid color(theme, backdrop-outline);
-      }
+      opacity: 0;
+    }
 
-      input[type="checkbox"]:checked + span:before {
-        width: 8px;
-        height: 15px;
-        margin: 2px 6px;
+    input[type="checkbox"] + span:before,
+    input[type="checkbox"] + span:after {
+      position: absolute;
+      z-index: 1;
+      left: 10px;
 
-        border-top: 3px solid transparent;
-        border-left: 3px solid transparent;
-        border-right: 3px solid color(theme, text-white);
-        border-bottom: 3px solid color(theme, text-white);
+      margin-top: 8px;
 
-        transform: rotateZ(37deg);
-        -webkit-transform: rotateZ(37deg);
-      }
+      content: "";
+    }
 
-      input[type="checkbox"]:checked + span:after {
-        width: 20px;
-        height: 20px;
-        z-index: 0;
+    input[type="checkbox"] + span:before {
+      width: 20px;
+      height: 20px;
 
-        border: 3px solid color(theme, primary-dark);
-        background-color: color(theme, primary-dark);
-      }
+      border: 2px solid color(theme, backdrop-outline);
+      border-radius: 2px;
+      background-color: transparent;
+    }
+
+    input[type="checkbox"]:checked + span:before {
+      width: 8px;
+      height: 15px;
+      margin: 8px 6px;
+
+      -webkit-transform: rotateZ(37deg);
+      transform: rotateZ(37deg);
+
+      border-top: 3px solid transparent;
+      border-right: 3px solid color(theme, text-white);
+      border-bottom: 3px solid color(theme, text-white);
+      border-left: 3px solid transparent;
+    }
+
+    input[type="checkbox"]:checked + span:after {
+      z-index: 0;
+
+      width: 20px;
+      height: 20px;
+
+      border: 3px solid color(theme, primary-dark);
+      background-color: color(theme, primary-dark);
     }
   }
 }

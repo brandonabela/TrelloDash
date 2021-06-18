@@ -1,90 +1,114 @@
-<div class="row">
-  <div class="col-xl-12">
-    <page-header></page-header>
-  </div>
+<page-header></page-header>
 
-  <div class="col-xl-12">
-    <ng-container *ngIf="trelloViewer.areProjectsLoaded(); else projectsLoading">
-      <card>
-        <card-header>
-          <card-tools>
-            <button class="btn" type="button" (click)="addTrelloProject()" data-toggle="modal" data-target="#manageProjectModal">
-              <i class="fas fa-plus"></i>
-              Add Project
-            </button>
-          </card-tools>
+<page-body>
+  <div class="row">
+    <div class="col-xl-12">
+      <ng-container *ngIf="trelloViewer.areProjectsLoaded(); else projectsLoading">
+        <card>
+          <card-header>
+            <card-title>
+              <h1> Manage Projects </h1>
+            </card-title>
 
-          <card-title>
-            Projects
-          </card-title>
-        </card-header>
+            <card-tools>
+              <button class="btn" type="button" (click)="addTrelloProject()" data-bs-toggle="modal" data-bs-target="#manageProjectModal">
+                <i class="fas fa-plus"></i>
+                Add Project
+              </button>
 
-        <card-body>
-          <div class="row">
-            <div class="col-xl-12">
+              <button class="btn" (click)="trelloViewer.syncAllProjects()">
+                <i class="fas fa-sync"></i>
+                Sync Project
+              </button>
+            </card-tools>
+          </card-header>
 
-              <ng-container *ngIf="trelloViewer.getTrelloProjects().length !== 0; else noProjects">
-                <div class="searchArea">
-                  <div class="input-group">
-                    <input class="form-control" placeholder="Project Name" [(ngModel)]="projectNameSearch" ng-model-options="{debounce: 100}">
+          <card-body>
+            <div class="row">
+              <div class="col-xl-12">
 
-                    <div class="input-group-append">
-                      <button class="btn btn-primary">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
 
-                <div class="row">
-                  <div class="col-xl-12">
-                    <div class="table-responsive" data-simplebar data-simplebar-auto-hide="false">
-                      <table class="table table-striped">
+                  <div class="row">
+                    <div class="col-xl-12 project-card">
+                      <table class="table">
                         <thead>
                           <tr>
-                            <th> Project Name </th>
-                            <th> Expiry Date </th>
-                            <th> Action </th>
+                            <th>Project Title</th>
+                            <th>Members</th>
+                            <th>Card Total</th>
+                            <th>Sync Date</th>
+                            <th></th>
                           </tr>
                         </thead>
 
                         <tbody>
-                          <tr *ngFor="let aTrelloProject of trelloViewer.getTrelloProjects() | trelloProjectFilter: projectNameSearch; index as i">
+                          <tr *ngFor="let aTrelloProject of trelloViewer.trelloProjects; index as i">
                             <td> {{aTrelloProject.projectName}} </td>
+
+                            <td class="memberCells">
+                              <img *ngFor="let aMember of aTrelloProject.projectMembers | slice:0:5; index as j" class="profilePicture" [src]="aMember.profilePicture" [attr.alt]="'Member ' + j">
+                              <div class="additionalMembers" *ngIf="aTrelloProject.projectMembers.length > 5">
+                                <p> +{{aTrelloProject.projectMembers.length - 5}} </p>
+                              </div>
+                            </td>
+
+                            <td> {{aTrelloProject.trelloCards.length}} Cards </td>
                             <td> {{aTrelloProject.expiryDate | date: 'dd MMMM yyyy'}} </td>
+
                             <td>
-                              <button class="btn btn-success" type="button" (click)="editTrelloProject(i)" data-toggle="modal" data-target="#manageProjectModal">
-                                <i class="fas fa-edit"></i>
+                              <button class="btn btn-primary" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-h"></i>
                               </button>
 
-                              <button class="btn btn-danger" type="button" (click)="removeTrelloProject(i)" data-toggle="modal" data-target="#confirmationModal">
-                                <i class="fas fa-trash"></i>
-                              </button>
+                              <div class="dropdown-menu">
+                                <button class="dropdown-item" (click)="editTrelloProject(i)" data-bs-toggle="modal" data-bs-target="#manageProjectModal">
+                                  <i class="fas fa-edit"></i> Edit
+                                </button>
+
+                                <button class="dropdown-item" (click)="removeTrelloProject(i)" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                                  <i class="fas fa-trash"></i> Remove
+                                </button>
+
+                                <div class="dropdown-divider"></div>
+
+                                <button class="dropdown-item" (click)="exportCSVProject(i)" data-bs-toggle="modal" data-bs-target="#exportCSVProjectModal">
+                                  <i class="fas fa-file-csv"></i> Export CSV
+                                </button>
+
+                                <button class="dropdown-item" (click)="exportLatexProject(i)" data-bs-toggle="modal" data-bs-target="#exportLatexProjectModal">
+                                  <i class="fas fa-file-code"></i> Export LaTeX
+                                </button>
+                              </div>
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
                   </div>
-                </div>
-              </ng-container>
 
-              <ng-template #noProjects>
-                <trello-no-project></trello-no-project>
-              </ng-template>
+                </ng-container>
 
+                <ng-template #noProjects>
+                  <trello-no-project></trello-no-project>
+                </ng-template>
+              </div>
             </div>
-          </div>
-        </card-body>
-      </card>
-    </ng-container>
+          </card-body>
+        </card>
+      </ng-container>
 
-    <ng-template #projectsLoading>
-      <trello-loading-projects [trelloViewer]="trelloViewer"></trello-loading-projects>
-    </ng-template>
+      <ng-template #projectsLoading>
+        <trello-loading-projects [trelloViewer]="trelloViewer"></trello-loading-projects>
+      </ng-template>
+    </div>
   </div>
-</div>
+</page-body>
 
-<trello-project [projectIndex]="projectIndex" [trelloForm]="trelloForm" [trelloViewer]="trelloViewer"></trello-project>
+<trello-project [projectIndex]="projectIndex" [trelloForm]="trelloForm" [(trelloViewer)]="trelloViewer"></trello-project>
+
+<trello-export-csv [projectIndex]="projectIndex" [trelloViewer]="trelloViewer"></trello-export-csv>
+
+<trello-export-latex [projectIndex]="projectIndex" [trelloViewer]="trelloViewer"></trello-export-latex>
 
 <confirmation-modal modalId="confirmationModal" (modalChoice)="confirmRemoveTrelloProject($event)"></confirmation-modal>

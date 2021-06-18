@@ -4,15 +4,18 @@ import { TrelloCheckList } from './trello-checklist';
 import { TrelloCheckListEntries } from './trello-checklist-entries';
 import { TrelloCustomDropdown } from './trello-custom-dropdown';
 import { TrelloLabel } from './trello-label';
+import { TrelloMember } from './trello-member';
 
 export class TrelloProject {
   public projectName: string;
   public projectLink: string;
   public projectJson: string;
-  public trelloCards: TrelloCard[] = [];
+  public projectMembers: TrelloMember[] = [];
 
   public validInDays: number;
   public expiryDate: Date;
+
+  public trelloCards: TrelloCard[] = [];
 
   public trelloBoards: Map<string, string> = new Map<string, string>();
   public trelloLabelList: Map<string, TrelloLabel> = new Map<string, TrelloLabel>();
@@ -25,6 +28,7 @@ export class TrelloProject {
     this.projectName = projectJson.name;
     this.projectLink = projectJson.shortUrl;
     this.projectJson = projectJson.shortUrl + '.json';
+    this.projectMembers = TrelloProject.getTrelloMembers(projectJson);
 
     this.validInDays = days;
     this.expiryDate = TrelloProject.getExpiryDate(days);
@@ -43,6 +47,18 @@ export class TrelloProject {
     // After initialising Trello Cards
 
     this.trelloFieldNames = TrelloProject.getFieldNames(this.trelloCards);
+  }
+
+  public static getTrelloMembers(projectJson: JsonTrello): TrelloMember[] {
+    return projectJson.members.map(aMember =>
+      new TrelloMember(
+        aMember.username,
+        aMember.fullName,
+        aMember.initials,
+        aMember.url,
+        aMember.avatarUrl + '/50.png'
+      )
+    );
   }
 
   public static getExpiryDate(days: number): Date {

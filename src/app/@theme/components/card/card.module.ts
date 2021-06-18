@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CardBodyComponent, CardComponent, CardHeaderComponent, CardSubtitleComponent, CardTitleComponent, CardToolsComponent } from './card.component';
+import { CardBodyComponent, CardComponent, CardHeaderComponent, CardTitleComponent, CardToolsComponent } from './card.component';
 
 @NgModule({
   declarations: [
@@ -8,7 +8,6 @@ import { CardBodyComponent, CardComponent, CardHeaderComponent, CardSubtitleComp
     CardHeaderComponent,
     CardTitleComponent,
     CardToolsComponent,
-    CardSubtitleComponent,
     CardBodyComponent
   ],
   imports: [CommonModule],
@@ -17,7 +16,6 @@ import { CardBodyComponent, CardComponent, CardHeaderComponent, CardSubtitleComp
     CardHeaderComponent,
     CardTitleComponent,
     CardToolsComponent,
-    CardSubtitleComponent,
     CardBodyComponent
   ]
 })

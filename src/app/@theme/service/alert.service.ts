@@ -14,7 +14,7 @@ export class AlertService {
     const message = alert instanceof AlertDescription ? alert.paragraph : '';
 
     const options = {
-      timeOut: 2000,
+      timeOut: 3000,
       closeButton: true,
       progressBar: true,
       positionClass: window.innerWidth < 1440 ? 'toast-bottom-full-width' : 'toast-bottom-right'

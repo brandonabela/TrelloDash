@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'page-header',
   templateUrl: './page-header.component.html',
-  styleUrls: ['./page-header.component.scss']
+  styleUrls: ['./page.component.scss']
 })
 export class PageHeaderComponent {
   public pageTitle: string;
@@ -13,3 +13,10 @@ export class PageHeaderComponent {
     this.pageTitle = activatedRoute.snapshot.data.breadcrumb;
   }
 }
+
+@Component({
+  selector: 'page-body',
+  templateUrl: './page-body.component.html',
+  styleUrls: ['./page.component.scss']
+})
+export class PageBodyComponent { }

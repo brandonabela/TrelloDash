@@ -6,11 +6,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./confirmation-modal.component.scss']
 })
 export class ConfirmationModalComponent {
-  @Input()
-  public modalId: string;
-
-  @Output()
-  public modalChoice = new EventEmitter();
+  @Input() public modalId: string;
+  @Output() public modalChoice = new EventEmitter();
 
   public confirmAction(): void {
     this.modalChoice.emit(true);

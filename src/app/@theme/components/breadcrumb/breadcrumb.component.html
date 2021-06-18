@@ -1,15 +1,9 @@
 <ul class="breadcrumb">
-  <ng-container *ngFor="let breadcrumb of breadcrumbs; let isLast = last">
-    <li class="breadcrumb-item">
-      <ng-container *ngIf="!isLast">
-        <a [routerLink]="[breadcrumb.url]">
-          {{breadcrumb.title}}
-        </a>
-      </ng-container>
-
-      <ng-container *ngIf="isLast">
+  <ng-container *ngFor="let breadcrumb of breadcrumbs; let isLast = last;">
+    <li class="breadcrumb-item" [ngClass]="{'active' : isLast}">
+      <a [routerLink]="[breadcrumb.url]">
         {{breadcrumb.title}}
-      </ng-container>
+      </a>
     </li>
 
     <li class="separator" *ngIf="!isLast">

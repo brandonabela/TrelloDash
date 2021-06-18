@@ -6,10 +6,12 @@ export const messages = {
   storageDownloadError: new AlertTitle('No data was saved thus, no data can be downloaded', AlertType.Error),
   storageUploadSuccess: new AlertTitle('Website configuration were imported', AlertType.Success),
 
-  texDocumentSuccess: new AlertTitle('The selected project has been downloaded successfully as a latex document', AlertType.Success),
-  zipDocumentSuccess: new AlertTitle('The selected project has been downloaded successfully containing the latex document and attachments', AlertType.Success),
+  trelloInitDownload: new AlertTitle('The creation of the latex project with attachments has been initiated', AlertType.Info),
+  csvDocumentSuccess: new AlertTitle('The project has been downloaded successfully as a CSV document', AlertType.Success),
+  texDocumentSuccess: new AlertTitle('The project has been downloaded successfully as a latex document', AlertType.Success),
+  zipDocumentSuccess: new AlertTitle('The project has been downloaded successfully containing the latex document and attachments', AlertType.Success),
 
-  trelloInitiateAdd: new AlertTitle('The add trello project has been initiated', AlertType.Info),
+  trelloInitAdd: new AlertTitle('The add trello project has been initiated', AlertType.Info),
   trelloSuccessAdd: new AlertTitle('The trello project has been extracted successfully', AlertType.Success),
   trelloNoAccess: new AlertTitle('The provided URL cannot be accessed', AlertType.Error),
   trelloAlreadyAdded: new AlertTitle('The trello project is already added', AlertType.Error),

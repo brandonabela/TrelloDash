@@ -12,7 +12,9 @@ declare var saveAs: any;
 export class StorageService {
   private keyTrelloProject = 'trelloProjects';
 
-  constructor(private alertService: AlertService) { }
+  constructor(
+    private alertService: AlertService
+  ) { }
 
   // ---------- JSON Map Handling ----------
 
@@ -87,16 +89,19 @@ export class StorageService {
     return trelloProjects != null ? trelloProjects : [];
   }
 
-  public addTrelloProject(trelloProject: TrelloProject): void {
+  public addTrelloProject(trelloProject: TrelloProject): TrelloProject[] {
     this.addToArray(this.keyTrelloProject, trelloProject);
+    return this.getTrelloProjects();
   }
 
-  public updateTrelloProject(index: number, trelloProject: TrelloProject): void {
+  public updateTrelloProject(index: number, trelloProject: TrelloProject): TrelloProject[] {
     this.updateArrayValue(this.keyTrelloProject, index, trelloProject);
+    return this.getTrelloProjects();
   }
 
-  public removeTrelloProject(index: number): void {
+  public removeTrelloProject(index: number): TrelloProject[] {
     this.removeFromArray(this.keyTrelloProject, index);
+    return this.getTrelloProjects();
   }
 
   // ---------- Import and Export Handling ----------

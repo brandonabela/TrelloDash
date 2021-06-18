@@ -1,34 +1,30 @@
 @import "~src/app/@theme/assets/scss/theme-colour.scss";
 
 .breadcrumb {
-  padding: 3px 0 0 0;
-  background: transparent;
-  font-size: 16px;
   margin: 0;
+  padding: 0;
+
   float: right;
 
-  li {
-    margin: 0;
+  font-size: 17px;
+  background: transparent;
 
-    a {
-      font-weight: 500;
+  a {
+    text-decoration: none;
+
+    color: color(theme, text-paragraph);
+
+    &:hover,
+    &:focus {
       color: color(theme, primary-light);
-      text-decoration: none;
     }
+  }
 
-    &:last-child {
-      color: color(theme, text-heading);
-    }
+  .active a {
+    color: color(theme, primary-light);
   }
 
   .separator {
-    padding: 3px 8px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 425px) {
-  .breadcrumb {
-    float: left;
+    margin: 0 10px;
   }
 }

@@ -39,7 +39,11 @@
 
       li {
         margin-bottom: 3px;
-        padding: 0 15px;
+        padding-right: 5px;
+
+        ul {
+          padding-left: 20px;
+        }
 
         button {
           .dropdownArrow {
@@ -57,6 +61,7 @@
         a,
         button {
           display: flex;
+          text-decoration: none;
 
           width: 100%;
           padding: 8px 10px;
@@ -78,7 +83,7 @@
           }
 
           p {
-            margin-bottom: 0;
+            margin-bottom: 2px;
           }
 
           &:focus,

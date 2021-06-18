@@ -1,5 +1,7 @@
 @import "~src/app/@theme/assets/scss/theme-colour.scss";
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
 .row .col-xl-8 {
   position: absolute;
   top: 50%;
@@ -10,7 +12,7 @@
   transform: translate(-50%, -50%);
 
   h1 {
-    font-family: "montserrat-black", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 220px;
     line-height: initial;
 
@@ -24,7 +26,7 @@
   }
 
   h2 {
-    font-family: "montserrat-black", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 24px;
 
     margin-top: 0;

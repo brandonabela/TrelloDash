@@ -1,0 +1,65 @@
+<modal modalId="exportLatexProjectModal" modalClass="modal-md">
+  <modal-title>
+    Export Project as Latex
+  </modal-title>
+
+  <modal-body>
+    <form [formGroup]="trelloForm">
+      <div class="col-xl-12">
+        <div class="form-group row">
+          <label class="col-xl-3 col-form-label"> Chapter: </label>
+
+          <div class="col-xl-9">
+            <input class="form-control" type="text" placeholder="Chapter Name" formControlName="txtChapterName">
+          </div>
+        </div>
+
+        <label class="mb-3"> Tick the fields that should be exported, which can then be renamed except for the card lists, custom fields and attachments. </label>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkBoardName"> </span>
+          <input class="form-control" type="text" placeholder="Board Name Column" formControlName="txtBoardName">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardName"> </span>
+          <input class="form-control" type="text" placeholder="Card Name Column" formControlName="txtCardName">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardDescription"> </span>
+          <input class="form-control" type="text" placeholder="Card Description Column" formControlName="txtCardDescription">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardLabels"> </span>
+          <input class="form-control" type="text" placeholder="Card Labels Column" formControlName="txtCardLabels">
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardLists"> </span>
+          <input class="form-control" value="Card Lists" disabled>
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCustomField"> </span>
+          <input class="form-control" value="Custom Field" disabled>
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardAttachment"> </span>
+          <input class="form-control" value="Card Attachments" disabled>
+        </div>
+
+        <label class="mb-3"> In the event that the card attachments have not been downloaded, access <a href="https://cors-anywhere.herokuapp.com/corsdemo">this</a> and click "Request temporary access to the demo server". </label>
+
+      </div>
+    </form>
+  </modal-body>
+
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="exportLatexProject()" data-bs-dismiss="modal">
+      Export Project as Latex
+    </button>
+  </modal-footer>
+</modal>

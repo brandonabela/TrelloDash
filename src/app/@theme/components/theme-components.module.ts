@@ -5,7 +5,7 @@ import { CardCountdownModule } from './card-countdown/card-countdown.module';
 import { CardModule } from './card/card.module';
 import { FormModule } from './form/form.module';
 import { ModalModule } from './modal/modal.module';
-import { PageHeaderModule } from './page-header/page-header.module';
+import { PageModule } from './page/page.module';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { PageHeaderModule } from './page-header/page-header.module';
     BreadcrumbModule,
     FormModule,
     ModalModule,
-    PageHeaderModule
+    PageModule
   ]
 })
 export class ThemeComponentsModule { }

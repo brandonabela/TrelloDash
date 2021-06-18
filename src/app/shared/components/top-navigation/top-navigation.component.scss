@@ -3,15 +3,19 @@
 .topNavigation {
   z-index: 50;
 
+  .container-fluid {
+    padding: 0;
+  }
+
   .navbar {
     padding: 0;
     background: color(theme, primary-light);
-    box-shadow: 0 0 5px color(theme, text-white);
 
     .logo-banner {
       width: 240px;
       height: 64px;
       padding: 0 20px;
+      text-align: center;
       background: rgba(0, 0, 0, 0.05);
 
       h4 {
@@ -43,97 +47,86 @@
         }
       }
 
-      .navbar-nav {
-        position: relative;
+      .nav-link {
+        font-size: 20px;
+        line-height: 1;
 
-        .nav-link {
-          font-size: 20px;
-          line-height: 1 !important;
+        margin-right: 7px;
+        padding: 10px;
 
-          margin-right: 7px;
-          padding: 10px;
+        cursor: pointer;
+        vertical-align: middle;
 
-          cursor: pointer;
-          vertical-align: middle;
+        border-radius: 4px;
+        color: color(theme, text-white);
 
-          border-radius: 4px;
+        &:hover,
+        &:focus {
+          background: rgba(31, 30, 30, 0.12);
+        }
+      }
 
-          &:hover,
-          &:focus {
-            background: rgba(31, 30, 30, 0.12);
+      .dropdown-menu {
+        font-size: 16px;
+
+        padding: 0;
+        margin-top: 6px;
+        position: absolute;
+        border-radius: 3px;
+
+        right: 15px;
+        left: auto;
+        width: 250px;
+        z-index: 1001;
+
+        .header {
+          padding: 15px 11px;
+          text-align: center;
+
+          color: color(theme, text-white);
+          background: color(theme, primary-light);
+
+          &:after {
+            top: -9px;
+            right: 18px;
+            content: "";
+            position: absolute;
+
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+
+            border-bottom: 9px solid color(theme, text-white);
+            border-bottom-color: color(theme, primary-light);
           }
         }
 
-        .dropdown-menu {
-          margin-top: 15px;
-          padding: 0;
+        .item {
+          cursor: pointer;
+          padding: 8px 15px;
+          text-decoration: none;
+          border: 1px solid #ebedf3;
+          color: color(theme, text-paragraph);
 
-          right: 0;
-          left: auto;
-          width: 250px;
-          z-index: 1001;
-          position: absolute;
-
-          .header {
-            align-items: center;
-            flex-direction: column;
-            background: color(theme, primary-dark);
-            font-size: 16px;
-
-            display: flex;
-            color: color(theme, text-white);
-            padding: 15px;
-            border-radius: 3px 3px 0 0;
-
-            &:after {
-              border-bottom: 9px solid color(theme, text-white);
-              border-left: 9px solid transparent;
-              border-right: 9px solid transparent;
-              content: "";
-              right: 17px;
-              top: -9px;
-              position: absolute;
-              border-bottom-color: color(theme, primary-light);
-            }
+          &:hover,
+          &:focus {
+            transition: all 0.15s ease;
+            background-color: #f3f6f9 !important;
           }
 
-          .row {
-            margin: 0;
-            padding: 7.5px 0;
-            background-color: color(theme, text-white);
+          i {
+            display: inline-flex;
+            width: 35px;
+            height: 35px;
+            color: color(theme, text-white);
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: color(theme, danger-dark) !important;
+            font-size: 16px;
+          }
 
-            .dropdown-links {
-              display: flex;
-              flex-direction: column;
-              margin: 7.5px 10px;
-              padding: 10px;
-              align-items: center;
-
-              i {
-                display: inline-flex;
-                width: 48px;
-                height: 48px;
-                color: color(theme, text-white);
-                align-items: center;
-                justify-content: center;
-                box-shadow: 2px 2px 8px 0px color(theme, backdrop-outline);
-                border-radius: 50%;
-                background-color: color(theme, danger-dark) !important;
-                font-size: 18px;
-
-                &:hover,
-                &:focus {
-                  transform: scale(1.15);
-                }
-              }
-
-              span {
-                text-align: center;
-                font-size: 14px;
-                margin-top: 12px;
-                color: color(theme, primary-dark);
-              }
-            }
+          span {
+            margin-left: 15px;
           }
         }
       }
@@ -166,16 +159,6 @@
 
         .center-logo {
           display: inline;
-        }
-
-        .navbar-nav {
-          .dropdown-menu {
-            width: 40vw;
-
-            .col-xl-6 {
-              width: 50%;
-            }
-          }
         }
       }
     }

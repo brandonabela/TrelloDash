@@ -7,14 +7,9 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./dropdown-checkbox.component.scss']
 })
 export class DropdownCheckboxComponent implements AfterViewInit {
-  @Input()
-  public dropdownForm: FormGroup;
-
-  @Input()
-  public dropdownArray: string;
-
-  @Input()
-  public checkboxArray: string[];
+  @Input() public dropdownForm: FormGroup;
+  @Input() public dropdownArray: string;
+  @Input() public checkboxArray: string[];
 
   ngAfterViewInit(): void {
     const dropdownCheckbox = Array.from(document.getElementsByClassName('dropdown-checkbox'));

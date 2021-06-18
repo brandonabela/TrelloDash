@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
-import { CardModule } from '../card/card.module';
-import { PageHeaderComponent } from './page-header.component';
+import { PageBodyComponent, PageHeaderComponent } from './page.component';
 
 @NgModule({
   declarations: [
-    PageHeaderComponent
+    PageHeaderComponent,
+    PageBodyComponent
   ],
   imports: [
     CommonModule,
-    CardModule,
     BreadcrumbModule
   ],
   exports: [
-    PageHeaderComponent
+    PageHeaderComponent,
+    PageBodyComponent
   ]
 })
-export class PageHeaderModule { }
+export class PageModule { }

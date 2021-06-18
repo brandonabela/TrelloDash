@@ -1,81 +1,81 @@
-<div class="row">
-  <div class="col-xl-12">
-    <page-header></page-header>
+<page-header></page-header>
+
+<page-body>
+  <div class="row">
+    <div class="col-xl-6">
+      <card>
+        <card-header>
+          <card-title>
+            <h1> Alert Title </h1>
+          </card-title>
+        </card-header>
+
+        <card-body>
+          <div class="row">
+            <div class="col-xl-6">
+              <button class="btn btn-primary col-xl-12" (click)="openAlertTitleSuccess()">
+                Success
+              </button>
+            </div>
+
+            <div class="col-xl-6">
+              <button class="btn btn-primary col-xl-12" (click)="openAlertTitleError()">
+                Error
+              </button>
+            </div>
+
+            <div class="col-xl-6">
+              <button class="btn btn-primary col-xl-12" (click)="openAlertTitleWarning()">
+                Warning
+              </button>
+            </div>
+
+            <div class="col-xl-6">
+              <button class="btn btn-primary col-xl-12" (click)="openAlertTitleInfo()">
+                Info
+              </button>
+            </div>
+          </div>
+        </card-body>
+      </card>
+    </div>
+
+    <div class="col-xl-6">
+      <card>
+        <card-header>
+          <card-title>
+            <h1> Alert Title with Description </h1>
+          </card-title>
+        </card-header>
+
+        <card-body>
+          <div class="row">
+            <div class="col-xl-6">
+              <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionSuccess()">
+                Success
+              </button>
+            </div>
+
+            <div class="col-xl-6">
+              <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionError()">
+                Error
+              </button>
+            </div>
+
+            <div class="col-xl-6">
+              <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionWarning()">
+                Warning
+              </button>
+            </div>
+
+            <div class="col-xl-6">
+              <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionInfo()">
+                Info
+              </button>
+            </div>
+          </div>
+        </card-body>
+      </card>
+    </div>
   </div>
-
-  <div class="col-xl-6">
-    <card>
-      <card-header>
-        <card-title>
-          Alert Title
-        </card-title>
-      </card-header>
-
-      <card-body>
-        <div class="row">
-          <div class="col-xl-6">
-            <button class="btn btn-primary col-xl-12" (click)="openAlertTitleSuccess()">
-              Success
-            </button>
-          </div>
-
-          <div class="col-xl-6">
-            <button class="btn btn-primary col-xl-12" (click)="openAlertTitleError()">
-              Error
-            </button>
-          </div>
-
-          <div class="col-xl-6">
-            <button class="btn btn-primary col-xl-12" (click)="openAlertTitleWarning()">
-              Warning
-            </button>
-          </div>
-
-          <div class="col-xl-6">
-            <button class="btn btn-primary col-xl-12" (click)="openAlertTitleInfo()">
-              Info
-            </button>
-          </div>
-        </div>
-      </card-body>
-    </card>
-  </div>
-
-  <div class="col-xl-6">
-    <card>
-      <card-header>
-        <card-title>
-          Alert Title with Description
-        </card-title>
-      </card-header>
-
-      <card-body>
-        <div class="row">
-          <div class="col-xl-6">
-            <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionSuccess()">
-              Success
-            </button>
-          </div>
-
-          <div class="col-xl-6">
-            <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionError()">
-              Error
-            </button>
-          </div>
-
-          <div class="col-xl-6">
-            <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionWarning()">
-              Warning
-            </button>
-          </div>
-
-          <div class="col-xl-6">
-            <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionInfo()">
-              Info
-            </button>
-          </div>
-        </div>
-      </card-body>
-    </card>
-  </div>
-</div>
+</page-body>

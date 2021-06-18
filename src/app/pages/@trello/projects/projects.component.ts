@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/@theme/service/alert.service';
+import { TrelloProject } from 'src/app/models/trello/trello-project';
 import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
 import { RequestService } from 'src/app/service/request.service';
 import { StorageService } from 'src/app/service/storage.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'page-projects',
@@ -11,10 +13,9 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  @Input()
-  public trelloViewer: TrelloViewer;
-
   public trelloForm: FormGroup;
+  public trelloViewer: TrelloViewer;
+  public trelloProjects: TrelloProject[];
 
   public projectIndex: number;
   public projectNameSearch: string;
@@ -45,7 +46,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   public populateForm(index: number): void {
-    const trelloProject = this.trelloViewer.getTrelloProject(index);
+    const trelloProject = this.trelloViewer.trelloProjects[index];
 
     const formUrl = trelloProject.projectLink;
     let formExpiryQuantity = trelloProject.validInDays;
@@ -94,5 +95,13 @@ export class ProjectsComponent implements OnInit {
     if ($event) {
       this.trelloViewer.removeProject(this.projectIndex);
     }
+  }
+
+  public exportCSVProject(index: number): void {
+    this.projectIndex = index;
+  }
+
+  public exportLatexProject(index: number): void {
+    this.projectIndex = index;
   }
 }

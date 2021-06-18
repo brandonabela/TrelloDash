@@ -22,13 +22,6 @@ export class CardHeaderComponent { }
 export class CardTitleComponent { }
 
 @Component({
-  selector: 'card-subtitle',
-  templateUrl: './card-subtitle.component.html',
-  styleUrls: ['./card.component.scss']
-})
-export class CardSubtitleComponent { }
-
-@Component({
   selector: 'card-tools',
   templateUrl: './card-tools.component.html',
   styleUrls: ['./card.component.scss']

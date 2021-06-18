@@ -1,6 +1,10 @@
 <ng-container *ngIf="trelloViewer.areProjectsLoaded(); else projectsLoading">
   <card>
     <card-header>
+      <card-title>
+         <h1> {{cardTitle}} </h1>
+      </card-title>
+
       <card-tools>
         <ng-content select=".header"></ng-content>
 
@@ -9,14 +13,10 @@
           Sync Project
         </button>
       </card-tools>
-
-      <card-title>
-        {{cardTitle}}
-      </card-title>
     </card-header>
 
     <card-body>
-      <ng-container *ngIf="trelloViewer.getTrelloProjects().length !== 0; else noProjects">
+      <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
         <ng-content select=".body"></ng-content>
       </ng-container>
 

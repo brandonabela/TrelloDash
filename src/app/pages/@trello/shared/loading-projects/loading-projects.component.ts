@@ -7,6 +7,5 @@ import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
   styleUrls: ['./loading-projects.component.scss']
 })
 export class LoadingProjectsComponent {
-  @Input()
-  public trelloViewer: TrelloViewer;
+  @Input() public trelloViewer: TrelloViewer;
 }

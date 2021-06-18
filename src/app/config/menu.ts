@@ -20,7 +20,6 @@ export class Menu {
     new MenuSection('Trello'),
     new MenuSingle('Projects', '/trello/projects', 'fas fa-project-diagram'),
     new MenuSingle('Queries', '/trello/queries', 'fas fa-folder'),
-    new MenuSingle('Mind Map', '/trello/mindmap', 'fas fa-sitemap'),
-    new MenuSingle('Export', '/trello/export', 'fas fa-file-alt')
+    new MenuSingle('Mind Map', '/trello/mindmap', 'fas fa-sitemap')
   ];
 }
