@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './@theme/layouts/dashboard-layout/dashboard-layout.component';
+import { AccordionsComponent } from './pages/@theme/accordions/accordions.component';
 import { AlertsComponent } from './pages/@theme/alerts/alerts.component';
 import { CardsComponent } from './pages/@theme/cards/cards.component';
 import { ModalsComponent } from './pages/@theme/modals/modals.component';
@@ -21,6 +22,13 @@ const routes: Routes = [
         component: HomeComponent,
         data: {
           breadcrumb: 'Home'
+        }
+      },
+      {
+        path: 'theme/accordions',
+        component: AccordionsComponent,
+        data: {
+          breadcrumb: 'Accordions'
         }
       },
       {
@@ -96,6 +104,7 @@ export class AppRoutingModule { }
 export const RoutingComponents = [
   HomeComponent,
 
+  AccordionsComponent,
   AlertsComponent,
   CardsComponent,
   ModalsComponent,

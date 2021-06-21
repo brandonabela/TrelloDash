@@ -9,6 +9,7 @@ export class Menu {
     new MenuSingle('Home', '/', 'fas fa-home'),
     new MenuSection('Theme'),
     new MenuParent('Components', 'fas fa-cogs', [
+      new MenuChild('Accordions', '/theme/accordions'),
       new MenuChild('Alerts', '/theme/alerts'),
       new MenuChild('Cards', '/theme/cards'),
       new MenuChild('Modals', '/theme/modals'),

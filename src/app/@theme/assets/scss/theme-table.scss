@@ -2,14 +2,16 @@
   color: color(theme, text-heading);
 
   thead th {
-    border: 0;
     font-weight: 600 !important;
+
+    border: 0;
   }
 
   th,
   td {
-    border-top: 1px solid color(theme, backdrop-outline);
     vertical-align: middle;
+
+    border-bottom: 1px solid color(theme, backdrop-outline) !important;
   }
 
   .table-active,
