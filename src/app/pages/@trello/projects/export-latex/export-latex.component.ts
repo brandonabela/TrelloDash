@@ -96,9 +96,7 @@ export class ExportLatexComponent implements OnInit {
     this.exportLatexFile(trelloProject, fileString);
   }
 
-  public getFileHeader() {
-    const txtChapterName = this.trelloForm.get('txtChapterName').value;
-
+  public getFileHeader(txtChapterName: string): string {
     return [
       '%----------------------------------------------------------------------------------------',
       '%\t\t\tCHAPTER',
@@ -177,6 +175,8 @@ export class ExportLatexComponent implements OnInit {
   }
 
   private generateLatexString(trelloProject: TrelloProject): string {
+    const txtChapterName = this.trelloForm.get('txtChapterName').value;
+
     const chkBoardName = this.trelloForm.get('chkBoardName').value;
     const txtBoardName = this.trelloForm.get('txtBoardName').value;
     const chkCardName = this.trelloForm.get('chkCardName').value;
@@ -189,7 +189,20 @@ export class ExportLatexComponent implements OnInit {
     const chkCustomField = this.trelloForm.get('chkCustomField').value;
     const chkCardAttachment = this.trelloForm.get('chkCardAttachment').value;
 
-    let fileString = this.getFileHeader();
+    if (!chkBoardName && !chkCardName && !chkCardDescription && !chkCardLabels && !chkCardLists && !chkCustomField && !chkCardAttachment) {
+      this.alertService.add(messages.documentErrorMinOne);
+      return;
+    }
+
+    if (
+      (chkBoardName && !txtBoardName.length) || (chkCardName && !txtCardName.length) ||
+      (chkCardDescription && !txtCardDescription.length) || (chkCardLabels && !txtCardLabels.length)
+    ) {
+      this.alertService.add(messages.documentErrorString);
+      return;
+    }
+
+    let fileString = this.getFileHeader(txtChapterName);
 
     trelloProject.trelloCards.map((aCard, cardIndex) => {
       fileString += '\\begin{longtabu}{|X|XX|} \\hline \\tabuphantomline\n';

@@ -87,6 +87,19 @@ export class ExportCsvComponent implements OnInit {
     const cardLength = trelloProject.trelloCards.length;
     const customFieldNames = trelloProject.trelloFieldNames.slice(6);
 
+    if (!chkBoardName && !chkCardName && !chkCardDescription && !chkCardLabels && !chkCardPercentage && !chkCustomField) {
+      this.alertService.add(messages.documentErrorMinOne);
+      return;
+    }
+
+    if (
+      (chkBoardName && !txtBoardName.length) || (chkCardName && !txtCardName.length) || (chkCardDescription && !txtCardDescription.length) ||
+      (chkCardLabels && !txtCardLabels.length) || (chkCardPercentage && txtCardPercentage.length) || (chkCustomField && txtCustomField.length)
+    ) {
+      this.alertService.add(messages.documentErrorString);
+      return;
+    }
+
     let csvHeading = [
       (chkBoardName ? txtBoardName : ''),
       (chkCardName ? txtCardName : ''),

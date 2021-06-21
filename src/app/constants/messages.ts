@@ -10,6 +10,8 @@ export const messages = {
   csvDocumentSuccess: new AlertTitle('The project has been downloaded successfully as a CSV document', AlertType.Success),
   texDocumentSuccess: new AlertTitle('The project has been downloaded successfully as a latex document', AlertType.Success),
   zipDocumentSuccess: new AlertTitle('The project has been downloaded successfully containing the latex document and attachments', AlertType.Success),
+  documentErrorMinOne: new AlertTitle('A minimum of at least one field needs to be exported', AlertType.Error),
+  documentErrorString: new AlertTitle('The exported fields need to be filled out with a value', AlertType.Error),
 
   trelloInitAdd: new AlertTitle('The add trello project has been initiated', AlertType.Info),
   trelloSuccessAdd: new AlertTitle('The trello project has been extracted successfully', AlertType.Success),
