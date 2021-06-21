@@ -7,7 +7,7 @@ import { ModalsComponent } from './pages/@theme/modals/modals.component';
 import { TablesComponent } from './pages/@theme/tables/tables.component';
 import { MindMapComponent } from './pages/@trello/mind-map/mind-map.component';
 import { ProjectsComponent } from './pages/@trello/projects/projects.component';
-import { QueriesComponent } from './pages/@trello/queries/queries.component';
+import { QueryComponent } from './pages/@trello/query/query.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
 
@@ -59,10 +59,10 @@ const routes: Routes = [
         }
       },
       {
-        path: 'trello/queries',
-        component: QueriesComponent,
+        path: 'trello/query',
+        component: QueryComponent,
         data: {
-          breadcrumb: 'Queries'
+          breadcrumb: 'Query'
         }
       },
       {
@@ -88,7 +88,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabled',
     relativeLinkResolution: 'legacy'
-})],
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
@@ -102,6 +102,6 @@ export const RoutingComponents = [
   TablesComponent,
 
   ProjectsComponent,
-  QueriesComponent,
+  QueryComponent,
   MindMapComponent
 ];
