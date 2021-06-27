@@ -3,26 +3,19 @@
 .card-countdown {
   text-align: center;
 
-  .card {
-    margin: 8px 0;
+  color: color(theme, text-white);
+
+  .count {
+    font-size: 28px;
+    font-weight: 600;
+
+    margin-top: 24px;
   }
 
-  h1 {
-    font-size: 36px;
-    line-height: 40px;
+  .description {
+    font-size: 15px;
 
-    padding-top: 10px;
-
-    color: color(theme, text-white);
-  }
-
-  h6 {
-    font-size: 14px;
-    line-height: 16px;
-
-    padding-bottom: 10px;
-
-    color: color(theme, text-white);
+    margin-bottom: 24px;
   }
 }
 
