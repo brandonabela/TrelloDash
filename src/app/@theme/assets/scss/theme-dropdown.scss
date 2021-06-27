@@ -1,0 +1,13 @@
+.dropdown-menu {
+  border-radius: 5px;
+}
+
+.dropdown-item {
+  font-size: 14px;
+  padding: 10px 16px;
+
+  &:hover,
+  &:focus {
+    background-color: color(theme, backdrop-outline);
+  }
+}

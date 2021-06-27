@@ -1,0 +1,109 @@
+.text-primary {
+  color: color(theme, primary-light) !important;
+}
+
+.text-success {
+  color: color(theme, success-light) !important;
+}
+
+.text-danger {
+  color: color(theme, danger-light) !important;
+}
+
+.text-warning {
+  color: color(theme, warning-light) !important;
+}
+
+.text-info {
+  color: color(theme, info-light) !important;
+}
+
+.text-light {
+  color: color(theme, light-light) !important;
+}
+
+.bg-primary {
+  background-color: color(theme, primary-light) !important;
+}
+
+.bg-success {
+  background-color: color(theme, success-light) !important;
+}
+
+.bg-danger {
+  background-color: color(theme, danger-light) !important;
+}
+
+.bg-warning {
+  background-color: color(theme, warning-light) !important;
+}
+
+.bg-info {
+  background-color: color(theme, info-light) !important;
+}
+
+.bg-light {
+  background-color: color(theme, light-light) !important;
+}
+
+.bg-dark {
+  background-color: color(theme, dark-light) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', Helvetica, sans-serif;
+  font-weight: 500;
+  line-height: 1.2;
+
+  margin-top: 0;
+  margin-bottom: 8px;
+
+  color: color(theme, text-heading);
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 21px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+h6 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 15px;
+}
+
+.blockquote {
+  font-size: 20px;
+
+  margin-bottom: 16px;
+
+  .blockquote-footer {
+    font-size: 16px;
+
+    margin-top: 0 !important;
+
+    color: #7E8299;
+  }
+}

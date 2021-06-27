@@ -26,6 +26,8 @@
     "@angular/platform-browser-dynamic": "^12.0.4",
     "@angular/platform-server": "^12.0.4",
     "@angular/router": "^12.0.4",
+    "@fontsource/poppins": "^4.4.5",
+    "@fontsource/roboto": "^4.4.5",
     "@fortawesome/fontawesome-free": "^5.13.1",
     "@nguniversal/express-engine": "^12.0.2",
     "@popperjs/core": "^2.9.2",
@@ -48,8 +50,6 @@
     "utf-8-validate": "^5.0.2",
     "webpack": "^4.46.0",
     "webpack-subresource-integrity": "^1.4.1",
-    "wfk-montserrat": "^1.0.0",
-    "wfk-poppins": "^1.0.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

@@ -11,9 +11,14 @@ export class Menu {
     new MenuParent('Components', 'fas fa-cogs', [
       new MenuChild('Accordions', '/theme/accordions'),
       new MenuChild('Alerts', '/theme/alerts'),
+      new MenuChild('Buttons', '/theme/buttons'),
+      new MenuChild('Button Group', '/theme/button-group'),
       new MenuChild('Cards', '/theme/cards'),
+      new MenuChild('Dropdowns', '/theme/dropdowns'),
       new MenuChild('Modals', '/theme/modals'),
-      new MenuChild('Tables', '/theme/tables')
+      new MenuChild('Tables', '/theme/tables'),
+      new MenuChild('Typography', '/theme/typography'),
+      new MenuChild('Progress Bars', '/theme/progress-bars')
     ]),
     new MenuParent('Error Pages', 'fas fa-ban', [
       new MenuChild('404', '/theme/404')

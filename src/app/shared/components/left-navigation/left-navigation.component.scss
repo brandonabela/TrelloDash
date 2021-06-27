@@ -19,8 +19,6 @@
     height: calc(100vh - 64px);
 
     ul {
-      font-size: 13px;
-
       display: block;
 
       margin: 15px 0;
@@ -74,7 +72,7 @@
           align-items: center;
 
           i {
-            font-size: 17px;
+            font-size: 16px;
             line-height: 30px;
 
             width: 25px;
@@ -83,6 +81,8 @@
           }
 
           p {
+            font-size: 13px !important;
+
             margin-bottom: 2px;
           }
 
@@ -126,7 +126,7 @@
           font-weight: 700;
 
           color: color(theme, text-white);
-          background: color(theme, primary-dark) !important;
+          background: color(theme, primary-light) !important;
           box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1), 4px 4px 15px -5px rgba(21, 114, 232, 0.4);
         }
 

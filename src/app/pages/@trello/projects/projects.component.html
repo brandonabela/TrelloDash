@@ -11,12 +11,12 @@
             </card-title>
 
             <card-tools>
-              <button class="btn" type="button" (click)="addTrelloProject()" data-bs-toggle="modal" data-bs-target="#manageProjectModal">
+              <button class="btn btn-primary btn-sm" type="button" (click)="addTrelloProject()" data-bs-toggle="modal" data-bs-target="#manageProjectModal">
                 <i class="fas fa-plus"></i>
                 Add Project
               </button>
 
-              <button class="btn" (click)="trelloViewer.syncAllProjects()">
+              <button class="btn btn-primary btn-sm" (click)="trelloViewer.syncAllProjects()">
                 <i class="fas fa-sync"></i>
                 Sync Project
               </button>
@@ -57,7 +57,7 @@
                             <td> {{aTrelloProject.expiryDate | date: 'dd MMMM yyyy'}} </td>
 
                             <td>
-                              <button class="btn btn-primary" type="button" data-bs-toggle="dropdown">
+                              <button class="btn btn-primary btn-icon btn-sm" type="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-ellipsis-h"></i>
                               </button>
 

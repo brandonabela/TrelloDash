@@ -1,21 +1,37 @@
 $palette: (
   theme: (
     text-heading: #181C32,
-    text-paragraph: #3F4254,
+    text-paragraph: #56585f,
     text-white: #FFFFFF,
 
     backdrop: #EEF0F8,
     backdrop-outline: #F3F6F9,
 
-    primary-light: #4886ff,
+    primary-feather: #E1F0FF,
+    primary-light: #3699FF,
+    primary-dark: #187DE4,
 
-    info-dark: #11cdef,
-    primary-dark: #3f76e4,
-    success-dark: #2dce89,
-    danger-dark: #f5365c,
-    warning-dark: #ffb822,
-    light-dark: #ebedf2,
-    dark-dark: #172b4d
+    success-feather: #C9F7F5,
+    success-light: #1BC5BD,
+    success-dark: #0BB7AF,
+
+    danger-feather: #FFE2E5,
+    danger-light: #F64E60,
+    danger-dark: #EE2D41,
+
+    warning-feather: #FFF4DE,
+    warning-light: #FFA800,
+    warning-dark: #EE9D01,
+
+    info-light: #8950FC,
+    info-dark: #7337EE,
+
+    light-light: #F3F6F9,
+    light-dark: #E4E6EF,
+
+    dark-feather: #D1D3E0,
+    dark-light: #181C32,
+    dark-dark: #131628
   )
 );
 

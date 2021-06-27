@@ -24,7 +24,6 @@
 
   ::ng-deep h1 {
     font-size: 17px;
-    font-weight: 600;
 
     line-height: 35px;
     margin-bottom: 0;
@@ -45,22 +44,7 @@
   line-height: 35px;
 
   ::ng-deep .btn {
-    font-size: 13px;
     margin-left: 15px;
-
-    color: color(theme, text-white);
-    border-color: color(theme, primary-dark);
-    background-color: color(theme, primary-dark);
-
-    &:hover,
-    &:active {
-      border-color: color(theme, primary-light);
-      background-color: color(theme, primary-light);
-    }
-
-    i {
-      margin-right: 5px;
-    }
   }
 }
 

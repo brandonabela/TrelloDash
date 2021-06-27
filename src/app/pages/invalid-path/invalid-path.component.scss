@@ -1,6 +1,5 @@
+@import "@fontsource/roboto";
 @import "~src/app/@theme/assets/scss/theme-colour.scss";
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
 .row .col-xl-8 {
   position: absolute;
@@ -12,7 +11,7 @@
   transform: translate(-50%, -50%);
 
   h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 220px;
     line-height: initial;
 
@@ -26,7 +25,7 @@
   }
 
   h2 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 24px;
 
     margin-top: 0;
@@ -38,17 +37,12 @@
   }
 
   .btn {
-    font-size: 14px;
-    font-weight: 700;
+    font-weight: 800;
 
     padding: 15px 30px;
 
-    color: color(theme, text-white);
-
     border-radius: 40px;
-    background: color(theme, primary-dark);
-    border-color: color(theme, primary-dark);
-    box-shadow: color(theme, primary-dark) 0 4px 15px -5px;
+    box-shadow: color(theme, primary-light) 0 4px 15px -5px;
   }
 }
 

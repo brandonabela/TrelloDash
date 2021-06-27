@@ -1,0 +1,305 @@
+.btn {
+  border-radius: 5px;
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+.btn.btn-icon i {
+  margin-right: 0px;
+}
+
+.btn-primary {
+  color: color(theme, text-white);
+  border-color: color(theme, primary-light) !important;
+  background-color: color(theme, primary-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: color(theme, primary-dark) !important;
+    background-color: color(theme, primary-dark) !important;
+  }
+}
+
+.btn-success {
+  color: color(theme, text-white);
+  border-color: color(theme, success-light) !important;
+  background-color: color(theme, success-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: color(theme, success-dark) !important;
+    background-color: color(theme, success-dark) !important;
+  }
+}
+
+.btn-danger {
+  color: color(theme, text-white);
+  border-color: color(theme, danger-light) !important;
+  background-color: color(theme, danger-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: color(theme, danger-dark) !important;
+    background-color: color(theme, danger-dark) !important;
+  }
+}
+
+.btn-warning {
+  color: color(theme, text-white);
+  border-color: color(theme, warning-light) !important;
+  background-color: color(theme, warning-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: color(theme, warning-dark) !important;
+    background-color: color(theme, warning-dark) !important;
+  }
+}
+
+.btn-info {
+  color: color(theme, text-white);
+  border-color: color(theme, info-light) !important;
+  background-color: color(theme, info-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: color(theme, info-dark) !important;
+    background-color: color(theme, info-dark) !important;
+  }
+}
+
+.btn-light {
+  color: color(theme, text-paragraph);
+  border-color: color(theme, light-light) !important;
+  background-color: color(theme, light-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-paragraph);
+    border-color: color(theme, light-dark) !important;
+    background-color: color(theme, light-dark) !important;
+  }
+}
+
+.btn-dark {
+  color: color(theme, text-white);
+  border-color: color(theme, dark-light) !important;
+  background-color: color(theme, dark-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: color(theme, dark-dark) !important;
+    background-color: color(theme, dark-dark) !important;
+  }
+}
+
+.btn-light-primary {
+  color: color(theme, primary-light);
+  border-color: transparent;
+  background-color: color(theme, primary-feather);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: transparent;
+    background-color: color(theme, primary-light);
+  }
+}
+
+.btn-light-success {
+  color: color(theme, success-light);
+  border-color: transparent;
+  background-color: color(theme, success-feather);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: transparent;
+    background-color: color(theme, success-light);
+  }
+}
+
+.btn-light-danger {
+  color: color(theme, danger-light);
+  border-color: transparent;
+  background-color: color(theme, danger-feather);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: transparent;
+    background-color: color(theme, danger-light);
+  }
+}
+
+.btn-light-warning {
+  color: color(theme, warning-light);
+  border-color: transparent;
+  background-color: color(theme, warning-feather);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: transparent;
+    background-color: color(theme, warning-light);
+  }
+}
+
+.btn-light-dark {
+  color: color(theme, dark-light);
+  border-color: transparent;
+  background-color: color(theme, dark-feather);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white);
+    border-color: transparent;
+    background-color: color(theme, dark-light);
+  }
+}
+
+.btn-outline-primary {
+  color: color(theme, primary-light) !important;
+  border-color: color(theme, primary-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white) !important;
+    border-color: color(theme, primary-light) !important;
+    background-color: color(theme, primary-light) !important;
+  }
+}
+
+.btn-outline-success {
+  color: color(theme, success-light) !important;
+  border-color: color(theme, success-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white) !important;
+    border-color: color(theme, success-light) !important;
+    background-color: color(theme, success-light) !important;
+  }
+}
+
+.btn-outline-danger {
+  color: color(theme, danger-light) !important;
+  border-color: color(theme, danger-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white) !important;
+    border-color: color(theme, danger-light) !important;
+    background-color: color(theme, danger-light) !important;
+  }
+}
+
+.btn-outline-warning {
+  color: color(theme, warning-light) !important;
+  border-color: color(theme, warning-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white) !important;
+    border-color: color(theme, warning-light) !important;
+    background-color: color(theme, warning-light) !important;
+  }
+}
+
+.btn-outline-info {
+  color: color(theme, info-light) !important;
+  border-color: color(theme, info-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white) !important;
+    border-color: color(theme, info-light) !important;
+    background-color: color(theme, info-light) !important;
+  }
+}
+
+.btn-outline-dark {
+  color: color(theme, dark-light) !important;
+  border-color: color(theme, dark-light) !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: color(theme, text-white) !important;
+    border-color: color(theme, dark-light) !important;
+    background-color: color(theme, dark-light) !important;
+  }
+}
+
+.btn-primary.btn-shadow-hover {
+  &:hover,
+  &:focus {
+    -webkit-box-shadow: 0px 9px 16px 0px lighten(color( theme, primary-light) , 20%) !important;
+    box-shadow: 0px 9px 16px 0px lighten(color( theme, primary-light) , 20%) !important;
+  }
+}
+
+.btn-success.btn-shadow-hover {
+  &:hover,
+  &:focus {
+    -webkit-box-shadow: 0px 9px 16px 0px lighten(color( theme, success-light) , 25%) !important;
+    box-shadow: 0px 9px 16px 0px lighten(color( theme, success-light) , 25%) !important;
+  }
+}
+
+.btn-danger.btn-shadow-hover {
+  &:hover,
+  &:focus {
+    -webkit-box-shadow: 0px 9px 16px 0px lighten(color( theme, danger-light) , 20%) !important;
+    box-shadow: 0px 9px 16px 0px lighten(color( theme, danger-light) , 20%) !important;
+  }
+}
+
+.btn-warning.btn-shadow-hover {
+  &:hover,
+  &:focus {
+    -webkit-box-shadow: 0px 9px 16px 0px lighten(color( theme, warning-light) , 25%) !important;
+    box-shadow: 0px 9px 16px 0px lighten(color( theme, warning-light) , 25%) !important;
+  }
+}
+
+.btn-info.btn-shadow-hover {
+  &:hover,
+  &:focus {
+    -webkit-box-shadow: 0px 9px 16px 0px lighten(color( theme, info-light) , 20%) !important;
+    box-shadow: 0px 9px 16px 0px lighten(color( theme, info-light) , 20%) !important;
+  }
+}
+
+.btn-dark.btn-shadow-hover {
+  &:hover,
+  &:focus {
+    -webkit-box-shadow: 0px 9px 16px 0px lighten(color( theme, dark-light) , 45%) !important;
+    box-shadow: 0px 9px 16px 0px lighten(color( theme, dark-light) , 45%) !important;
+  }
+}

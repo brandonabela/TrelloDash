@@ -4,11 +4,16 @@ Convention for CSS ordering is done using https://csscomb.herokuapp.com/online
 ----------------------------------------
 */
 
-@import "./theme-accordion.scss";
-@import "./theme-alert.scss";
-@import "./theme-table.scss";
+@import "@fontsource/poppins";
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500');
+@import "./theme-accordion.scss";
+@import "./theme-button-group.scss";
+@import "./theme-button.scss";
+@import "./theme-alert.scss";
+@import "./theme-dropdown.scss";
+@import "./theme-table.scss";
+@import "./theme-typography.scss";
+@import "./theme-progress-bar.scss";
 
 * {
   margin: 0;
@@ -16,44 +21,10 @@ Convention for CSS ordering is done using https://csscomb.herokuapp.com/online
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  font-size: 15px;
+  font-family: 'Poppins', Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
 
   color: color(theme, text-paragraph);
   background: color(theme, backdrop);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: color(theme, text-heading);
-  font-family: 'Poppins', sans-serif;
-}
-
-h1 {
-  font-size: 36px;
-}
-
-h2 {
-  font-size: 24px;
-}
-
-h3 {
-  font-size: 21px;
-}
-
-h4 {
-  font-size: 18px;
-}
-
-h5 {
-  line-height: 18px;
-  font-size: 16px;
-}
-
-h6 {
-  font-size: 14px;
 }
