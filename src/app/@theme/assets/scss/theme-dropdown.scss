@@ -4,10 +4,14 @@
 
 .dropdown-item {
   font-size: 14px;
+
   padding: 10px 16px;
+
+  color: color(theme, text-heading);
 
   &:hover,
   &:focus {
+    color: color(theme, text-heading);
     background-color: color(theme, backdrop-outline);
   }
 }
