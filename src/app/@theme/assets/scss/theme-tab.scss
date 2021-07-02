@@ -1,0 +1,45 @@
+.nav {
+  i {
+    margin-right: 5px;
+  }
+
+  .nav-link {
+    padding: 10px 20px;
+
+    color: color(theme, text-paragraph);
+
+    &.active,
+    &:hover,
+    &:focus {
+      color: color(theme, primary-light) !important;
+    }
+  }
+
+  &.nav-tabs {
+    margin-right: 3px;
+
+    color: color(theme, primary-light);
+  }
+
+  &.nav-pills .active,
+  &.nav-success .active {
+    color: color(theme, text-white) !important;
+  }
+
+  &.nav-success {
+    .active {
+      background-color: color(theme, success-light) !important;
+    }
+
+    .nav-link:hover:not(.active),
+    .nav-link:focus:not(.active) {
+      color: color(theme, success-light) !important;
+    }
+  }
+}
+
+.tab-content {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding: 0;
+}

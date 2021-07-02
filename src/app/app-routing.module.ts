@@ -10,6 +10,7 @@ import { DropdownsComponent } from './pages/@theme/dropdowns/dropdowns.component
 import { ModalsComponent } from './pages/@theme/modals/modals.component';
 import { ProgressBarsComponent } from './pages/@theme/progress-bars/progress-bars.component';
 import { TablesComponent } from './pages/@theme/tables/tables.component';
+import { TabsComponent } from './pages/@theme/tabs/tabs.component';
 import { TypographyComponent } from './pages/@theme/typography/typography.component';
 import { MindMapComponent } from './pages/@trello/mind-map/mind-map.component';
 import { ProjectsComponent } from './pages/@trello/projects/projects.component';
@@ -76,6 +77,13 @@ const routes: Routes = [
         component: ModalsComponent,
         data: {
           breadcrumb: 'Modals'
+        }
+      },
+      {
+        path: 'theme/tabs',
+        component: TabsComponent,
+        data: {
+          breadcrumb: 'Tabs'
         }
       },
       {
@@ -151,6 +159,7 @@ export const RoutingComponents = [
   CardsComponent,
   DropdownsComponent,
   ModalsComponent,
+  TabsComponent,
   TablesComponent,
   TypographyComponent,
   ProgressBarsComponent,

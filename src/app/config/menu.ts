@@ -16,6 +16,7 @@ export class Menu {
       new MenuChild('Cards', '/theme/cards'),
       new MenuChild('Dropdowns', '/theme/dropdowns'),
       new MenuChild('Modals', '/theme/modals'),
+      new MenuChild('Tabs', '/theme/tabs'),
       new MenuChild('Tables', '/theme/tables'),
       new MenuChild('Typography', '/theme/typography'),
       new MenuChild('Progress Bars', '/theme/progress-bars')
