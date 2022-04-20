@@ -9,19 +9,24 @@
 
   .navbar {
     padding: 0;
+
     background: color(theme, primary-light);
 
     .logo-banner {
       width: 240px;
       height: 64px;
       padding: 0 20px;
+
       text-align: center;
+
       background: rgba(0, 0, 0, 0.05);
 
       h4 {
-        margin: 0;
         font-size: 20px;
         line-height: 64px;
+
+        margin: 0;
+
         color: color(theme, text-white);
       }
 
@@ -36,6 +41,7 @@
 
     .navbar-collapse {
       padding: 11px 15px;
+
       color: color(theme, text-white);
 
       .center-logo {
@@ -43,6 +49,7 @@
 
         h4 {
           margin: 0;
+
           color: color(theme, text-white);
         }
       }
@@ -57,8 +64,8 @@
         cursor: pointer;
         vertical-align: middle;
 
-        border-radius: 4px;
         color: color(theme, text-white);
+        border-radius: 4px;
 
         &:hover,
         &:focus {
@@ -67,62 +74,50 @@
       }
 
       .dropdown-menu {
-        font-size: 16px;
-
-        padding: 0;
-        margin-top: 6px;
-        position: absolute;
-        border-radius: 3px;
-
+        z-index: 1001;
         right: 15px;
         left: auto;
+
         width: 250px;
-        z-index: 1001;
+        margin-top: 6px;
+        padding: 0;
+
+        border-radius: 3px;
 
         .header {
-          padding: 15px 11px;
+          padding: 11px 30px;
+
           text-align: center;
 
           color: color(theme, text-white);
           background: color(theme, primary-light);
 
           &:after {
+            position: absolute;
             top: -9px;
             right: 18px;
+
             content: "";
-            position: absolute;
 
-            border-left: 9px solid transparent;
             border-right: 9px solid transparent;
-
             border-bottom: 9px solid color(theme, text-white);
             border-bottom-color: color(theme, primary-light);
+            border-left: 9px solid transparent;
           }
         }
 
         .item {
+          padding: 11px 30px;
+
           cursor: pointer;
-          padding: 8px 15px;
-          text-decoration: none;
-          border: 1px solid #ebedf3;
+
           color: color(theme, text-paragraph);
 
           &:hover,
           &:focus {
             transition: all 0.15s ease;
-            background-color: #f3f6f9 !important;
-          }
 
-          i {
-            display: inline-flex;
-            width: 35px;
-            height: 35px;
-            color: color(theme, text-white);
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background-color: color(theme, danger-dark) !important;
-            font-size: 16px;
+            background-color: #f3f6f9 !important;
           }
 
           span {
@@ -146,7 +141,7 @@
   }
 }
 
-@media (max-width: 1440px) {
+@media(max-width: 1440px) {
   .topNavigation {
     .logo-banner {
       display: none;
@@ -154,8 +149,8 @@
 
     .navbar {
       .navbar-collapse {
-        flex-basis: auto;
         display: flex;
+        flex-basis: auto;
 
         .center-logo {
           display: inline;

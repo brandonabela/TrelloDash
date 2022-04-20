@@ -59,25 +59,26 @@
         a,
         button {
           display: flex;
-          text-decoration: none;
+          align-items: center;
 
           width: 100%;
           padding: 8px 10px;
+
+          text-decoration: none;
 
           color: color(theme, text-paragraph);
           border: none;
           border-radius: 5px;
           background: none;
 
-          align-items: center;
-
           i {
             font-size: 16px;
             line-height: 30px;
 
             width: 25px;
-            text-align: center;
             margin-right: 15px;
+
+            text-align: center;
           }
 
           p {
@@ -127,7 +128,7 @@
 
           color: color(theme, text-white);
           background: color(theme, primary-light) !important;
-          box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1), 4px 4px 15px -5px rgba(21, 114, 232, 0.4);
+          box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1) , 4px 4px 15px -5px rgba( 21, 114, 232, 0.4);
         }
 
         ul .active a {
@@ -195,7 +196,7 @@
   }
 }
 
-@media (max-width: 1440px) {
+@media(max-width: 1440px) {
   .miniLeftNavigation {
     display: none;
   }
