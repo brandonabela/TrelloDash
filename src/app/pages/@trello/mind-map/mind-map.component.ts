@@ -9,7 +9,6 @@ import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
 import { RequestService } from 'src/app/service/request.service';
 import { StorageService } from 'src/app/service/storage.service';
 
-import SimpleBar from 'simplebar';
 
 @Component({
   selector: 'page-mind-map',
@@ -93,11 +92,6 @@ export class MindMapComponent implements OnInit {
   public populateMindMap(): void {
     if (this.mindMap === undefined) {
       this.mindMap = this.createMindMap();
-
-      const scrollElement = document.getElementsByClassName('jsmind-inner')[0];
-
-      const simpleBar = new SimpleBar(scrollElement, { autoHide: false });
-      simpleBar.getScrollElement();
     }
 
     const mindMapObject = this.getMindMapObject();

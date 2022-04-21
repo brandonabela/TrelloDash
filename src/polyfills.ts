@@ -55,8 +55,7 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js';  // Included with Angular CLI
-import 'simplebar';          // Included for Simple Bar Scrolling
+import 'zone.js';   // Included with Angular CLI
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
