@@ -1,6 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { TrelloProject } from '../models/trello/trello-project';
 
+// TODO: Still require checking once dashboard is fixed
+
 @Pipe({
   name: 'trelloProjectFilter',
   pure: false

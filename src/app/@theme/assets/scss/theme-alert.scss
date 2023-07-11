@@ -7,21 +7,21 @@
 }
 
 .toast-success {
-  background-color: color(theme, success-dark);
-  color: color(theme, text-white);
+  color: var(--bs-white);
+  background-color: var(--bs-success-dark);
 }
 
 .toast-error {
-  background-color: color(theme, danger-dark);
-  color: color(theme, text-white);
+  color: var(--bs-white);
+  background-color: var(--bs-danger-dark);
 }
 
 .toast-warning {
-  background-color: color(theme, warning-dark);
-  color: color(theme, text-heading);
+  color: var(--bs-black);
+  background-color: var(--bs-warning-dark);
 }
 
 .toast-info {
-  background-color: color(theme, primary-dark);
-  color: color(theme, text-white);
+  color: var(--bs-white);
+  background-color: var(--bs-primary-dark);
 }

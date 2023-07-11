@@ -18,52 +18,50 @@ export class BreadcrumbComponent implements OnInit {
   ngOnInit() {
     const root: ActivatedRoute = this.activatedRoute.root;
 
-    this.breadcrumbs.push(new Breadcrumb('Home', '/'));
-    this.breadcrumbs.push(...this.getBreadcrumbs(root));
+    this.breadcrumbs = [new Breadcrumb('Home', '/'), ...BreadcrumbComponent.getBreadcrumbs(root)];
   }
 
-  private getBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
+  private static getBreadcrumbs(route: ActivatedRoute, url = ''): Breadcrumb[] {
+    const breadcrumbs: Breadcrumb[] = [];
+
     for (const child of route.children) {
-      if (!child.snapshot.data.hasOwnProperty('breadcrumb')) {
-        return this.getBreadcrumbs(child, url, breadcrumbs);
+      if (!child?.snapshot?.data?.hasOwnProperty('breadcrumb')) {
+        return this.getBreadcrumbs(child, url) ?? breadcrumbs;
       }
 
-      if (!this.isRoot(child)) {
-        url += this.getUrl(child);
+      if (!BreadcrumbComponent.isRoot(child)) {
+        url += BreadcrumbComponent.getUrl(child);
 
-        breadcrumbs.push(new Breadcrumb(this.getTitle(child), url));
+        breadcrumbs.push(new Breadcrumb(BreadcrumbComponent.getTitle(child), url));
       }
-
-      return this.getBreadcrumbs(child, url, breadcrumbs);
     }
 
     return breadcrumbs;
   }
 
-  private isRoot(child: ActivatedRoute): boolean {
-    return !Array.isArray(child.snapshot.url) || !child.snapshot.url.length;
+  private static isRoot(child: ActivatedRoute): boolean {
+    return !(child.snapshot.url?.length ?? 0);
   }
 
-  private getTitle(child: ActivatedRoute): string {
-    return child.snapshot.data.breadcrumb;
+  private static getTitle(child: ActivatedRoute): string {
+    return child.snapshot.data?.['breadcrumb'] ?? '';
   }
 
-  private getUrl(child: ActivatedRoute): string {
-    const childUrls = child.snapshot.url;
+  private static getUrl(child: ActivatedRoute): string {
+    const childUrls = child.snapshot.url.map(segment => segment.path);
 
-    if (childUrls && childUrls.length) {
-      const lastUrlSegment = childUrls.pop();
+    if (childUrls.length) {
+      const lastUrlSegment = child.snapshot.url[child.snapshot.url.length - 1];
 
       if (lastUrlSegment.path.startsWith(':')) {
         const paramName = lastUrlSegment.path.split(':')[1];
         const paramValue = child.snapshot.params[paramName];
+        const newPath = paramValue ? `/${paramValue}` : '';
 
-        lastUrlSegment.path.replace(lastUrlSegment.path, paramValue);
+        childUrls[childUrls.length - 1] = newPath;
       }
-
-      childUrls.push(lastUrlSegment);
     }
 
-    return '/' + childUrls.join('/');
+    return `/${childUrls.join('/')}`;
   }
 }

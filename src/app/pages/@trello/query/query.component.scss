@@ -1,27 +1,9 @@
-.searchArea {
-  padding-bottom: 15px;
-}
-
 .table tbody {
-  .label {
-    padding: 3px 10px;
-    line-height: 13px;
-    color: color(theme, text-white);
-    border-radius: 4px;
-    font-size: 14px;
+ .label {
+   font-size: var(--fs-base);
 
-    &:not(:last-child) {
-      margin-right: 10px;
-    }
-  }
-
-  .progressColumn {
-    margin-left: 0;
-    margin-right: 0;
-
-    .col-xl-5,
-    .col-xl-7 {
-      padding: 0;
-    }
-  }
+   &:not(:last-child) {
+     margin-right: 10px;
+   }
+ }
 }

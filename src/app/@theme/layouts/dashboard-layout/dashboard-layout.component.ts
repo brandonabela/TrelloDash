@@ -1,20 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-layout',
   templateUrl: './dashboard-layout.component.html',
   styleUrls: ['./dashboard-layout.component.scss']
 })
-export class DashboardLayoutComponent {
-  public routeChanged() {
-    if (window.innerWidth < 1440) {
-      document.getElementsByClassName('content')[0].classList.add('fullContent');
-      document.getElementsByClassName('leftNavigation')[0].classList.add('miniLeftNavigation');
-      document.getElementsByClassName('topNavigation')[0].firstElementChild.classList.add('minimise-sidebar');
-    } else {
-      document.getElementsByClassName('content')[0].classList.remove('fullContent');
-      document.getElementsByClassName('leftNavigation')[0].classList.remove('miniLeftNavigation');
-      document.getElementsByClassName('topNavigation')[0].firstElementChild.classList.remove('minimise-sidebar');
+export class DashboardLayoutComponent implements OnInit {
+  ngOnInit() {
+    this.updateLayout();
+  }
+
+  @HostListener('window:resize')
+  onWindowResize() {
+    this.updateLayout();
+  }
+
+  public updateLayout() {
+    const contentElement = document.querySelector('.content');
+    const sidebarElement = document.querySelector('.sidebar');
+    const navigationElement = document.querySelector('.navigation');
+
+    if (contentElement && sidebarElement && navigationElement) {
+      const smallDevice = window.innerWidth < 1440;
+
+      contentElement.classList.toggle('expand', smallDevice);
+      sidebarElement.classList.toggle('collapse', smallDevice);
+      navigationElement.classList.toggle('expand', smallDevice);
     }
   }
 }

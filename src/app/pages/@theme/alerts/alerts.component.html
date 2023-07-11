@@ -2,15 +2,14 @@
 
 <page-body>
   <div class="row">
-    <div class="col-xl-6">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Alert Title </h1>
-          </card-title>
-        </card-header>
 
-        <card-body>
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Alert Title </h3>
+        </div>
+
+        <div class="card-body">
           <div class="row">
             <div class="col-xl-6">
               <button class="btn btn-success col-xl-12" (click)="openAlertTitleSuccess()">
@@ -31,24 +30,22 @@
             </div>
 
             <div class="col-xl-6">
-              <button class="btn btn-info col-xl-12" (click)="openAlertTitleInfo()">
-                Info
+              <button class="btn btn-primary col-xl-12" (click)="openAlertTitlePrimary()">
+                Primary
               </button>
             </div>
           </div>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-6">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Alert Title with Description </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Alert Title with Description </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <div class="row">
             <div class="col-xl-6">
               <button class="btn btn-success col-xl-12" (click)="openAlertDescriptionSuccess()">
@@ -69,13 +66,14 @@
             </div>
 
             <div class="col-xl-6">
-              <button class="btn btn-info col-xl-12" (click)="openAlertDescriptionInfo()">
-                Info
+              <button class="btn btn-primary col-xl-12" (click)="openAlertDescriptionPrimary()">
+                Primary
               </button>
             </div>
           </div>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
+
   </div>
 </page-body>

@@ -1,4 +1,4 @@
-<modal modalId="exportLatexProjectModal" modalClass="modal-md">
+<modal modalId="exportLatexProjectModal">
   <modal-title>
     Export Project as Latex
   </modal-title>
@@ -10,56 +10,63 @@
           <label class="col-xl-3 col-form-label"> Chapter: </label>
 
           <div class="col-xl-9">
-            <input class="form-control" type="text" placeholder="Chapter Name" formControlName="txtChapterName">
+            <input class="form-control" type="text" placeholder="Chapter Name" formControlName="chapterName">
           </div>
         </div>
 
-        <label class="mb-3"> Tick the fields that should be exported, which can then be renamed except for the card lists, custom fields and attachments. </label>
+        <label class="mb-3"> Select the fields to be exported and rename them as needed. </label>
 
         <div class="input-group mb-2">
-          <span class="input-group-text"> <input type="checkbox" formControlName="chkBoardName"> </span>
-          <input class="form-control" type="text" placeholder="Board Name Column" formControlName="txtBoardName">
+          <span class="input-group-text"> <input type="checkbox" formControlName="keepBoardName"> </span>
+          <input class="form-control" type="text" placeholder="Board Name Column" formControlName="boardName">
         </div>
 
         <div class="input-group mb-2">
-          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardName"> </span>
-          <input class="form-control" type="text" placeholder="Card Name Column" formControlName="txtCardName">
+          <span class="input-group-text"> <input type="checkbox" formControlName="keepCardName"> </span>
+          <input class="form-control" type="text" placeholder="Card Name Column" formControlName="cardName">
         </div>
 
         <div class="input-group mb-2">
-          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardDescription"> </span>
-          <input class="form-control" type="text" placeholder="Card Description Column" formControlName="txtCardDescription">
+          <span class="input-group-text"> <input type="checkbox" formControlName="keepCardDescription"> </span>
+          <input class="form-control" type="text" placeholder="Card Description Column" formControlName="cardDescription">
         </div>
 
         <div class="input-group mb-2">
-          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardLabels"> </span>
-          <input class="form-control" type="text" placeholder="Card Labels Column" formControlName="txtCardLabels">
+          <span class="input-group-text"> <input type="checkbox" formControlName="keepCardLabels"> </span>
+          <input class="form-control" type="text" placeholder="Card Labels Column" formControlName="cardLabels">
         </div>
 
         <div class="input-group mb-2">
-          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardLists"> </span>
-          <input class="form-control" value="Card Lists" disabled>
+          <span class="input-group-text"> <input type="checkbox" formControlName="keepCardLists"> </span>
+          <input class="form-control" type="text" value="Card Lists" disabled>
         </div>
 
         <div class="input-group mb-2">
-          <span class="input-group-text"> <input type="checkbox" formControlName="chkCustomField"> </span>
-          <input class="form-control" value="Custom Field" disabled>
+          <span class="input-group-text"> <input type="checkbox" formControlName="keepCustomField"> </span>
+          <input class="form-control" type="text" value="Custom Field" disabled>
         </div>
 
         <div class="input-group mb-2">
-          <span class="input-group-text"> <input type="checkbox" formControlName="chkCardAttachment"> </span>
-          <input class="form-control" value="Card Attachments" disabled>
+          <span class="input-group-text"> <input type="checkbox" formControlName="keepCardAttachment"> </span>
+          <input class="form-control" type="text" value="Card Attachments" disabled>
+          <input class="form-control" type="text" value="Card Attachment Path" formControlName="cardAttachmentPath">
         </div>
 
-        <label class="mb-3"> In the event that the card attachments have not been downloaded, access <a href="https://cors-anywhere.herokuapp.com/corsdemo">this</a> and click "Request temporary access to the demo server". </label>
-
+        <label class="mb-3">
+          In the event that the card attachments have not been downloaded, access
+          <a href="https://cors-anywhere.herokuapp.com/corsdemo">this</a> and click "Request temporary access to the demo server".
+        </label>
       </div>
     </form>
-  </modal-body>
 
-  <modal-footer>
-    <button type="button" class="btn btn-primary" (click)="exportLatexProject()" data-bs-dismiss="modal">
-      Export Project as Latex
-    </button>
-  </modal-footer>
+    <div class="modal-controls">
+      <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+        Discard
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="exportLatexProject()" data-bs-dismiss="modal">
+        Export Latex
+      </button>
+    </div>
+  </modal-body>
 </modal>

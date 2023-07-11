@@ -1,23 +1,17 @@
-<modal [modalId]="modalId" modalClass="modal-md">
-  <modal-title>
-    Confirm Action
-  </modal-title>
+<modal [modalId]="modalId">
+  <modal-title>Confirm Action</modal-title>
 
   <modal-body>
-    <p> Are you sure you want to perform this action? </p>
+    <p>Do you want to continue with the following action?</p>
 
-    <div class="row">
-      <div class="col-xl-6">
-        <button type="button" class="btn btn-success col-xl-12" (click)="confirmAction()" data-bs-dismiss="modal">
-          <i class="fas fa-check"></i>
-        </button>
-      </div>
+    <div class="modal-controls">
+      <button type="button" class="btn btn-success" (click)="confirmAction()" data-bs-dismiss="modal">
+        <i class="fas fa-check"></i> Confirm
+      </button>
 
-      <div class="col-xl-6">
-        <button type="button" class="btn btn-danger col-xl-12" (click)="declineAction()" data-bs-dismiss="modal">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
+      <button type="button" class="btn btn-danger" (click)="declineAction()" data-bs-dismiss="modal">
+        <i class="fas fa-times"></i> Cancel
+      </button>
     </div>
   </modal-body>
 </modal>

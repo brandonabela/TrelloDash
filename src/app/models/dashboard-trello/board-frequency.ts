@@ -1,6 +1,6 @@
 export class BoardFrequency {
   constructor(
-    public name: string,
-    public frequency: number
+    public readonly name: string,
+    public frequency: number = 0
   ) { }
 }

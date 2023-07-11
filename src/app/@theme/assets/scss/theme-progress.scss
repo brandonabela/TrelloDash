@@ -1,0 +1,23 @@
+.progress {
+  height: var(--space-m);
+
+  border-radius: var(--radius);
+  background-color: var(--bs-backdrop);
+}
+
+.progress-bar,
+.bg-primary {
+  background-color: var(--bs-primary-light) !important;
+}
+
+.bg-success {
+  background-color: var(--bs-success-light) !important;
+}
+
+.bg-warning {
+  background-color: var(--bs-warning-dark) !important;
+}
+
+.bg-danger {
+  background-color: var(--bs-danger-light) !important;
+}

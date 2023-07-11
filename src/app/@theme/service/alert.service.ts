@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, IndividualConfig } from 'ngx-toastr';
+
 import { AlertDescription } from '../models/alerts/alert-description';
 import { AlertTitle } from '../models/alerts/alert-title';
 import { AlertType } from '../models/alerts/alert-type';
@@ -8,26 +9,44 @@ import { AlertType } from '../models/alerts/alert-type';
   providedIn: 'root'
 })
 export class AlertService {
-  constructor(private toaster: ToastrService) { }
+  private readonly TOAST_POSITION = {
+    desktop: 'toast-bottom-right',
+    mobile: 'toast-bottom-full-width'
+  };
+
+  private readonly TOAST_CONFIG: Partial<IndividualConfig> = {
+    timeOut: 3000,
+    closeButton: true,
+    progressBar: true
+  };
+
+  constructor(private toastrService: ToastrService) { }
 
   public add(alert: AlertTitle | AlertDescription): void {
-    const message = alert instanceof AlertDescription ? alert.paragraph : '';
+    const message = alert instanceof AlertDescription ? alert.description : '';
 
-    const options = {
-      timeOut: 3000,
-      closeButton: true,
-      progressBar: true,
-      positionClass: window.innerWidth < 1440 ? 'toast-bottom-full-width' : 'toast-bottom-right'
+    const positionClass = window.innerWidth < 1440
+      ? this.TOAST_POSITION.mobile
+      : this.TOAST_POSITION.desktop;
+
+    const options: Partial<IndividualConfig> = {
+      ...this.TOAST_CONFIG,
+      positionClass
     };
 
-    if (alert.type === AlertType.Success) {
-      this.toaster.success(message, alert.title, options);
-    } else if (alert.type === AlertType.Error) {
-      this.toaster.error(message, alert.title, options);
-    } else if (alert.type === AlertType.Warning) {
-      this.toaster.warning(message, alert.title, options);
-    } else if (alert.type === AlertType.Info) {
-      this.toaster.info(message, alert.title, options);
+    switch (alert.type) {
+      case AlertType.Success:
+        this.toastrService.success(message, alert.title, options);
+        break;
+      case AlertType.Error:
+        this.toastrService.error(message, alert.title, options);
+        break;
+      case AlertType.Warning:
+        this.toastrService.warning(message, alert.title, options);
+        break;
+      case AlertType.Primary:
+        this.toastrService.info(message, alert.title, options);
+        break;
     }
   }
 }

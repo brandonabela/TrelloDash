@@ -1,4 +1,5 @@
-export class JsonTrelloAttachment {
+export interface JsonTrelloAttachment {
   name: string;
   url: string;
+  fileName: string;
 }

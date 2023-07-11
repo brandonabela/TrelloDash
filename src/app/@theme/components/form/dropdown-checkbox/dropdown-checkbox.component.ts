@@ -7,17 +7,32 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./dropdown-checkbox.component.scss']
 })
 export class DropdownCheckboxComponent implements AfterViewInit {
-  @Input() public dropdownForm: FormGroup;
-  @Input() public dropdownArray: string;
-  @Input() public checkboxArray: string[];
+  @Input() elementValues!: string[];
+  @Input() elementFormGroup!: FormGroup;
+
+  public elementFilter: string = '';
 
   ngAfterViewInit(): void {
-    const dropdownCheckbox = Array.from(document.getElementsByClassName('dropdown-checkbox'));
+    const dropdownCheckboxes = Array.from(document.getElementsByClassName('dropdown-checkbox'));
 
-    dropdownCheckbox.forEach(element => {
-      element.addEventListener('click', ($event: Event) => {
-        $event.stopPropagation();
-      });
-    });
+    const stopPropagation = (event: Event) => {
+      event.stopPropagation();
+    };
+
+    for (const checkbox of dropdownCheckboxes) {
+      checkbox.addEventListener('click', stopPropagation);
+    }
+  }
+
+  public getTickedColumns(): string {
+    const tickedColumns = this.elementValues.filter((_, index) => this.elementFormGroup.value[index]);
+
+    return tickedColumns.length
+      ? (tickedColumns.length === this.elementValues.length ? 'All Selected' : tickedColumns.join(', '))
+      : 'Nothing Selected';
+  }
+
+  public trackByIndex(index: number, item: any): number {
+    return index;
   }
 }

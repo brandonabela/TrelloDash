@@ -1,0 +1,41 @@
+<div class="sidebar">
+  <ul class="nav">
+    <li *ngFor="let menuItem of menuItems;" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <ng-container *ngIf="getMenuSection(menuItem); let menuSection">
+        <div class="nav-section">
+          <span>{{menuSection.name}}</span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="getMenuSingle(menuItem); let menuSingle">
+        <div class="nav-item">
+          <a [routerLink]="menuSingle.link">
+            <i [class]="menuSingle.icon"></i>
+            <span>{{menuSingle.name}}</span>
+          </a>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="getMenuParent(menuItem); let menuParent">
+        <div class="nav-item">
+          <button [attr.data-bs-target]="'#' + menuParent.dropdownId" data-bs-toggle="collapse">
+            <i [class]="menuParent.icon"></i>
+            <span>{{menuParent.name}}</span>
+            <i class="fas fa-angle-right ms-auto dropdownArrow"></i>
+          </button>
+
+          <div class="collapse" [id]="menuParent.dropdownId">
+            <ul>
+              <li *ngFor="let menuChild of menuParent.children" routerLinkActive="active">
+                <a [routerLink]="menuChild.link">
+                  <i class="fa-solid">•</i>
+                  <span>{{menuChild.name}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+    </li>
+  </ul>
+</div>

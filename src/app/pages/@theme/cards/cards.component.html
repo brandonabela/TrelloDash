@@ -2,107 +2,80 @@
 
 <page-body>
   <div class="row">
-    <div class="col-xl-6">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Project 1 </h1>
-            <p> Date: 00/00/0000 </p>
-          </card-title>
 
-          <card-tools>
-            <button class="btn btn-primary btn-sm">
+    <div class="col-xl-3">
+      <card-countdown cardColour="primary" [count]="100" description="Test"></card-countdown>
+    </div>
+
+    <div class="col-xl-3">
+      <card-countdown cardColour="success" [count]="100" description="Test"></card-countdown>
+    </div>
+
+    <div class="col-xl-3">
+      <card-countdown cardColour="dark" [count]="100" description="Test"></card-countdown>
+    </div>
+
+    <div class="col-xl-3">
+      <card-countdown cardColour="info" [count]="100" description="Test"></card-countdown>
+    </div>
+
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Project 1 </h3>
+
+          <div class="card-tools">
+            <button class="btn btn-light">
               Button 1
             </button>
 
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-light">
               Button 2
             </button>
-          </card-tools>
-        </card-header>
+          </div>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           Description Text
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-6">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Project 1 </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Project 1 </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           Description Text
-        </card-body>
-      </card>
-    </div>
+        </div>
 
-    <div class="col-xl-6">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Project 1 </h1>
-          </card-title>
-
-          <card-tools>
-            <button class="btn btn-primary">
-              Button 1
-            </button>
-
-            <button class="btn btn-primary">
-              Button 2
-            </button>
-          </card-tools>
-        </card-header>
-
-        <card-body>
-          Description Text
-        </card-body>
-      </card>
-    </div>
-
-    <div class="col-xl-6">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Project 1 </h1>
-          </card-title>
-        </card-header>
-
-        <card-body>
-          Description Text
-        </card-body>
-      </card>
+        <div class="card-footer">
+          Footer Text
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-4">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Project 1 </h1>
-            <p> Sub Title </p>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Project 1 </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <img src="https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2018/2-dog.jpg" alt="Dog Image">
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-8">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Project 1 </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Project 1 </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <table class="table table-hover">
             <thead>
               <tr>
@@ -124,8 +97,9 @@
               </tr>
             </tbody>
           </table>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
+
   </div>
 </page-body>

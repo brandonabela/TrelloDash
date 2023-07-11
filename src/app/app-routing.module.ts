@@ -1,22 +1,29 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './@theme/layouts/dashboard-layout/dashboard-layout.component';
+
 import { AccordionsComponent } from './pages/@theme/accordions/accordions.component';
 import { AlertsComponent } from './pages/@theme/alerts/alerts.component';
-import { ButtonGroupComponent } from './pages/@theme/button-group/button-group.component';
+import { BadgesComponent } from './pages/@theme/badges/badges.component';
 import { ButtonsComponent } from './pages/@theme/buttons/buttons.component';
+import { ButtonGroupComponent } from './pages/@theme/button-group/button-group.component';
 import { CardsComponent } from './pages/@theme/cards/cards.component';
+import { ChartsComponent } from "./pages/@theme/charts/charts.component";
 import { DropdownsComponent } from './pages/@theme/dropdowns/dropdowns.component';
+import { FormComponent } from './pages/@theme/form/form.component';
 import { ModalsComponent } from './pages/@theme/modals/modals.component';
-import { ProgressBarsComponent } from './pages/@theme/progress-bars/progress-bars.component';
-import { TablesComponent } from './pages/@theme/tables/tables.component';
 import { TabsComponent } from './pages/@theme/tabs/tabs.component';
+import { TablesComponent } from './pages/@theme/tables/tables.component';
 import { TypographyComponent } from './pages/@theme/typography/typography.component';
-import { MindMapComponent } from './pages/@trello/mind-map/mind-map.component';
+import { ProgressComponent } from './pages/@theme/progress/progress.component';
+
 import { ProjectsComponent } from './pages/@trello/projects/projects.component';
 import { QueryComponent } from './pages/@trello/query/query.component';
-import { HomeComponent } from './pages/home/home.component';
+import { MindMapComponent } from './pages/@trello/mind-map/mind-map.component';
+
 import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 
 const routes: Routes = [
   {
@@ -25,9 +32,23 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent,
+        component: ProjectsComponent,
         data: {
-          breadcrumb: 'Home'
+          breadcrumb: 'Projects'
+        }
+      },
+      {
+        path: 'query',
+        component: QueryComponent,
+        data: {
+          breadcrumb: 'Query Editor'
+        }
+      },
+      {
+        path: 'mind-map',
+        component: MindMapComponent,
+        data: {
+          breadcrumb: 'Mind Map'
         }
       },
       {
@@ -45,10 +66,17 @@ const routes: Routes = [
         }
       },
       {
+        path: 'theme/badges',
+        component: BadgesComponent,
+        data: {
+          breadcrumb: 'Badges'
+        }
+      },
+      {
         path: 'theme/buttons',
         component: ButtonsComponent,
         data: {
-          breadcrumb: 'Button'
+          breadcrumb: 'Buttons'
         }
       },
       {
@@ -66,6 +94,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'theme/charts',
+        component: ChartsComponent,
+        data: {
+          breadcrumb: 'Charts'
+        }
+      },
+      {
         path: 'theme/dropdowns',
         component: DropdownsComponent,
         data: {
@@ -73,10 +108,24 @@ const routes: Routes = [
         }
       },
       {
+        path: 'theme/form',
+        component: FormComponent,
+        data: {
+          breadcrumb: 'Form'
+        }
+      },
+      {
         path: 'theme/modals',
         component: ModalsComponent,
         data: {
           breadcrumb: 'Modals'
+        }
+      },
+      {
+        path: 'theme/progress',
+        component: ProgressComponent,
+        data: {
+          breadcrumb: 'Progress Bars'
         }
       },
       {
@@ -99,72 +148,43 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Typography'
         }
-      },
-      {
-        path: 'theme/progress-bars',
-        component: ProgressBarsComponent,
-        data: {
-          breadcrumb: 'Progress Bars'
-        }
-      },
-      {
-        path: 'trello/projects',
-        component: ProjectsComponent,
-        data: {
-          breadcrumb: 'Projects'
-        }
-      },
-      {
-        path: 'trello/query',
-        component: QueryComponent,
-        data: {
-          breadcrumb: 'Query Editor'
-        }
-      },
-      {
-        path: 'trello/mindmap',
-        component: MindMapComponent,
-        data: {
-          breadcrumb: 'Mind Map'
-        }
       }
     ]
   },
   {
-    path: 'theme/404',
+    path: '**',
     component: InvalidPathComponent
   },
-  { // Keep last in the array
-    path: '**',
+  {
+    path: 'theme/404',
     component: InvalidPathComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled',
-    relativeLinkResolution: 'legacy'
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
 
 export const RoutingComponents = [
-  HomeComponent,
+  ProjectsComponent,
+  QueryComponent,
+  MindMapComponent,
 
   AccordionsComponent,
   AlertsComponent,
+  BadgesComponent,
   ButtonsComponent,
   ButtonGroupComponent,
   CardsComponent,
+  ChartsComponent,
   DropdownsComponent,
   ModalsComponent,
+  ProgressComponent,
   TabsComponent,
   TablesComponent,
   TypographyComponent,
-  ProgressBarsComponent,
 
-  ProjectsComponent,
-  QueryComponent,
-  MindMapComponent
+  InvalidPathComponent
 ];

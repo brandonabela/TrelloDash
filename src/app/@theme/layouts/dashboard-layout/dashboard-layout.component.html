@@ -1,11 +1,11 @@
-<top-navigation></top-navigation>
+<navigation></navigation>
 
-<left-navigation></left-navigation>
+<sidebar></sidebar>
 
 <div class="content">
   <div class="content-body">
-    <router-outlet (activate)="routeChanged()"></router-outlet>
+    <router-outlet (activate)="updateLayout()"></router-outlet>
   </div>
 
-  <content-footer></content-footer>
+  <page-footer></page-footer>
 </div>

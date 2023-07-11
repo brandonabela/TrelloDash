@@ -1,76 +1,104 @@
 .table {
-  color: color(theme, text-heading);
+  margin-bottom: var(--space-m);
 
-  thead th {
-    font-weight: 600 !important;
+  vertical-align: middle;
 
-    border: 0;
+  color: var(--bs-black);
+  border-color: var(--bs-outline);
+
+  th {
+    text-transform: uppercase;
   }
 
-  th,
-  td {
-    vertical-align: middle;
-
-    border-bottom: 1px solid color(theme, backdrop-outline) !important;
+  th[sortable] {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .table-active,
-  .table-active > td,
-  .table-active > th {
-    color: color(theme, text-white);
-    background-color: color(theme, info-dark);
+  .table-active td,
+  .table-active th {
+    background-color: #E4E6EF;
   }
 
   .table-primary,
-  .table-primary > td,
-  .table-primary > th {
-    color: color(theme, text-white);
-    background-color: color(theme, primary-dark);
+  .table-primary td,
+  .table-primary th {
+    background-color: var(--bs-primary-fade);
   }
 
   .table-success,
-  .table-success > td,
-  .table-success > th {
-    color: color(theme, text-white);
-    background-color: color(theme, success-dark);
+  .table-success td,
+  .table-success th {
+    background-color: var(--bs-success-fade);
   }
 
   .table-danger,
-  .table-danger > td,
-  .table-danger > th {
-    background-color: color(theme, danger-dark);
+  .table-danger td,
+  .table-danger th {
+    background-color: var(--bs-danger-fade);
   }
 
   .table-warning,
-  .table-warning > td,
-  .table-warning > th {
-    background-color: color(theme, warning-dark);
+  .table-warning td,
+  .table-warning th {
+    background-color: var(--bs-warning-fade);
+  }
+
+  .table-info,
+  .table-info td,
+  .table-info th {
+    background-color: var(--bs-info-fade);
   }
 
   .table-light,
-  .table-light > td,
-  .table-light > th {
-    background-color: color(theme, light-dark);
+  .table-light td,
+  .table-light th {
+    background-color: var(--bs-light-fade);
   }
 
   .table-dark,
-  .table-dark > td,
-  .table-dark > th {
-    color: color(theme, text-white);
-    background-color: color(theme, dark-dark);
+  .table-dark td,
+  .table-dark th {
+    background-color: var(--bs-dark-fade);
   }
 }
 
-.table-striped tbody tr:nth-of-type(odd) {
-  background: color(theme, light-dark);
+.table-dark {
+  color: var(--bs-white);
+  background-color: var(--bs-black);
+
+  th,
+  td {
+    border-color: var(--bs-dark-dark);
+  }
 }
 
-.table-bordered,
-.table-bordered td,
-.table-bordered th {
-  border: 1px solid color(theme, backdrop-outline);
+.table-rounded {
+  overflow: hidden;
+
+  border-radius: var(--radius);
 }
 
+.table-striped>tbody>tr:nth-of-type(odd),
 .table-hover tbody tr:hover {
-  background-color: color(theme, light-dark);
+  background-color: var(--bs-table-striped);
+}
+
+.table-controls {
+  p {
+    display: flex;
+    align-items: center;
+
+    height: 35px;
+    margin: 0 auto;
+  }
+
+  .form-select {
+    float: right;
+
+    width: 80px;
+    margin-left: 10px;
+  }
 }

@@ -1,28 +1,37 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+
 import { DropdownCheckboxComponent } from './dropdown-checkbox/dropdown-checkbox.component';
+import { TextareaAutocompleteComponent } from './textarea-autocomplete/textarea-autocomplete.component';
+import { ThemeFiltersModule } from '../../filters/theme-filters.module';
 
 @NgModule({
   declarations: [
-    DropdownCheckboxComponent
+    DropdownCheckboxComponent,
+    TextareaAutocompleteComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    ThemeFiltersModule
   ],
   exports: [
-    DropdownCheckboxComponent
+    DropdownCheckboxComponent,
+    TextareaAutocompleteComponent
   ]
 })
 export class FormModule {
-  static updateFieldStatus(formGroup: FormGroup, checkboxFormName: string, textFieldFormName: string): void {
-    formGroup.get(checkboxFormName).valueChanges.subscribe(formValues => {
-      if (formValues) {
-        formGroup.get(textFieldFormName).enable();
-      } else {
-        formGroup.get(textFieldFormName).disable();
-      }
-    });
+  static updateFieldStatus(formGroup: FormGroup | null, checkboxFormName: string, textFieldFormName: string): void {
+    if (formGroup) {
+      formGroup.get(checkboxFormName)?.valueChanges.subscribe(formValues => {
+        if (formValues) {
+          formGroup.get(textFieldFormName)?.enable();
+        } else {
+          formGroup.get(textFieldFormName)?.disable();
+        }
+      });
+    }
   }
 }

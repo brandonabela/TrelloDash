@@ -1,84 +1,114 @@
 <page-header></page-header>
 
 <page-body>
-  <div class="row">
-    <div class="col-xl-12">
-      <trello-card cardTitle="Mind Map Builder" [trelloViewer]="trelloViewer">
-        <div class="header"></div>
+  <trello-card cardTitle="Mind Map Builder">
+    <div class="header"></div>
 
-        <div class="body">
-          <div class="col-xl-12">
+    <div class="body">
+      <ng-container *ngIf="this.trelloService.trelloProjects.length">
+        <form [formGroup]="trelloForm">
 
-            <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
-              <form [formGroup]="trelloForm">
-                <div class="row">
-                  <div class="col-xl-4">
-                    <div class="form-group">
-                      <label> Trello Project </label>
-
-                      <select class="form-control" formControlName="projectIndex">
-                        <option *ngFor="let aTrelloProject of trelloViewer.trelloProjects; let i = index" [value]="i"> {{aTrelloProject.projectName}} </option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-xl-4">
-                    <div class="form-group">
-                      <label> First Parent </label>
-
-                      <select class="form-control" formControlName="firstParentIndex">
-                        <option *ngFor="let field of getFirstParentFields(); let i = index" [value]="i"> {{field}} </option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-xl-4">
-                    <div class="form-group">
-                      <label> Second Parent </label>
-
-                      <select class="form-control" formControlName="secondParentIndex">
-                        <option *ngFor="let field of getSecondParentFields(); let i = index" [value]="i"> {{field}} </option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </ng-container>
-
-            <ng-template #noProjects>
-              <trello-no-project></trello-no-project>
-            </ng-template>
-
-          </div>
-        </div>
-      </trello-card>
-    </div>
-
-    <div class="col-xl-12">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Mind Map </h1>
-          </card-title>
-
-          <card-tools>
-            <button class="btn btn-primary btn-sm" (click)="fullscreen()">
-              <i class="fas fa-expand-arrows-alt"></i>
-              Fullscreen
-            </button>
-          </card-tools>
-        </card-header>
-
-        <card-body>
           <div class="row">
-            <div class="col-xl-12">
+            <div class="col-xl-4">
+              <div class="form-group">
+                <label> Trello Project: </label>
 
-              <div id="jsmind_container"></div>
+                <select class="form-control form-select" formControlName="projectIndex">
+                  <option *ngFor="let aTrelloProject of trelloService.trelloProjects; let i = index" [value]="i"> {{aTrelloProject.projectName}} </option>
+                </select>
+              </div>
+            </div>
 
+            <div class="col-xl-4">
+              <div class="form-group">
+                <label> Level One Parent: </label>
+
+                <select class="form-control form-select" formControlName="levelOne">
+                  <option *ngFor="let field of levelOneFields()" [value]="field"> {{field}} </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-xl-4">
+              <div class="form-group">
+                <label> Level Two Parent: </label>
+
+                <select class="form-control form-select" formControlName="levelTwo">
+                  <option *ngFor="let field of levelTwoFields()" [value]="field"> {{field}} </option>
+                </select>
+              </div>
             </div>
           </div>
-        </card-body>
-      </card>
+        </form>
+
+        <div class="row">
+          <div class="col-xl-6">
+            <div *ngTemplateOutlet="accordionTree; context: { $implicit: tree, level: 0 }"></div>
+
+            <ng-template #accordionTree let-items let-level="level">
+              <div class="accordion solid-accordion">
+                <div class="accordion-item" *ngFor="let item of items; let i = index">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" [class.collapsed]="i !== 0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#L' + level + 'B' + i">
+                      <i class="fa-solid fa-folder"></i> {{ item.topic }}
+                    </button>
+
+                    <div [id]="'L' + level + 'B' + i" class="accordion-collapse collapse" [class.show]="i === 0">
+                      <div class="accordion-body">
+                        <ng-container *ngIf="isBranch(item.children); else noChildren">
+                          <ng-container *ngTemplateOutlet="accordionTree; context: { $implicit: item.children, level: level + 1 }"></ng-container>
+                        </ng-container>
+
+                        <ng-template #noChildren>
+                          <div class="button-grid gap-2">
+                            <button class="btn btn-primary" type="button" *ngFor="let child of item.children" (click)="setDisplayCard(child)">
+                              {{ child.cardName }}
+                            </button>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </h2>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="col-xl-6">
+            <form>
+              <div class="form-group">
+                <label>Card Name</label>
+                <input type="text" class="form-control" [value]="displayCard.cardName" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>Card Board Name</label>
+                <input type="text" class="form-control" [value]="displayCard.cardBoardName" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>Card Description</label>
+                <textarea class="form-control" rows="5" [value]="displayCard.cardDescription" disabled></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Card Labels</label>
+                <input type="text" class="form-control" [value]="getCardLabelNames(displayCard)" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>Card Percentage</label>
+                <input type="text" class="form-control" [value]="displayCard.cardPercentage + '%'" disabled>
+              </div>
+
+              <div class="form-group" *ngFor="let customField of displayCard.cardCustomFields">
+                <label> {{customField.name}} </label>
+                <input type="text" class="form-control" [value]="customField.value" disabled>
+              </div>
+            </form>
+          </div>
+        </div>
+      </ng-container>
     </div>
-  </div>
+  </trello-card>
 </page-body>

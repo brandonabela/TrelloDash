@@ -1,13 +1,19 @@
-<form [formGroup]="dropdownForm">
-  <button class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-    <ng-content></ng-content>
-  </button>
+<div class="dropdown-checkbox">
+  <div class="col-xl-12 btn-group">
+    <button class="form-control dropdown-toggle" type="button" data-bs-toggle="dropdown">
+      {{getTickedColumns()}}
+    </button>
 
-  <ul class="dropdown-menu dropdown-checkbox" [formArrayName]="dropdownArray">
-    <li *ngFor="let checkbox of checkboxArray; let i = index">
-      <a class="dropdown-item">
-        <input class="form-check-input" type="checkbox" [formControlName]="i"> {{checkbox}}
-      </a>
-    </li>
-  </ul>
-</form>
+    <ul class="dropdown-menu dropdown-checkbox">
+      <li>
+        <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="elementFilter" [ngModelOptions]="{standalone: true}" />
+      </li>
+
+      <li *ngFor="let checkbox of elementValues | dropdownCheckboxFilter: elementFilter; trackBy: trackByIndex" [formGroup]="elementFormGroup">
+        <label class="dropdown-item form-check">
+          <input type="checkbox" class="form-check-input" [formControlName]="elementValues.indexOf(checkbox)"> {{checkbox}}
+        </label>
+      </li>
+    </ul>
+  </div>
+</div>

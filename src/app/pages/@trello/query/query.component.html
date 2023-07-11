@@ -1,102 +1,135 @@
 <page-header></page-header>
 
 <page-body>
-  <div class="row">
-    <div class="col-xl-12">
-      <trello-card cardTitle="Trello Board Counts" [trelloViewer]="trelloViewer">
-        <div class="header"></div>
+  <trello-card cardTitle="Trello Board Counts">
+    <div class="header"></div>
 
-        <div class="body">
-          <div class="row">
-            <ng-container *ngFor="let aBoard of trelloViewer.uniqueBoards; let i = index">
-              <div [class]="boardStatisticsClass(i + 1, trelloViewer.uniqueBoards.length)">
-                <card-countdown cardPrimary [count]="aBoard.frequency" [description]="aBoard.name"></card-countdown>
-              </div>
-            </ng-container>
+    <div class="body">
+      <div class="row">
+        <ng-container *ngFor="let aBoard of trelloService.uniqueBoards; let i = index">
+          <div [class]="boardStatisticsClass(i + 1, trelloService.uniqueBoards.length)">
+            <card-countdown cardColour="primary" [count]="aBoard.frequency" [description]="aBoard.name"></card-countdown>
           </div>
-        </div>
-      </trello-card>
+        </ng-container>
+      </div>
     </div>
+  </trello-card>
 
-    <div class="col-xl-12">
-      <trello-card cardTitle="Trello Projects Overview" [trelloViewer]="trelloViewer">
-        <div class="header">
-          <dropdown-checkbox [dropdownForm]="tableColumnForm" dropdownArray="tableColumnsArray" [checkboxArray]="trelloCardFields">
-            <i class="fas fa-cog"></i>
-          </dropdown-checkbox>
+  <trello-card cardTitle="Trello Projects Overview">
+    <div class="body">
+      <div class="row basic-filter">
+        <div class="col-xl-3 form-group">
+          <label> Project: </label>
+          <dropdown-checkbox [elementFormGroup]="projectGroup" [elementValues]="projectNames"></dropdown-checkbox>
         </div>
 
-        <div class="body">
-          <div class="searchArea">
-            <div class="input-group">
-              <input class="form-control" placeholder="Card Search" [(ngModel)]="cardSearch" ng-model-options="{debounce: 100}">
+        <div class="col-xl-3 form-group">
+          <label> Board: </label>
+          <dropdown-checkbox [elementFormGroup]="boardGroup" [elementValues]="boardNames"></dropdown-checkbox>
+        </div>
 
-              <button class="btn btn-primary">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
+        <div class="col-xl-3 form-group">
+          <label> Label: </label>
+          <dropdown-checkbox [elementFormGroup]="labelGroup" [elementValues]="labelNames"></dropdown-checkbox>
+        </div>
 
-          <div class="row">
-            <div class="col-xl-12">
-              <ng-container *ngIf="noColumnsPresent(); else noColumns">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <ng-container *ngFor="let aCardField of trelloCardFields; let i = index">
-                          <th *ngIf="displayColumns[i]"> {{aCardField}} </th>
-                        </ng-container>
-                      </tr>
-                    </thead>
+        <div class="col-xl-3 form-group">
+          <label> Columns: </label>
+          <dropdown-checkbox [elementFormGroup]="columnGroup" [elementValues]="columnNames"></dropdown-checkbox>
+        </div>
+      </div>
 
-                    <tbody>
-                      <tr *ngFor="let aTrelloCard of trelloViewer.getTrelloCards() | trelloCardFilter: { 'filter': cardSearch, 'columns': displayColumns }">
+      <div class="row form-group">
+        <label> Advanced Search: </label>
+        <textarea-autocomplete
+          [keys]="advancedFilterKeys" [originalObjects]="originalCards"
+          (filterEvent)="handleFilterEvent($event)" (filteredObjects)="filteredCards" [elementFormControl]="advancedFilterControl"
+        ></textarea-autocomplete>
+      </div>
 
-                        <ng-container *ngFor="let aCardField of trelloCardFields; let i = index">
-                          <ng-container *ngIf="displayColumns[i]">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <ng-container *ngFor="let columnName of columnNames; let i = index">
+                <th *ngIf="columnGroup.value[i]" sortable (click)="sortCards(columnName)">
+                  {{columnName}}
 
-                            <td *ngIf="i == 0"> {{aTrelloCard.projectName}} </td>
-                            <td *ngIf="i == 1"> {{aTrelloCard.cardBoardName}} </td>
-                            <td *ngIf="i == 2"> {{aTrelloCard.cardName}} </td>
-                            <td *ngIf="i == 3"> {{aTrelloCard.cardDescription}} </td>
-
-                            <td *ngIf="i == 4">
-                              <span class="label" *ngFor="let aCard of aTrelloCard.cardLabels" [style.background-color]="aCard.labelColour"> {{aCard.labelName}} </span>
-                            </td>
-
-                            <td *ngIf="i == 5">
-                              <div class="row progressColumn">
-                                <div class="col-xl-7">
-                                  <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" [style.width]="aTrelloCard.cardPercentage + '%'" [attr.aria-valuenow]="aTrelloCard.cardPercentage"></div>
-                                  </div>
-                                </div>
-
-                                <div class="col-xl-5 text-center">
-                                  {{aTrelloCard.cardPercentage}}%
-                                </div>
-                              </div>
-                            </td>
-
-                            <td *ngIf="i > 5"> {{aTrelloCard.cardCustomFields[i - 6].fieldValue}} </td>
-
-                          </ng-container>
-                        </ng-container>
-
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                  <ng-container *ngIf="sortColumn == columnName">
+                    <i class="fas" [ngClass]="sortDirection ? 'fa-sort-alpha-down' : 'fa-sort-alpha-up'"></i>
+                  </ng-container>
+                </th>
               </ng-container>
+            </tr>
+          </thead>
 
-              <ng-template #noColumns>
-                <trello-no-columns></trello-no-columns>
-              </ng-template>
-            </div>
-          </div>
+          <tbody>
+            <tr *ngFor="
+              let filteredCard of filteredCards |
+              slice: (pageIndex-1) * pageEntries : pageIndex * pageEntries
+            ">
+              <ng-container *ngFor="let columnName of columnNames; let i = index">
+                <ng-container *ngIf="columnGroup.value[i]">
+                  <td *ngIf="i === 0"> {{filteredCard['project']}} </td>
+                  <td *ngIf="i === 1"> {{filteredCard['cardBoardName']}} </td>
+                  <td *ngIf="i === 2"> {{filteredCard['cardName']}} </td>
+                  <td *ngIf="i === 3"> {{filteredCard['cardDescription']}} </td>
+
+                  <td *ngIf="i === 4">
+                    <span class="badge label" *ngFor="let aLabel of filteredCard['cardLabels']" [style.background-color]="aLabel['colour']">
+                      {{aLabel['name']}}
+                    </span>
+                  </td>
+
+                  <td *ngIf="i === 5">
+                    <div class="progress">
+                      <div
+                        class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                        [style.width]="filteredCard['cardPercentage'] + '%'" [attr.aria-valuenow]="filteredCard['cardPercentage']"
+                      >
+                        {{filteredCard['cardPercentage']}}%
+                      </div>
+                    </div>
+                  </td>
+
+                  <td *ngIf="i > 5"> {{filteredCard['cardCustomFields'][i - 6]['value']}} </td>
+                </ng-container>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row table-controls">
+        <div class="col-xl-3">
+          <p> Showing {{(pageIndex-1)*pageEntries+1}} to {{pageIndex*pageEntries}} of {{filteredCards.length}} entries </p>
         </div>
-      </trello-card>
+
+        <div class="col-xl-6">
+          <ul class="pagination">
+            <li class="page-item" [ngClass]="{'disabled': pageIndex === 1}" (click)="setPage(pageIndex - 1)">
+              <a class="page-link"><i class="fa-solid fa-angle-left"></i></a>
+            </li>
+
+            <li class="page-item" *ngFor="let pageNum of getPages()" [ngClass]="{'active': pageNum === pageIndex}" (click)="setPage(pageNum)">
+              <a class="page-link"> {{pageNum}} </a>
+            </li>
+
+            <li class="page-item" [ngClass]="{'disabled': pageIndex === getMaxPage()}" (click)="setPage(pageIndex + 1)">
+              <a class="page-link"><i class="fa-solid fa-angle-right"></i></a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-xl-3">
+          <select class="form-control form-select" [(ngModel)]="pageEntries">
+            <option value="25"> 25 </option>
+            <option value="50"> 50 </option>
+            <option value="75"> 75 </option>
+            <option value="100"> 100 </option>
+          </select>
+        </div>
+      </div>
     </div>
-  </div>
+  </trello-card>
 </page-body>

@@ -1,7 +1,7 @@
 export class TrelloAttachment {
   constructor(
-    public cardAttachmentName: string,
-    public cardAttachmentNameWithExtension: string,
-    public cardAttachmentLink: string
+    public readonly name: string = "",
+    public readonly link: string = "",
+    public readonly fileName: string = ""
   ) { }
 }

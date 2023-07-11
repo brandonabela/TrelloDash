@@ -1,141 +1,144 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/@theme/service/alert.service';
 import { messages } from 'src/app/constants/messages';
-import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
+import { TrelloService } from 'src/app/service/trello.service';
 import { FormModule } from '../../../../@theme/components/form/form.module';
-
-declare var saveAs: any;
 
 @Component({
   selector: 'trello-export-csv',
   templateUrl: './export-csv.component.html',
   styleUrls: ['./export-csv.component.scss']
 })
-export class ExportCsvComponent implements OnInit {
-  @Input() public projectIndex: number;
-  @Input() public trelloViewer: TrelloViewer;
+export class ExportCsvComponent {
+  @Input() public projectIndex!: number;
 
-  public trelloForm: FormGroup;
+  public readonly CSV_DELIMITER: Map<string, string> = new Map([
+    ['Comma', ','],
+    ['Semicolon', ';'],
+    ['Tab', '\t'],
+    ['Pipe', '|'],
+    ['Colon', ':'],
+  ]);
+
+  public trelloForm!: FormGroup;
+  public readonly csvDelimiterKeys = Array.from(this.CSV_DELIMITER.keys());
 
   constructor(
     private alertService: AlertService,
+    private trelloService: TrelloService,
     private fb: FormBuilder
-  ) { }
-
-  static formatDescription(cardDescription: string): string {
-    return cardDescription.replace(/[*_~]/g, '').replace(/\[([^\[\]]*)]\((.*?)\)/gm, '$2').replace(/[\r\n]+/g, '\n');
-  }
-
-  ngOnInit() {
+  ) {
     this.trelloForm = this.fb.group({
-      csvDelimiter: ['Comma', Validators.required],
-      chkBoardName: [true, Validators.required],
-      txtBoardName: ['Board Name', Validators.required],
-      chkCardName: [true, Validators.required],
-      txtCardName: ['Card Name', Validators.required],
-      chkCardDescription: [true, Validators.required],
-      txtCardDescription: ['Description', Validators.required],
-      chkCardLabels: [true, Validators.required],
-      txtCardLabels: ['Labels', Validators.required],
-      chkCardPercentage: [true, Validators.required],
-      txtCardPercentage: ['List Progress', Validators.required],
-      chkCustomField: [true, Validators.required],
-      txtCustomField: ['Custom Field', Validators.required],
+      csvDelimiter: [Array.from(this.CSV_DELIMITER.keys())[0], [Validators.required]],
+      keepBoardName: [true],
+      boardName: ['Board Name', [Validators.required]],
+      keepCardName: [true],
+      cardName: ['Card Name', [Validators.required]],
+      keepCardDescription: [true],
+      cardDescription: ['Card Description', [Validators.required]],
+      keepCardLabels: [true],
+      cardLabels: ['Card Labels', [Validators.required]],
+      keepCardPercentage: [true],
+      cardPercentage: ['Card Percentage', [Validators.required]],
+      keepCustomField: [true],
+      customField: ['Custom Field', [Validators.required]],
     });
 
     this.onChanges();
   }
 
   onChanges(): void {
-    FormModule.updateFieldStatus(this.trelloForm, 'chkBoardName', 'txtBoardName');
-    FormModule.updateFieldStatus(this.trelloForm, 'chkCardName', 'txtCardName');
-    FormModule.updateFieldStatus(this.trelloForm, 'chkCardDescription', 'txtCardDescription');
-    FormModule.updateFieldStatus(this.trelloForm, 'chkCardLabels', 'txtCardLabels');
-    FormModule.updateFieldStatus(this.trelloForm, 'chkCardPercentage', 'txtCardPercentage');
-    FormModule.updateFieldStatus(this.trelloForm, 'chkCustomField', 'txtCustomField');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepBoardName', 'boardName');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCardName', 'cardName');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCardDescription', 'cardDescription');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCardLabels', 'cardLabels');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCardPercentage', 'cardPercentage');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCustomField', 'customField');
   }
 
   private getCsvDelimiter(): string {
-    const fieldValue = this.trelloForm.get('csvDelimiter').value;
-
-    return fieldValue === 'Tab' ? '\t' : fieldValue === 'Semicolon' ? ';' : fieldValue === 'Comma' ? ',' : fieldValue === 'Space' ? ' ' : ',';
+    const fieldValue = this.trelloForm.controls['csvDelimiter'].value;
+    return this.CSV_DELIMITER.get(fieldValue) || '';
   }
 
-  private formatColumns(csvColumns: string[], csvDelimiter: string): string[] {
-    return csvColumns.map(column => column.includes(csvDelimiter) || column.includes('\n') ? '"' + column + '"' : column);
+  private static formatColumn(value: string = "", delimiter: string = ","): string {
+    // Remove any commas in the original string
+    value = value.toString().replace(/,/g, '');
+
+    // Replace any occurrences of zero width spaces with an empty string
+    value = value.replace(/\u200C/g, '')
+
+    // Replace any newline characters with spaces
+    value = value.replace(/\n/g, ' ');
+
+    // Remove markdown syntax
+    value = value.replace(/[*_~]/g, '').replace(/\[([^\[\]]*)]\((.*?)\)/gm, '$2');
+
+    // Return formatted column
+    return value.includes(delimiter) || value.includes('\n') ? '"' + value + '"' : value;
+  }
+
+  private static formatJoinColumns(columns: string[] = [], delimiter: string = ","): string {
+    columns = columns.map(column => ExportCsvComponent.formatColumn(column, delimiter));
+    return columns.join(delimiter) + '\n';
   }
 
   public exportCSVProject(): void {
     const csvDelimiter = this.getCsvDelimiter();
 
-    const chkBoardName = this.trelloForm.get('chkBoardName').value;
-    const txtBoardName = this.trelloForm.get('txtBoardName').value;
-    const chkCardName = this.trelloForm.get('chkCardName').value;
-    const txtCardName = this.trelloForm.get('txtCardName').value;
-    const chkCardDescription = this.trelloForm.get('chkCardDescription').value;
-    const txtCardDescription = this.trelloForm.get('txtCardDescription').value;
-    const chkCardLabels = this.trelloForm.get('chkCardLabels').value;
-    const txtCardLabels = this.trelloForm.get('txtCardLabels').value;
-    const chkCardPercentage = this.trelloForm.get('chkCardPercentage').value;
-    const txtCardPercentage = this.trelloForm.get('txtCardPercentage').value;
-    const chkCustomField = this.trelloForm.get('chkCustomField').value;
-    const txtCustomField = this.trelloForm.get('txtCustomField').value;
+    const {
+      keepBoardName, boardName,
+      keepCardName, cardName,
+      keepCardDescription, cardDescription,
+      keepCardLabels, cardLabels,
+      keepCardPercentage, cardPercentage,
+      keepCustomField, customField
+    } = this.trelloForm.value;
 
-    const trelloProject = this.trelloViewer.trelloProjects[this.projectIndex];
+    if (keepBoardName || keepCardName || keepCardDescription || keepCardLabels || keepCardPercentage || keepCustomField) {
+      const trelloProject = this.trelloService.trelloProjects[this.projectIndex];
+      const customFieldNames = trelloProject.trelloFieldNames.slice(6);
 
-    const cardLength = trelloProject.trelloCards.length;
-    const customFieldNames = trelloProject.trelloFieldNames.slice(6);
+      const csvHeading = [
+        keepBoardName && boardName,
+        keepCardName && cardName,
+        keepCardDescription && cardDescription,
+        keepCardLabels && cardLabels,
+        keepCardPercentage && cardPercentage,
+        ...(keepCustomField ? customFieldNames.map(fieldName => customField + ' - ' + fieldName) : [])
+      ].filter(Boolean);
 
-    if (!chkBoardName && !chkCardName && !chkCardDescription && !chkCardLabels && !chkCardPercentage && !chkCustomField) {
+      let fileString = ExportCsvComponent.formatJoinColumns(csvHeading, csvDelimiter);
+
+      trelloProject.trelloCards.forEach(card => {
+        let columns = [
+          keepBoardName && card.cardBoardName,
+          keepCardName && card.cardName,
+          keepCardDescription && card.cardDescription,
+          keepCardLabels && card.cardLabels.map(label => label.name).join('\n'),
+          keepCardPercentage && card.cardPercentage.toString(),
+          ...(keepCustomField && card.cardCustomFields.map(custom => custom.value))
+        ].filter(Boolean);
+
+        fileString += ExportCsvComponent.formatJoinColumns(columns, csvDelimiter);
+      });
+
+      const blob = new Blob([fileString], {
+        type: 'text/plain;charset=utf-8'
+      });
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${trelloProject.projectName}.csv`;
+      link.click();
+      URL.revokeObjectURL(url);
+
+      this.alertService.add(messages.csvDocumentSuccess);
+    }
+    else {
       this.alertService.add(messages.documentErrorMinOne);
-      return;
     }
-
-    if (
-      (chkBoardName && !txtBoardName.length) || (chkCardName && !txtCardName.length) || (chkCardDescription && !txtCardDescription.length) ||
-      (chkCardLabels && !txtCardLabels.length) || (chkCardPercentage && txtCardPercentage.length) || (chkCustomField && txtCustomField.length)
-    ) {
-      this.alertService.add(messages.documentErrorString);
-      return;
-    }
-
-    let csvHeading = [
-      (chkBoardName ? txtBoardName : ''),
-      (chkCardName ? txtCardName : ''),
-      (chkCardDescription ? txtCardDescription : ''),
-      (chkCardLabels ? txtCardLabels : ''),
-      (chkCardPercentage ? txtCardPercentage : ''),
-      (chkCustomField ? customFieldNames.map(fieldName => txtCustomField + ' - ' + fieldName) : '')
-    ];
-
-    csvHeading = [].concat(...csvHeading).filter(item => item !== '');
-    csvHeading = this.formatColumns(csvHeading, csvDelimiter);
-
-    let fileString = csvHeading.join(csvDelimiter);
-
-    for (let i = 0; i < cardLength; i++) {
-      let columns = [
-        chkBoardName ? trelloProject.trelloCards[i].cardBoardName : '',
-        chkCardName ? trelloProject.trelloCards[i].cardName : '',
-        chkCardDescription ? ExportCsvComponent.formatDescription(trelloProject.trelloCards[i].cardDescription) : '',
-        chkCardLabels ? trelloProject.trelloCards[i].cardLabels.map(label => label.labelName).join('\n') : '',
-        chkCardPercentage ? trelloProject.trelloCards[i].cardPercentage + '' : '',
-        chkCustomField ? trelloProject.trelloCards[i].cardCustomFields.map(custom => custom.fieldValue) : ''
-      ];
-
-      columns = [].concat(...columns).filter(item => item !== '');
-      columns = this.formatColumns(columns as string[], csvDelimiter);
-
-      fileString += '\n' + columns.join(csvDelimiter);
-    }
-
-    const blob = new Blob([fileString], {
-      type: 'text/plain;charset=utf-8'
-    });
-
-    saveAs(blob, trelloProject.projectName + '.csv');
-
-    this.alertService.add(messages.csvDocumentSuccess);
   }
 }

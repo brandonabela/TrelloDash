@@ -1,107 +1,87 @@
 import { Injectable } from '@angular/core';
-import { AlertService } from '../@theme/service/alert.service';
+
 import { messages } from '../constants/messages';
+
+import { AlertService } from '../@theme/service/alert.service';
 import { JsonStorage } from '../models/local-storage/json-storage';
 import { TrelloProject } from '../models/trello/trello-project';
-
-declare var saveAs: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  private keyTrelloProject = 'trelloProjects';
+  private static JSON_OBJECT = JSON;
+
+  private trelloProjects: TrelloProject[] = [];
+  private keyTrelloProject: string = 'trelloProjects';
 
   constructor(
     private alertService: AlertService
-  ) { }
-
-  // ---------- JSON Map Handling ----------
-
-  private compress(key: string, value: any) {
-    const originalObject = this[key];
-
-    if (originalObject instanceof Map) {
-      return {
-        dataType: 'Map',
-        value: [...originalObject]
-      };
-    } else {
-      return value;
-    }
+  ) {
+    this.trelloProjects = StorageService.getStorageValue<TrelloProject[]>(this.keyTrelloProject) || [];
   }
 
-  private decompress(key: string, value: any) {
-    if (typeof value === 'object' && value !== null) {
-      if (value.dataType === 'Map') {
-        return new Map(value.value);
-      }
-    }
+  // ---------- Read and Write Functionality ----------
 
-    return value;
-  }
-
-  // ---------- Reading Memory Handling ----------
-
-  private getStorageValue(key: string): any {
+  private static getStorageValue<T>(key: string): T | null {
     const storageValue = window.localStorage.getItem(key);
 
-    return storageValue != null ? JSON.parse(storageValue, this.decompress) : null;
+    try {
+      return StorageService.JSON_OBJECT.parse(storageValue ?? "null") as T;
+    } catch (error) {
+      console.error(`Error parsing storage value for key ${key}: ${error}`);
+      return null;
+    }
   }
 
-  // ---------- Writing Memory Handling ----------
-
-  private setStorageValue(key: string, value: any): void {
-    window.localStorage.setItem(key, JSON.stringify(value, this.compress));
+  private static setStorageValue<T>(key: string, value: T[]): void {
+    window.localStorage.setItem(key, StorageService.JSON_OBJECT.stringify(value));
   }
 
-  private addToArray(key: string, value: any): void {
-    let storageValue = this.getStorageValue(key);
+  private static updateArray<T>(key: string, value: T, index?: number): void {
+    let storageValue = StorageService.getStorageValue<T[]>(key) ?? [];
 
-    if (storageValue === null) {
-      storageValue = [];
+    if (index !== undefined && storageValue[index] !== undefined) {
+      storageValue[index] = value;
+    } else {
+      storageValue.push(value);
     }
 
-    storageValue.push(value);
-
-    this.setStorageValue(key, storageValue);
+    StorageService.setStorageValue(key, storageValue);
   }
 
-  private updateArrayValue(key: string, index: number, value: any): void {
-    const storageValue = this.getStorageValue(key);
-    storageValue[index] = value;
-
-    this.setStorageValue(key, storageValue);
-  }
-
-  private removeFromArray(key: string, index: number): void {
-    const storageValue = this.getStorageValue(key);
+  private static removeFromArray<T>(key: string, index: number): void {
+    let storageValue = StorageService.getStorageValue<T[]>(key) || [];
     storageValue.splice(index, 1);
-
-    this.setStorageValue(key, storageValue);
+    StorageService.setStorageValue(key, storageValue);
   }
 
   // ---------- Specific Functionality ----------
 
   public getTrelloProjects(): TrelloProject[] {
-    const trelloProjects = this.getStorageValue(this.keyTrelloProject);
-
-    return trelloProjects != null ? trelloProjects : [];
+    return this.trelloProjects;
   }
 
   public addTrelloProject(trelloProject: TrelloProject): TrelloProject[] {
-    this.addToArray(this.keyTrelloProject, trelloProject);
-    return this.getTrelloProjects();
+    StorageService.updateArray<TrelloProject>(this.keyTrelloProject, trelloProject);
+    this.trelloProjects.push(trelloProject);
+    return this.trelloProjects;
   }
 
   public updateTrelloProject(index: number, trelloProject: TrelloProject): TrelloProject[] {
-    this.updateArrayValue(this.keyTrelloProject, index, trelloProject);
-    return this.getTrelloProjects();
+    StorageService.updateArray<TrelloProject>(this.keyTrelloProject, trelloProject, index);
+    this.trelloProjects[index] = trelloProject;
+    return this.trelloProjects;
   }
 
   public removeTrelloProject(index: number): TrelloProject[] {
-    this.removeFromArray(this.keyTrelloProject, index);
-    return this.getTrelloProjects();
+    StorageService.removeFromArray(this.keyTrelloProject, index);
+    this.trelloProjects.splice(index, 1);
+    return this.trelloProjects;
+  }
+
+  public clearTrelloStorage(): void {
+    StorageService.setStorageValue(this.keyTrelloProject, []);
   }
 
   // ---------- Import and Export Handling ----------
@@ -111,34 +91,44 @@ export class StorageService {
     reader.readAsText(file);
 
     reader.onload = () => {
-      const importJson = JSON.parse(reader.result.toString(), this.decompress);
-      const jsonStorageKeys = Object.keys(new JsonStorage());
+      if (reader.result) {
+        const importJson = JSON.parse(reader.result.toString());
 
-      jsonStorageKeys.map(aStorageKey => {
-        if (aStorageKey in importJson) {
-          window.localStorage.setItem(aStorageKey, importJson[aStorageKey]);
+        const jsonStorageKeys = Object.keys(new JsonStorage());
+
+        for (const aStorageKey of jsonStorageKeys) {
+          if (aStorageKey in importJson) {
+            window.localStorage.setItem(aStorageKey, importJson[aStorageKey]);
+          }
         }
-      });
 
-      location.reload();
+        location.reload();
 
-      this.alertService.add(messages.storageUploadSuccess);
+        alert('Storage upload successful.');
+      } else {
+        console.error('Error: FileReader result is null.');
+      }
     };
   }
 
-  public exportStorage(): void {
-    if (window.localStorage.length > 0) {
-      const content = JSON.stringify(window.localStorage, this.compress);
-
-      const blob = new Blob([content], {
-        type: 'text/plain;charset=utf-8'
-      });
-
-      saveAs(blob, 'DS-Config.json');
-
-      this.alertService.add(messages.storageDownloadSuccess);
-    } else {
+  public exportStorage(filename: string = 'DS-Config.json'): void {
+    if (window.localStorage.length === 0) {
       this.alertService.add(messages.storageDownloadError);
+      return;
     }
+
+    const content = JSON.stringify(window.localStorage);
+    const blob = new Blob([content], {
+      type: 'text/plain;charset=utf-8'
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(url);
+
+    this.alertService.add(messages.storageDownloadSuccess);
   }
 }

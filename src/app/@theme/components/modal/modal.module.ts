@@ -11,7 +11,9 @@ import { ModalBodyComponent, ModalComponent, ModalFooterComponent, ModalTitleCom
     ModalFooterComponent,
     ConfirmationModalComponent
   ],
-  imports: [CommonModule],
+  imports: [
+    CommonModule
+  ],
   exports: [
     ModalComponent,
     ModalTitleComponent,

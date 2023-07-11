@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { AlertDescription } from 'src/app/@theme/models/alerts/alert-description';
-import { AlertTitle } from 'src/app/@theme/models/alerts/alert-title';
+
 import { AlertType } from 'src/app/@theme/models/alerts/alert-type';
 import { AlertService } from 'src/app/@theme/service/alert.service';
+import { AlertTitle } from 'src/app/@theme/models/alerts/alert-title';
+import { AlertDescription } from 'src/app/@theme/models/alerts/alert-description';
 
 @Component({
   selector: 'page-alerts',
@@ -10,10 +11,12 @@ import { AlertService } from 'src/app/@theme/service/alert.service';
   styleUrls: ['./alerts.component.scss']
 })
 export class AlertsComponent {
-  private title = 'This is an alert box title';
-  private description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque convallis at sapien.';
+  private title = 'I am the title of the alert';
+  private description = 'I am the description of the alert where I explain something to the user';
 
-  constructor(private alertService: AlertService) { }
+  constructor(
+    private alertService: AlertService
+  ) { }
 
   public openAlertTitleSuccess() {
     this.alertService.add(new AlertTitle(this.title, AlertType.Success));
@@ -27,8 +30,8 @@ export class AlertsComponent {
     this.alertService.add(new AlertTitle(this.title, AlertType.Warning));
   }
 
-  public openAlertTitleInfo() {
-    this.alertService.add(new AlertTitle(this.title, AlertType.Info));
+  public openAlertTitlePrimary() {
+    this.alertService.add(new AlertTitle(this.title, AlertType.Primary));
   }
 
   public openAlertDescriptionSuccess() {
@@ -43,7 +46,7 @@ export class AlertsComponent {
     this.alertService.add(new AlertDescription(this.title, this.description, AlertType.Warning));
   }
 
-  public openAlertDescriptionInfo() {
-    this.alertService.add(new AlertDescription(this.title, this.description, AlertType.Info));
+  public openAlertDescriptionPrimary() {
+    this.alertService.add(new AlertDescription(this.title, this.description, AlertType.Primary));
   }
 }

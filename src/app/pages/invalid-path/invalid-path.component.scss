@@ -1,65 +1,34 @@
-@import "@fontsource/roboto";
-@import "~src/app/@theme/assets/scss/theme-colour.scss";
+@import url("https://fonts.googleapis.com/css?family=Roboto:wght@400;700;900&display=swap");
 
-.row .col-xl-8 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+h1,
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
 
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-
-  h1 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 220px;
-    line-height: initial;
-
-    letter-spacing: 10px;
-    text-transform: uppercase;
-
-    background: url("~src/app/@theme/assets/img/SolarBackground.jpg") no-repeat center center;
-    -webkit-background-clip: text;
-
-    -webkit-text-fill-color: transparent;
-  }
-
-  h2 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-
-    margin-top: 0;
-    margin-bottom: 30px;
-
-    text-transform: uppercase;
-
-    color: color(theme, text-heading);
-  }
-
-  .btn {
-    font-weight: 800;
-
-    padding: 15px 30px;
-
-    border-radius: 40px;
-    box-shadow: color(theme, primary-light) 0 4px 15px -5px;
-  }
+  text-transform: uppercase;
 }
 
-@media (max-width: 1024px) {
-  .row .col-xl-8 h1 {
-    font-size: 150px;
-  }
+h1 {
+  font-size: calc(8rem + 10vh);
+
+  letter-spacing: 0.5rem;
+
+  background: url("~src/app/@theme/assets/img/SolarBackground.jpg") no-repeat center center;
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
 }
 
-@media (max-width: 768px) {
-  .row .col-xl-8 h1 {
-    font-size: 100px;
-  }
+h2 {
+  font-size: calc(1rem + 3vh);
+
+  margin-bottom: 30px;
 }
 
-@media (max-width: 425px) {
-  .row .col-xl-8 h1 {
-    font-size: 75px;
-  }
+.btn {
+  font-weight: 900;
+
+  padding: var(--space-m) var( --space-l);
+
+  letter-spacing: 1px;
 }

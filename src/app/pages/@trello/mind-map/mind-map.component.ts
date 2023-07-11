@@ -1,215 +1,154 @@
-declare var jsMind: any;
-
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService } from 'src/app/@theme/service/alert.service';
 import { TrelloCard } from 'src/app/models/trello/trello-card';
-import { TrelloProject } from 'src/app/models/trello/trello-project';
-import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
-import { RequestService } from 'src/app/service/request.service';
-import { StorageService } from 'src/app/service/storage.service';
+import { TrelloService } from 'src/app/service/trello.service';
 
+export class Branch {
+  constructor(
+    public readonly topic: string,
+    public readonly children: Branch[] | TrelloCard[]
+  ) {}
+}
 
 @Component({
   selector: 'page-mind-map',
   templateUrl: './mind-map.component.html',
   styleUrls: ['./mind-map.component.scss']
 })
-export class MindMapComponent implements OnInit {
-  public mindMap: any;
-  public trelloForm: FormGroup;
-  public trelloViewer: TrelloViewer;
+export class MindMapComponent {
+  public tree: Branch[] = [];
 
-  public mouseClick = false;
-  public mouseDownX: number;
-  public mouseDownY: number;
+  public trelloForm!: FormGroup;
+  public displayCard!: TrelloCard;
 
   constructor(
-    private alertService: AlertService,
-    private storageService: StorageService,
-    private requestService: RequestService,
+    public trelloService: TrelloService,
     private fb: FormBuilder
   ) {
-    this.trelloViewer = new TrelloViewer(this.alertService, this.storageService, this.requestService);
-  }
+    const fields = this.trelloService.trelloProjects[0].trelloFieldNames;
 
-  ngOnInit() {
     this.trelloForm = this.fb.group({
-      projectIndex: [0, Validators.required],
-      firstParentIndex: [0, Validators.required],
-      secondParentIndex: [1, Validators.required]
+      projectIndex: [0, [Validators.required]],
+      levelOne: [fields[1], [Validators.required]],
+      levelTwo: [fields[4], [Validators.required]]
     });
 
-    this.populateMindMap();
+    this.buildTree();
     this.onChanges();
   }
 
   onChanges(): void {
-    this.trelloForm.valueChanges.subscribe(_ => {
-      this.populateMindMap();
-    });
-  }
+    this.trelloForm.valueChanges.subscribe((_: any) => {
+      const { levelOne, levelTwo } = this.trelloForm.value;
 
-  public getFirstParentFields(): string[] {
-    const projectIndex = this.trelloForm.get('projectIndex').value;
-
-    const projectFields = this.trelloViewer.trelloProjects[projectIndex].trelloFieldNames;
-    const relevantFields = [projectFields[1], projectFields[4]].concat(projectFields.slice(6));
-
-    return relevantFields;
-  }
-
-  public getSecondParentFields(): string[] {
-    const firstParentIndex = this.trelloForm.get('firstParentIndex').value;
-
-    let relevantFields = this.getFirstParentFields();
-    relevantFields.splice(firstParentIndex, 1);
-    relevantFields = ['None'].concat(relevantFields);
-
-    return relevantFields;
-  }
-
-  public getProjectFields(): string[] {
-    const trelloProjects = this.trelloViewer.trelloProjects;
-    const projectFields = [].concat(...trelloProjects.map(aProject => aProject.trelloFieldNames));
-
-    const uniqueFields = [...new Set(projectFields)];
-    const relevantFields = [uniqueFields[1], uniqueFields[4]].concat(uniqueFields.slice(6));
-
-    return relevantFields;
-  }
-
-  public createMindMap(): any {
-    const options = {
-      container: 'jsmind_container',
-      editable: false,
-      theme: 'primary'
-    };
-
-    return new jsMind(options);
-  }
-
-  public populateMindMap(): void {
-    if (this.mindMap === undefined) {
-      this.mindMap = this.createMindMap();
-    }
-
-    const mindMapObject = this.getMindMapObject();
-
-    this.mindMap.show(mindMapObject);
-  }
-
-  public getCardField(card: TrelloCard, parentIndex: number): any {
-    if (parentIndex === 0) {
-      return card.cardBoardName;
-    } else if (parentIndex === 1) {
-      return [].concat(...card.cardLabels.map(aLabel => aLabel.labelName));
-    } else {
-      return card.cardCustomFields[parentIndex - 2].fieldValue;
-    }
-  }
-
-  public isBranchPresent(mindMapData: any[], current: string, previous = ''): boolean {
-    let branchPresent = false;
-
-    mindMapData.filter(branch => {
-      const branchNames = branch.id.split('/');
-
-      const currentBranch = branchNames.length >= 1 ? branchNames[branchNames.length - 1] : '';
-      const previousBranch = branchNames.length >= 2 ? branchNames[branchNames.length - 2] : '';
-
-      if (currentBranch === current && (previous === '' || previousBranch === previous)) {
-        branchPresent = true;
+      if (levelOne === levelTwo) {
+        this.trelloForm.controls['levelTwo'].setValue('None');
       }
-    });
 
-    return branchPresent;
+      this.buildTree()
+    });
   }
 
-  public getMindMapData(project: TrelloProject, firstParentIndex: number, secondParentIndex: number): any {
-    const mindMapData = [];
-    mindMapData.push({ id: 'root', isroot: true, topic: project.projectName });
+  public fields(): string[] {
+    const { projectIndex } = this.trelloForm.controls;
+    const projectFields = this.trelloService.trelloProjects[projectIndex.value].trelloFieldNames;
 
-    let branchCounter = 0;
+    return ['None', projectFields[1], projectFields[4], ...projectFields.slice(6)];
+  }
 
-    project.trelloCards.forEach(card => {
-      const firstFields = [].concat(this.getCardField(card, firstParentIndex));
+  public levelOneFields(): string[] {
+    return this.fields().slice(1);
+  }
 
-      firstFields.forEach(firstField => {
-        if (!this.isBranchPresent(mindMapData, firstField)) {
-          mindMapData.push({
-            id: firstField,
-            parentid: 'root',
-            topic: firstField,
-            direction: (branchCounter % 2 === 0) ? 'left' : 'right'
-          });
+  public levelTwoFields(): string[] {
+    const { levelOne } = this.trelloForm.controls;
 
-          branchCounter++;
-        }
+    const relevantFields = this.levelOneFields().filter(value => value !== levelOne.value);
+    return ['None', ...relevantFields];
+  }
 
-        if (secondParentIndex !== -1) {
-          const secondFields = [].concat(this.getCardField(card, secondParentIndex));
+  public cardLevelField(trelloCard: TrelloCard, levelValue: string): string {
+    const levelIndex = this.fields().indexOf(levelValue);
 
-          secondFields.forEach(secondField => {
-            if (!this.isBranchPresent(mindMapData, secondField, firstField)) {
-              mindMapData.push({
-                id: firstField + '/' + secondField,
-                parentid: firstField,
-                topic: secondField
-              });
-            }
+    if (levelIndex == 0) {
+      return '';
+    }
+    else if (levelIndex == 1) {
+      return trelloCard.cardBoardName;
+    }
+    else if (levelIndex == 2) {
+      return trelloCard.cardLabels.length ? trelloCard.cardLabels[0].name : 'Unassigned Label';
+    }
+    else {
+      return trelloCard.cardCustomFields[levelIndex - 3].value;
+    }
+  }
 
-            mindMapData.push({
-              id: firstField + '/' + secondField + '/' + card.cardName,
-              parentid: firstField + '/' + secondField,
-              topic: card.cardName,
-            });
-          });
-        } else {
-          mindMapData.push({
-            id: firstField + '/' + card.cardName,
-            parentid: firstField,
-            topic: card.cardName,
-          });
+  private targetBranch(levelValues: string[], index: number): any {
+    let targetBranch: any = this.tree;
+
+    if (index >= 0) {
+      let pastLevels = levelValues.slice(0, index);
+
+      pastLevels.forEach(level => {
+        const branch = targetBranch.find((branch: any) => branch.topic === level);
+
+        if (branch) {
+          targetBranch = branch.children;
         }
       });
+    }
+
+    return targetBranch;
+  }
+
+  public buildTree(): void {
+    const { projectIndex, levelOne, levelTwo } = this.trelloForm.value;
+    const trelloProject = this.trelloService.trelloProjects[projectIndex];
+
+    this.tree = [];
+
+    trelloProject.trelloCards.forEach((aTrelloCard, index) => {
+      const levelValues = [
+        this.cardLevelField(aTrelloCard, levelOne),
+        this.cardLevelField(aTrelloCard, levelTwo)
+      ];
+
+      levelValues.forEach((level, index) => {
+        let targetBranch = this.targetBranch(levelValues, index);
+
+        if (targetBranch instanceof Array && level !== '') {
+          const levelPresent = targetBranch.find((branch: any) => branch.topic === level);
+
+          if (!levelPresent) {
+            const branch = new Branch(level, []);
+            targetBranch.push(branch);
+          }
+        }
+      });
+
+      let targetBranch = this.targetBranch(levelValues, levelValues.length);
+      targetBranch.push(aTrelloCard);
+
+      if (index === 0) {
+        this.setDisplayCard(aTrelloCard);
+      }
     });
-
-    return mindMapData;
   }
 
-  public getMindMapObject(): any {
-    const projectIndex = Number(this.trelloForm.get('projectIndex').value);
-    const firstParentIndex = Number(this.trelloForm.get('firstParentIndex').value);
-    let secondParentIndex = Number(this.trelloForm.get('secondParentIndex').value);
-
-    if (firstParentIndex >= secondParentIndex) {
-      secondParentIndex--;
+  public isBranch(branch: Branch[] | TrelloCard[]): boolean {
+    if (branch && branch.length > 0) {
+      return 'topic' in branch[0];
     }
 
-    const project = this.trelloViewer.trelloProjects[projectIndex];
-    const mindMapData = this.getMindMapData(project, firstParentIndex, secondParentIndex);
-
-    const mindMap = {
-      meta: { name: project.projectName },
-      format: 'node_array',
-      data: mindMapData
-    };
-
-    return mindMap;
+    return false;
   }
 
-  public fullscreen(): void {
-    if (document.fullscreenElement) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      }
-    } else {
-      const element = document.getElementById('jsmind_container');
+  public setDisplayCard(trelloCard: TrelloCard): void {
+    this.displayCard = trelloCard;
+  }
 
-      if (element.requestFullscreen) {
-        element.requestFullscreen();
-      }
-    }
+  public getCardLabelNames(trelloCard: TrelloCard): string {
+    return trelloCard.cardLabels.map(label => label.name).join(', ') || 'Unassigned Label';
   }
 }

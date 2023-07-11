@@ -1,6 +1,6 @@
 export class TrelloCustomField {
   constructor(
-    public fieldName: string,
-    public fieldValue: string
+    public readonly name: string = "",
+    public readonly value: string = ""
   ) {}
 }

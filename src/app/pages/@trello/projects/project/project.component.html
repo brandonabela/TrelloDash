@@ -1,4 +1,4 @@
-<modal modalId="manageProjectModal" modalClass="modal-md">
+<modal modalId="manageProjectModal">
   <modal-title>
     <div *ngIf="isNewMode(); else editMode"> Add Trello Project </div>
     <ng-template #editMode> Edit Trello Project </ng-template>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="col-xl-6">
-              <select class="form-select" formControlName="expiryType">
+              <select class="form-control form-select" formControlName="expiryType">
                 <option value=1> Days </option>
                 <option value=31> Months </option>
                 <option value=365> Years </option>
@@ -34,19 +34,25 @@
         </div>
       </div>
     </form>
-  </modal-body>
 
-  <modal-footer>
-    <ng-container *ngIf="isNewMode()">
-      <button type="button" class="btn btn-primary" (click)="addTrelloProjectModal()" data-bs-dismiss="modal">
+    <div class="modal-controls">
+      <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+        Discard
+      </button>
+
+      <button
+        type="button" class="btn btn-primary" *ngIf="isNewMode()"
+        (click)="addTrelloProjectModal()" data-bs-dismiss="modal"
+      >
         Add Project
       </button>
-    </ng-container>
 
-    <ng-container *ngIf="!isNewMode()">
-      <button type="button" class="btn btn-primary" (click)="updateTrelloProjectModal()" data-bs-dismiss="modal">
+      <button
+        type="button" class="btn btn-primary" *ngIf="!isNewMode()"
+        (click)="updateTrelloProjectModal()" data-bs-dismiss="modal"
+      >
         Update Project
       </button>
-    </ng-container>
-  </modal-footer>
+    </div>
+  </modal-body>
 </modal>

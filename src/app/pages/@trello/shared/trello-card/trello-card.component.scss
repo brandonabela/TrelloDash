@@ -1,0 +1,10 @@
+.no-projects .input-group {
+  margin-bottom: 0;
+
+  .form-control {
+    padding: var(--space-m) var( --space-l);
+
+    color: var(--bs-white);
+    background: var(--bs-primary-dark);
+  }
+}

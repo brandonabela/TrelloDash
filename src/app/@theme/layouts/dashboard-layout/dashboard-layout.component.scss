@@ -1,38 +1,18 @@
 .content {
-  position: relative;
-  width: calc(100% - 240px);
+  float: right;
+
+  width: calc(100% - var(--ht-sidebar));
   height: 100vh;
   min-height: 100%;
-  float: right;
+
   transition: all 0.3s;
-
-  .content-body {
-    margin-top: 64px;
-    min-height: calc(100% - 64px - 50px); /* Top Navigation and Footer Height */
-  }
 }
 
-::ng-deep {
-  &::-webkit-scrollbar {
-    width: 9px;
-    height: 9px;
-
-    -webkit-appearance: none;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-    background: #808080;
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-  }
+.expand {
+  width: 100%;
 }
 
-.fullContent {
-  width: calc(100% - 60px);
-}
-
-@media (max-width: 1440px) {
-  .content {
-    width: 100%;
-  }
+.content-body {
+  min-height: calc(100% - var(--ht-header) - var(--ht-header));
+  margin-top: var(--ht-header);
 }

@@ -1,282 +1,290 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService } from 'src/app/@theme/service/alert.service';
-import { messages } from 'src/app/constants/messages';
-import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
-import { FormModule } from '../../../../@theme/components/form/form.module';
-import { TrelloAttachment } from '../../../../models/trello/trello-attachment';
-import { TrelloCheckList } from '../../../../models/trello/trello-checklist';
-import { TrelloCustomField } from '../../../../models/trello/trello-custom-field';
-import { TrelloLabel } from '../../../../models/trello/trello-label';
-import { TrelloProject } from '../../../../models/trello/trello-project';
-import { RequestService } from '../../../../service/request.service';
 
-declare var JSZip: any;
-declare var saveAs: any;
+import { messages } from 'src/app/constants/messages';
+import { AlertService } from 'src/app/@theme/service/alert.service';
+import { RequestService } from 'src/app/service/request.service';
+import { TrelloService } from 'src/app/service/trello.service';
+
+import { FormModule } from "../../../../@theme/components/form/form.module";
+import { TrelloAttachment } from '../../../../models/trello/trello-attachment';
+import { TrelloChecklist } from '../../../../models/trello/trello-checklist';
+import { TrelloProject } from '../../../../models/trello/trello-project';
+import { TrelloChecklistEntries } from 'src/app/models/trello/trello-checklist-entries';
+
+import * as JSZip from 'jszip';
 
 @Component({
   selector: 'trello-export-latex',
   templateUrl: './export-latex.component.html',
   styleUrls: ['./export-latex.component.scss']
 })
-export class ExportLatexComponent implements OnInit {
-  @Input() public projectIndex: number;
-  @Input() public trelloViewer: TrelloViewer;
+export class ExportLatexComponent {
+  @Input() public projectIndex!: number;
 
-  public trelloForm: FormGroup;
+  public trelloForm!: FormGroup;
 
   constructor(
     private alertService: AlertService,
     private requestService: RequestService,
+    private trelloService: TrelloService,
     private fb: FormBuilder
-  ) { }
-
-  static escapeCharacters(noFormatString: string): string {
-    return noFormatString.replace(/([&%$#_{}~^\\])/g, '\\$1');
-  }
-
-  static latexTableRow(rowName: string, rowContent: string): string {
-    return (
-      '\t' + (rowName + ':').padEnd(25) +
-      '& \\multicolumn{2}{p{\\dimexpr 20pt+2\\tabucolX+2\\arrayrulewidth}|}{' + rowContent + ' \\newline} \\\\ \\hline \n'
-    );
-  }
-
-  static formatCardDescription(cardDescription: string): string {
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    const italicRegex = /_(.*?)_/g;
-    const strikeRegex = /~~(.*?)~~/g;
-    const newLineRegex = /[\r\n]+/g;
-    const urlRegex = /\[([^\[\]]*)]\((.*?)\)/gm;
-
-    return cardDescription
-      .replace(boldRegex, '\\textbf{$1}')
-      .replace(italicRegex, '\\textit{$1}')
-      .replace(strikeRegex, '\\sout{$1}')
-      .replace(newLineRegex, ' \\newline ')
-      .replace(urlRegex, '\\textbf{\\textit{\\href{$1}{$2}}}');
-  }
-
-  static getAttachments(selectedProject: TrelloProject) {
-    return [].concat(...selectedProject.trelloCards
-      .filter(aCard => aCard.cardAttachments.length)
-      .map(aCard => aCard.cardAttachments.map(anAttachment => anAttachment))
-    );
-  }
-
-  ngOnInit() {
+  ) {
     this.trelloForm = this.fb.group({
-      txtChapterName: ['Trello Documentation', Validators.required],
-      chkBoardName: [true, Validators.required],
-      txtBoardName: ['Board Name', Validators.required],
-      chkCardName: [true, Validators.required],
-      txtCardName: ['Card Name', Validators.required],
-      chkCardDescription: [true, Validators.required],
-      txtCardDescription: ['Description', Validators.required],
-      chkCardLabels: [true, Validators.required],
-      txtCardLabels: ['Labels', Validators.required],
-      chkCardLists: [true, Validators.required],
-      chkCustomField: [true, Validators.required],
-      chkCardAttachment: [true, Validators.required]
+      chapterName: ['Trello Documentation', [Validators.required]],
+      keepBoardName: [true],
+      boardName: ['Board Name', [Validators.required]],
+      keepCardName: [true],
+      cardName: ['Card Name', [Validators.required]],
+      keepCardDescription: [true],
+      cardDescription: ['Description', [Validators.required]],
+      keepCardLabels: [true],
+      cardLabels: ['Labels', [Validators.required]],
+      keepCardLists: [true],
+      keepCustomField: [true],
+      keepCardAttachment: [true],
+      cardAttachmentPath: ['images/', [Validators.required]]
     });
 
     this.onChanges();
   }
 
   onChanges(): void {
-    FormModule.updateFieldStatus(this.trelloForm, 'chkBoardName', 'txtBoardName');
-    FormModule.updateFieldStatus(this.trelloForm, 'chkCardName', 'txtCardName');
-    FormModule.updateFieldStatus(this.trelloForm, 'chkCardDescription', 'txtCardDescription');
-    FormModule.updateFieldStatus(this.trelloForm, 'chkCardLabels', 'txtCardLabels');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepBoardName', 'boardName');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCardName', 'cardName');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCardDescription', 'cardDescription');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCardLabels', 'cardLabels');
+    FormModule.updateFieldStatus(this.trelloForm, 'keepCardAttachment', 'cardAttachmentPath');
   }
 
-  public exportLatexProject(): void {
-    const trelloProject = this.trelloViewer.trelloProjects[this.projectIndex];
-    const fileString = this.generateLatexString(trelloProject);
-    this.exportLatexFile(trelloProject, fileString);
-  }
-
-  public getFileHeader(txtChapterName: string): string {
+  public getFileHeader(chapterName: string): string {
     return [
-      '%----------------------------------------------------------------------------------------',
-      '%\t\t\tCHAPTER',
-      '%----------------------------------------------------------------------------------------',
+      '\\documentclass{book}',
+      '',
+      '\\usepackage{tabu}',
+      '\\usepackage{hyperref}',
+      '\\usepackage{longtable}',
+      '\\usepackage{graphicx}',
+      '',
+      '\\usepackage{enumitem,amssymb}',
+      '\\newlist{todolist}{itemize}{2}',
+      '\\setlist[todolist]{label=$\\square$}',
+      '',
+      '\\usepackage[a4paper, total={6in, 8in}]{geometry}',
       '',
       '\\begin{document}',
       '',
-      '\\chapter{' + txtChapterName + '}\n',
+      '\\chapter{' + chapterName + '}\n\n'
     ].join('\n');
   }
 
-  public getSelectedLabels(cardLabels: TrelloLabel[]): string {
-    return cardLabels.map(aCardLabel => aCardLabel.labelName).join(', ');
+  private static escapeCharacters(value: string): string {
+    const escapeRegex = /[$&%{}_^~\\]/g;
+    const unicodeRegex = /[^\x00-\x7F]/g;
+
+    const boldRegex = /#+\s([^\n]*)|\*\*(.*?)\*\*/g;
+    const italicRegex = /_(.*?)_/g;
+    const strikeRegex = /~~(.*?)~~/g;
+    const newLineRegex = /[\r\n]+/g;
+
+    const urlRegex = /\[([^\[\]]*)]\((.*?)\)|^(https?:\/\/[^\s/$.?#][^\s]*)$/g;
+    const urlMarkRegex = /\[([^\[\]]*)]\((.*?)\)/g;
+    const urlPlaceRegex = /LINKPLACEHOLDER(\d+)/g;
+
+    value = value.replace(unicodeRegex, '');
+
+    const linkPlaceholders: string[] = [];
+    value = value.replace(urlRegex, (match, _) => {
+      linkPlaceholders.push(match);
+      return `LINKPLACEHOLDER${linkPlaceholders.length - 1}`;
+    });
+
+    value = value
+      .replace(escapeRegex, '\\$&')
+
+      .replace(boldRegex, '\\textbf{$1}')
+      .replace(italicRegex, '\\textit{$1}')
+      .replace(strikeRegex, '\\sout{$1}')
+      .replace(newLineRegex, ' \\newline ');
+
+    value = value.replace(urlPlaceRegex, (_, p1) => {
+      let url = linkPlaceholders[p1].replace(/%&/g, '\\$&');
+
+      if (url.match(urlMarkRegex)) {
+        return url.replace(urlRegex, (_, p1, p2) => {
+          p1 = p1.replace(escapeRegex, '\\$&');
+          p2 = p2.replace(escapeRegex, '\\$&');
+          return `\\textbf{\\href{${p2}}{${p1}}}`;
+        });
+      }
+      else {
+        url = url.replace(escapeRegex, '\\$&');
+        return `\\textbf{\\href{${url}}{${url}}}`;
+      }
+    });
+
+    return value;
   }
 
-  public getCustomFields(cardCustomFields: TrelloCustomField[]): string {
-    return cardCustomFields.map(aCardCustomField => {
-      ExportLatexComponent.latexTableRow(
-        ExportLatexComponent.escapeCharacters(aCardCustomField.fieldName),
-        ExportLatexComponent.escapeCharacters(aCardCustomField.fieldValue)
-      );
-    }).join('');
+  private static latexTableRow(rowName: string, rowContent: string): string {
+    const escapedName = (ExportLatexComponent.escapeCharacters(rowName) + ':').padEnd(25);
+    const escapedContent = ExportLatexComponent.escapeCharacters(rowContent);
+
+    return `\t${escapedName}& \\multicolumn{2}{p{\\dimexpr 20pt + 2 \\tabucolX + 2 \\arrayrulewidth}|}{${escapedContent} \\newline} \\\\ \\hline\n`;
   }
 
-  public getCardLists(cardLists: TrelloCheckList[]): string {
-    return cardLists.map(aCardList => {
-      let useTwoColumn = true;
+  public latexCardChecklist(trelloCheckList: TrelloChecklist): string {
+    const checklistName = ExportLatexComponent.escapeCharacters(trelloCheckList.name);
+    const useTwoColumn = trelloCheckList.entries.some(entry => entry.entry.length < 40);
+    let latexChecklist = '\t' + (checklistName + ':').padEnd(25) + '& ';
 
-      aCardList.checklistEntries.map(aChecklistEntry => {
-        if (aChecklistEntry.taskName.length > 40 && useTwoColumn) {
-          useTwoColumn = false;
-        }
-      });
-
-      this.formatCardChecklist(aCardList, useTwoColumn);
-    }).join('');
-  }
-
-  private formatCardChecklist(trelloCheckList: TrelloCheckList, useTwoColumn: boolean): string {
-    let latexChecklist = '\t' + (trelloCheckList.checklistName + ':').padEnd(25) + '& ';
+    const processChecklistEntry = (entry: TrelloChecklistEntries) => {
+      latexChecklist += `\n\t\t${entry.isCompleted ? '$\\boxtimes$ ' : '$\\square$ '}`;
+      latexChecklist += ExportLatexComponent.escapeCharacters(entry.entry);
+      latexChecklist += ' \\newline';
+    };
 
     if (useTwoColumn) {
-      trelloCheckList.checklistEntries.map((aChecklistEntry, index) => {
-        latexChecklist += (((index !== 0) && (index % 2) === 0) ? '\t\t\t\t\t\t\t & ' : '');
-        latexChecklist += '\\begin{todolist} ';
+      const splitIndex = Math.ceil(trelloCheckList.entries.length / 2);
+      const [firstColumnEntries, secondColumnEntries] = [
+        trelloCheckList.entries.slice(0, splitIndex),
+        trelloCheckList.entries.slice(splitIndex)
+      ];
 
-        latexChecklist += ((aChecklistEntry.isTaskCompleted) ? '\\item[\\done] ' : '\\item ');
-        latexChecklist += ExportLatexComponent.escapeCharacters(aChecklistEntry.taskName);
-        latexChecklist += ' \\end{todolist}' + (((index % 2) === 0) ? ' & ' : ' \\\\ \n');
-      });
+      firstColumnEntries.forEach(processChecklistEntry);
+      latexChecklist += '\n\t&'
+      secondColumnEntries.forEach(processChecklistEntry);
     } else {
-      latexChecklist += '\\multicolumn{2}{p{\\dimexpr 20pt+2\\tabucolX+2\\arrayrulewidth}|}{';
-      latexChecklist += '\n\t\\begin{todolist}\n';
-
-      trelloCheckList.checklistEntries.map((aChecklistEntry, index) => {
-        latexChecklist += ((aChecklistEntry.isTaskCompleted) ? '\t\t\\item[\\done] ' : '\t\t\\item ');
-        latexChecklist += ExportLatexComponent.escapeCharacters(aChecklistEntry.taskName);
-        latexChecklist += ((index !== trelloCheckList.checklistEntries.length - 1) ? ' \\\\ \n' : '');
-      });
-
-      latexChecklist += '\n\t\\end{todolist}}';
+      latexChecklist += '\\multicolumn{2}{p{\\dimexpr 20pt+2\\tabucolX+2\\arrayrulewidth}|}{\n';
+      trelloCheckList.entries.forEach(processChecklistEntry);
+      latexChecklist += '\n\t}';
     }
 
     return latexChecklist + ' \\\\ \\hline \n';
   }
 
-  public getCardAttachments(cardAttachments: TrelloAttachment[]): string {
+  private latexCardAttachments(cardAttachments: TrelloAttachment[], cardAttachmentPath: string): string {
+    cardAttachmentPath += cardAttachmentPath.endsWith('/') ? '' : '/';
+
     return cardAttachments.map(aCardAttachment => [
       '\n\\begin{figure}[ht!]',
       '\t\\centering',
-      '\t\\includegraphics[width=\\linewidth / 4 * 3]{images/GameTasks/' + ExportLatexComponent.escapeCharacters(aCardAttachment.cardAttachmentName) + '}',
-      '\end{figure}',
-      '\\vspace*{1.5cm}'
+      `\t\\includegraphics[width=0.75 \\linewidth]{${cardAttachmentPath}${ExportLatexComponent.escapeCharacters(aCardAttachment.name)}}`,
+      '\\end{figure}\n',
+      '\\vspace*{1cm}'
     ].join('\n')
     ).join('\n');
   }
 
-  private generateLatexString(trelloProject: TrelloProject): string {
-    const txtChapterName = this.trelloForm.get('txtChapterName').value;
-
-    const chkBoardName = this.trelloForm.get('chkBoardName').value;
-    const txtBoardName = this.trelloForm.get('txtBoardName').value;
-    const chkCardName = this.trelloForm.get('chkCardName').value;
-    const txtCardName = this.trelloForm.get('txtCardName').value;
-    const chkCardDescription = this.trelloForm.get('chkCardDescription').value;
-    const txtCardDescription = this.trelloForm.get('txtCardDescription').value;
-    const chkCardLabels = this.trelloForm.get('chkCardLabels').value;
-    const txtCardLabels = this.trelloForm.get('txtCardLabels').value;
-    const chkCardLists = this.trelloForm.get('chkCardLists').value;
-    const chkCustomField = this.trelloForm.get('chkCustomField').value;
-    const chkCardAttachment = this.trelloForm.get('chkCardAttachment').value;
-
-    if (!chkBoardName && !chkCardName && !chkCardDescription && !chkCardLabels && !chkCardLists && !chkCustomField && !chkCardAttachment) {
-      this.alertService.add(messages.documentErrorMinOne);
-      return;
-    }
-
-    if (
-      (chkBoardName && !txtBoardName.length) || (chkCardName && !txtCardName.length) ||
-      (chkCardDescription && !txtCardDescription.length) || (chkCardLabels && !txtCardLabels.length)
-    ) {
-      this.alertService.add(messages.documentErrorString);
-      return;
-    }
-
-    let fileString = this.getFileHeader(txtChapterName);
-
-    trelloProject.trelloCards.map((aCard, cardIndex) => {
-      fileString += '\\begin{longtabu}{|X|XX|} \\hline \\tabuphantomline\n';
-
-      const cardName = ExportLatexComponent.escapeCharacters(aCard.cardName);
-      fileString += chkCardName ? ExportLatexComponent.latexTableRow(txtCardName, cardName) : '';
-
-      const boardName = ExportLatexComponent.escapeCharacters(aCard.cardBoardName);
-      fileString += chkBoardName ? ExportLatexComponent.latexTableRow(txtBoardName, boardName) : '';
-
-      const cardDescription = ExportLatexComponent.formatCardDescription(ExportLatexComponent.escapeCharacters(aCard.cardDescription));
-      fileString += chkCardDescription ? ExportLatexComponent.latexTableRow(txtCardDescription, cardDescription) : '';
-
-      if (aCard.cardLabels.length !== 0) {
-        const cardLabels = ExportLatexComponent.escapeCharacters(this.getSelectedLabels(aCard.cardLabels));
-        fileString += chkCardLabels ? ExportLatexComponent.latexTableRow(txtCardLabels, cardLabels) : '';
-      }
-
-      if (aCard.cardCustomFields.length !== 0) {
-        fileString += chkCustomField ? this.getCustomFields(aCard.cardCustomFields) : '';
-      }
-
-      fileString += chkCardLists ? this.getCardLists(aCard.cardLists) : '';
-      fileString += '\\end{longtabu}';
-
-      if (aCard.cardAttachments.length !== 0) {
-        fileString += chkCardAttachment ? '\n' + this.getCardAttachments(aCard.cardAttachments) : '';
-      }
-
-      fileString += ((cardIndex < trelloProject.trelloCards.length - 1) ? '\n\n\\clearpage\n\n' : '\n\n\\end{document}\n');
-    });
-
-    return fileString;
+  private static projectAttachments(trelloProject: TrelloProject): TrelloAttachment[] {
+    return trelloProject.trelloCards.flatMap(aCard => aCard.cardAttachments);
   }
 
-  private exportLatexFile(selectedProject: TrelloProject, fileString: string): void {
-    const zip = new JSZip();
+  private exportFiles(trelloProject: TrelloProject, fileString: string, keepCardAttachment: boolean = true, cardAttachmentPath: string = 'images/'): void {
+    const texFileName = trelloProject.projectName + '.tex';
+    const zipFileName = trelloProject.projectName + '.zip';
 
-    const imageFolder = 'images/';
-    const texFileName = selectedProject.projectName + '.tex';
-    const zipFileName = selectedProject.projectName + '.zip';
-
-    const chkCardAttachment = this.trelloForm.get('chkCardAttachment').value;
-    const projectAttachments = ExportLatexComponent.getAttachments(selectedProject);
+    cardAttachmentPath += cardAttachmentPath.endsWith('/') ? '' : '/';
+    const projectAttachments = ExportLatexComponent.projectAttachments(trelloProject);
 
     const blob = new Blob([fileString], {
       type: 'text/plain;charset=utf-8'
     });
 
-    if (chkCardAttachment && projectAttachments.length !== 0) {
+    if (keepCardAttachment && projectAttachments.length !== 0) {
       this.alertService.add(messages.trelloInitDownload);
 
-      let currentAttachment = 0;
+      const zip = new JSZip();
+      zip.file(texFileName, blob);
 
-      zip.file(texFileName, blob, { type: 'octet/stream' });
+      let attachmentLoaded = 0;
 
-      projectAttachments.map((anAttachment: TrelloAttachment) => {
-        this.requestService.getBase64WithCors(anAttachment.cardAttachmentLink).then(attachmentBase64 => {
-          zip.file(imageFolder + anAttachment.cardAttachmentNameWithExtension, attachmentBase64, { base64: true });
-          currentAttachment++;
+      projectAttachments.forEach((anAttachment: TrelloAttachment) => {
+        this.requestService.getResponseWithCors(anAttachment.link).subscribe((attachment: ArrayBuffer) => {
+          zip.file(cardAttachmentPath + anAttachment.fileName, attachment, { base64: true });
 
-          if (currentAttachment === projectAttachments.length) {
-            zip.generateAsync({ type: 'blob' }).then(content => {
-              saveAs(content, zipFileName);
+          attachmentLoaded ++;
 
-              this.alertService.add(messages.zipDocumentSuccess);
-            });
+          if (attachmentLoaded == projectAttachments.length) {
+            zip.generateAsync({ type: 'blob' })
+              .then((content: Blob) => {
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(content);
+                a.download = zipFileName;
+                a.click();
+
+                this.alertService.add(messages.zipDocumentSuccess);
+              })
+              .catch((error: Error) => {
+                this.alertService.add(messages.zipDocumentError);
+              });
           }
         });
       });
-    } else {
-      saveAs(blob, texFileName);
+    }
+    else {
+      const zip = new Blob([blob], { type: 'octet/stream' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(zip);
+      link.download = texFileName;
+      link.click();
 
       this.alertService.add(messages.texDocumentSuccess);
+    }
+  }
+
+  public exportLatexProject(): void {
+    const {
+      chapterName,
+      keepBoardName, boardName,
+      keepCardName, cardName,
+      keepCardDescription, cardDescription,
+      keepCardLabels, cardLabels,
+      keepCardLists, keepCustomField,
+      keepCardAttachment, cardAttachmentPath
+    } = this.trelloForm.value;
+
+    if (keepBoardName || keepCardName || keepCardDescription || keepCardLabels || keepCardLists || keepCustomField || keepCardAttachment) {
+      const trelloProject = this.trelloService.trelloProjects[this.projectIndex];
+
+      let fileString = this.getFileHeader(chapterName);
+
+      trelloProject.trelloCards.forEach((aCard, cardIndex) => {
+        fileString += '\\begin{longtabu}{|X|XX|} \\hline \\tabuphantomline\n';
+        fileString += keepCardName ? ExportLatexComponent.latexTableRow(cardName, aCard.cardName) : '';
+        fileString += keepBoardName ? ExportLatexComponent.latexTableRow(boardName, aCard.cardBoardName) : '';
+        fileString += keepCardDescription ? ExportLatexComponent.latexTableRow(cardDescription, aCard.cardDescription) : '';
+
+        if (keepCardLabels) {
+          const cardLabelJoin = aCard.cardLabels.length ? aCard.cardLabels.map(aCardLabel => aCardLabel.name).join(', ') : 'No Labels';
+          fileString += ExportLatexComponent.latexTableRow(cardLabels, cardLabelJoin);
+        }
+
+        if (keepCustomField) {
+          for (const aCardCustomField of aCard.cardCustomFields) {
+            fileString += ExportLatexComponent.latexTableRow(aCardCustomField.name, aCardCustomField.value);
+          }
+        }
+
+        if (keepCardLists) {
+          for (const aCardList of aCard.cardLists) {
+            fileString += this.latexCardChecklist(aCardList);
+          }
+        }
+
+        fileString += '\\end{longtabu}\n';
+
+        if (keepCardAttachment) {
+          fileString += this.latexCardAttachments(aCard.cardAttachments, cardAttachmentPath);
+        }
+
+        fileString += ((cardIndex < trelloProject.trelloCards.length - 1) ? '\n\n\\clearpage\n\n' : '\n\n\\end{document}\n');
+      });
+
+      this.exportFiles(trelloProject, fileString, keepCardAttachment, cardAttachmentPath);
+    }
+    else {
+      this.alertService.add(messages.documentErrorMinOne);
     }
   }
 }

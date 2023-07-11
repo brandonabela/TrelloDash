@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
+import { TrelloService } from 'src/app/service/trello.service';
 
 @Component({
   selector: 'trello-card',
@@ -7,6 +7,9 @@ import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
   styleUrls: ['./trello-card.component.scss']
 })
 export class TrelloCardComponent {
-  @Input() public cardTitle: string;
-  @Input() public trelloViewer: TrelloViewer;
+  @Input() public cardTitle: string = "";
+
+  constructor(
+    public trelloService: TrelloService
+  ) { }
 }

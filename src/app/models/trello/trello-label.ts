@@ -1,32 +1,24 @@
-export class TrelloLabel {
-  constructor(public labelName: string, public labelColour: string) {
-    this.labelColour = TrelloLabel.getRGBFromColour(labelColour);
-  }
+import { JsonTrelloLabel } from "../trello-json/json-trello-label";
 
-  private static getRGBFromColour(colour: string): string {
-    switch (colour) {
-      case 'black':
-        return '#355263';
-      case 'blue':
-        return '#0079bf';
-      case 'green':
-        return '#61bd4f';
-      case 'lime':
-        return '#51e898';
-      case 'orange':
-        return '#ff9f1a';
-      case 'pink':
-        return '#ff78cb';
-      case 'purple':
-        return '#c377e0';
-      case 'red':
-        return '#eb5a46';
-      case 'sky':
-        return '#00c2e0';
-      case 'yellow':
-        return '#f2d600';
-      default:
-        return '#b3bec4';
-    }
+export class TrelloLabel {
+  private static colorMap = new Map([
+    ['black', '#355263'],
+    ['blue', '#0079BF'],
+    ['green', '#61BD4F'],
+    ['lime', '#51E898'],
+    ['orange', '#FF9F1A'],
+    ['pink', '#FF78CB'],
+    ['purple', '#C377E0'],
+    ['red', '#EB5A46'],
+    ['sky', '#00C2E0'],
+    ['yellow', '#F2D600'],
+  ]);
+
+  public readonly name: string = '';
+  public readonly colour: string = '';
+
+  constructor(jsonLabel: JsonTrelloLabel) {
+    this.name = jsonLabel.name;
+    this.colour = TrelloLabel.colorMap.get(jsonLabel.color.toLowerCase()) || '#B3BEC4';
   }
 }

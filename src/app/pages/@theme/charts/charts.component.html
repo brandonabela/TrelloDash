@@ -1,0 +1,107 @@
+<page-header></page-header>
+
+<page-body>
+  <div class="row">
+
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Bar Chart </h3>
+        </div>
+
+        <div class="card-body">
+          <canvas
+            baseChart
+            [type]="'bar'"
+            [legend]="true"
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="chartOptions"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Line Chart </h3>
+        </div>
+
+        <div class="card-body">
+          <canvas
+            baseChart
+            [type]="'line'"
+            [legend]="true"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="chartOptions"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Pie Chart </h3>
+        </div>
+
+        <div class="card-body">
+          <canvas
+            baseChart
+            [type]="'pie'"
+            [legend]="true"
+            [datasets]="pieChartData"
+            [labels]="pieChartLabels"
+            [options]="chartOptions"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Radar Chart </h3>
+        </div>
+
+        <div class="card-body">
+          <canvas
+            baseChart
+            [type]="'radar'"
+            [legend]="true"
+            [datasets]="radarChartData"
+            [labels]="radarChartLabels"
+            [options]="chartOptions"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Doughnut Chart </h3>
+        </div>
+
+        <div class="card-body">
+          <canvas
+            baseChart
+            [type]="'doughnut'"
+            [legend]="true"
+            [datasets]="doughnutChartData"
+            [labels]="doughnutChartLabels"
+            [options]="chartOptions"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</page-body>

@@ -1,9 +1,25 @@
-@import "~src/app/@theme/assets/scss/theme-colour.scss";
+.dropdown-checkbox {
+  .btn-group {
+    width: 100%;
+  }
 
-.dropdown-menu li {
-  cursor: pointer;
+  button {
+    overflow: hidden;
 
-  .form-check-input {
-    margin: 9px 5px 0 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .dropdown-menu li {
+    margin-bottom: var(--space-s);
+
+    label {
+      cursor: pointer;
+    }
+
+    .form-check-input {
+      margin-right: var(--icon-size);
+      margin-left: 0;
+    }
   }
 }

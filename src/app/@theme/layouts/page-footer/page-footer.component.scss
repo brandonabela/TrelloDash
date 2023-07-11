@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  align-items: center;
+
+  min-height: var(--ht-footer);
+  padding: 0 var(--space-xl);
+
+  border-top: 1px solid var(--bs-outline);
+  background: var(--bs-white);
+}
+
+.footer p {
+  margin: 0;
+
+  color: var(--bs-gray);
+}

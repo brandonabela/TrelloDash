@@ -2,7 +2,7 @@ import { AlertType } from './alert-type';
 
 export class AlertTitle {
   constructor(
-    public title: string,
-    public type: AlertType
+    public readonly title: string,
+    public readonly type: AlertType
   ) { }
 }

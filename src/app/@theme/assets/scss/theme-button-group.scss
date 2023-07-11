@@ -1,3 +1,47 @@
 .btn-group-icons i {
   margin-right: 0 !important;
 }
+
+.pagination {
+  justify-content: center;
+
+  margin-bottom: 0;
+}
+
+.page-item {
+  width: 35px;
+  height: 35px;
+  margin-right: var(--space-m);
+
+  border-color: var(--bs-gray);
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .page-link {
+    font-size: var(--fs-p);
+    font-weight: 500;
+
+    text-align: center;
+
+    color: var(--bs-gray);
+    border-radius: var(--radius);
+  }
+
+  &:not(.disabled):not(.active):hover .page-link,
+  &:not(.disabled):not(.active):focus .page-link {
+    color: var(--bs-primary-light);
+    background-color: var(--bs-primary-fade);
+  }
+
+  &.disabled .page-link {
+    opacity: 0.6;
+  }
+
+  &.active .page-link {
+    color: var(--bs-white) !important;
+    border-color: transparent;
+    background-color: var(--bs-primary-light);
+  }
+}

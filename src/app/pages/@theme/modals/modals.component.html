@@ -1,119 +1,106 @@
 <page-header></page-header>
 
-
 <page-body>
   <div class="row">
-    <div class="col-xl-4">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Default </h1>
-          </card-title>
-        </card-header>
 
-        <card-body>
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Default </h3>
+        </div>
+
+        <div class="card-body">
           <button class="btn btn-primary col-xl-12" data-bs-toggle="modal" data-bs-target="#defaultModal">
             Launch Modal
           </button>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-4">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Vertically Centered </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Vertically Centered </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <button class="btn btn-primary col-xl-12" data-bs-toggle="modal" data-bs-target="#verticalCenteredModal">
             Launch Modal
           </button>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-4">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Scrolling </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+         <h3 class="card-title"> Scrolling </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <button class="btn btn-primary col-xl-12" data-bs-toggle="modal" data-bs-target="#scrollingModal">
             Launch Modal
           </button>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-4">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Small </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Small </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <button class="btn btn-primary col-xl-12" data-bs-toggle="modal" data-bs-target="#smallModal">
             Launch Modal
           </button>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-4">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Large </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Large </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <button class="btn btn-primary col-xl-12" data-bs-toggle="modal" data-bs-target="#largeModal">
             Launch Modal
           </button>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-4">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Extra Large </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Extra Large </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <button class="btn btn-primary col-xl-12" data-bs-toggle="modal" data-bs-target="#extraLargeModal">
             Launch Modal
           </button>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
 
     <div class="col-xl-4">
-      <card>
-        <card-header>
-          <card-title>
-            <h1> Confirmation </h1>
-          </card-title>
-        </card-header>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"> Confirmation </h3>
+        </div>
 
-        <card-body>
+        <div class="card-body">
           <button class="btn btn-primary col-xl-12" data-bs-toggle="modal" data-bs-target="#confirmationModal">
             Launch Modal
           </button>
-        </card-body>
-      </card>
+        </div>
+      </div>
     </div>
+
   </div>
 </page-body>
 
@@ -127,7 +114,7 @@
   </modal-body>
 
   <modal-footer>
-    <button class="btn btn-primary"> Save changes </button>
+    <button class="btn btn-primary"> Submit </button>
   </modal-footer>
 </modal>
 
@@ -149,80 +136,12 @@
   </modal-title>
 
   <modal-body>
-    <p>
+    <p *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus nunc quis mauris pulvinar molestie.
       Aliquam eros nunc, luctus in malesuada ut, facilisis elementum sem. Pellentesque a fermentum mauris. Nunc arcu
       tortor, scelerisque non euismod quis, tristique ut est. Donec in quam eu erat ullamcorper pretium nec sed risus.
       Donec tincidunt lobortis aliquet. Morbi faucibus eros ex, elementum auctor libero vehicula at. Aenean nec nisi
       dictum, iaculis turpis sed, elementum lacus. Aenean quis enim metus. Quisque sed finibus velit, ac consequat urna.
-    </p>
-
-    <p>
-      Donec molestie augue vel magna fringilla tincidunt. In accumsan sit amet turpis quis fermentum. Fusce tempus erat
-      et finibus imperdiet. Fusce sapien arcu, pretium et auctor vel, viverra a risus. Phasellus volutpat, tortor eu
-      tempus ultrices, eros eros commodo mi, quis semper lectus ante in augue. Cras sodales auctor efficitur. Fusce
-      blandit arcu nulla, ac luctus turpis pharetra ac. Maecenas eget risus justo. Cras eget nisl cursus ipsum accumsan
-      laoreet. Suspendisse volutpat nulla ac urna mollis congue. Mauris eget metus nisl.
-    </p>
-
-    <p>
-      Aenean diam nisl, suscipit at consequat et, eleifend eget sem. Duis dapibus, lorem id convallis accumsan, dui est
-      rutrum est, quis euismod enim felis at odio. Curabitur at tincidunt dui. Integer ligula quam, auctor blandit dolor
-      sit amet, sollicitudin fringilla leo. Phasellus blandit semper justo vitae consectetur. Curabitur et lacus leo.
-      Aenean turpis nisi, facilisis nec eros eu, laoreet tristique diam. Mauris ullamcorper libero enim, id consectetur
-      nunc feugiat non. Cras mollis justo in velit sagittis, at finibus nisi egestas. Nulla mattis posuere sapien, ac
-      volutpat urna porttitor sit amet. Nulla non nisl lacus. Aliquam malesuada fermentum leo, in auctor quam. Maecenas
-      vehicula commodo mi, non suscipit tortor.
-    </p>
-
-    <p>
-      Suspendisse et urna sed magna blandit dapibus. Nunc a tincidunt tellus. Morbi iaculis quis ligula nec feugiat.
-      Donec gravida, arcu quis tempus ultrices, quam nunc posuere augue, a semper turpis orci a tellus. Sed sit amet
-      sapien non nulla rutrum consectetur quis eu nisl. Aenean vulputate pellentesque ante, consequat vestibulum erat
-      mollis sed. Duis laoreet at nulla vitae aliquet. Pellentesque elementum nulla nec ex interdum efficitur.
-      Suspendisse potenti. Ut purus sem, interdum vitae lectus et, euismod eleifend turpis. Quisque ac tristique nisl.
-      Sed ac dolor nulla. Vivamus nisi elit, interdum nec venenatis non, tempus vel mauris. Maecenas maximus suscipit
-      condimentum. Nullam vitae purus augue.
-    </p>
-
-    <p>
-      Aenean diam nisl, suscipit at consequat et, eleifend eget sem. Duis dapibus, lorem id convallis accumsan, dui est
-      rutrum est, quis euismod enim felis at odio. Curabitur at tincidunt dui. Integer ligula quam, auctor blandit dolor
-      sit amet, sollicitudin fringilla leo. Phasellus blandit semper justo vitae consectetur. Curabitur et lacus leo.
-      Aenean turpis nisi, facilisis nec eros eu, laoreet tristique diam. Mauris ullamcorper libero enim, id consectetur
-      nunc feugiat non. Cras mollis justo in velit sagittis, at finibus nisi egestas. Nulla mattis posuere sapien, ac
-      volutpat urna porttitor sit amet. Nulla non nisl lacus. Aliquam malesuada fermentum leo, in auctor quam. Maecenas
-      vehicula commodo mi, non suscipit tortor.
-    </p>
-
-    <p>
-      Suspendisse et urna sed magna blandit dapibus. Nunc a tincidunt tellus. Morbi iaculis quis ligula nec feugiat.
-      Donec gravida, arcu quis tempus ultrices, quam nunc posuere augue, a semper turpis orci a tellus. Sed sit amet
-      sapien non nulla rutrum consectetur quis eu nisl. Aenean vulputate pellentesque ante, consequat vestibulum erat
-      mollis sed. Duis laoreet at nulla vitae aliquet. Pellentesque elementum nulla nec ex interdum efficitur.
-      Suspendisse potenti. Ut purus sem, interdum vitae lectus et, euismod eleifend turpis. Quisque ac tristique nisl.
-      Sed ac dolor nulla. Vivamus nisi elit, interdum nec venenatis non, tempus vel mauris. Maecenas maximus suscipit
-      condimentum. Nullam vitae purus augue.
-    </p>
-
-    <p>
-      Aenean diam nisl, suscipit at consequat et, eleifend eget sem. Duis dapibus, lorem id convallis accumsan, dui est
-      rutrum est, quis euismod enim felis at odio. Curabitur at tincidunt dui. Integer ligula quam, auctor blandit dolor
-      sit amet, sollicitudin fringilla leo. Phasellus blandit semper justo vitae consectetur. Curabitur et lacus leo.
-      Aenean turpis nisi, facilisis nec eros eu, laoreet tristique diam. Mauris ullamcorper libero enim, id consectetur
-      nunc feugiat non. Cras mollis justo in velit sagittis, at finibus nisi egestas. Nulla mattis posuere sapien, ac
-      volutpat urna porttitor sit amet. Nulla non nisl lacus. Aliquam malesuada fermentum leo, in auctor quam. Maecenas
-      vehicula commodo mi, non suscipit tortor.
-    </p>
-
-    <p>
-      Suspendisse et urna sed magna blandit dapibus. Nunc a tincidunt tellus. Morbi iaculis quis ligula nec feugiat.
-      Donec gravida, arcu quis tempus ultrices, quam nunc posuere augue, a semper turpis orci a tellus. Sed sit amet
-      sapien non nulla rutrum consectetur quis eu nisl. Aenean vulputate pellentesque ante, consequat vestibulum erat
-      mollis sed. Duis laoreet at nulla vitae aliquet. Pellentesque elementum nulla nec ex interdum efficitur.
-      Suspendisse potenti. Ut purus sem, interdum vitae lectus et, euismod eleifend turpis. Quisque ac tristique nisl.
-      Sed ac dolor nulla. Vivamus nisi elit, interdum nec venenatis non, tempus vel mauris. Maecenas maximus suscipit
-      condimentum. Nullam vitae purus augue.
     </p>
   </modal-body>
 

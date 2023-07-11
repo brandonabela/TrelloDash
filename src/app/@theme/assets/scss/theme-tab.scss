@@ -1,45 +1,49 @@
 .nav {
   i {
-    margin-right: 5px;
+    margin-right: var(--icon-size);
   }
 
   .nav-link {
-    padding: 10px 20px;
+    padding: var(--space-s) var( --space-m);
 
-    color: color(theme, text-paragraph);
+    color: var(--bs-gray);
+    border-radius: var(--radius);
 
     &.active,
     &:hover,
     &:focus {
-      color: color(theme, primary-light) !important;
+      color: var(--bs-primary-light);
     }
   }
+}
 
-  &.nav-tabs {
-    margin-right: 3px;
+.nav-tabs {
+  color: var(--bs-primary-light);
 
-    color: color(theme, primary-light);
+  .nav-link {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.nav-pills .active {
+  color: var(--bs-white) !important;
+}
+
+.nav-success {
+  .active {
+    background-color: var(--bs-success-light) !important;
   }
 
-  &.nav-pills .active,
-  &.nav-success .active {
-    color: color(theme, text-white) !important;
-  }
-
-  &.nav-success {
-    .active {
-      background-color: color(theme, success-light) !important;
-    }
-
-    .nav-link:hover:not(.active),
-    .nav-link:focus:not(.active) {
-      color: color(theme, success-light) !important;
+  .nav-link:not(.active) {
+    &:hover,
+    &:focus {
+      color: var(--bs-success-light) !important;
     }
   }
 }
 
 .tab-content {
-  margin-top: 15px;
-  margin-bottom: 20px;
+  margin: var(--space-m) 0 var(--space-l) 0;
   padding: 0;
 }

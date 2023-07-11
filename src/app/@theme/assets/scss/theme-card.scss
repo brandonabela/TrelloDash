@@ -1,0 +1,51 @@
+.card {
+  margin-bottom: var(--space-xl);
+
+  border: 0;
+  box-shadow: 0 0.1rem 1rem 0.25rem rgba(0, 0, 0, 0.05);
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: var(--ht-header);
+    padding: var(--space-m) var(--space-l);
+
+    border-bottom: 1px solid var(--bs-light-dark);
+    background-color: transparent;
+
+    .card-title {
+      font-size: var(--fs-h3);
+
+      margin: 0;
+    }
+
+    .card-tools {
+      display: flex;
+
+      margin-left: var(--space-m);
+
+      .btn {
+        margin-left: var(--space-m);
+      }
+    }
+  }
+
+  .card-body {
+    padding: var(--space-l);
+
+    canvas {
+      position: initial;
+
+      max-height: 20rem;
+    }
+  }
+
+  .card-footer {
+    padding: var(--space-m) var(--space-l);
+
+    border-top: 1px solid var(--bs-light-dark);
+    background-color: transparent;
+  }
+}

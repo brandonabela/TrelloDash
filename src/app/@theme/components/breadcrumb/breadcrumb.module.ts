@@ -15,4 +15,4 @@ import { BreadcrumbComponent } from './breadcrumb.component';
     BreadcrumbComponent
   ]
 })
-export class BreadcrumbModule { }
+export class BreadcrumbModule {}

@@ -1,36 +1,32 @@
-@import "~src/app/@theme/assets/scss/theme-colour.scss";
-
 .card-countdown {
+  padding: var(--space-l) var(--space-xl);
+
   text-align: center;
 
-  color: color(theme, text-white);
+  color: var(--bs-white);
 
   .count {
-    font-size: 28px;
+    font-size: var(--fs-h1);
     font-weight: 600;
-
-    margin-top: 24px;
   }
 
   .description {
-    font-size: 15px;
-
-    margin-bottom: 24px;
+    font-size: var(--fs-h4);
   }
 }
 
-.card-info .card {
-  background: color(theme, info-dark) !important;
+.card-info {
+  background: var(--bs-info-dark);
 }
 
-.card-primary .card {
-  background: color(theme, primary-dark) !important;
+.card-primary {
+  background: var(--bs-primary-dark);
 }
 
-.card-success .card {
-  background: color(theme, success-dark) !important;
+.card-success {
+  background: var(--bs-success-dark);
 }
 
-.card-dark .card {
-  background: color(theme, dark-dark) !important;
+.card-dark {
+  background: var(--bs-dark-dark);
 }

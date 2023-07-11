@@ -1,22 +1,29 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-import { ThemeComponentsModule } from './@theme/components/theme-components.module';
-import { DashboardLayoutComponent } from './@theme/layouts/dashboard-layout/dashboard-layout.component';
-import { AppRoutingModule, RoutingComponents } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { TrelloCardFilter } from './filters/TrelloCardFilter';
-import { TrelloProjectFilter } from './filters/TrelloProjectFilter';
+import { AppRoutingModule, RoutingComponents } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { ProjectComponent } from './pages/@trello/projects/project/project.component';
 import { ExportCsvComponent } from './pages/@trello/projects/export-csv/export-csv.component';
 import { ExportLatexComponent } from './pages/@trello/projects/export-latex/export-latex.component';
+
+import { TrelloCardFilter } from './filters/TrelloCardFilter';
+import { TrelloProjectFilter } from './filters/TrelloProjectFilter';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NgChartsModule } from 'ng2-charts';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+
 import { TrelloSharedModule } from './pages/@trello/shared/trello-shared.module';
-import { InvalidPathComponent } from './pages/invalid-path/invalid-path.component';
-import { ContentFooterComponent } from './shared/components/content-footer/content-footer.component';
-import { LeftNavigationComponent } from './shared/components/left-navigation/left-navigation.component';
-import { TopNavigationComponent } from './shared/components/top-navigation/top-navigation.component';
+import { ThemeComponentsModule } from './@theme/components/theme-components.module';
+import { ThemeLayoutsModule } from "./@theme/layouts/theme-layouts.module";
+import { ThemeFiltersModule } from "./@theme/filters/theme-filters.module";
+import { FormComponent } from './pages/@theme/form/form.component';
 
 
 @NgModule({
@@ -25,14 +32,6 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
 
     AppComponent,
     RoutingComponents,
-
-    // Dashboard Components
-
-    LeftNavigationComponent,
-    TopNavigationComponent,
-    ContentFooterComponent,
-    DashboardLayoutComponent,
-    InvalidPathComponent,
 
     // Trello Components
 
@@ -43,18 +42,26 @@ import { TopNavigationComponent } from './shared/components/top-navigation/top-n
     // Filters
 
     TrelloCardFilter,
-    TrelloProjectFilter
+    TrelloProjectFilter,
+    FormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
+
+    NgChartsModule,
     ToastrModule.forRoot(),
+    NgxGoogleAnalyticsModule.forRoot('UA-149941240-1'),
+    NgxGoogleAnalyticsRouterModule,
 
     TrelloSharedModule,
-    ThemeComponentsModule
+    ThemeComponentsModule,
+    ThemeLayoutsModule,
+    ThemeFiltersModule
   ],
   bootstrap: [AppComponent]
 })

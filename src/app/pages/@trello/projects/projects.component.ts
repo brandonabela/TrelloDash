@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService } from 'src/app/@theme/service/alert.service';
-import { TrelloProject } from 'src/app/models/trello/trello-project';
-import { TrelloViewer } from 'src/app/models/trello/trello-viewer';
-import { RequestService } from 'src/app/service/request.service';
-import { StorageService } from 'src/app/service/storage.service';
-
+import { TrelloService } from 'src/app/service/trello.service';
+import { ChartOptions } from "../../../config/chart-options";
 
 @Component({
   selector: 'page-projects',
@@ -14,90 +10,150 @@ import { StorageService } from 'src/app/service/storage.service';
 })
 export class ProjectsComponent implements OnInit {
   public trelloForm: FormGroup;
-  public trelloViewer: TrelloViewer;
-  public trelloProjects: TrelloProject[];
+  public projectIndex: number = 0;
 
-  public projectIndex: number;
-  public projectNameSearch: string;
+  public readonly EXPIRY_TYPES = [
+    { value: 1, label: 'Days' },
+    { value: 31, label: 'Months' },
+    { value: 365, label: 'Years' }
+  ];
+
+  private readonly DEFAULT_FORM_VALUES = {
+    url: '',
+    expiryQuantity: 1,
+    expiryType: this.EXPIRY_TYPES[0].value
+  };
+
+  private boardSummary: Map<string, number> = new Map();
+  public boardDataset: any[] = [];
+  public boardLabels: string[] = [];
+
+  private cardSummary: Map<string, number> = new Map();
+  public cardDataset: any[] = [];
+  public cardLabels: string[] = [];
+
+  private memberSummary: Map<string, number> = new Map();
+  public memberDataset: any[] = [];
+  public memberLabels: string[] = [];
+
+  public chartOptions = ChartOptions.getChartOptions();
 
   constructor(
-    private alertService: AlertService,
-    private storageService: StorageService,
-    private requestService: RequestService,
+    public trelloService: TrelloService,
     private fb: FormBuilder
   ) {
-    this.trelloViewer = new TrelloViewer(this.alertService, this.storageService, this.requestService);
+    this.trelloForm = this.fb.group({
+      url: ['', [Validators.required, Validators.minLength(8)]],
+      expiryQuantity: [1, [Validators.required, Validators.min(1)]],
+      expiryType: [this.EXPIRY_TYPES[0].value, Validators.required]
+    });
   }
 
   ngOnInit() {
-    this.trelloForm = this.fb.group({
-      url: ['', Validators.required],
-      expiryQuantity: [1, Validators.required],
-      expiryType: [1, Validators.required]
-    });
+    this.boardSummary = this.getBoardSummary();
+    this.boardDataset = [{ data: Array.from(this.boardSummary.values()) }];
+    this.boardLabels = Array.from(this.boardSummary.keys());
+
+    this.cardSummary = this.getCardSummary();
+    this.cardDataset = [{ data: Array.from(this.cardSummary.values()) }];
+    this.cardLabels = Array.from(this.cardSummary.keys());
+
+    this.memberSummary = this.getMemberSummary();
+    this.memberDataset = [{ data: Array.from(this.memberSummary.values()) }];
+    this.memberLabels = Array.from(this.memberSummary.keys());
   }
 
-  public clearForm(): void {
-    this.trelloForm.reset({
-      url: '',
-      expiryQuantity: 1,
-      expiryType: 1
-    });
+  private getCardSummary(): Map<string, number> {
+    const cardCounts = new Map<string, number>();
+
+    for (const project of this.trelloService.trelloProjects) {
+      const count = cardCounts.get(project.projectName) ?? 0;
+      cardCounts.set(project.projectName, count + project.trelloCards.length);
+    }
+
+    return cardCounts;
   }
 
-  public populateForm(index: number): void {
-    const trelloProject = this.trelloViewer.trelloProjects[index];
+  public getBoardSummary(): Map<string, number> {
+    const boardCounts = new Map<string, number>();
 
-    const formUrl = trelloProject.projectLink;
-    let formExpiryQuantity = trelloProject.validInDays;
+    for (const project of this.trelloService.trelloProjects) {
+      for (const card of project.trelloCards) {
+        const count = boardCounts.get(card.cardBoardName) ?? 0;
+        boardCounts.set(card.cardBoardName, count + 1);
+      }
+    }
 
-    const formExpiryType = this.getExpiryType(formExpiryQuantity);
-
-    formExpiryQuantity = formExpiryQuantity / formExpiryType;
-
-    this.trelloForm.reset({
-      url: formUrl,
-      expiryQuantity: formExpiryQuantity,
-      expiryType: formExpiryType
-    });
+    return boardCounts;
   }
 
-  public getExpiryType(expiryQuantity: number): number {
-    const isYear = expiryQuantity % 365 === 0;
-    const isMonth = expiryQuantity % 31 === 0;
+  public getMemberSummary(): Map<string, number> {
+    const memberCounts = new Map<string, number>();
 
-    if (expiryQuantity === 0) {
+    for (const project of this.trelloService.trelloProjects) {
+      for (const member of project.projectMembers) {
+        const count = memberCounts.get(member.fullName) ?? 0;
+        memberCounts.set(member.fullName, count + 1);
+      }
+    }
+
+    return memberCounts;
+  }
+
+  public getExpiryType(expiryDays: number): number {
+    if (expiryDays === 0) {
       return 1;
     }
 
-    return isYear ? 365 : (isMonth ? 31 : 1);
+    const isMonth = expiryDays % 31 === 0;
+    const isYear = !isMonth && expiryDays % 365 === 0;
+
+    return isYear ? 365 : isMonth ? 31 : 1;
+  }
+
+  public populateForm(index: number): void {
+    const { projectLink: url, renewalPeriod: expiryDays } = this.trelloService.trelloProjects[index];
+
+    const expiryType = this.getExpiryType(expiryDays);
+    const expiryQuantity = expiryDays / expiryType;
+
+    this.trelloForm.reset({ url, expiryQuantity, expiryType });
+  }
+
+  public clearForm(): void {
+    this.trelloForm.reset(this.DEFAULT_FORM_VALUES);
   }
 
   public addTrelloProject(): void {
     this.clearForm();
-    this.projectIndex = -1;
 
-    this.trelloForm.controls.url.enable();
+    this.projectIndex = -1;
+    this.trelloForm.controls['url'].enable();
   }
 
   public editTrelloProject(index: number): void {
     this.populateForm(index);
-    this.projectIndex = index;
 
-    this.trelloForm.controls.url.disable();
+    this.projectIndex = index;
+    this.trelloForm.controls['url'].disable();
   }
 
   public removeTrelloProject(index: number): void {
     this.projectIndex = index;
+    this.trelloForm.controls['url'].disable();
   }
 
-  public confirmRemoveTrelloProject($event: Event): void {
-    if ($event) {
-      this.trelloViewer.removeProject(this.projectIndex);
+  public confirmRemoveTrelloProject(isConfirmed: boolean): void {
+    if (isConfirmed) {
+      this.trelloService.removeProject(this.projectIndex);
     }
   }
 
-  public exportCSVProject(index: number): void {
+  public syncTrelloProject(index: number): void {
+    this.trelloService.syncProject(index);
+  }
+
+  public exportCsvProject(index: number): void {
     this.projectIndex = index;
   }
 

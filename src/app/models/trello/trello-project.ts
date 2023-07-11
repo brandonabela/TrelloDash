@@ -1,130 +1,107 @@
 import { JsonTrello } from '../trello-json/json-trello';
-import { TrelloCard } from './trello-card';
-import { TrelloCheckList } from './trello-checklist';
-import { TrelloCheckListEntries } from './trello-checklist-entries';
-import { TrelloCustomDropdown } from './trello-custom-dropdown';
-import { TrelloLabel } from './trello-label';
+import { JsonTrelloBoard } from "../trello-json/json-trello-board";
+import { JsonTrelloLabel } from "../trello-json/json-trello-label";
+import { JsonTrelloMember } from "../trello-json/json-trello-member";
+import { JsonTrelloCheckList } from "../trello-json/json-trello-checklist";
+import { JsonTrelloCustomField } from "../trello-json/json-trello-custom-field";
+
 import { TrelloMember } from './trello-member';
+import { TrelloCard } from './trello-card';
+import { TrelloLabel } from './trello-label';
+import { TrelloChecklist } from './trello-checklist';
+import { TrelloCustomDropdown } from './trello-custom-dropdown';
 
 export class TrelloProject {
   public projectName: string;
   public projectLink: string;
   public projectJson: string;
-  public projectMembers: TrelloMember[] = [];
+  public projectMembers: TrelloMember[];
 
-  public validInDays: number;
-  public expiryDate: Date;
+  public renewalPeriod: number = 0;
+  public expiryDate: Date = new Date();
 
   public trelloCards: TrelloCard[] = [];
 
   public trelloBoards: Map<string, string> = new Map<string, string>();
-  public trelloLabelList: Map<string, TrelloLabel> = new Map<string, TrelloLabel>();
-  public trelloCheckList: Map<string, TrelloCheckList> = new Map<string, TrelloCheckList>();
-  public trelloCustomDropdown: Map<string, TrelloCustomDropdown> = new Map<string, TrelloCustomDropdown>();
+  public trelloLabels: Map<string, TrelloLabel> = new Map<string, TrelloLabel>();
+  public trelloMembers: Map<string, TrelloMember> = new Map<string, TrelloMember>();
+  public trelloChecklists: Map<string, TrelloChecklist> = new Map<string, TrelloChecklist>();
+  public trelloCustomDropdowns: Map<string, TrelloCustomDropdown> = new Map<string, TrelloCustomDropdown>();
 
   public trelloFieldNames: string[] = [];
 
   constructor(projectJson: JsonTrello, days: number) {
+    const jsonCustomFields: JsonTrelloCustomField[] = projectJson.customFields;
+
     this.projectName = projectJson.name;
     this.projectLink = projectJson.shortUrl;
     this.projectJson = projectJson.shortUrl + '.json';
-    this.projectMembers = TrelloProject.getTrelloMembers(projectJson);
 
-    this.validInDays = days;
-    this.expiryDate = TrelloProject.getExpiryDate(days);
+    this.trelloMembers = TrelloProject.getMembers(projectJson.members);
+    this.projectMembers = Array.from(this.trelloMembers.values());
 
-    this.trelloBoards = TrelloProject.addTrelloBoards(projectJson);
-    this.trelloCheckList = TrelloProject.addTrelloChecklists(projectJson);
-    this.trelloLabelList = TrelloProject.addTrelloLabels(projectJson);
-    this.trelloCustomDropdown = TrelloProject.addCustomDropdown(projectJson);
+    this.setRenewalPeriod(days);
 
-    // Add Trello Cards
+    this.trelloBoards = TrelloProject.getBoards(projectJson.lists);
+    this.trelloLabels = TrelloProject.getLabels(projectJson.labels);
+    this.trelloChecklists = TrelloProject.getChecklists(projectJson.checklists);
+    this.trelloCustomDropdowns = TrelloProject.getCustomDropdown(projectJson.customFields);
 
-    for (let i = 0; i < projectJson.cards.length; i++) {
-      this.trelloCards.push(new TrelloCard(projectJson, i, this.trelloBoards, this.trelloCheckList, this.trelloLabelList, this.trelloCustomDropdown));
-    }
+    this.trelloFieldNames = TrelloProject.getFieldNames(jsonCustomFields);
 
-    // After initialising Trello Cards
-
-    this.trelloFieldNames = TrelloProject.getFieldNames(this.trelloCards);
-  }
-
-  public static getTrelloMembers(projectJson: JsonTrello): TrelloMember[] {
-    return projectJson.members.map(aMember =>
-      new TrelloMember(
-        aMember.username,
-        aMember.fullName,
-        aMember.initials,
-        aMember.url,
-        aMember.avatarUrl + '/50.png'
+    this.trelloCards = projectJson.cards.map(card =>
+      new TrelloCard(
+        this.projectName, card, this.trelloBoards, this.trelloLabels, this.trelloMembers, this.trelloChecklists,
+        this.trelloCustomDropdowns, jsonCustomFields
       )
     );
   }
 
-  public static getExpiryDate(days: number): Date {
+  public setRenewalPeriod(days: number): void {
+    this.renewalPeriod = days;
+
     const todayDate = new Date();
     todayDate.setDate(todayDate.getDate() + days);
-
-    return todayDate;
+    this.expiryDate = todayDate;
   }
 
-  private static addTrelloBoards(projectJson: JsonTrello): Map<string, string> {
-    const trelloBoards: Map<string, string> = new Map<string, string>();
-
-    projectJson.lists.map(aBoard => trelloBoards.set(aBoard.id, aBoard.name));
-
-    return trelloBoards;
-  }
-
-  private static addTrelloLabels(projectJson: JsonTrello): Map<string, TrelloLabel> {
-    const trelloLabelList: Map<string, TrelloLabel> = new Map<string, TrelloLabel>();
-
-    projectJson.labels.map(aLabel => trelloLabelList.set(aLabel.id, new TrelloLabel(aLabel.name, aLabel.color)));
-
-    return trelloLabelList;
-  }
-
-  private static addTrelloChecklists(projectJson: JsonTrello): Map<string, TrelloCheckList> {
-    const trelloCheckList: Map<string, TrelloCheckList> = new Map<string, TrelloCheckList>();
-
-    projectJson.checklists.map(aChecklist =>
-      trelloCheckList.set(
-        aChecklist.id,
-        new TrelloCheckList(
-          aChecklist.name,
-          aChecklist.checkItems.map(aCheckItem => new TrelloCheckListEntries(aCheckItem.name, (aCheckItem.state === 'complete')))
-        )
-      )
+  private static getMembers(jsonMembers: JsonTrelloMember[]): Map<string, TrelloMember> {
+    return new Map<string, TrelloMember>(
+      jsonMembers.map(aJsonMember => [aJsonMember.id, new TrelloMember(aJsonMember)])
     );
-
-    return trelloCheckList;
   }
 
-  private static addCustomDropdown(projectJson: JsonTrello): Map<string, TrelloCustomDropdown> {
-    const trelloFieldList: Map<string, TrelloCustomDropdown> = new Map<string, TrelloCustomDropdown>();
-
-    projectJson.customFields
-      .filter(aCustomField => aCustomField.type === 'list')
-      .map(aCustomField => trelloFieldList.set(
-        aCustomField.id,
-        new TrelloCustomDropdown(
-          aCustomField.name,
-          new Map<string, string>(
-            aCustomField.options.map(anOption =>
-              [anOption.id, anOption.value]
-            )
-          )
-        )
-      ));
-
-    return trelloFieldList;
+  private static getBoards(jsonLists: JsonTrelloBoard[]): Map<string, string> {
+    return new Map<string, string>(
+      jsonLists.map(aJsonList => [aJsonList.id, aJsonList.name])
+    );
   }
 
-  private static getFieldNames(trelloCards: TrelloCard[]): string[] {
-    const fieldsNames = ['Project Name', 'Board Name', 'Card Name', 'Card Description', 'Card Labels', 'Card Percentage'];
+  private static getLabels(jsonLabels: JsonTrelloLabel[]): Map<string, TrelloLabel> {
+    return new Map<string, TrelloLabel>(
+      jsonLabels.map(aJsonLabel => [aJsonLabel.id, new TrelloLabel(aJsonLabel)])
+    );
+  }
 
-    if (trelloCards.length > 0) {
-      return [...fieldsNames, ...trelloCards[0].cardCustomFields.map(customField => customField.fieldName)];
+  private static getChecklists(jsonChecklists: JsonTrelloCheckList[]): Map<string, TrelloChecklist> {
+    return new Map<string, TrelloChecklist>(
+      jsonChecklists.map(aChecklist => [aChecklist.id, new TrelloChecklist(aChecklist)])
+    );
+  }
+
+  private static getCustomDropdown(jsonCustomFields: JsonTrelloCustomField[]): Map<string, TrelloCustomDropdown> {
+    return new Map<string, TrelloCustomDropdown>(
+      jsonCustomFields
+        .filter(aCustomField => aCustomField.type === 'list')
+        .map(aCustomField => [aCustomField.id, new TrelloCustomDropdown(aCustomField)])
+    );
+  }
+
+  private static getFieldNames(jsonCustomFields: JsonTrelloCustomField[]): string[] {
+    const fieldsNames = ['Project', 'Board', 'Card Name', 'Card Description', 'Card Labels', 'Card Percentage'];
+
+    if (jsonCustomFields.length > 0) {
+      return [...fieldsNames, ...jsonCustomFields.map(aCustomField => aCustomField.name)];
     }
 
     return fieldsNames;

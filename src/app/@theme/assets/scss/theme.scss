@@ -1,31 +1,40 @@
-/*
-----------------------------------------
-Convention for CSS ordering is done using https://csscomb.herokuapp.com/online
-----------------------------------------
-*/
+@import url("https://fonts.googleapis.com/css?family=Poppins:wght@400;700;900&display=swap");
 
-@import "@fontsource/poppins";
+@import "variables";
+@import "theme-accordion";
+@import "theme-alert";
+@import "theme-badge";
+@import "theme-button";
+@import "theme-button-group";
+@import "theme-card";
+@import "theme-dropdown";
+@import "theme-form";
+@import "theme-progress";
+@import "theme-tab";
+@import "theme-table";
+@import "theme-typography";
 
-@import "./theme-accordion.scss";
-@import "./theme-button-group.scss";
-@import "./theme-button.scss";
-@import "./theme-alert.scss";
-@import "./theme-dropdown.scss";
-@import "./theme-tab.scss";
-@import "./theme-table.scss";
-@import "./theme-typography.scss";
-@import "./theme-progress-bar.scss";
+html {
+  box-sizing: border-box;
+}
 
-* {
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
   margin: 0;
   padding: 0;
 }
 
 body {
   font-family: 'Poppins', Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: var(--fs-p);
   font-weight: 400;
 
-  color: color(theme, text-paragraph);
-  background: color(theme, backdrop);
+  color: var(--bs-gray);
+  background: var(--bs-backdrop);
+}
+
+i {
+  text-align: center;
 }

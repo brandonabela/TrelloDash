@@ -1,0 +1,38 @@
+.textarea-numbers {
+  display: flex;
+
+  margin-bottom: var(--space-m);
+
+  .lines {
+    position: relative;
+
+    width: calc(var(--space-xl) + var(--space-l));
+    padding: var(--space-m) calc(var(--space-m) / 4 * 3);
+
+    border-radius: var(--radius) 0 0 var(--radius);
+    background-color: var(--bs-outline);
+
+    p {
+      margin-bottom: 0;
+
+      text-align: right;
+    }
+  }
+
+  textarea {
+    overflow: auto clip;
+
+    margin: 0;
+    padding: var(--space-m);
+
+    resize: none;
+
+    border-left: 0;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  &.is-valid,
+  &.is-invalid {
+    background-position: right 1rem center;
+  }
+}

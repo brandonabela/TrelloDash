@@ -1,20 +1,11 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'card-countdown',
   templateUrl: './card-countdown.component.html',
-  styleUrls: ['./card-countdown.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./card-countdown.component.scss']
 })
-export class CardCountdownComponent implements OnInit {
-  @Input() public count: number;
-  @Input() public description: string;
-
-  ngOnInit(): void {
-    if (!this.count) {
-      throw new Error('Attribute "count" is required in card component');
-    } else if (!this.description) {
-      throw new Error('Attribute "description" is required in card component');
-    }
-  }
+export class CardCountdownComponent {
+  @Input() count?: number = 0;
+  @Input() description?: string = "";
 }

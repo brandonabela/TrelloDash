@@ -1,4 +1,4 @@
-export class JsonTrelloBoard {
+export interface JsonTrelloBoard {
   id: string;
   name: string;
 }

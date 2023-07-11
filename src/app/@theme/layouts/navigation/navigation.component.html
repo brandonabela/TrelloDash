@@ -1,0 +1,47 @@
+<div class="navigation">
+  <nav class="navbar navbar-header fixed-top navbar-expand-lg">
+    <div class="logo-banner">
+      <h2> Dashboard System </h2>
+    </div>
+
+    <div class="navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" (click)="onToggleSidebar()"> <i class="fas fa-bars"></i> </a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            <i class="fas fa-cog"></i>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" (click)="downloadData()" href="#">
+                <i class="fas fa-download"></i>
+                Download Data
+              </a>
+            </li>
+
+            <input type="file" accept=".json" hidden #loadData (change)="importData($event)">
+            <li>
+              <a class="dropdown-item" (click)="loadData.click()" href="#">
+                <i class="fas fa-upload"></i>
+                Import Data
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" (click)="clearData()" href="#">
+                <i class="fa-solid fa-trash"></i>
+                Clear Data
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

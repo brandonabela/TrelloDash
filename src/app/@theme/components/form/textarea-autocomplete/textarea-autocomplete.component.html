@@ -1,0 +1,27 @@
+<div class="textarea-numbers">
+  <div class="lines">
+    <p *ngFor="let lineNumber of lineNumbers"> {{lineNumber}} </p>
+  </div>
+
+  <textarea
+    #textareaField
+    class="form-control" rows="1"
+    [formControl]="elementFormControl"
+    (keyup)="trackKeyUp()"
+    data-bs-toggle="typeahead" autocomplete="off"
+    (click)="setUserInteraction(true)"
+  ></textarea>
+
+  <ul
+    class="dropdown-menu autocomplete"
+    [ngClass]="{'show': userInteraction && showAutocomplete}"
+    [style.margin-top.px]="dropdownTop" [style.margin-left.px]="dropdownLeft"
+  >
+    <li
+      class="dropdown-item" *ngFor="let dropdownValue of dropdownValues"
+      (click)="dropdownClick(dropdownValue)"
+    >
+      {{dropdownValue}}
+    </li>
+  </ul>
+</div>

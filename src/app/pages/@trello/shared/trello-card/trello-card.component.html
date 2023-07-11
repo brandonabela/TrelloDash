@@ -1,32 +1,42 @@
-<ng-container *ngIf="trelloViewer.areProjectsLoaded(); else projectsLoading">
-  <card>
-    <card-header>
-      <card-title>
-         <h1> {{cardTitle}} </h1>
-      </card-title>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      {{trelloService.areProjectsLoaded ? cardTitle : 'Loading Trello Projects'}}
+    </h3>
 
-      <card-tools>
-        <ng-content select=".header"></ng-content>
+    <div class="card-tools">
+      <ng-content select=".header"></ng-content>
 
-        <button class="btn btn-primary btn-sm" (click)="trelloViewer.syncAllProjects()">
-          <i class="fas fa-sync"></i>
-          Sync Project
-        </button>
-      </card-tools>
-    </card-header>
+      <button class="btn btn-light" (click)="trelloService.syncAllProjects()" [disabled]="!trelloService.areProjectsLoaded">
+        <i class="fas fa-sync"></i>
+        Sync Projects
+      </button>
+    </div>
+  </div>
 
-    <card-body>
-      <ng-container *ngIf="trelloViewer.trelloProjects.length !== 0; else noProjects">
+  <div class="card-body">
+    <ng-container *ngIf="trelloService.trelloProjects.length; else noProjects">
+      <ng-container *ngIf="trelloService.areProjectsLoaded; else projectsLoading">
         <ng-content select=".body"></ng-content>
       </ng-container>
 
-      <ng-template #noProjects>
-        <trello-no-project></trello-no-project>
+      <ng-template #projectsLoading>
+        <div class="progress col-xl-12">
+          <div
+            class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+            [style.width]="trelloService.loadedPercentage + '%'"
+            [attr.aria-valuenow]="trelloService.loadedPercentage">
+          </div>
+        </div>
       </ng-template>
-    </card-body>
-  </card>
-</ng-container>
+    </ng-container>
 
-<ng-template #projectsLoading>
-  <trello-loading-projects [trelloViewer]="trelloViewer"></trello-loading-projects>
-</ng-template>
+    <ng-template #noProjects>
+      <div class="no-projects col-xl-12 text-center">
+        <div class="input-group">
+          <p class="form-control"> No projects added </p>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
