@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 import { messages } from 'src/app/constants/messages';
 import { AlertService } from 'src/app/@theme/service/alert.service';
@@ -12,7 +12,7 @@ import { TrelloService } from 'src/app/service/trello.service';
 })
 export class ProjectComponent {
   @Input() public projectIndex!: number;
-  @Input() public trelloForm!: FormGroup;
+  @Input() public trelloForm!: UntypedFormGroup;
 
   constructor(
     private alertService: AlertService,

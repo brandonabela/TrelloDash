@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'dropdown-checkbox',
@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class DropdownCheckboxComponent implements AfterViewInit {
   @Input() elementValues!: string[];
-  @Input() elementFormGroup!: FormGroup;
+  @Input() elementFormGroup!: UntypedFormGroup;
 
   public elementFilter: string = '';
 

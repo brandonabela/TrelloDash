@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { messages } from 'src/app/constants/messages';
 import { AlertService } from 'src/app/@theme/service/alert.service';
@@ -22,13 +22,13 @@ import * as JSZip from 'jszip';
 export class ExportLatexComponent {
   @Input() public projectIndex!: number;
 
-  public trelloForm!: FormGroup;
+  public trelloForm!: UntypedFormGroup;
 
   constructor(
     private alertService: AlertService,
     private requestService: RequestService,
     private trelloService: TrelloService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.trelloForm = this.fb.group({
       chapterName: ['Trello Documentation', [Validators.required]],

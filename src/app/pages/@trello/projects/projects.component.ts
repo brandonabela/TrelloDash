@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TrelloService } from 'src/app/service/trello.service';
 import { ChartOptions } from "../../../config/chart-options";
 
@@ -9,7 +9,7 @@ import { ChartOptions } from "../../../config/chart-options";
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  public trelloForm: FormGroup;
+  public trelloForm: UntypedFormGroup;
   public projectIndex: number = 0;
 
   public readonly EXPIRY_TYPES = [
@@ -40,7 +40,7 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     public trelloService: TrelloService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.trelloForm = this.fb.group({
       url: ['', [Validators.required, Validators.minLength(8)]],

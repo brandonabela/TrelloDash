@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 import { TrelloService } from 'src/app/service/trello.service';
 import { Pagination } from "../../../@theme/models/pagination";
@@ -20,13 +20,13 @@ export class QueryComponent {
   public labelNames: string[];
   public columnNames: string[];
 
-  public projectGroup: FormGroup;
-  public boardGroup: FormGroup;
-  public labelGroup: FormGroup;
-  public columnGroup: FormGroup;
+  public projectGroup: UntypedFormGroup;
+  public boardGroup: UntypedFormGroup;
+  public labelGroup: UntypedFormGroup;
+  public columnGroup: UntypedFormGroup;
 
   public advancedFilterKeys: string[];
-  public advancedFilterControl: FormControl;
+  public advancedFilterControl: UntypedFormControl;
 
   public pageIndex: number = 1;
   public pageEntries: number = 25;
@@ -36,7 +36,7 @@ export class QueryComponent {
 
   constructor(
     public trelloService: TrelloService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.projectNames = this.getProjectNames();
     this.boardNames = this.getBoardNames();
@@ -51,7 +51,7 @@ export class QueryComponent {
     this.columnGroup = this.fb.group(columnGroupValues);
 
     this.advancedFilterKeys = this.columnNames.map(columnName => columnName.replace(' ', '_'));
-    this.advancedFilterControl = new FormControl('');
+    this.advancedFilterControl = new UntypedFormControl('');
 
     this.originalCards = this.trelloService.getTrelloCards();
     this.filteredCards = this.originalCards;

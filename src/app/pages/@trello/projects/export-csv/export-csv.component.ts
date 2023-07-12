@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/@theme/service/alert.service';
 import { messages } from 'src/app/constants/messages';
 import { TrelloService } from 'src/app/service/trello.service';
@@ -21,13 +21,13 @@ export class ExportCsvComponent {
     ['Colon', ':'],
   ]);
 
-  public trelloForm!: FormGroup;
+  public trelloForm!: UntypedFormGroup;
   public readonly csvDelimiterKeys = Array.from(this.CSV_DELIMITER.keys());
 
   constructor(
     private alertService: AlertService,
     private trelloService: TrelloService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     this.trelloForm = this.fb.group({
       csvDelimiter: [Array.from(this.CSV_DELIMITER.keys())[0], [Validators.required]],

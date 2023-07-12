@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TrelloCard } from 'src/app/models/trello/trello-card';
 import { TrelloService } from 'src/app/service/trello.service';
 
@@ -18,12 +18,12 @@ export class Branch {
 export class MindMapComponent {
   public tree: Branch[] = [];
 
-  public trelloForm!: FormGroup;
+  public trelloForm!: UntypedFormGroup;
   public displayCard!: TrelloCard;
 
   constructor(
     public trelloService: TrelloService,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) {
     const fields = this.trelloService.trelloProjects[0].trelloFieldNames;
 

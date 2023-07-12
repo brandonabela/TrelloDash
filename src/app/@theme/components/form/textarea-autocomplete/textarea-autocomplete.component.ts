@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { EvaluateExpression } from 'src/app/@theme/models/expression';
 import { TrelloCard } from 'src/app/models/trello/trello-card';
 
@@ -27,7 +27,7 @@ export class TextareaAutocompleteComponent {
 
   @Input() keys!: string[];
   @Input() originalObjects!: TrelloCard[];
-  @Input() elementFormControl!: FormControl;
+  @Input() elementFormControl!: UntypedFormControl;
   @Output() filterEvent = new EventEmitter<TrelloCard[]>();
 
   constructor() {

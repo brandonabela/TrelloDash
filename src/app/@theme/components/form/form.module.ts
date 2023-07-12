@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 
 import { DropdownCheckboxComponent } from './dropdown-checkbox/dropdown-checkbox.component';
 import { TextareaAutocompleteComponent } from './textarea-autocomplete/textarea-autocomplete.component';
@@ -23,7 +23,7 @@ import { ThemeFiltersModule } from '../../filters/theme-filters.module';
   ]
 })
 export class FormModule {
-  static updateFieldStatus(formGroup: FormGroup | null, checkboxFormName: string, textFieldFormName: string): void {
+  static updateFieldStatus(formGroup: UntypedFormGroup | null, checkboxFormName: string, textFieldFormName: string): void {
     if (formGroup) {
       formGroup.get(checkboxFormName)?.valueChanges.subscribe(formValues => {
         if (formValues) {
