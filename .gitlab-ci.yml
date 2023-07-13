@@ -4,8 +4,8 @@ pages:
     paths:
       - node_modules/
   script:
-    - npm install -g @angular/cli@12.0.4
-    - npm install -g gzipper@3.7.0
+    - npm install -g @angular/cli@16.1.4
+    - npm install -g gzipper@7.2.0
     - npm install
     - npm run build:ssr
     - npm run prerender
