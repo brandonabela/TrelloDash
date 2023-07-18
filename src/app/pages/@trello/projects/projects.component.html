@@ -3,7 +3,7 @@
     class="btn btn-secondary" type="button" [disabled]="!trelloService.areProjectsLoaded"
     (click)="trelloService.addProject('https://trello.com/b/1lD8Fo21/city-of-the-zombies-game.json')"
   >
-    <i class="fas fa-plus"></i>
+    <i class="bi bi-plus"></i>
     Add Sample
   </button>
 
@@ -12,7 +12,7 @@
     (click)="addTrelloProject()" [disabled]="!trelloService.areProjectsLoaded"
     data-bs-toggle="modal" data-bs-target="#manageProjectModal"
   >
-    <i class="fas fa-plus"></i>
+    <i class="bi bi-plus"></i>
     Add Project
   </button>
 </page-header>
@@ -65,7 +65,7 @@
           (click)="addTrelloProject()" [disabled]="!trelloService.areProjectsLoaded"
           data-bs-toggle="modal" data-bs-target="#manageProjectModal"
         >
-          <i class="fas fa-plus"></i>
+          <i class="bi bi-plus"></i>
           Add Project
         </button>
       </div>
@@ -106,25 +106,25 @@
 
                 <div class="dropdown-menu">
                   <button class="dropdown-item" (click)="syncTrelloProject(i)">
-                    <i class="fas fa-sync"></i> Sync
+                    <i class="bi bi-arrow-repeat"></i> Sync
                   </button>
 
                   <button class="dropdown-item" (click)="editTrelloProject(i)" data-bs-toggle="modal" data-bs-target="#manageProjectModal">
-                    <i class="fas fa-edit"></i> Edit
+                    <i class="bi bi-pencil-square"></i> Edit
                   </button>
 
                   <button class="dropdown-item" (click)="removeTrelloProject(i)" data-bs-toggle="modal" data-bs-target="#confirmationModal">
-                    <i class="fas fa-trash"></i> Remove
+                    <i class="bi bi-trash-fill"></i> Remove
                   </button>
 
                   <div class="dropdown-divider"></div>
 
                   <button class="dropdown-item" (click)="exportCsvProject(i)" data-bs-toggle="modal" data-bs-target="#exportCSVProjectModal">
-                    <i class="fas fa-file-csv"></i> Export CSV
+                    <i class="bi bi-filetype-csv"></i> Export CSV
                   </button>
 
                   <button class="dropdown-item" (click)="exportLatexProject(i)" data-bs-toggle="modal" data-bs-target="#exportLatexProjectModal">
-                    <i class="fas fa-file-code"></i> Export LaTeX
+                    <i class="bi bi-file-earmark-code-fill"></i> Export LaTeX
                   </button>
                 </div>
               </td>

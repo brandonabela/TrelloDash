@@ -50,7 +50,7 @@
                 <div class="accordion-item" *ngFor="let item of items; let i = index">
                   <h2 class="accordion-header">
                     <button class="accordion-button" [class.collapsed]="i !== 0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#L' + level + 'B' + i">
-                      <i class="fa-solid fa-folder"></i> {{ item.topic }}
+                      <i class="bi bi-folder-fill"></i> {{ item.topic }}
                     </button>
 
                     <div [id]="'L' + level + 'B' + i" class="accordion-collapse collapse" [class.show]="i === 0">

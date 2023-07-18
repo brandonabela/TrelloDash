@@ -6,12 +6,12 @@ import { MenuSingle } from '../@theme/models/menu/menu-single';
 
 export class Menu {
   public items: MenuItem[] = [
-    new MenuSingle('Projects', '/', 'fas fa-project-diagram'),
-    new MenuSingle('Query Editor', '/query', 'fas fa-filter'),
-    new MenuSingle('Mind Map', '/mind-map', 'fas fa-sitemap'),
+    new MenuSingle('Projects', '/', 'bi bi-stack'),
+    new MenuSingle('Query Editor', '/query', 'bi bi-funnel-fill'),
+    new MenuSingle('Mind Map', '/mind-map', 'bi bi-diagram-3-fill'),
 
     new MenuSection('Theme'),
-    new MenuParent('Components', 'fas fa-cogs', [
+    new MenuParent('Components', 'bi bi-bricks', [
       new MenuChild('Accordions', '/theme/accordions'),
       new MenuChild('Alerts', '/theme/alerts'),
       new MenuChild('Badges', '/theme/badges'),
@@ -28,7 +28,7 @@ export class Menu {
       new MenuChild('Typography', '/theme/typography')
     ]),
 
-    new MenuParent('Error Pages', 'fas fa-ban', [
+    new MenuParent('Error Pages', 'bi bi-exclamation-triangle-fill', [
       new MenuChild('404', '/theme/404')
     ])
   ];

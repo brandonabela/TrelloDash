@@ -62,6 +62,8 @@
       }
 
       button[aria-expanded="true"] .dropdownArrow {
+        margin-top: -10px;
+
         transform: rotate(90deg);
       }
 

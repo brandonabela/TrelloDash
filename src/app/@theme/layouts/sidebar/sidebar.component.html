@@ -21,14 +21,14 @@
           <button [attr.data-bs-target]="'#' + menuParent.dropdownId" data-bs-toggle="collapse">
             <i [class]="menuParent.icon"></i>
             <span>{{menuParent.name}}</span>
-            <i class="fas fa-angle-right ms-auto dropdownArrow"></i>
+            <i class="bi bi-chevron-right ms-auto dropdownArrow"></i>
           </button>
 
           <div class="collapse" [id]="menuParent.dropdownId">
             <ul>
               <li *ngFor="let menuChild of menuParent.children" routerLinkActive="active">
                 <a [routerLink]="menuChild.link">
-                  <i class="fa-solid">•</i>
+                  <i class="bi bi-dot"></i>
                   <span>{{menuChild.name}}</span>
                 </a>
               </li>

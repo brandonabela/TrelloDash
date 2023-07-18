@@ -8,7 +8,7 @@
       <ng-content select=".header"></ng-content>
 
       <button class="btn btn-light" (click)="trelloService.syncAllProjects()" [disabled]="!trelloService.areProjectsLoaded">
-        <i class="fas fa-sync"></i>
+        <i class="bi bi-arrow-repeat"></i>
         Sync Projects
       </button>
     </div>

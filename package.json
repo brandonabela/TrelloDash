@@ -2,41 +2,37 @@
   "name": "dashboard-system",
   "version": "1.0.0",
   "scripts": {
+    "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration=production",
-    "test": "ng test",
-    "lint": "ng lint",
-    "dev:ssr": "ng run DashboardSystem:serve-ssr",
-    "serve:ssr": "node dist/DashboardSystem-server/main.js",
-    "build:ssr": "ng build --configuration=production && ng run DashboardSystem:server:production",
-    "prerender": "ng run DashboardSystem:prerender"
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.1.4",
-    "@angular/common": "^16.1.4",
-    "@angular/compiler": "^16.1.4",
-    "@angular/core": "^16.1.4",
-    "@angular/forms": "^16.1.4",
-    "@angular/platform-browser": "^16.1.4",
-    "@angular/platform-browser-dynamic": "^16.1.4",
-    "@angular/router": "^16.1.4",
-    "@fortawesome/fontawesome-free": "^6.4.0",
+    "@angular/animations": "^16.1.0",
+    "@angular/common": "^16.1.0",
+    "@angular/compiler": "^16.1.0",
+    "@angular/core": "^16.1.0",
+    "@angular/forms": "^16.1.0",
+    "@angular/platform-browser": "^16.1.0",
+    "@angular/platform-browser-dynamic": "^16.1.0",
+    "@angular/router": "^16.1.0",
+    "@types/archiver": "^5.3.2",
     "bootstrap": "^5.3.0",
+    "bootstrap-icons": "^1.10.5",
     "jszip": "^3.10.1",
     "ng2-charts": "^4.1.1",
-    "ngx-google-analytics": "^14.0.1",
     "ngx-toastr": "^17.0.2",
-    "rxjs": "^7.8.1",
-    "tslib": "^2.6.0",
-    "zone.js": "0.13.1"
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.13.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.1.4",
-    "@angular/cli": "^16.1.4",
-    "@angular/compiler-cli": "^16.1.4",
-    "@nguniversal/builders": "^16.1.1",
-    "@types/node": "^20.4.1",
-    "typescript": "^5.1.6"
+    "@angular/cli": "~16.1.4",
+    "@angular/compiler-cli": "^16.1.0",
+    "@types/node": "^20.4.2",
+    "typescript": "~5.1.3"
   }
 }

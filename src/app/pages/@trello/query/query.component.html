@@ -56,7 +56,7 @@
                   {{columnName}}
 
                   <ng-container *ngIf="sortColumn == columnName">
-                    <i class="fas" [ngClass]="sortDirection ? 'fa-sort-alpha-down' : 'fa-sort-alpha-up'"></i>
+                    <i class="bi" [ngClass]="sortDirection ? 'bi-sort-down' : 'bi-sort-up'"></i>
                   </ng-container>
                 </th>
               </ng-container>
@@ -108,7 +108,7 @@
         <div class="col-xl-6">
           <ul class="pagination">
             <li class="page-item" [ngClass]="{'disabled': pageIndex === 1}" (click)="setPage(pageIndex - 1)">
-              <a class="page-link"><i class="fa-solid fa-angle-left"></i></a>
+              <a class="page-link"><i class="bi bi-chevron-left"></i></a>
             </li>
 
             <li class="page-item" *ngFor="let pageNum of getPages()" [ngClass]="{'active': pageNum === pageIndex}" (click)="setPage(pageNum)">
@@ -116,7 +116,7 @@
             </li>
 
             <li class="page-item" [ngClass]="{'disabled': pageIndex === getMaxPage()}" (click)="setPage(pageIndex + 1)">
-              <a class="page-link"><i class="fa-solid fa-angle-right"></i></a>
+              <a class="page-link"><i class="bi bi-chevron-right"></i></a>
             </li>
           </ul>
         </div>
