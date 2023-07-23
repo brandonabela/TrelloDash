@@ -1,14 +1,14 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { EvaluateExpression } from 'src/app/@theme/models/expression';
 import { TrelloCard } from 'src/app/models/trello/trello-card';
 
 @Component({
-  selector: 'textarea-autocomplete',
+  selector: 'app-textarea-autocomplete',
   templateUrl: './textarea-autocomplete.component.html',
   styleUrls: ['./textarea-autocomplete.component.scss']
 })
-export class TextareaAutocompleteComponent {
+export class TextareaAutocompleteComponent implements AfterViewInit {
   public lineNumbers: number[] = [1];
   public userInteraction: boolean = false;
   public showAutocomplete: boolean = false;

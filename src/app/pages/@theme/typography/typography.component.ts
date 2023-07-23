@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'pages-typography',
+  selector: 'app-pages-typography',
   templateUrl: './typography.component.html',
   styleUrls: ['./typography.component.scss']
 })

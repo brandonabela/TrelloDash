@@ -1,4 +1,4 @@
-<page-header>
+<app-page-header>
   <button
     class="btn btn-secondary" type="button" [disabled]="!trelloService.areProjectsLoaded"
     (click)="trelloService.addProject('https://trello.com/b/1lD8Fo21/city-of-the-zombies-game.json')"
@@ -15,9 +15,9 @@
     <i class="bi bi-plus"></i>
     Add Project
   </button>
-</page-header>
+</app-page-header>
 
-<page-body>
+<app-page-body>
   <div class="row">
 
     <ng-container *ngIf="trelloService.trelloProjects.length">
@@ -58,7 +58,7 @@
       </div>
     </ng-container>
 
-    <trello-card cardTitle="Manage Projects">
+    <app-trello-card cardTitle="Manage Projects">
       <div class="header">
         <button
           class="btn btn-light" type="button"
@@ -132,15 +132,15 @@
           </tbody>
         </table>
       </div>
-    </trello-card>
+    </app-trello-card>
 
   </div>
-</page-body>
+</app-page-body>
 
-<trello-project [projectIndex]="projectIndex" [trelloForm]="trelloForm"></trello-project>
+<app-trello-project [projectIndex]="projectIndex" [trelloForm]="trelloForm"></app-trello-project>
 
-<trello-export-csv [projectIndex]="projectIndex"></trello-export-csv>
+<app-trello-export-csv [projectIndex]="projectIndex"></app-trello-export-csv>
 
-<trello-export-latex [projectIndex]="projectIndex"></trello-export-latex>
+<app-trello-export-latex [projectIndex]="projectIndex"></app-trello-export-latex>
 
-<confirmation-modal modalId="confirmationModal" (modalChoice)="confirmRemoveTrelloProject($event)"></confirmation-modal>
+<app-confirmation-modal modalId="confirmationModal" (modalChoice)="confirmRemoveTrelloProject($event)"></app-confirmation-modal>

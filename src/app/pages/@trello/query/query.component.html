@@ -1,50 +1,50 @@
-<page-header></page-header>
+<app-page-header></app-page-header>
 
-<page-body>
-  <trello-card cardTitle="Trello Board Counts">
+<app-page-body>
+  <app-trello-card cardTitle="Trello Board Counts">
     <div class="header"></div>
 
     <div class="body">
       <div class="row">
         <ng-container *ngFor="let aBoard of trelloService.uniqueBoards; let i = index">
           <div [class]="boardStatisticsClass(i + 1, trelloService.uniqueBoards.length)">
-            <card-countdown cardColour="primary" [count]="aBoard.frequency" [description]="aBoard.name"></card-countdown>
+            <app-card-countdown appCardColour="primary" [count]="aBoard.frequency" [description]="aBoard.name"></app-card-countdown>
           </div>
         </ng-container>
       </div>
     </div>
-  </trello-card>
+  </app-trello-card>
 
-  <trello-card cardTitle="Trello Projects Overview">
+  <app-trello-card cardTitle="Trello Projects Overview">
     <div class="body">
       <div class="row basic-filter">
         <div class="col-xl-3 form-group">
-          <label> Project: </label>
-          <dropdown-checkbox [elementFormGroup]="projectGroup" [elementValues]="projectNames"></dropdown-checkbox>
+          <label for="projectGroupInput"> Project: </label>
+          <app-dropdown-checkbox id="projectGroupInput" [elementFormGroup]="projectGroup" [elementValues]="projectNames"></app-dropdown-checkbox>
         </div>
 
         <div class="col-xl-3 form-group">
-          <label> Board: </label>
-          <dropdown-checkbox [elementFormGroup]="boardGroup" [elementValues]="boardNames"></dropdown-checkbox>
+          <label for="boardGroupInput"> Board: </label>
+          <app-dropdown-checkbox id="boardGroupInput" [elementFormGroup]="boardGroup" [elementValues]="boardNames"></app-dropdown-checkbox>
         </div>
 
         <div class="col-xl-3 form-group">
-          <label> Label: </label>
-          <dropdown-checkbox [elementFormGroup]="labelGroup" [elementValues]="labelNames"></dropdown-checkbox>
+          <label for="labelGroupInput"> Label: </label>
+          <app-dropdown-checkbox id="labelGroupInput" [elementFormGroup]="labelGroup" [elementValues]="labelNames"></app-dropdown-checkbox>
         </div>
 
         <div class="col-xl-3 form-group">
-          <label> Columns: </label>
-          <dropdown-checkbox [elementFormGroup]="columnGroup" [elementValues]="columnNames"></dropdown-checkbox>
+          <label for="columnGroupInput"> Columns: </label>
+          <app-dropdown-checkbox id="columnGroupInput" [elementFormGroup]="columnGroup" [elementValues]="columnNames"></app-dropdown-checkbox>
         </div>
       </div>
 
       <div class="row form-group">
-        <label> Advanced Search: </label>
-        <textarea-autocomplete
-          [keys]="advancedFilterKeys" [originalObjects]="originalCards"
+        <label for="advancedSearchInput"> Advanced Search: </label>
+        <app-textarea-autocomplete
+          id="advancedSearchInput" [keys]="advancedFilterKeys" [originalObjects]="originalCards"
           (filterEvent)="handleFilterEvent($event)" (filteredObjects)="filteredCards" [elementFormControl]="advancedFilterControl"
-        ></textarea-autocomplete>
+        ></app-textarea-autocomplete>
       </div>
 
       <div class="table-responsive">
@@ -55,7 +55,7 @@
                 <th *ngIf="columnGroup.value[i]" sortable (click)="sortCards(columnName)">
                   {{columnName}}
 
-                  <ng-container *ngIf="sortColumn == columnName">
+                  <ng-container *ngIf="sortColumn === columnName">
                     <i class="bi" [ngClass]="sortDirection ? 'bi-sort-down' : 'bi-sort-up'"></i>
                   </ng-container>
                 </th>
@@ -107,15 +107,15 @@
 
         <div class="col-xl-6">
           <ul class="pagination">
-            <li class="page-item" [ngClass]="{'disabled': pageIndex === 1}" (click)="setPage(pageIndex - 1)">
+            <li class="page-item" [ngClass]="{'disabled': pageIndex === 1}" click="() => setPage(pageIndex - 1)">
               <a class="page-link"><i class="bi bi-chevron-left"></i></a>
             </li>
 
-            <li class="page-item" *ngFor="let pageNum of getPages()" [ngClass]="{'active': pageNum === pageIndex}" (click)="setPage(pageNum)">
+            <li class="page-item" *ngFor="let pageNum of getPages()" [ngClass]="{'active': pageNum === pageIndex}" click="{() => setPage(pageNum)}">
               <a class="page-link"> {{pageNum}} </a>
             </li>
 
-            <li class="page-item" [ngClass]="{'disabled': pageIndex === getMaxPage()}" (click)="setPage(pageIndex + 1)">
+            <li class="page-item" [ngClass]="{'disabled': pageIndex === getMaxPage()}" click="() => setPage(pageIndex + 1)">
               <a class="page-link"><i class="bi bi-chevron-right"></i></a>
             </li>
           </ul>
@@ -131,5 +131,5 @@
         </div>
       </div>
     </div>
-  </trello-card>
-</page-body>
+  </app-trello-card>
+</app-page-body>

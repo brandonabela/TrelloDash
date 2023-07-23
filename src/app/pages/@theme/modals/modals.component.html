@@ -1,6 +1,6 @@
-<page-header></page-header>
+<app-page-header></app-page-header>
 
-<page-body>
+<app-page-body>
   <div class="row">
 
     <div class="col-xl-4">
@@ -102,40 +102,40 @@
     </div>
 
   </div>
-</page-body>
+</app-page-body>
 
-<modal modalId="defaultModal">
-  <modal-title>
+<app-modal modalId="defaultModal">
+  <app-modal-title>
     Default Modal
-  </modal-title>
+  </app-modal-title>
 
-  <modal-body>
+  <app-modal-body>
     <p> Modal body text goes here. </p>
-  </modal-body>
+  </app-modal-body>
 
-  <modal-footer>
+  <app-modal-footer>
     <button class="btn btn-primary"> Submit </button>
-  </modal-footer>
-</modal>
+  </app-modal-footer>
+</app-modal>
 
-<modal modalId="verticalCenteredModal" modalClass="modal-dialog-centered">
-  <modal-title>
+<app-modal modalId="verticalCenteredModal" modalClass="modal-dialog-centered">
+  <app-modal-title>
     Vertical Centered Modal
-  </modal-title>
+  </app-modal-title>
 
-  <modal-body>
+  <app-modal-body>
     <p> Modal body text goes here. </p>
-  </modal-body>
+  </app-modal-body>
 
-  <modal-footer></modal-footer>
-</modal>
+  <app-modal-footer></app-modal-footer>
+</app-modal>
 
-<modal modalId="scrollingModal" modalClass="long-modal">
-  <modal-title>
+<app-modal modalId="scrollingModal" modalClass="long-modal">
+  <app-modal-title>
     Scrolling Modal
-  </modal-title>
+  </app-modal-title>
 
-  <modal-body>
+  <app-modal-body>
     <p *ngFor="let item of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin faucibus nunc quis mauris pulvinar molestie.
       Aliquam eros nunc, luctus in malesuada ut, facilisis elementum sem. Pellentesque a fermentum mauris. Nunc arcu
@@ -143,75 +143,75 @@
       Donec tincidunt lobortis aliquet. Morbi faucibus eros ex, elementum auctor libero vehicula at. Aenean nec nisi
       dictum, iaculis turpis sed, elementum lacus. Aenean quis enim metus. Quisque sed finibus velit, ac consequat urna.
     </p>
-  </modal-body>
+  </app-modal-body>
 
-  <modal-footer></modal-footer>
-</modal>
+  <app-modal-footer></app-modal-footer>
+</app-modal>
 
-<modal modalId="smallModal" modalClass="modal-sm">
-  <modal-title>
+<app-modal modalId="smallModal" modalClass="modal-sm">
+  <app-modal-title>
     Small Modal
-  </modal-title>
+  </app-modal-title>
 
-  <modal-body>
+  <app-modal-body>
     <form>
       <div class="form-group">
-        <label> Recipient: </label>
-        <input type="text" class="form-control">
+        <label for="recipientInput"> Recipient: </label>
+        <input id="recipientInput" type="text" class="form-control">
       </div>
 
       <div class="form-group">
-        <label> Message: </label>
-        <textarea class="form-control"></textarea>
+        <label for="messageInput"> Message: </label>
+        <textarea id="messageInput" class="form-control"></textarea>
       </div>
     </form>
-  </modal-body>
+  </app-modal-body>
 
-  <modal-footer></modal-footer>
-</modal>
+  <app-modal-footer></app-modal-footer>
+</app-modal>
 
-<modal modalId="largeModal" modalClass="modal-lg">
-  <modal-title>
+<app-modal modalId="largeModal" modalClass="modal-lg">
+  <app-modal-title>
     Large Modal
-  </modal-title>
+  </app-modal-title>
 
-  <modal-body>
+  <app-modal-body>
     <form>
       <div class="form-group">
-        <label> Recipient: </label>
-        <input type="text" class="form-control">
+        <label for="recipientInput"> Recipient: </label>
+        <input id="recipientInput" type="text" class="form-control">
       </div>
 
       <div class="form-group">
-        <label> Message: </label>
-        <textarea class="form-control"></textarea>
+        <label for="messageInput"> Message: </label>
+        <textarea id="messageInput" class="form-control"></textarea>
       </div>
     </form>
-  </modal-body>
+  </app-modal-body>
 
-  <modal-footer></modal-footer>
-</modal>
+  <app-modal-footer></app-modal-footer>
+</app-modal>
 
-<modal modalId="extraLargeModal" modalClass="modal-xl">
-  <modal-title>
+<app-modal modalId="extraLargeModal" modalClass="modal-xl">
+  <app-modal-title>
     Extra Large Modal
-  </modal-title>
+  </app-modal-title>
 
-  <modal-body>
+  <app-modal-body>
     <form>
       <div class="form-group">
-        <label> Recipient: </label>
-        <input type="text" class="form-control">
+        <label for="recipientInput"> Recipient: </label>
+        <input id="recipientInput" type="text" class="form-control">
       </div>
 
       <div class="form-group">
-        <label> Message: </label>
-        <textarea class="form-control"></textarea>
+        <label for="messageInput"> Message: </label>
+        <textarea id="messageInput" class="form-control"></textarea>
       </div>
     </form>
-  </modal-body>
+  </app-modal-body>
 
-  <modal-footer></modal-footer>
-</modal>
+  <app-modal-footer></app-modal-footer>
+</app-modal>
 
-<confirmation-modal modalId="confirmationModal"></confirmation-modal>
+<app-confirmation-modal modalId="confirmationModal"></app-confirmation-modal>

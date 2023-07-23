@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'dropdown-checkbox',
+  selector: 'app-dropdown-checkbox',
   templateUrl: './dropdown-checkbox.component.html',
   styleUrls: ['./dropdown-checkbox.component.scss']
 })
@@ -30,9 +30,5 @@ export class DropdownCheckboxComponent implements AfterViewInit {
     return tickedColumns.length
       ? (tickedColumns.length === this.elementValues.length ? 'All Selected' : tickedColumns.join(', '))
       : 'Nothing Selected';
-  }
-
-  public trackByIndex(index: number, item: any): number {
-    return index;
   }
 }

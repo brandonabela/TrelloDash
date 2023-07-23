@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'page-accordions',
+  selector: 'app-page-accordions',
   templateUrl: './accordions.component.html',
   styleUrls: ['./accordions.component.scss']
 })

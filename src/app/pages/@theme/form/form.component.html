@@ -1,6 +1,6 @@
-<page-header></page-header>
+<app-page-header></app-page-header>
 
-<page-body>
+<app-page-body>
   <div class="row">
 
     <div class="col-xl-4">
@@ -12,19 +12,19 @@
         <div class="card-body">
           <form>
             <div class="form-group">
-              <label>Email address <span class="text-danger">*</span></label>
-              <input type="email" class="form-control" placeholder="Enter email" />
+              <label for="emailInput">Email address <span class="text-danger">*</span></label>
+              <input id="emailInput" type="email" class="form-control" placeholder="Enter email" />
               <span class="form-text text-muted"> We'll never share your email with anyone else. </span>
             </div>
 
             <div class="form-group">
-              <label> Password <span class="text-danger"> * </span></label>
-              <input type="password" class="form-control" placeholder="Password" />
+              <label for="passportInput"> Password <span class="text-danger"> * </span></label>
+              <input id="passportInput" type="password" class="form-control" placeholder="Password" />
             </div>
 
             <div class="form-group">
-              <label>Example select <span class="text-danger">*</span></label>
-              <select class="form-control form-select">
+              <label for="selectInput"> Select <span class="text-danger">*</span></label>
+              <select id="selectInput" class="form-control form-select">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -34,8 +34,8 @@
             </div>
 
             <div class="form-group">
-              <label> Example multiple select <span class="text-danger"> * </span></label>
-              <select class="form-control form-select" multiple>
+              <label for="selectMultipleInput"> Multiple select <span class="text-danger"> * </span></label>
+              <select id="selectMultipleInput" class="form-control form-select" multiple>
                 <option> 1 </option>
                 <option> 2 </option>
                 <option> 3 </option>
@@ -45,8 +45,8 @@
             </div>
 
             <div class="form-group">
-              <label> Example textarea <span class="text-danger"> * </span></label>
-              <textarea class="form-control" rows="3"></textarea>
+              <label for="textareaInput"> Textarea <span class="text-danger"> * </span></label>
+              <textarea id="textareaInput" class="form-control" rows="3"></textarea>
             </div>
           </form>
         </div>
@@ -62,51 +62,51 @@
         <div class="card-body">
           <form>
             <div class="form-group row">
-              <label class="col-2 col-form-label"> Name </label>
+              <label for="nameInput" class="col-2 col-form-label"> Name </label>
               <div class="col-10">
-                <input class="form-control" type="text" value="John" />
+                <input id="nameInput" class="form-control" type="text" value="John" />
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-2 col-form-label"> Search </label>
+              <label for="searchInput" class="col-2 col-form-label"> Search </label>
               <div class="col-10">
-                <input class="form-control" type="search" value="How do I shoot web" />
+                <input id="searchInput" class="form-control" type="search" value="How do I shoot web" />
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-2 col-form-label"> Email </label>
+              <label for="emailInput" class="col-2 col-form-label"> Email </label>
               <div class="col-10">
-                <input class="form-control" type="email" value="bootstrap@example.com" />
+                <input id="emailInput" class="form-control" type="email" value="bootstrap@example.com" />
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-2 col-form-label"> Password </label>
+              <label for="passwordInput" class="col-2 col-form-label"> Password </label>
               <div class="col-10">
-                <input class="form-control" type="password" value="hunter2" />
+                <input id="passwordInput" class="form-control" type="password" value="hunter2" />
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-2 col-form-label"> Number </label>
+              <label for="numberInput" class="col-2 col-form-label"> Number </label>
               <div class="col-10">
-                <input class="form-control" type="number" value="42" />
+                <input id="numberInput" class="form-control" type="number" value="42" />
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-2 col-form-label"> Date and time </label>
+              <label for="dateTimeInput" class="col-2 col-form-label"> Date and time </label>
               <div class="col-10">
-                <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" />
+                <input id="dateTimeInput" class="form-control" type="datetime-local" value="2011-08-19T13:45:00" />
               </div>
             </div>
 
             <div class="form-group row">
-              <label for="example-date-input" class="col-2 col-form-label"> Date </label>
+              <label for="dateInput" class="col-2 col-form-label"> Date </label>
               <div class="col-10">
-                <input class="form-control" type="date" value="2011-08-19" />
+                <input id="dateInput" class="form-control" type="date" value="2011-08-19" />
               </div>
             </div>
           </form>
@@ -123,17 +123,17 @@
         <div class="card-body">
           <form>
             <div class="form-group">
-              <label> Left Addon </label>
+              <label for="leftAddonsInput"> Left Addon </label>
               <div class="input-group">
                 <span class="input-group-text"> @ </span>
-                <input type="text" class="form-control" placeholder="Email" />
+                <input id="leftAddonsInput" type="text" class="form-control" placeholder="Email" />
               </div>
             </div>
 
             <div class="form-group">
-              <label> Right Addon </label>
+              <label for="rightAddonsInput"> Right Addon </label>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Username" />
+                <input id="rightAddonsInput" type="text" class="form-control" placeholder="Username" />
                 <span class="input-group-text"> @example.com </span>
               </div>
             </div>
@@ -141,19 +141,19 @@
             <div class="separator separator-dashed"></div>
 
             <div class="form-group">
-              <label> Joint Addons </label>
+              <label for="jointAddonsInput"> Joint Addons </label>
               <div class="input-group">
                 <span class="input-group-text"> $ </span>
                 <span class="input-group-text"> 0.00 </span>
-                <input type="text" class="form-control" />
+                <input id="jointAddonsInput" type="text" class="form-control" />
               </div>
             </div>
 
             <div class="form-group">
-              <label> Left & Right Addons </label>
+              <label for="leftRightAddonsInput"> Left & Right Addons </label>
               <div class="input-group">
                 <span class="input-group-text"> $ </span>
-                <input type="text" class="form-control" placeholder="0.00" />
+                <input id="leftRightAddonsInput" type="text" class="form-control" placeholder="0.00" />
                 <span class="input-group-text"><i class="bi bi-r-circle-fill"></i></span>
               </div>
             </div>
@@ -161,17 +161,17 @@
             <div class="separator separator-dashed"></div>
 
             <div class="form-group">
-              <label> Left Icon Input </label>
+              <label for="leftIconInput"> Left Icon Input </label>
               <div class="input-group input-group-icon-left">
                 <span class="input-group-text"><i class="bi bi-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search..." />
+                <input id="leftIconInput" type="text" class="form-control" placeholder="Search..." />
               </div>
             </div>
 
             <div class="form-group">
-              <label>Right Icon Input</label>
+              <label for="rightIconInput">Right Icon Input</label>
               <div class="input-group input-group-icon-right">
-                <input type="text" class="form-control" placeholder="Search..." />
+                <input id="rightIconInput" type="text" class="form-control" placeholder="Search..." />
                 <span class="input-group-text"><i class="bi bi-search"></i></span>
               </div>
             </div>
@@ -189,8 +189,8 @@
         <div class="card-body">
           <form>
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Checkboxes </label>
-              <div class="col-9 col-form-label">
+              <label for="checkboxesInput" class="col-3 col-form-label"> Checkboxes </label>
+              <div id="checkboxesInput" class="col-9 col-form-label">
                 <div class="form-check">
                   <label class="form-check-label">
                     <input class="form-check-input" type="checkbox">
@@ -215,8 +215,8 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Inline Checkboxes </label>
-              <div class="col-9 col-form-label">
+              <label for="inlineCheckboxesInput" class="col-3 col-form-label"> Inline Checkboxes </label>
+              <div id="inlineCheckboxesInput" class="col-9 col-form-label">
                 <div class="form-check form-check-inline">
                   <label class="form-check-label">
                     <input class="form-check-input" type="checkbox">
@@ -243,8 +243,8 @@
             <div class="separator separator-dashed"></div>
 
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Primary State </label>
-              <div class="col-9 col-form-label">
+              <label for="primaryStateInput" class="col-3 col-form-label"> Primary State </label>
+              <div id="primaryStateInput" class="col-9 col-form-label">
                 <div class="form-check form-check-inline">
                   <label class="form-check-label">
                     <input class="form-check-input" type="checkbox">
@@ -269,8 +269,8 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Success State </label>
-              <div class="col-9 col-form-label">
+              <label for="successStateInput" class="col-3 col-form-label"> Success State </label>
+              <div id="successStateInput" class="col-9 col-form-label">
                 <div class="form-check form-check-inline form-check-success">
                   <label class="form-check-label">
                     <input class="form-check-input" type="checkbox">
@@ -295,8 +295,8 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Danger State </label>
-              <div class="col-9 col-form-label">
+              <label for="dangerStateInput" class="col-3 col-form-label"> Danger State </label>
+              <div id="dangerStateInput" class="col-9 col-form-label">
                 <div class="form-check form-check-inline form-check-danger">
                   <label class="form-check-label">
                     <input class="form-check-input" type="checkbox">
@@ -333,8 +333,8 @@
         <div class="card-body">
           <form>
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Radios </label>
-              <div class="col-9 col-form-label">
+              <label for="radiosInput" class="col-3 col-form-label"> Radios </label>
+              <div id="radiosInput" class="col-9 col-form-label">
                 <div class="form-check">
                   <label class="form-check-label">
                     <input class="form-check-input" type="radio" name="radios1">
@@ -359,8 +359,8 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Inline Radios </label>
-              <div class="col-9 col-form-label">
+              <label for="inlineRadioInput" class="col-3 col-form-label"> Inline Radios </label>
+              <div id="inlineRadioInput" class="col-9 col-form-label">
                 <div class="form-check form-check-inline">
                   <label class="form-check-label">
                     <input class="form-check-input" type="radio" name="radios2">
@@ -387,8 +387,8 @@
             <div class="separator separator-dashed"></div>
 
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Primary State </label>
-              <div class="col-9 col-form-label">
+              <label for="primaryStateInput" class="col-3 col-form-label"> Primary State </label>
+              <div id="primaryStateInput" class="col-9 col-form-label">
                 <div class="form-check form-check-inline">
                   <label class="form-check-label">
                     <input class="form-check-input" type="radio" name="radios3">
@@ -413,8 +413,8 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Success State </label>
-              <div class="col-9 col-form-label">
+              <label for="successStateInput" class="col-3 col-form-label"> Success State </label>
+              <div id="successStateInput" class="col-9 col-form-label">
                 <div class="form-check form-check-inline form-check-success">
                   <label class="form-check-label">
                     <input class="form-check-input" type="radio" name="radios4">
@@ -439,8 +439,8 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Danger State </label>
-              <div class="col-9 col-form-label">
+              <label for="dangerStateInput" class="col-3 col-form-label"> Danger State </label>
+              <div id="dangerStateInput" class="col-9 col-form-label">
                 <div class="form-check form-check-inline form-check-danger">
                   <label class="form-check-label">
                     <input class="form-check-input" type="radio" name="radios5">
@@ -477,8 +477,8 @@
         <div class="card-body">
           <form>
             <div class="form-group row">
-              <label class="col-3 col-form-label"> Switches </label>
-              <div class="col-9 col-form-label">
+              <label for="switchInput" class="col-3 col-form-label"> Switches </label>
+              <div id="switchInput" class="col-9 col-form-label">
                 <div class="form-check form-switch">
                   <label class="form-check-label">
                     <input class="form-check-input" type="checkbox">
@@ -502,8 +502,8 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-3 col-form-label"> Inline Switches </label>
-                <div class="col-9 col-form-label">
+                <label for="inlineSwitchInput" class="col-3 col-form-label"> Inline Switches </label>
+                <div id="inlineSwitchInput" class="col-9 col-form-label">
                   <div class="form-check form-switch form-check-inline">
                     <label class="form-check-label">
                       <input class="form-check-input" type="checkbox">
@@ -530,8 +530,8 @@
               <div class="separator separator-dashed"></div>
 
               <div class="form-group row">
-                <label class="col-3 col-form-label"> Primary State </label>
-                <div class="col-9 col-form-label">
+                <label for="primaryInput" class="col-3 col-form-label"> Primary State </label>
+                <div id="primaryInput" class="col-9 col-form-label">
                   <div class="form-check form-switch form-check-inline">
                     <label class="form-check-label">
                       <input class="form-check-input" type="checkbox">
@@ -556,8 +556,8 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-3 col-form-label"> Success State </label>
-                <div class="col-9 col-form-label">
+                <label for="successInput" class="col-3 col-form-label"> Success State </label>
+                <div id="successInput" class="col-9 col-form-label">
                   <div class="form-check form-switch form-check-inline form-check-success">
                     <label class="form-check-label">
                       <input class="form-check-input" type="checkbox">
@@ -582,8 +582,8 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-3 col-form-label"> Danger State </label>
-                <div class="col-9 col-form-label">
+                <label for="dangerInput" class="col-3 col-form-label"> Danger State </label>
+                <div id="dangerInput" class="col-9 col-form-label">
                   <div class="form-check form-switch form-check-inline form-check-danger">
                     <label class="form-check-label">
                       <input class="form-check-input" type="checkbox">
@@ -621,13 +621,13 @@
         <div class="card-body">
           <form>
             <div class="form-group">
-              <label> Disabled Input </label>
-              <input type="email" class="form-control" disabled="disabled" placeholder="Disabled input" />
+              <label for="disabledInput"> Disabled Input </label>
+              <input id="disabledInput" type="email" class="form-control" disabled="disabled" placeholder="Disabled input" />
             </div>
 
             <div class="form-group">
-              <label> Disabled select </label>
-              <select class="form-control form-select" disabled="disabled">
+              <label for="disabledInput"> Disabled select </label>
+              <select id="disabledInput" class="form-control form-select" disabled="disabled">
                 <option> 1 </option>
                 <option> 2 </option>
                 <option> 3 </option>
@@ -637,13 +637,13 @@
             </div>
 
             <div class="form-group">
-              <label for="exampleTextarea"> Disabled textarea </label>
-              <textarea class="form-control" disabled="disabled" rows="3"></textarea>
+              <label for="disabledTextareaInput"> Disabled textarea </label>
+              <textarea id="disabledTextareaInput" class="form-control" disabled="disabled" rows="3"></textarea>
             </div>
 
             <div class="form-group">
-              <label> Readonly Input </label>
-              <input type="email" class="form-control" readonly placeholder="Readonly input" />
+              <label for="readonlyInput"> Readonly Input </label>
+              <input id="readonlyInput" type="email" class="form-control" readonly placeholder="Readonly input" />
             </div>
 
             <div class="form-group">
@@ -716,4 +716,4 @@
     </div>
 
   </div>
-</page-body>
+</app-page-body>

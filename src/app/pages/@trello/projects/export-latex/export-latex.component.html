@@ -1,20 +1,20 @@
-<modal modalId="exportLatexProjectModal">
-  <modal-title>
+<app-modal modalId="exportLatexProjectModal">
+  <app-modal-title>
     Export Project as Latex
-  </modal-title>
+  </app-modal-title>
 
-  <modal-body>
+  <app-modal-body>
     <form [formGroup]="trelloForm">
       <div class="col-xl-12">
         <div class="form-group row">
-          <label class="col-xl-3 col-form-label"> Chapter: </label>
+          <label for="chapterInput" class="col-xl-3 col-form-label"> Chapter: </label>
 
           <div class="col-xl-9">
-            <input class="form-control" type="text" placeholder="Chapter Name" formControlName="chapterName">
+            <input id="chapterInput" class="form-control" type="text" placeholder="Chapter Name" formControlName="chapterName">
           </div>
         </div>
 
-        <label class="mb-3"> Select the fields to be exported and rename them as needed. </label>
+        <p class="mb-3"> Select the fields to be exported and rename them as needed. </p>
 
         <div class="input-group mb-2">
           <span class="input-group-text"> <input type="checkbox" formControlName="keepBoardName"> </span>
@@ -52,10 +52,10 @@
           <input class="form-control" type="text" value="Card Attachment Path" formControlName="cardAttachmentPath">
         </div>
 
-        <label class="mb-3">
+        <p class="mb-3">
           In the event that the card attachments have not been downloaded, access
           <a href="https://cors-anywhere.herokuapp.com/corsdemo">this</a> and click "Request temporary access to the demo server".
-        </label>
+        </p>
       </div>
     </form>
 
@@ -68,5 +68,5 @@
         Export Latex
       </button>
     </div>
-  </modal-body>
-</modal>
+  </app-modal-body>
+</app-modal>

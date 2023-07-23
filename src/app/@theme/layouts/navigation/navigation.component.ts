@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
-  selector: 'navigation',
+  selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })

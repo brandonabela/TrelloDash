@@ -8,9 +8,6 @@ import { ProjectComponent } from './pages/@trello/projects/project/project.compo
 import { ExportCsvComponent } from './pages/@trello/projects/export-csv/export-csv.component';
 import { ExportLatexComponent } from './pages/@trello/projects/export-latex/export-latex.component';
 
-import { TrelloCardFilter } from './filters/TrelloCardFilter';
-import { TrelloProjectFilter } from './filters/TrelloProjectFilter';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,10 +35,6 @@ import { FormComponent } from './pages/@theme/form/form.component';
     ExportCsvComponent,
     ExportLatexComponent,
 
-    // Filters
-
-    TrelloCardFilter,
-    TrelloProjectFilter,
     FormComponent
   ],
   imports: [

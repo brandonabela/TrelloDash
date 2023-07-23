@@ -6,7 +6,7 @@ import { AlertService } from 'src/app/@theme/service/alert.service';
 import { TrelloService } from 'src/app/service/trello.service';
 
 @Component({
-  selector: 'trello-project',
+  selector: 'app-trello-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })

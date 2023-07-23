@@ -11,7 +11,7 @@ export class Branch {
 }
 
 @Component({
-  selector: 'page-mind-map',
+  selector: 'app-page-mind-map',
   templateUrl: './mind-map.component.html',
   styleUrls: ['./mind-map.component.scss']
 })
@@ -38,7 +38,7 @@ export class MindMapComponent {
   }
 
   onChanges(): void {
-    this.trelloForm.valueChanges.subscribe((_: any) => {
+    this.trelloForm.valueChanges.subscribe(() => {
       const { levelOne, levelTwo } = this.trelloForm.value;
 
       if (levelOne === levelTwo) {
@@ -84,24 +84,6 @@ export class MindMapComponent {
     }
   }
 
-  private targetBranch(levelValues: string[], index: number): any {
-    let targetBranch: any = this.tree;
-
-    if (index >= 0) {
-      let pastLevels = levelValues.slice(0, index);
-
-      pastLevels.forEach(level => {
-        const branch = targetBranch.find((branch: any) => branch.topic === level);
-
-        if (branch) {
-          targetBranch = branch.children;
-        }
-      });
-    }
-
-    return targetBranch;
-  }
-
   public buildTree(): void {
     const { projectIndex, levelOne, levelTwo } = this.trelloForm.value;
     const trelloProject = this.trelloService.trelloProjects[projectIndex];
@@ -111,24 +93,29 @@ export class MindMapComponent {
     trelloProject.trelloCards.forEach((aTrelloCard, index) => {
       const levelValues = [
         this.cardLevelField(aTrelloCard, levelOne),
-        this.cardLevelField(aTrelloCard, levelTwo)
+        this.cardLevelField(aTrelloCard, levelTwo),
       ];
 
-      levelValues.forEach((level, index) => {
-        let targetBranch = this.targetBranch(levelValues, index);
+      let currentChildren: (Branch | TrelloCard)[] = this.tree;
 
-        if (targetBranch instanceof Array && level !== '') {
-          const levelPresent = targetBranch.find((branch: any) => branch.topic === level);
+      for (let i = 0; i < levelValues.length; i++) {
+        const level = levelValues[i];
+        const nextBranch = currentChildren.find(
+          (branch) => branch instanceof Branch && branch.topic === level
+        );
 
-          if (!levelPresent) {
-            const branch = new Branch(level, []);
-            targetBranch.push(branch);
-          }
+        if (nextBranch && nextBranch instanceof Branch) {
+          // If the branch with the level exists, set the 'currentChildren' to its children.
+          currentChildren = nextBranch.children;
+        } else if (level !== '') {
+          // If the branch does not exist, create a new branch and set it as the child of the current branch.
+          const branch = new Branch(level, []);
+          currentChildren.push(branch);
+          currentChildren = branch.children;
         }
-      });
+      }
 
-      let targetBranch = this.targetBranch(levelValues, levelValues.length);
-      targetBranch.push(aTrelloCard);
+      currentChildren.push(aTrelloCard);
 
       if (index === 0) {
         this.setDisplayCard(aTrelloCard);

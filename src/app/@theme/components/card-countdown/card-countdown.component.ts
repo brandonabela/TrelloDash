@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'card-countdown',
+  selector: 'app-card-countdown',
   templateUrl: './card-countdown.component.html',
   styleUrls: ['./card-countdown.component.scss']
 })

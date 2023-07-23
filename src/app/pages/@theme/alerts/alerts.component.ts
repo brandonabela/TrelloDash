@@ -6,7 +6,7 @@ import { AlertTitle } from 'src/app/@theme/models/alerts/alert-title';
 import { AlertDescription } from 'src/app/@theme/models/alerts/alert-description';
 
 @Component({
-  selector: 'page-alerts',
+  selector: 'app-page-alerts',
   templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.scss']
 })

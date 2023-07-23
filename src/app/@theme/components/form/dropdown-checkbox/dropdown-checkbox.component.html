@@ -9,7 +9,7 @@
         <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="elementFilter" [ngModelOptions]="{standalone: true}" />
       </li>
 
-      <li *ngFor="let checkbox of elementValues | dropdownCheckboxFilter: elementFilter; trackBy: trackByIndex" [formGroup]="elementFormGroup">
+      <li *ngFor="let checkbox of elementValues | dropdownCheckboxFilter: elementFilter" [formGroup]="elementFormGroup">
         <label class="dropdown-item form-check">
           <input type="checkbox" class="form-check-input" [formControlName]="elementValues.indexOf(checkbox)"> {{checkbox}}
         </label>

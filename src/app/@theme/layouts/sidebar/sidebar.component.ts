@@ -6,14 +6,12 @@ import { MenuSection } from '../../models/menu/menu-section';
 import { MenuSingle } from '../../models/menu/menu-single';
 
 @Component({
-  selector: 'sidebar',
+  selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
   public menuItems = new Menu().items;
-
-  // Menu Creation Handling
 
   public getMenuSingle(menuItem: MenuItem): MenuSingle | undefined {
     return (menuItem instanceof MenuSingle) ? menuItem : undefined;

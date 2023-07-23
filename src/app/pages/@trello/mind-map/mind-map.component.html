@@ -1,7 +1,7 @@
-<page-header></page-header>
+<app-page-header></app-page-header>
 
-<page-body>
-  <trello-card cardTitle="Mind Map Builder">
+<app-page-body>
+  <app-trello-card cardTitle="Mind Map Builder">
     <div class="header"></div>
 
     <div class="body">
@@ -11,9 +11,9 @@
           <div class="row">
             <div class="col-xl-4">
               <div class="form-group">
-                <label> Trello Project: </label>
+                <label for="trelloProjectInput"> Trello Project: </label>
 
-                <select class="form-control form-select" formControlName="projectIndex">
+                <select id="trelloProjectInput" class="form-control form-select" formControlName="projectIndex">
                   <option *ngFor="let aTrelloProject of trelloService.trelloProjects; let i = index" [value]="i"> {{aTrelloProject.projectName}} </option>
                 </select>
               </div>
@@ -21,9 +21,9 @@
 
             <div class="col-xl-4">
               <div class="form-group">
-                <label> Level One Parent: </label>
+                <label for="levelOneInput"> Level One Parent: </label>
 
-                <select class="form-control form-select" formControlName="levelOne">
+                <select id="levelOneInput" class="form-control form-select" formControlName="levelOne">
                   <option *ngFor="let field of levelOneFields()" [value]="field"> {{field}} </option>
                 </select>
               </div>
@@ -31,9 +31,9 @@
 
             <div class="col-xl-4">
               <div class="form-group">
-                <label> Level Two Parent: </label>
+                <label for="levelTwoInput"> Level Two Parent: </label>
 
-                <select class="form-control form-select" formControlName="levelTwo">
+                <select id="levelTwoInput" class="form-control form-select" formControlName="levelTwo">
                   <option *ngFor="let field of levelTwoFields()" [value]="field"> {{field}} </option>
                 </select>
               </div>
@@ -77,38 +77,38 @@
           <div class="col-xl-6">
             <form>
               <div class="form-group">
-                <label>Card Name</label>
-                <input type="text" class="form-control" [value]="displayCard.cardName" disabled>
+                <label for="cardNameInput"> Card Name </label>
+                <input id="cardNameInput" type="text" class="form-control" [value]="displayCard.cardName" disabled>
               </div>
 
               <div class="form-group">
-                <label>Card Board Name</label>
-                <input type="text" class="form-control" [value]="displayCard.cardBoardName" disabled>
+                <label for="cardBoardInput"> Card Board Name </label>
+                <input id="cardBoardInput" type="text" class="form-control" [value]="displayCard.cardBoardName" disabled>
               </div>
 
               <div class="form-group">
-                <label>Card Description</label>
-                <textarea class="form-control" rows="5" [value]="displayCard.cardDescription" disabled></textarea>
+                <label for="cardDescriptionInput"> Card Description </label>
+                <textarea id="cardDescriptionInput" class="form-control" rows="5" [value]="displayCard.cardDescription" disabled></textarea>
               </div>
 
               <div class="form-group">
-                <label>Card Labels</label>
-                <input type="text" class="form-control" [value]="getCardLabelNames(displayCard)" disabled>
+                <label for="cardLabelInput"> Card Labels </label>
+                <input id="cardLabelInput" type="text" class="form-control" [value]="getCardLabelNames(displayCard)" disabled>
               </div>
 
               <div class="form-group">
-                <label>Card Percentage</label>
-                <input type="text" class="form-control" [value]="displayCard.cardPercentage + '%'" disabled>
+                <label for="cardPercentageInput"> Card Percentage </label>
+                <input id="cardPercentageInput" type="text" class="form-control" [value]="displayCard.cardPercentage + '%'" disabled>
               </div>
 
               <div class="form-group" *ngFor="let customField of displayCard.cardCustomFields">
-                <label> {{customField.name}} </label>
-                <input type="text" class="form-control" [value]="customField.value" disabled>
+                <label for="customFieldInput"> {{customField.name}} </label>
+                <input id="customFieldInput" type="text" class="form-control" [value]="customField.value" disabled>
               </div>
             </form>
           </div>
         </div>
       </ng-container>
     </div>
-  </trello-card>
-</page-body>
+  </app-trello-card>
+</app-page-body>

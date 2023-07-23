@@ -6,7 +6,7 @@ import { Pagination } from "../../../@theme/models/pagination";
 import { TrelloCard } from 'src/app/models/trello/trello-card';
 
 @Component({
-  selector: 'page-query',
+  selector: 'app-page-query',
   templateUrl: './query.component.html',
   styleUrls: ['./query.component.scss'],
   encapsulation: ViewEncapsulation.None

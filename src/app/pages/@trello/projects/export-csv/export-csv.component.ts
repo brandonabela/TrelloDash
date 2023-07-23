@@ -6,7 +6,7 @@ import { TrelloService } from 'src/app/service/trello.service';
 import { FormModule } from '../../../../@theme/components/form/form.module';
 
 @Component({
-  selector: 'trello-export-csv',
+  selector: 'app-trello-export-csv',
   templateUrl: './export-csv.component.html',
   styleUrls: ['./export-csv.component.scss']
 })
@@ -73,7 +73,7 @@ export class ExportCsvComponent {
     value = value.replace(/\n/g, ' ');
 
     // Remove markdown syntax
-    value = value.replace(/[*_~]/g, '').replace(/\[([^\[\]]*)]\((.*?)\)/gm, '$2');
+    value = value.replace(/[*_~]/g, '').replace(/\[([^[\]]*)]\((.*?)\)/gm, '$2');
 
     // Return formatted column
     return value.includes(delimiter) || value.includes('\n') ? '"' + value + '"' : value;
@@ -112,7 +112,7 @@ export class ExportCsvComponent {
       let fileString = ExportCsvComponent.formatJoinColumns(csvHeading, csvDelimiter);
 
       trelloProject.trelloCards.forEach(card => {
-        let columns = [
+        const columns = [
           keepBoardName && card.cardBoardName,
           keepCardName && card.cardName,
           keepCardDescription && card.cardDescription,

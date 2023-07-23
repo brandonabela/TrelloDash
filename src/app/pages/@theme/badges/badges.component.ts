@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'page-badges',
+  selector: 'app-page-badges',
   templateUrl: './badges.component.html',
   styleUrls: ['./badges.component.scss']
 })

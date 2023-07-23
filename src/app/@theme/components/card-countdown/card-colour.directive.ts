@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[cardColour]'
+  selector: '[appCardColour]'
 })
 export class CardColourDirective implements OnInit {
-  @Input('cardColour') colour!: string;
+  @Input('appCardColour') colour!: string;
 
   constructor(private elementRef: ElementRef) {}
 

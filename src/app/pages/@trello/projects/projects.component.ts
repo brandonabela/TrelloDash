@@ -4,7 +4,7 @@ import { TrelloService } from 'src/app/service/trello.service';
 import { ChartOptions } from "../../../config/chart-options";
 
 @Component({
-  selector: 'page-projects',
+  selector: 'app-page-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
@@ -25,15 +25,15 @@ export class ProjectsComponent implements OnInit {
   };
 
   private boardSummary: Map<string, number> = new Map();
-  public boardDataset: any[] = [];
+  public boardDataset: { data: number[] }[] = [];
   public boardLabels: string[] = [];
 
   private cardSummary: Map<string, number> = new Map();
-  public cardDataset: any[] = [];
+  public cardDataset: { data: number[] }[] = [];
   public cardLabels: string[] = [];
 
   private memberSummary: Map<string, number> = new Map();
-  public memberDataset: any[] = [];
+  public memberDataset: { data: number[] }[] = [];
   public memberLabels: string[] = [];
 
   public chartOptions = ChartOptions.getChartOptions();

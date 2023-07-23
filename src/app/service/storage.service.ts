@@ -39,7 +39,7 @@ export class StorageService {
   }
 
   private static updateArray<T>(key: string, value: T, index?: number): void {
-    let storageValue = StorageService.getStorageValue<T[]>(key) ?? [];
+    const storageValue = StorageService.getStorageValue<T[]>(key) ?? [];
 
     if (index !== undefined && storageValue[index] !== undefined) {
       storageValue[index] = value;
@@ -51,7 +51,7 @@ export class StorageService {
   }
 
   private static removeFromArray<T>(key: string, index: number): void {
-    let storageValue = StorageService.getStorageValue<T[]>(key) || [];
+    const storageValue = StorageService.getStorageValue<T[]>(key) || [];
     storageValue.splice(index, 1);
     StorageService.setStorageValue(key, storageValue);
   }

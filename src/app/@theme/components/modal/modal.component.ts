@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'modal',
+  selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -12,14 +12,14 @@ export class ModalComponent {
 }
 
 @Component({
-  selector: 'modal-title',
+  selector: 'app-modal-title',
   templateUrl: './modal-title.component.html',
   styleUrls: ['./modal.component.scss']
 })
 export class ModalTitleComponent { }
 
 @Component({
-  selector: 'modal-body',
+  selector: 'app-modal-body',
   templateUrl: './modal-body.component.html',
   styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -27,7 +27,7 @@ export class ModalTitleComponent { }
 export class ModalBodyComponent { }
 
 @Component({
-  selector: 'modal-footer',
+  selector: 'app-modal-footer',
   templateUrl: './modal-footer.component.html',
   styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.None

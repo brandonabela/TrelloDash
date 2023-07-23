@@ -15,7 +15,7 @@ import { TrelloChecklistEntries } from 'src/app/models/trello/trello-checklist-e
 import * as JSZip from 'jszip';
 
 @Component({
-  selector: 'trello-export-latex',
+  selector: 'app-trello-export-latex',
   templateUrl: './export-latex.component.html',
   styleUrls: ['./export-latex.component.scss']
 })
@@ -80,21 +80,21 @@ export class ExportLatexComponent {
 
   private static escapeCharacters(value: string): string {
     const escapeRegex = /[$&%{}_^~\\]/g;
-    const unicodeRegex = /[^\x00-\x7F]/g;
+    const unicodeRegex = /./gu;
 
     const boldRegex = /#+\s([^\n]*)|\*\*(.*?)\*\*/g;
     const italicRegex = /_(.*?)_/g;
     const strikeRegex = /~~(.*?)~~/g;
     const newLineRegex = /[\r\n]+/g;
 
-    const urlRegex = /\[([^\[\]]*)]\((.*?)\)|^(https?:\/\/[^\s/$.?#][^\s]*)$/g;
-    const urlMarkRegex = /\[([^\[\]]*)]\((.*?)\)/g;
+    const urlRegex = /\[([^[\]]*)]\((.*?)\)|^(https?:\/\/[^\s/$.?#][^\s]*)$/g;
+    const urlMarkRegex = /\[([^[\]]*)]\((.*?)\)/g;
     const urlPlaceRegex = /LINKPLACEHOLDER(\d+)/g;
 
     value = value.replace(unicodeRegex, '');
 
     const linkPlaceholders: string[] = [];
-    value = value.replace(urlRegex, (match, _) => {
+    value = value.replace(urlRegex, (match) => {
       linkPlaceholders.push(match);
       return `LINKPLACEHOLDER${linkPlaceholders.length - 1}`;
     });
@@ -215,7 +215,7 @@ export class ExportLatexComponent {
 
                 this.alertService.add(messages.zipDocumentSuccess);
               })
-              .catch((error: Error) => {
+              .catch(() => {
                 this.alertService.add(messages.zipDocumentError);
               });
           }

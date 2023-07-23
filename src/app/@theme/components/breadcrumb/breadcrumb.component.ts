@@ -6,7 +6,7 @@ export class Breadcrumb {
 }
 
 @Component({
-  selector: 'breadcrumb',
+  selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
@@ -25,7 +25,7 @@ export class BreadcrumbComponent implements OnInit {
     const breadcrumbs: Breadcrumb[] = [];
 
     for (const child of route.children) {
-      if (!child?.snapshot?.data?.hasOwnProperty('breadcrumb')) {
+      if (!Object.prototype.hasOwnProperty.call(child?.snapshot?.data, 'breadcrumb')) {
         return this.getBreadcrumbs(child, url) ?? breadcrumbs;
       }
 

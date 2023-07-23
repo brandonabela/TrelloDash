@@ -1,5 +1,4 @@
 import { TrelloCard } from "src/app/models/trello/trello-card";
-import { TrelloLabel } from "src/app/models/trello/trello-label";
 
 export class BasicExpression {
   constructor(

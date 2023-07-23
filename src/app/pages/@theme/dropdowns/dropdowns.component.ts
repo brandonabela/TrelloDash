@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'page-dropdowns',
+  selector: 'app-page-dropdowns',
   templateUrl: './dropdowns.component.html',
   styleUrls: ['./dropdowns.component.scss']
 })
