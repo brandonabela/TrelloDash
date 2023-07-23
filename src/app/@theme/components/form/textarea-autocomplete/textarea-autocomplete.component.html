@@ -19,7 +19,7 @@
   >
     <li
       class="dropdown-item" *ngFor="let dropdownValue of dropdownValues"
-      click="() => dropdownClick(dropdownValue)"
+      (click)="dropdownClick(dropdownValue)" (keydown.enter)="dropdownClick(dropdownValue)" tabindex="0"
     >
       {{dropdownValue}}
     </li>

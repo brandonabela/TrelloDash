@@ -107,15 +107,15 @@
 
         <div class="col-xl-6">
           <ul class="pagination">
-            <li class="page-item" [ngClass]="{'disabled': pageIndex === 1}" click="() => setPage(pageIndex - 1)">
+            <li class="page-item" [ngClass]="{'disabled': pageIndex === 1}" (click)="setPage(pageIndex - 1)" (keydown.enter)="setPage(pageIndex - 1)" tabindex="0">
               <a class="page-link"><i class="bi bi-chevron-left"></i></a>
             </li>
 
-            <li class="page-item" *ngFor="let pageNum of getPages()" [ngClass]="{'active': pageNum === pageIndex}" click="{() => setPage(pageNum)}">
+            <li class="page-item" *ngFor="let pageNum of getPages()" [ngClass]="{'active': pageNum === pageIndex}" (click)="setPage(pageNum)" (keydown.enter)="setPage(pageNum)" tabindex="0">
               <a class="page-link"> {{pageNum}} </a>
             </li>
 
-            <li class="page-item" [ngClass]="{'disabled': pageIndex === getMaxPage()}" click="() => setPage(pageIndex + 1)">
+            <li class="page-item" [ngClass]="{'disabled': pageIndex === getMaxPage()}" (click)="setPage(pageIndex + 1)" (keydown.enter)="setPage(pageIndex + 1)" tabindex="0">
               <a class="page-link"><i class="bi bi-chevron-right"></i></a>
             </li>
           </ul>
