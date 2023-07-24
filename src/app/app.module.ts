@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgChartsModule } from 'ng2-charts';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 import { TrelloSharedModule } from './pages/@trello/shared/trello-shared.module';
 import { ThemeComponentsModule } from './@theme/components/theme-components.module';
@@ -47,6 +48,8 @@ import { FormComponent } from './pages/@theme/form/form.component';
 
     NgChartsModule,
     ToastrModule.forRoot(),
+    NgxGoogleAnalyticsModule.forRoot('307518136'),
+    NgxGoogleAnalyticsRouterModule,
 
     TrelloSharedModule,
     ThemeComponentsModule,
