@@ -48,7 +48,7 @@ import { FormComponent } from './pages/@theme/form/form.component';
 
     NgChartsModule,
     ToastrModule.forRoot(),
-    NgxGoogleAnalyticsModule.forRoot('307518136'),
+    NgxGoogleAnalyticsModule.forRoot('G-BX0WTE9K9P'),
     NgxGoogleAnalyticsRouterModule,
 
     TrelloSharedModule,
