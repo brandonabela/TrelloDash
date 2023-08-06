@@ -25,16 +25,25 @@ export class MindMapComponent {
     public trelloService: TrelloService,
     private fb: UntypedFormBuilder
   ) {
-    const fields = this.trelloService.trelloProjects[0].trelloFieldNames;
+    if (this.trelloService.trelloProjects.length > 0) {
+      const fields = this.trelloService.trelloProjects[0].trelloFieldNames;
 
-    this.trelloForm = this.fb.group({
-      projectIndex: [0, [Validators.required]],
-      levelOne: [fields[1], [Validators.required]],
-      levelTwo: [fields[4], [Validators.required]]
-    });
+      this.trelloForm = this.fb.group({
+        projectIndex: [0, [Validators.required]],
+        levelOne: [fields[1], [Validators.required]],
+        levelTwo: [fields[4], [Validators.required]]
+      });
 
-    this.buildTree();
-    this.onChanges();
+      this.buildTree();
+      this.onChanges();
+    }
+    else {
+      this.trelloForm = this.fb.group({
+        projectIndex: [0, [Validators.required]],
+        levelOne: ['', [Validators.required]],
+        levelTwo: ['', [Validators.required]]
+      });
+    }
   }
 
   onChanges(): void {
@@ -50,6 +59,10 @@ export class MindMapComponent {
   }
 
   public fields(): string[] {
+    if (this.trelloService.trelloProjects.length == 0) {
+      return [];
+    }
+
     const { projectIndex } = this.trelloForm.controls;
     const projectFields = this.trelloService.trelloProjects[projectIndex.value].trelloFieldNames;
 
